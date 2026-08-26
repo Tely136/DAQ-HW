@@ -1,0 +1,107 @@
+# ============================================================
+# Vivado
+# ============================================================
+
+# Temporary/cache directories
+.Xil/
+*.cache/
+*.runs/
+*.gen/
+*.hw/
+*.ip_user_files/
+*.sim/
+
+# Logs / journals
+*.jou
+*.log
+*.str
+*.debug
+*.dmp
+
+# Generated reports / intermediate files
+*.rpt
+*.pb
+*.wdb
+*.wcfg
+
+# Simulation output
+xsim.dir/
+webtalk/
+webtalk.jou
+webtalk.log
+
+# Generated hardware outputs
+*.bit
+*.bin
+*.ltx
+
+# Generated checkpoints
+*.dcp
+
+# Generated memory/config files
+*.mmi
+
+# Vivado backup files
+*.xpr.zip
+*.backup.jou
+*.backup.log
+
+
+# ============================================================
+# Vitis HLS
+# ============================================================
+
+# HLS temporary/cache directories
+.autopilot/
+.apc/
+*.autopilot/
+
+# Common project/solution generated directories
+*/solution*/.autopilot/
+*/solution*/csim/
+*/solution*/sim/
+*/solution*/syn/
+*/solution*/impl/
+
+# HLS generated databases / temporary files
+*.adb
+*.adb.xml
+*.verbose.rpt
+
+# HLS logs
+vitis_hls.log
+vivado_hls.log
+
+
+# ============================================================
+# Vitis / general Xilinx
+# ============================================================
+
+# Workspace metadata
+.metadata/
+RemoteSystemsTempFiles/
+
+# Generated platform / build directories
+Debug/
+Release/
+build/
+
+# Xilinx-generated logs
+hs_err_pid*.log
+
+
+# ============================================================
+# OS / editor junk
+# ============================================================
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# Linux
+*~
+*.swp
+*.swo
+
+# VS Code - keep project settings if desired
+# .vscode/
