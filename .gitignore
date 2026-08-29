@@ -105,3 +105,7 @@ Desktop.ini
 
 # VS Code - keep project settings if desired
 # .vscode/
+
+# Fossil checkout metadata
+.fslckout
+_FOSSIL_
