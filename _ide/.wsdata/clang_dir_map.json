@@ -1,0 +1,6 @@
+{
+  "workspaceRoot": "C:\\Users\\tely1\\Documents\\DAQ-HW",
+  "mapping": {
+    "hls\\counter\\counter_test\\counter_test.cpp": "hls\\counter\\counter_test"
+  }
+}
