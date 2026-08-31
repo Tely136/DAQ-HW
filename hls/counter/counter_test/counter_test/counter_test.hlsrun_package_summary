@@ -1,0 +1,157 @@
+<ENTRY>
+{
+ "thisFile": "C:/DAQ-HW\\hls\\counter\\counter_test\\counter_test\\counter_test.hlsrun_package_summary",
+ "connectId": "",
+ "serverToken": "",
+ "timestamp": "0"
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_CmdStep",
+ "dateTimestamp": "08/31/26 17:27:10",
+ "timestampMillis": "1788211630069",
+ "buildStep": {
+  "cmdId": "150b53e3-c6ad-4697-a137-d13045fc1b15",
+  "name": "vitis-run",
+  "logFile": "C:/DAQ-HW\\hls\\counter\\counter_test\\counter_test\\logs\\counter_test.steps.log",
+  "commandLine": "C:/AMDDesignTools/2026.1/Vitis/bin/unwrapped/win64.o/vitis-run.exe  --mode hls --package --config C:\\DAQ-HW\\hls\\counter\\counter_test\\hls_config.cfg --work_dir counter_test ",
+  "args": [
+   "--mode",
+   "hls",
+   "--package",
+   "--config",
+   "C:\\DAQ-HW\\hls\\counter\\counter_test\\hls_config.cfg",
+   "--work_dir",
+   "counter_test"
+  ],
+  "iniFiles": [],
+  "cwd": "C:\\DAQ-HW\\hls\\counter\\counter_test"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "08/31/26 17:27:10",
+ "timestampMillis": "1788211630070",
+ "status": {
+  "cmdId": "150b53e3-c6ad-4697-a137-d13045fc1b15",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_FlowMetaData",
+ "dateTimestamp": "08/31/26 17:27:24",
+ "timestampMillis": "1788211644601",
+ "buildSummary": {
+  "hardwarePlatform": "",
+  "hardwareDsa": "",
+  "platformDirectory": "",
+  "runtime": "",
+  "systemConfig": "",
+  "flow": "BF_RUN",
+  "target": "TT_HLS_IP",
+  "kernels": [
+   {
+    "base": {
+     "type": "KERNEL",
+     "name": "test",
+     "file": "C:/DAQ-HW\\hls\\counter\\counter_test\\counter_test\\test.zip",
+     "reports": [],
+     "uuid": ""
+    },
+    "sources": [
+     "C:/DAQ-HW\\hls\\counter\\counter_test\\counter_test.cpp",
+     "C:/DAQ-HW\\hls\\counter\\counter_test\\counter_test.h"
+    ],
+    "psSources": [],
+    "cuNames": [],
+    "type": "HLS",
+    "frequency": 0,
+    "freqUnits": ""
+   }
+  ],
+  "toolVersion": "2026.1"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_SubCmdStep",
+ "dateTimestamp": "08/31/26 17:27:24",
+ "timestampMillis": "1788211644604",
+ "buildStep": {
+  "cmdId": "4f1b8d37-98e5-47ee-b3a2-a293e400cf07",
+  "name": "",
+  "logFile": "C:/DAQ-HW\\hls\\counter\\counter_test\\counter_test\\hls\\hls.log",
+  "commandLine": "",
+  "args": [],
+  "iniFiles": [],
+  "cwd": "C:\\DAQ-HW\\hls\\counter\\counter_test"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "08/31/26 17:27:24",
+ "timestampMillis": "1788211644606",
+ "status": {
+  "cmdId": "4f1b8d37-98e5-47ee-b3a2-a293e400cf07",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "08/31/26 17:27:55",
+ "timestampMillis": "1788211675478",
+ "status": {
+  "cmdId": "4f1b8d37-98e5-47ee-b3a2-a293e400cf07",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "08/31/26 17:27:55",
+ "timestampMillis": "1788211675879",
+ "status": {
+  "cmdId": "150b53e3-c6ad-4697-a137-d13045fc1b15",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "08/31/26 17:27:55",
+ "timestampMillis": "1788211675881",
+ "report": {
+  "path": "",
+  "name": "",
+  "fileType": "HTML",
+  "reportType": "GLOBAL_RULECHECK_GUIDANCE",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "08/31/26 17:27:55",
+ "timestampMillis": "1788211675882",
+ "report": {
+  "path": "",
+  "name": "",
+  "fileType": "BINARY_PROTOBUF",
+  "reportType": "GLOBAL_RULECHECK_GUIDANCE",
+  "cmdId": ""
+ }
+}
+</ENTRY>

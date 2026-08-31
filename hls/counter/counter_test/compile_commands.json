@@ -1,15 +1,15 @@
 [
   {
-    "directory": "C:\\Users\\tely1\\Documents\\DAQ-HW\\hls\\counter\\counter_test",
+    "directory": "C:\\DAQ-HW\\hls\\counter\\counter_test",
     "arguments": [
       "C:\\AMDDesignTools\\2026.1\\Vitis\\win64\\tools\\clang-16\\bin\\clang++.exe",
       "--sysroot=C:\\AMDDesignTools\\2026.1\\Vitis\\tps\\mingw\\10.0.0\\win64.o\\nt",
       "-fhls",
       "-hls-syn-headers-dir=C:\\AMDDesignTools\\2026.1\\Vitis\\common\\technology\\autopilot",
-      "-fhlstoplevel=main",
+      "-fhlstoplevel=test",
       "-c",
-      "C:\\Users\\tely1\\Documents\\DAQ-HW\\hls\\counter\\counter_test\\counter_test.cpp"
+      "C:\\DAQ-HW\\hls\\counter\\counter_test\\counter_test.cpp"
     ],
-    "file": "C:\\Users\\tely1\\Documents\\DAQ-HW\\hls\\counter\\counter_test\\counter_test.cpp"
+    "file": "C:\\DAQ-HW\\hls\\counter\\counter_test\\counter_test.cpp"
   }
 ]

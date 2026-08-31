@@ -1,0 +1,179 @@
+{
+  "design": {
+    "design_info": {
+      "boundary_crc": "0x509DC692526C9803",
+      "device": "xc7z007sclg400-1",
+      "gen_directory": "../../../../cora-mcs.gen/sources_1/bd/counter",
+      "name": "counter",
+      "rev_ctrl_bd_flag": "RevCtrlBdOff",
+      "synth_flow_mode": "Hierarchical",
+      "tool_version": "2026.1",
+      "validated": "true"
+    },
+    "design_tree": {
+      "test_0": "",
+      "clk_wiz_0": "",
+      "rst_clk_wiz_0_100M": "",
+      "ilslice_0": ""
+    },
+    "ports": {
+      "ck_io0": {
+        "direction": "I"
+      },
+      "sys_clock": {
+        "type": "clk",
+        "direction": "I",
+        "parameters": {
+          "CLK_DOMAIN": {
+            "value": "counter_sys_clock",
+            "value_src": "default"
+          },
+          "FREQ_HZ": {
+            "value": "125000000"
+          },
+          "FREQ_TOLERANCE_HZ": {
+            "value": "0",
+            "value_src": "default"
+          },
+          "INSERT_VIP": {
+            "value": "0",
+            "value_src": "default"
+          },
+          "PHASE": {
+            "value": "0.0"
+          }
+        }
+      },
+      "btn": {
+        "direction": "I",
+        "left": "1",
+        "right": "0"
+      },
+      "ck_io1": {
+        "direction": "I"
+      },
+      "ck_io2": {
+        "direction": "I"
+      },
+      "led0_b": {
+        "direction": "O"
+      },
+      "led1_r": {
+        "direction": "O"
+      }
+    },
+    "components": {
+      "test_0": {
+        "vlnv": "xilinx.com:hls:test:1.0",
+        "ip_revision": "2114765667",
+        "xci_name": "counter_test_0_1",
+        "xci_path": "ip\\counter_test_0_1\\counter_test_0_1.xci",
+        "inst_hier_path": "test_0",
+        "has_run_ip_tcl": "true"
+      },
+      "clk_wiz_0": {
+        "vlnv": "xilinx.com:ip:clk_wiz:6.0",
+        "ip_revision": "19",
+        "xci_name": "counter_clk_wiz_0_0",
+        "xci_path": "ip\\counter_clk_wiz_0_0\\counter_clk_wiz_0_0.xci",
+        "inst_hier_path": "clk_wiz_0",
+        "has_run_ip_tcl": "true",
+        "parameters": {
+          "CLK_IN1_BOARD_INTERFACE": {
+            "value": "sys_clock"
+          },
+          "USE_BOARD_FLOW": {
+            "value": "true"
+          }
+        }
+      },
+      "rst_clk_wiz_0_100M": {
+        "vlnv": "xilinx.com:ip:proc_sys_reset:5.0",
+        "ip_revision": "17",
+        "xci_name": "counter_rst_clk_wiz_0_100M_0",
+        "xci_path": "ip\\counter_rst_clk_wiz_0_100M_0\\counter_rst_clk_wiz_0_100M_0.xci",
+        "inst_hier_path": "rst_clk_wiz_0_100M",
+        "has_run_ip_tcl": "true"
+      },
+      "ilslice_0": {
+        "vlnv": "xilinx.com:inline_hdl:ilslice:1.0",
+        "parameters": {
+          "DIN_WIDTH": {
+            "value": "2"
+          }
+        }
+      }
+    },
+    "nets": {
+      "btn_1": {
+        "ports": [
+          "btn",
+          "ilslice_0/Din"
+        ]
+      },
+      "ck_io0_1": {
+        "ports": [
+          "ck_io0",
+          "test_0/ap_start"
+        ]
+      },
+      "ck_io1_1": {
+        "ports": [
+          "ck_io1",
+          "test_0/next_bin"
+        ]
+      },
+      "ck_io2_1": {
+        "ports": [
+          "ck_io2",
+          "test_0/A_dout",
+          "test_0/A_empty_n"
+        ]
+      },
+      "clk_wiz_0_clk_out1": {
+        "ports": [
+          "clk_wiz_0/clk_out1",
+          "test_0/ap_clk",
+          "rst_clk_wiz_0_100M/slowest_sync_clk"
+        ]
+      },
+      "clk_wiz_0_locked": {
+        "ports": [
+          "clk_wiz_0/locked",
+          "rst_clk_wiz_0_100M/dcm_locked"
+        ]
+      },
+      "ilslice_0_Dout": {
+        "ports": [
+          "ilslice_0/Dout",
+          "clk_wiz_0/reset",
+          "rst_clk_wiz_0_100M/ext_reset_in"
+        ]
+      },
+      "rst_clk_wiz_0_100M_peripheral_reset": {
+        "ports": [
+          "rst_clk_wiz_0_100M/peripheral_reset",
+          "test_0/ap_rst"
+        ]
+      },
+      "sys_clock_1": {
+        "ports": [
+          "sys_clock",
+          "clk_wiz_0/clk_in1"
+        ]
+      },
+      "test_0_A_read": {
+        "ports": [
+          "test_0/A_read",
+          "led0_b"
+        ]
+      },
+      "test_0_ap_done": {
+        "ports": [
+          "test_0/ap_done",
+          "led1_r"
+        ]
+      }
+    }
+  }
+}
