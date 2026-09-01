@@ -1,0 +1,14 @@
+[
+{
+  "directory": "C:/DAQ-HW/hls/counter/counter_test_app/build",
+  "command": "C:\\AMDDesignTools\\2026.1\\Vitis\\gnu\\aarch32\\nt\\gcc-arm-none-eabi\\bin\\arm-none-eabi-gcc.exe -isystem C:/DAQ-HW/hls/counter/platform/export/platform/sw/standalone_ps7_cortexa9_0/include -isystem C:/AMDDesignTools/2026.1/gnu/aarch32/nt/gcc-arm-none-eabi/x86_64-oesdk-mingw32/usr/lib/arm-xilinx-eabi/gcc/arm-xilinx-eabi/13.4.0/include -isystem C:/AMDDesignTools/2026.1/gnu/aarch32/nt/gcc-arm-none-eabi/x86_64-oesdk-mingw32/usr/lib/arm-xilinx-eabi/gcc/arm-xilinx-eabi/13.4.0/include-fixed -isystem C:/AMDDesignTools/2026.1/Vitis/gnu/aarch32/nt/gcc-arm-none-eabi/aarch32-xilinx-eabi/usr/include  -DSDT -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard  -MMD -MP -specs=C:/DAQ-HW/hls/counter/platform/export/platform/sw/standalone_ps7_cortexa9_0/Xilinx.spec -IC:/DAQ-HW/hls/counter/platform/export/platform/sw/standalone_ps7_cortexa9_0/include -Wall -Wextra      -O0  -g3     -U__clang__ -o CMakeFiles\\counter_test_app.elf.dir\\helloworld.c.obj -c C:\\DAQ-HW\\hls\\counter\\counter_test_app\\src\\helloworld.c",
+  "file": "C:\\DAQ-HW\\hls\\counter\\counter_test_app\\src\\helloworld.c",
+  "output": "CMakeFiles\\counter_test_app.elf.dir\\helloworld.c.obj"
+},
+{
+  "directory": "C:/DAQ-HW/hls/counter/counter_test_app/build",
+  "command": "C:\\AMDDesignTools\\2026.1\\Vitis\\gnu\\aarch32\\nt\\gcc-arm-none-eabi\\bin\\arm-none-eabi-gcc.exe -isystem C:/DAQ-HW/hls/counter/platform/export/platform/sw/standalone_ps7_cortexa9_0/include -isystem C:/AMDDesignTools/2026.1/gnu/aarch32/nt/gcc-arm-none-eabi/x86_64-oesdk-mingw32/usr/lib/arm-xilinx-eabi/gcc/arm-xilinx-eabi/13.4.0/include -isystem C:/AMDDesignTools/2026.1/gnu/aarch32/nt/gcc-arm-none-eabi/x86_64-oesdk-mingw32/usr/lib/arm-xilinx-eabi/gcc/arm-xilinx-eabi/13.4.0/include-fixed -isystem C:/AMDDesignTools/2026.1/Vitis/gnu/aarch32/nt/gcc-arm-none-eabi/aarch32-xilinx-eabi/usr/include  -DSDT -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard  -MMD -MP -specs=C:/DAQ-HW/hls/counter/platform/export/platform/sw/standalone_ps7_cortexa9_0/Xilinx.spec -IC:/DAQ-HW/hls/counter/platform/export/platform/sw/standalone_ps7_cortexa9_0/include -Wall -Wextra      -O0  -g3     -U__clang__ -o CMakeFiles\\counter_test_app.elf.dir\\platform.c.obj -c C:\\DAQ-HW\\hls\\counter\\counter_test_app\\src\\platform.c",
+  "file": "C:\\DAQ-HW\\hls\\counter\\counter_test_app\\src\\platform.c",
+  "output": "CMakeFiles\\counter_test_app.elf.dir\\platform.c.obj"
+}
+]

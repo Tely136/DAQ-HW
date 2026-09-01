@@ -6,20 +6,21 @@
 
 `timescale 1 ns / 1 ps 
 
-(* CORE_GENERATION_INFO="test_test,hls_ip_2026_1,{HLS_INPUT_TYPE=cxx,HLS_INPUT_FLOAT=0,HLS_INPUT_FIXED=0,HLS_INPUT_PART=xc7z007s-clg400-1,HLS_INPUT_CLOCK=10.000000,HLS_INPUT_ARCH=others,HLS_SYN_CLOCK=3.477000,HLS_SYN_LAT=-1,HLS_SYN_TPT=none,HLS_SYN_MEM=0,HLS_SYN_DSP=0,HLS_SYN_FF=14,HLS_SYN_LUT=77,HLS_VERSION=2026_1}" *)
+(* CORE_GENERATION_INFO="test_test,hls_ip_2026_1,{HLS_INPUT_TYPE=cxx,HLS_INPUT_FLOAT=0,HLS_INPUT_FIXED=0,HLS_INPUT_PART=xc7z007s-clg400-1,HLS_INPUT_CLOCK=10.000000,HLS_INPUT_ARCH=others,HLS_SYN_CLOCK=2.552000,HLS_SYN_LAT=2,HLS_SYN_TPT=none,HLS_SYN_MEM=0,HLS_SYN_DSP=0,HLS_SYN_FF=3,HLS_SYN_LUT=82,HLS_VERSION=2026_1}" *)
 
 (* DowngradeIPIdentifiedWarnings="yes" *)
 module test (
         ap_clk,
         ap_rst,
-        ap_start,
-        ap_done,
-        ap_idle,
-        ap_ready,
-        A_dout,
-        A_empty_n,
-        A_read,
-        next_bin
+        pulse,
+        next_bin,
+        counts_Addr_A,
+        counts_EN_A,
+        counts_WEN_A,
+        counts_Din_A,
+        counts_Dout_A,
+        counts_Clk_A,
+        counts_Rst_A
 );
 
 parameter    ap_ST_fsm_state1 = 3'd1;
@@ -28,58 +29,37 @@ parameter    ap_ST_fsm_state3 = 3'd4;
 
 input   ap_clk;
 input   ap_rst;
-input   ap_start;
-output   ap_done;
-output   ap_idle;
-output   ap_ready;
-input  [0:0] A_dout;
-input   A_empty_n;
-output   A_read;
+input  [0:0] pulse;
 input  [0:0] next_bin;
+output  [31:0] counts_Addr_A;
+output   counts_EN_A;
+output  [3:0] counts_WEN_A;
+output  [31:0] counts_Din_A;
+input  [31:0] counts_Dout_A;
+output   counts_Clk_A;
+output   counts_Rst_A;
 
-reg ap_done;
-reg ap_idle;
-reg ap_ready;
-
+wire   [0:0] pulse_read_read_fu_42_p2;
 (* fsm_encoding = "none" *) reg   [2:0] ap_CS_fsm;
 wire    ap_CS_fsm_state1;
-reg   [0:0] next_bin_read_reg_91;
-wire    grp_test_Pipeline_VITIS_LOOP_17_2_fu_52_ap_start;
-wire    grp_test_Pipeline_VITIS_LOOP_17_2_fu_52_ap_done;
-wire    grp_test_Pipeline_VITIS_LOOP_17_2_fu_52_ap_idle;
-wire    grp_test_Pipeline_VITIS_LOOP_17_2_fu_52_ap_ready;
-wire    grp_test_Pipeline_VITIS_LOOP_17_2_fu_52_A_read;
-reg    grp_test_Pipeline_VITIS_LOOP_17_2_fu_52_ap_start_reg;
+wire   [3:0] counts_addr_reg_73;
+wire   [31:0] add_ln18_fu_62_p2;
 wire    ap_CS_fsm_state2;
-wire   [0:0] icmp_ln14_fu_67_p2;
+reg    counts_EN_A_local;
+wire   [31:0] counts_Addr_A_local;
+reg   [31:0] counts_Addr_A_orig;
+reg   [3:0] counts_WEN_A_local;
 wire    ap_CS_fsm_state3;
-reg   [6:0] i_fu_42;
-wire   [6:0] i_2_fu_73_p2;
 reg   [2:0] ap_NS_fsm;
-reg    ap_ST_fsm_state1_blk;
+wire    ap_ST_fsm_state1_blk;
 wire    ap_ST_fsm_state2_blk;
-reg    ap_ST_fsm_state3_blk;
+wire    ap_ST_fsm_state3_blk;
 wire    ap_ce_reg;
 
 // power-on initialization
 initial begin
 #0 ap_CS_fsm = 3'd1;
-#0 grp_test_Pipeline_VITIS_LOOP_17_2_fu_52_ap_start_reg = 1'b0;
-#0 i_fu_42 = 7'd0;
 end
-
-test_test_Pipeline_VITIS_LOOP_17_2 grp_test_Pipeline_VITIS_LOOP_17_2_fu_52(
-    .ap_clk(ap_clk),
-    .ap_rst(ap_rst),
-    .ap_start(grp_test_Pipeline_VITIS_LOOP_17_2_fu_52_ap_start),
-    .ap_done(grp_test_Pipeline_VITIS_LOOP_17_2_fu_52_ap_done),
-    .ap_idle(grp_test_Pipeline_VITIS_LOOP_17_2_fu_52_ap_idle),
-    .ap_ready(grp_test_Pipeline_VITIS_LOOP_17_2_fu_52_ap_ready),
-    .A_dout(A_dout),
-    .A_empty_n(A_empty_n),
-    .A_read(grp_test_Pipeline_VITIS_LOOP_17_2_fu_52_A_read),
-    .next_bin(next_bin_read_reg_91)
-);
 
 always @ (posedge ap_clk) begin
     if (ap_rst == 1'b1) begin
@@ -89,96 +69,52 @@ always @ (posedge ap_clk) begin
     end
 end
 
-always @ (posedge ap_clk) begin
-    if (ap_rst == 1'b1) begin
-        grp_test_Pipeline_VITIS_LOOP_17_2_fu_52_ap_start_reg <= 1'b0;
-    end else begin
-        if (((icmp_ln14_fu_67_p2 == 1'd0) & (1'b1 == ap_CS_fsm_state2))) begin
-            grp_test_Pipeline_VITIS_LOOP_17_2_fu_52_ap_start_reg <= 1'b1;
-        end else if ((grp_test_Pipeline_VITIS_LOOP_17_2_fu_52_ap_ready == 1'b1)) begin
-            grp_test_Pipeline_VITIS_LOOP_17_2_fu_52_ap_start_reg <= 1'b0;
-        end
-    end
-end
-
-always @ (posedge ap_clk) begin
-    if (((ap_start == 1'b1) & (1'b1 == ap_CS_fsm_state1))) begin
-        i_fu_42 <= 7'd0;
-    end else if (((icmp_ln14_fu_67_p2 == 1'd0) & (1'b1 == ap_CS_fsm_state2))) begin
-        i_fu_42 <= i_2_fu_73_p2;
-    end
-end
-
-always @ (posedge ap_clk) begin
-    if ((1'b1 == ap_CS_fsm_state1)) begin
-        next_bin_read_reg_91 <= next_bin;
-    end
-end
-
-always @ (*) begin
-    if ((ap_start == 1'b0)) begin
-        ap_ST_fsm_state1_blk = 1'b1;
-    end else begin
-        ap_ST_fsm_state1_blk = 1'b0;
-    end
-end
+assign ap_ST_fsm_state1_blk = 1'b0;
 
 assign ap_ST_fsm_state2_blk = 1'b0;
 
+assign ap_ST_fsm_state3_blk = 1'b0;
+
 always @ (*) begin
-    if ((grp_test_Pipeline_VITIS_LOOP_17_2_fu_52_ap_done == 1'b0)) begin
-        ap_ST_fsm_state3_blk = 1'b1;
+    if ((1'b1 == ap_CS_fsm_state2)) begin
+        counts_Addr_A_orig = counts_addr_reg_73;
+    end else if ((1'b1 == ap_CS_fsm_state1)) begin
+        counts_Addr_A_orig = 64'd0;
     end else begin
-        ap_ST_fsm_state3_blk = 1'b0;
+        counts_Addr_A_orig = 'bx;
     end
 end
 
 always @ (*) begin
-    if (((icmp_ln14_fu_67_p2 == 1'd1) & (1'b1 == ap_CS_fsm_state2))) begin
-        ap_done = 1'b1;
+    if (((1'b1 == ap_CS_fsm_state3) | (1'b1 == ap_CS_fsm_state2) | (1'b1 == ap_CS_fsm_state1))) begin
+        counts_EN_A_local = 1'b1;
     end else begin
-        ap_done = 1'b0;
+        counts_EN_A_local = 1'b0;
     end
 end
 
 always @ (*) begin
-    if (((ap_start == 1'b0) & (1'b1 == ap_CS_fsm_state1))) begin
-        ap_idle = 1'b1;
+    if ((1'b1 == ap_CS_fsm_state2)) begin
+        counts_WEN_A_local = 4'd15;
     end else begin
-        ap_idle = 1'b0;
-    end
-end
-
-always @ (*) begin
-    if (((icmp_ln14_fu_67_p2 == 1'd1) & (1'b1 == ap_CS_fsm_state2))) begin
-        ap_ready = 1'b1;
-    end else begin
-        ap_ready = 1'b0;
+        counts_WEN_A_local = 4'd0;
     end
 end
 
 always @ (*) begin
     case (ap_CS_fsm)
         ap_ST_fsm_state1 : begin
-            if (((ap_start == 1'b1) & (1'b1 == ap_CS_fsm_state1))) begin
-                ap_NS_fsm = ap_ST_fsm_state2;
+            if (((1'b1 == ap_CS_fsm_state1) & (pulse_read_read_fu_42_p2 == 1'd0))) begin
+                ap_NS_fsm = ap_ST_fsm_state3;
             end else begin
-                ap_NS_fsm = ap_ST_fsm_state1;
+                ap_NS_fsm = ap_ST_fsm_state2;
             end
         end
         ap_ST_fsm_state2 : begin
-            if (((icmp_ln14_fu_67_p2 == 1'd1) & (1'b1 == ap_CS_fsm_state2))) begin
-                ap_NS_fsm = ap_ST_fsm_state1;
-            end else begin
-                ap_NS_fsm = ap_ST_fsm_state3;
-            end
+            ap_NS_fsm = ap_ST_fsm_state3;
         end
         ap_ST_fsm_state3 : begin
-            if (((grp_test_Pipeline_VITIS_LOOP_17_2_fu_52_ap_done == 1'b1) & (1'b1 == ap_CS_fsm_state3))) begin
-                ap_NS_fsm = ap_ST_fsm_state2;
-            end else begin
-                ap_NS_fsm = ap_ST_fsm_state3;
-            end
+            ap_NS_fsm = ap_ST_fsm_state1;
         end
         default : begin
             ap_NS_fsm = 'bx;
@@ -186,7 +122,7 @@ always @ (*) begin
     endcase
 end
 
-assign A_read = grp_test_Pipeline_VITIS_LOOP_17_2_fu_52_A_read;
+assign add_ln18_fu_62_p2 = (counts_Dout_A + 32'd1);
 
 assign ap_CS_fsm_state1 = ap_CS_fsm[32'd0];
 
@@ -194,10 +130,22 @@ assign ap_CS_fsm_state2 = ap_CS_fsm[32'd1];
 
 assign ap_CS_fsm_state3 = ap_CS_fsm[32'd2];
 
-assign grp_test_Pipeline_VITIS_LOOP_17_2_fu_52_ap_start = grp_test_Pipeline_VITIS_LOOP_17_2_fu_52_ap_start_reg;
+assign counts_Addr_A = counts_Addr_A_local;
 
-assign i_2_fu_73_p2 = (i_fu_42 + 7'd1);
+assign counts_Addr_A_local = counts_Addr_A_orig << 32'd2;
 
-assign icmp_ln14_fu_67_p2 = ((i_fu_42 == 7'd100) ? 1'b1 : 1'b0);
+assign counts_Clk_A = ap_clk;
+
+assign counts_Din_A = add_ln18_fu_62_p2;
+
+assign counts_EN_A = counts_EN_A_local;
+
+assign counts_Rst_A = ap_rst;
+
+assign counts_WEN_A = counts_WEN_A_local;
+
+assign counts_addr_reg_73 = 64'd0;
+
+assign pulse_read_read_fu_42_p2 = pulse;
 
 endmodule //test

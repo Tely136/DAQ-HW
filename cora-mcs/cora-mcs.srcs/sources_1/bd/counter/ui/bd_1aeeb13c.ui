@@ -1,34 +1,47 @@
 {
    "ActiveEmotionalView":"Default View",
-   "Default View_ScaleFactor":"1.28493",
-   "Default View_TopLeft":"-163,3",
+   "Default View_ScaleFactor":"1.17712",
+   "Default View_TopLeft":"-226,10",
    "ExpandedHierarchyInLayout":"",
    "guistr":"# # String gsaved with Nlview 7.8.0 2024-04-26 e1825d835c VDI=44 GEI=38 GUI=JA:24.0
 #  -string -flagsOSRD
-preplace port port-id_ck_io0 -pg 1 -lvl 0 -x 0 -y 430 -defaultsOSRD
-preplace port port-id_sys_clock -pg 1 -lvl 0 -x 0 -y 120 -defaultsOSRD
-preplace port port-id_ck_io1 -pg 1 -lvl 0 -x 0 -y 490 -defaultsOSRD
-preplace port port-id_ck_io2 -pg 1 -lvl 0 -x 0 -y 300 -defaultsOSRD
-preplace port port-id_led0_b -pg 1 -lvl 5 -x 1130 -y 450 -defaultsOSRD
-preplace port port-id_led1_r -pg 1 -lvl 5 -x 1130 -y 280 -defaultsOSRD
-preplace portBus btn -pg 1 -lvl 0 -x 0 -y 60 -defaultsOSRD
-preplace inst test_0 -pg 1 -lvl 4 -x 950 -y 420 -defaultsOSRD
-preplace inst clk_wiz_0 -pg 1 -lvl 2 -x 310 -y 110 -defaultsOSRD
-preplace inst rst_clk_wiz_0_100M -pg 1 -lvl 3 -x 590 -y 200 -defaultsOSRD
-preplace inst ilslice_0 -pg 1 -lvl 1 -x 120 -y 60 -defaultsOSRD
-preplace netloc ck_io0_1 1 0 4 NJ 430 NJ 430 NJ 430 NJ
-preplace netloc sys_clock_1 1 0 2 NJ 120 NJ
-preplace netloc clk_wiz_0_clk_out1 1 2 2 420 100 780J
-preplace netloc clk_wiz_0_locked 1 2 1 400 120n
-preplace netloc rst_clk_wiz_0_100M_peripheral_reset 1 3 1 760 200n
-preplace netloc btn_1 1 0 1 NJ 60
-preplace netloc ilslice_0_Dout 1 1 2 220 40 410J
-preplace netloc ck_io1_1 1 0 4 NJ 490 NJ 490 NJ 490 NJ
-preplace netloc ck_io2_1 1 0 5 NJ 300 NJ 300 NJ 300 770J 290 1110
-preplace netloc test_0_A_read 1 4 1 NJ 450
-preplace netloc test_0_ap_done 1 3 2 790 280 NJ
-levelinfo -pg 1 0 120 310 590 950 1130
-pagesize -pg 1 -db -bbox -sgen -110 0 1220 550
+preplace port DDR_0 -pg 1 -lvl 5 -x 1320 -y 50 -defaultsOSRD
+preplace port FIXED_IO_0 -pg 1 -lvl 5 -x 1320 -y 80 -defaultsOSRD
+preplace port btns_2bits -pg 1 -lvl 5 -x 1320 -y 330 -defaultsOSRD
+preplace port port-id_bin_trig -pg 1 -lvl 0 -x 0 -y 680 -defaultsOSRD
+preplace port port-id_ph_pulse -pg 1 -lvl 0 -x 0 -y 820 -defaultsOSRD
+preplace port port-id_ard_clk -pg 1 -lvl 0 -x 0 -y 780 -defaultsOSRD
+preplace port port-id_led0_b -pg 1 -lvl 5 -x 1320 -y 740 -defaultsOSRD
+preplace inst test_0 -pg 1 -lvl 3 -x 900 -y 650 -defaultsOSRD
+preplace inst test_0_bram -pg 1 -lvl 4 -x 1180 -y 490 -defaultsOSRD
+preplace inst ilconstant_0 -pg 1 -lvl 2 -x 570 -y 620 -defaultsOSRD
+preplace inst processing_system7_0 -pg 1 -lvl 1 -x 230 -y 110 -defaultsOSRD
+preplace inst axi_smc -pg 1 -lvl 2 -x 570 -y 310 -defaultsOSRD
+preplace inst rst_ps7_0_50M -pg 1 -lvl 1 -x 230 -y 330 -defaultsOSRD
+preplace inst axi_bram_ctrl_0 -pg 1 -lvl 3 -x 900 -y 500 -defaultsOSRD
+preplace inst axi_gpio_0 -pg 1 -lvl 3 -x 900 -y 340 -defaultsOSRD
+preplace inst xpm_cdc_gen_0 -pg 1 -lvl 2 -x 570 -y 800 -defaultsOSRD
+preplace inst pos_edge_detect_0 -pg 1 -lvl 3 -x 900 -y 810 -defaultsOSRD
+preplace netloc ck_io1_1 1 0 3 NJ 680 NJ 680 NJ
+preplace netloc ilconstant_0_dout 1 2 1 700J 620n
+preplace netloc processing_system7_0_FCLK_CLK0 1 0 3 20 430 430 400 710
+preplace netloc processing_system7_0_FCLK_RESET0_N 1 0 2 30 220 420
+preplace netloc rst_ps7_0_50M_peripheral_aresetn 1 1 2 440 390 740
+preplace netloc axi_gpio_0_ip2intc_irpt 1 0 4 40 230 NJ 230 730J 420 1060
+preplace netloc ph_pulse_1 1 0 2 NJ 820 NJ
+preplace netloc clk_200MHz_1 1 0 2 NJ 780 NJ
+preplace netloc xpm_cdc_gen_0_dest_out 1 2 1 N 800
+preplace netloc pos_edge_detect_0_b 1 2 3 740 740 1060 740 NJ
+preplace netloc test_0_counts_PORTA 1 3 1 1060 480n
+preplace netloc processing_system7_0_DDR 1 1 4 NJ 60 NJ 60 NJ 60 1300J
+preplace netloc processing_system7_0_FIXED_IO 1 1 4 NJ 80 NJ 80 NJ 80 NJ
+preplace netloc processing_system7_0_M_AXI_GP0 1 1 1 440 120n
+preplace netloc axi_bram_ctrl_0_BRAM_PORTA 1 3 1 N 500
+preplace netloc axi_smc_M00_AXI 1 2 1 720 300n
+preplace netloc axi_gpio_0_GPIO 1 3 2 NJ 330 NJ
+preplace netloc axi_smc_M01_AXI 1 2 1 N 320
+levelinfo -pg 1 0 230 570 900 1180 1320
+pagesize -pg 1 -db -bbox -sgen -110 0 1440 880
 "
 }
-
+0

@@ -1,1 +1,1 @@
-#define NUM_BINS 100
+#define NUM_BINS 10
