@@ -1,74 +1,35 @@
-# 2026-09-01T11:59:36.065356800
+# 2026-09-03T09:16:39.768493100
 import vitis
 
 client = vitis.create_client()
 client.set_workspace(path="counter")
 
-comp = client.get_component(name="counter_test")
+client.delete_component(name="counter_test_app")
+
+client.delete_component(name="componentName")
+
+comp = client.create_hls_component(name = "counter",platform = "$COMPONENT_LOCATION/../../../cora-mcs/counter_wrapper.xsa",cfg_file = ["hls_config.cfg"],template = "empty_hls_component")
+
+cfg = client.get_config_file(path="C:\DAQ-HW\hls\counter\counter\hls_config.cfg")
+
+cfg.set_values(key="syn.file", values=["counter.cpp"])
+
+cfg.set_values(key="syn.file", values=["counter.cpp", "counter_test.cpp"])
+
+cfg.set_values(key="syn.file", values=["counter.cpp", "counter.h"])
+
+comp = client.get_component(name="counter")
+comp.run(operation="SYNTHESIS")
+
+cfg = client.get_config_file(path="/c:/DAQ-HW/hls/counter/counter/hls_config.cfg")
+
+cfg.set_value(section="hls", key="syn.top", value="test")
+
 comp.run(operation="SYNTHESIS")
 
 comp.run(operation="SYNTHESIS")
 
 comp.run(operation="PACKAGE")
 
-comp.run(operation="SYNTHESIS")
-
-comp.run(operation="PACKAGE")
-
-comp.run(operation="SYNTHESIS")
-
-comp.run(operation="PACKAGE")
-
-comp.run(operation="SYNTHESIS")
-
-comp.run(operation="PACKAGE")
-
-comp.run(operation="SYNTHESIS")
-
-comp.run(operation="PACKAGE")
-
-comp.run(operation="SYNTHESIS")
-
-comp.run(operation="PACKAGE")
-
-comp.run(operation="SYNTHESIS")
-
-comp.run(operation="PACKAGE")
-
-comp.run(operation="SYNTHESIS")
-
-comp.run(operation="PACKAGE")
-
-platform = client.create_platform_component(name = "platform",hw_design = "$COMPONENT_LOCATION/../../../cora-mcs/counter_wrapper.xsa",os = "standalone",cpu = "ps7_cortexa9_0",domain_name = "standalone_ps7_cortexa9_0",compiler = "gcc")
-
-platform = client.get_component(name="platform")
-status = platform.build()
-
-comp = client.create_app_component(name="counter_test_app",platform = "$COMPONENT_LOCATION/../platform/export/platform/platform.xpfm",domain = "standalone_ps7_cortexa9_0",template = "hello_world")
-
-status = platform.build()
-
-comp = client.get_component(name="counter_test_app")
-comp.build()
-
-status = platform.update_hw(hw_design = "$COMPONENT_LOCATION/../../../cora-mcs/counter_wrapper.xsa")
-
-status = platform.build()
-
-status = platform.build()
-
-comp = client.get_component(name="xgpio_example")
-comp.build()
-
-status = platform.build()
-
-comp = client.get_component(name="xbram_example")
-comp.build()
-
-comp = client.get_component(name="counter_test")
-comp.run(operation="SYNTHESIS")
-
-comp.run(operation="PACKAGE")
-
-vitis.dispose()
+client.delete_component(name="counter_test")
 

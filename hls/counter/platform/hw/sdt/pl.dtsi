@@ -13,6 +13,11 @@
 			clock-output-names = "fabric_clk";
 			clocks = <&clkc 15>;
 		};
+		misc_clk_0: misc_clk_0 {
+			compatible = "fixed-clock";
+			clock-frequency = <50000000>;
+			#clock-cells = <0>;
+		};
 		axi_bram_ctrl_0: axi_bram_ctrl_0@40000000 {
 			xlnx,protocol = "AXI4";
 			xlnx,edk-special = "BRAM_CTRL";
@@ -26,7 +31,7 @@
 			xlnx,ip-name = "axi_bram_ctrl";
 			reg = <0x40000000 0x2000>;
 			xlnx,bmg-instance = "EXTERNAL";
-			clocks = <&clkc 15>;
+			clocks = <&misc_clk_0>;
 			xlnx,s-axi-ctrl-addr-width = <32>;
 			xlnx,read-latency = <1>;
 			xlnx,id-width = <0>;
@@ -60,7 +65,7 @@
 			xlnx,tri-default-2 = <0xffffffff>;
 			reg = <0x40010000 0x10000>;
 			xlnx,all-inputs-2 = <0>;
-			clocks = <&clkc 15>;
+			clocks = <&misc_clk_0>;
 			xlnx,all-outputs-2 = <1>;
 			gpio-controller;
 			device_type = "gpio";

@@ -1,0 +1,15 @@
+[
+  {
+    "directory": "C:\\DAQ-HW\\hls\\counter\\counter",
+    "arguments": [
+      "C:\\AMDDesignTools\\2026.1\\Vitis\\win64\\tools\\clang-16\\bin\\clang++.exe",
+      "--sysroot=C:\\AMDDesignTools\\2026.1\\Vitis\\tps\\mingw\\10.0.0\\win64.o\\nt",
+      "-fhls",
+      "-hls-syn-headers-dir=C:\\AMDDesignTools\\2026.1\\Vitis\\common\\technology\\autopilot",
+      "-fhlstoplevel=test",
+      "-c",
+      "C:\\DAQ-HW\\hls\\counter\\counter\\counter.cpp"
+    ],
+    "file": "C:\\DAQ-HW\\hls\\counter\\counter\\counter.cpp"
+  }
+]

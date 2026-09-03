@@ -20,7 +20,7 @@
         };
 
         cpus_a9: cpus-a9@0 {
-                phandle = <0x30>;
+                phandle = <0x31>;
                 #address-cells = <0x1>;
                 #size-cells = <0x0>;
                 compatible = "cpus,cluster";
@@ -90,7 +90,7 @@
         };
 
         fpga_full: fpga-region {
-                phandle = <0x31>;
+                phandle = <0x32>;
                 compatible = "fpga-region";
                 fpga-mgr = <&devcfg>;
                 #address-cells = <0x1>;
@@ -237,7 +237,7 @@
                 };
 
                 ocm: sram@fffc0000 {
-                        phandle = <0x36>;
+                        phandle = <0x37>;
                         compatible = "mmio-sram";
                         reg = <0xfffc0000 0x10000>;
                         #address-cells = <0x1>;
@@ -334,14 +334,14 @@
                                 bootph-all;
                                 #clock-cells = <0x1>;
                                 compatible = "xlnx,ps7-clkc";
-                                fclk-enable = <0x1>;
+                                fclk-enable = <0x0>;
                                 clock-output-names = "armpll", "ddrpll", "iopll", "cpu_6or4x", "cpu_3or2x", "cpu_2x", "cpu_1x", "ddr2x", "ddr3x", "dci", "lqspi", "smc", "pcap", "gem0", "gem1", "fclk0", "fclk1", "fclk2", "fclk3", "can0", "can1", "sdio0", "sdio1", "uart0", "uart1", "spi0", "spi1", "dma", "usb0_aper", "usb1_aper", "gem0_aper", "gem1_aper", "sdio0_aper", "sdio1_aper", "spi0_aper", "spi1_aper", "can0_aper", "can1_aper", "i2c0_aper", "i2c1_aper", "uart0_aper", "uart1_aper", "gpio_aper", "lqspi_aper", "smc_aper", "swdt", "dbg_trc", "dbg_apb";
                                 reg = <0x100 0x100>;
                                 ps-clk-frequency = <0x2faf080>;
                         };
 
                         rstc: rstc@200 {
-                                phandle = <0x40>;
+                                phandle = <0x41>;
                                 compatible = "xlnx,zynq-reset";
                                 reg = <0x200 0x48>;
                                 #reset-cells = <0x1>;
@@ -349,7 +349,7 @@
                         };
 
                         pinctrl0: pinctrl@700 {
-                                phandle = <0x41>;
+                                phandle = <0x42>;
                                 compatible = "xlnx,pinctrl-zynq";
                                 reg = <0x700 0x200>;
                                 syscon = <&slcr>;
@@ -390,7 +390,7 @@
                 };
 
                 efuse: efuse@f800d000 {
-                        phandle = <0x42>;
+                        phandle = <0x43>;
                         compatible = "xlnx,zynq-efuse";
                         reg = <0xf800d000 0x20>;
                 };
@@ -408,7 +408,7 @@
                 };
 
                 ttc0: timer@f8001000 {
-                        phandle = <0x43>;
+                        phandle = <0x44>;
                         interrupt-parent = <&intc>;
                         interrupts = <0x0 0xa 0x4 0x0 0xb 0x4 0x0 0xc 0x4>;
                         compatible = "cdns,ttc";
@@ -417,7 +417,7 @@
                 };
 
                 ttc1: timer@f8001004 {
-                        phandle = <0x4d>;
+                        phandle = <0x4e>;
                         reg = <0xf8001004 0xffc>;
                         clocks = <&clkc 0x6>;
                         compatible = "cdns,ttc";
@@ -427,7 +427,7 @@
                 };
 
                 ttc2: timer@f8001008 {
-                        phandle = <0x4e>;
+                        phandle = <0x4f>;
                         reg = <0xf8001008 0xff8>;
                         clocks = <&clkc 0x6>;
                         compatible = "cdns,ttc";
@@ -437,7 +437,7 @@
                 };
 
                 ttc3: timer@f8002000 {
-                        phandle = <0x44>;
+                        phandle = <0x45>;
                         interrupt-parent = <&intc>;
                         interrupts = <0x0 0x25 0x4 0x0 0x26 0x4 0x0 0x27 0x4>;
                         compatible = "cdns,ttc";
@@ -446,7 +446,7 @@
                 };
 
                 ttc4: timer@f8002004 {
-                        phandle = <0x4f>;
+                        phandle = <0x50>;
                         reg = <0xf8002004 0xffc>;
                         clocks = <&clkc 0x6>;
                         compatible = "cdns,ttc";
@@ -456,7 +456,7 @@
                 };
 
                 ttc5: timer@f8002008 {
-                        phandle = <0x50>;
+                        phandle = <0x51>;
                         reg = <0xf8002008 0xff8>;
                         clocks = <&clkc 0x6>;
                         compatible = "cdns,ttc";
@@ -506,7 +506,7 @@
                 };
 
                 watchdog0: watchdog@f8005000 {
-                        phandle = <0x46>;
+                        phandle = <0x47>;
                         clocks = <&clkc 0x2d>;
                         compatible = "cdns,wdt-r1p2";
                         interrupt-parent = <&intc>;
@@ -746,7 +746,7 @@
         };
 
         amba_pl: amba_pl {
-                phandle = <0x4b>;
+                phandle = <0x4c>;
                 ranges;
                 compatible = "simple-bus";
                 #address-cells = <0x1>;
@@ -754,13 +754,20 @@
                 firmware-name = "counter_wrapper.bit.bin";
 
                 clocking0: clocking0 {
-                        phandle = <0x4c>;
+                        phandle = <0x4d>;
                         compatible = "xlnx,fclk";
                         assigned-clocks = <&clkc 0xf>;
                         assigned-clock-rates = <0x2faf080>;
                         #clock-cells = <0x0>;
                         clock-output-names = "fabric_clk";
                         clocks = <&clkc 0xf>;
+                };
+
+                misc_clk_0: misc_clk_0 {
+                        phandle = <0x30>;
+                        compatible = "fixed-clock";
+                        clock-frequency = <0x2faf080>;
+                        #clock-cells = <0x0>;
                 };
 
                 axi_bram_ctrl_0: axi_bram_ctrl_0@40000000 {
@@ -777,7 +784,7 @@
                         xlnx,ip-name = "axi_bram_ctrl";
                         reg = <0x40000000 0x2000>;
                         xlnx,bmg-instance = "EXTERNAL";
-                        clocks = <&clkc 0xf>;
+                        clocks = <&misc_clk_0>;
                         xlnx,s-axi-ctrl-addr-width = <0x20>;
                         xlnx,read-latency = <0x1>;
                         xlnx,id-width = <0x0>;
@@ -813,7 +820,7 @@
                         xlnx,tri-default-2 = <0xffffffff>;
                         reg = <0x40010000 0x10000>;
                         xlnx,all-inputs-2 = <0x0>;
-                        clocks = <&clkc 0xf>;
+                        clocks = <&misc_clk_0>;
                         xlnx,all-outputs-2 = <0x1>;
                         gpio-controller;
                         device_type = "gpio";
@@ -933,6 +940,7 @@
                 ps7_afi_3 = "/axi/ps7_afi@f800b000";
                 amba_pl = "/amba_pl";
                 clocking0 = "/amba_pl/clocking0";
+                misc_clk_0 = "/amba_pl/misc_clk_0";
                 axi_bram_ctrl_0 = "/amba_pl/axi_bram_ctrl_0@40000000";
                 axi_gpio_0 = "/amba_pl/gpio@40010000";
                 axi_bram_ctrl_0_memory = "/memory@40000000";

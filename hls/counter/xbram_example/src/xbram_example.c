@@ -34,6 +34,8 @@
 #include "xparameters.h"
 #include "xbram.h"
 #include <stdio.h>
+#include <xbram_hw.h>
+#include <xil_printf.h>
 
 /************************** Constant Definitions *****************************/
 
@@ -162,6 +164,9 @@ int BramExample(UINTPTR BaseAddress)
 	if (Status != XST_SUCCESS) {
 		return XST_FAILURE;
 	}
+
+	u32 read_val = XBram_ReadReg(XPAR_XBRAM_0_BASEADDR, 0x0);
+	xil_printf("Value: %d\r\n",read_val);
 
 	return XST_SUCCESS;
 }

@@ -1,3 +1,0 @@
-relativeroot=C:/DAQ-HW/hls/counter/counter_test
-original_argv=--mode hls --package --config C:\DAQ-HW\hls\counter\counter_test\hls_config.cfg --work_dir counter_test 
-
