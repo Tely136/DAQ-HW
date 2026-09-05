@@ -20,18 +20,26 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module pos_edge_detect(
-    input a,
-    input clk,
-    output wire b
-    );
-    
-    reg a_delay;
-    
-    assign b = a & ~a_delay;
-    
+module bus_pos_edge_det #(
+    parameter WIDTH = 8 // Define the width of the bus
+)(
+    input  wire             clk,      // System clock
+    input  wire [WIDTH-1:0] bus_in,   // Input bus to monitor
+    output wire [WIDTH-1:0] edge_out  // Output pulse bus (1 cycle wide)
+);
+
+    // Register to store the delayed version of the bus
+    reg [WIDTH-1:0] bus_dly;
+
+    // Pipeline stage: Delay the input bus by exactly 1 clock cycle
     always @(posedge clk) begin
-        a_delay <= a;
+        begin
+            bus_dly <= bus_in;
+        end
     end
 
+    // Bitwise combinational logic: (Current State) AND (NOT Previous State)
+    assign edge_out = bus_in & ~bus_dly;
+
 endmodule
+

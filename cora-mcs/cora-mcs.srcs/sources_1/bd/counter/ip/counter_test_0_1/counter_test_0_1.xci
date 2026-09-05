@@ -4,7 +4,7 @@
     "xci_name": "counter_test_0_1",
     "cell_name": "test_0",
     "component_reference": "xilinx.com:hls:test:1.0",
-    "ip_revision": "2114767059",
+    "ip_revision": "2114769879",
     "gen_directory": "../../../../../../cora-mcs.gen/sources_1/bd/counter/ip/counter_test_0_1",
     "parameters": {
       "component_parameters": {
@@ -12,8 +12,8 @@
         "clk_period": [ { "value": "10", "enabled": false, "usage": "all" } ],
         "machine": [ { "value": "64", "enabled": false, "usage": "all" } ],
         "combinational": [ { "value": "0", "enabled": false, "usage": "all" } ],
-        "latency": [ { "value": "1", "enabled": false, "usage": "all" } ],
-        "II": [ { "value": "2 ~ 3", "enabled": false, "usage": "all" } ]
+        "latency": [ { "value": "undef", "enabled": false, "usage": "all" } ],
+        "II": [ { "value": "0", "enabled": false, "usage": "all" } ]
       },
       "project_parameters": {
         "ARCHITECTURE": [ { "value": "zynq", "resolve_type": "generated", "usage": "all" } ],
@@ -30,7 +30,7 @@
       },
       "runtime_parameters": {
         "IPCONTEXT": [ { "value": "IP_Integrator" } ],
-        "IPREVISION": [ { "value": "2114767059" } ],
+        "IPREVISION": [ { "value": "2114769879" } ],
         "MANAGED": [ { "value": "TRUE" } ],
         "OUTPUTDIR": [ { "value": "../../../../../../cora-mcs.gen/sources_1/bd/counter/ip/counter_test_0_1" } ],
         "SELECTEDSIMMODEL": [ { "value": "" } ],
@@ -43,15 +43,11 @@
       "ports": {
         "ap_clk": [ { "direction": "in" } ],
         "ap_rst": [ { "direction": "in" } ],
-        "pulse": [ { "direction": "in", "size_left": "0", "size_right": "0" } ],
-        "next_bin": [ { "direction": "in", "size_left": "0", "size_right": "0" } ],
-        "counts_Addr_A": [ { "direction": "out", "size_left": "31", "size_right": "0" } ],
-        "counts_Clk_A": [ { "direction": "out" } ],
-        "counts_Din_A": [ { "direction": "out", "size_left": "31", "size_right": "0" } ],
-        "counts_Dout_A": [ { "direction": "in", "size_left": "31", "size_right": "0" } ],
-        "counts_EN_A": [ { "direction": "out" } ],
-        "counts_Rst_A": [ { "direction": "out" } ],
-        "counts_WEN_A": [ { "direction": "out", "size_left": "3", "size_right": "0" } ]
+        "ap_done": [ { "direction": "out" } ],
+        "ap_idle": [ { "direction": "out" } ],
+        "ap_ready": [ { "direction": "out" } ],
+        "ap_start": [ { "direction": "in" } ],
+        "pulse": [ { "direction": "in", "size_left": "0", "size_right": "0" } ]
       },
       "interfaces": {
         "ap_clk": {
@@ -84,21 +80,18 @@
             "RST": [ { "physical_name": "ap_rst" } ]
           }
         },
-        "pulse": {
-          "vlnv": "xilinx.com:signal:data:1.0",
-          "abstraction_type": "xilinx.com:signal:data_rtl:1.0",
+        "ap_ctrl": {
+          "vlnv": "xilinx.com:interface:acc_handshake:1.0",
+          "abstraction_type": "xilinx.com:interface:acc_handshake_rtl:1.0",
           "mode": "slave",
-          "parameters": {
-            "LAYERED_METADATA": [ { "value": "undef", "value_permission": "bd_and_user", "resolve_type": "generated", "is_ips_inferred": true, "is_static_object": false } ],
-            "FREQ_HZ": [ { "value": "", "value_src": "weak", "resolve_type": "generated", "is_ips_inferred": true, "is_static_object": false } ],
-            "PHASE": [ { "value": "", "value_src": "weak", "resolve_type": "generated", "is_ips_inferred": true, "is_static_object": false } ],
-            "CLK_DOMAIN": [ { "value": "", "value_src": "weak", "resolve_type": "generated", "is_ips_inferred": true, "is_static_object": false } ]
-          },
           "port_maps": {
-            "DATA": [ { "physical_name": "pulse" } ]
+            "done": [ { "physical_name": "ap_done" } ],
+            "idle": [ { "physical_name": "ap_idle" } ],
+            "ready": [ { "physical_name": "ap_ready" } ],
+            "start": [ { "physical_name": "ap_start" } ]
           }
         },
-        "next_bin": {
+        "pulse": {
           "vlnv": "xilinx.com:signal:data:1.0",
           "abstraction_type": "xilinx.com:signal:data_rtl:1.0",
           "mode": "slave",
@@ -106,34 +99,11 @@
             "LAYERED_METADATA": [ { "value": "undef", "value_permission": "bd_and_user", "resolve_type": "generated", "is_ips_inferred": true, "is_static_object": false } ]
           },
           "port_maps": {
-            "DATA": [ { "physical_name": "next_bin" } ]
-          }
-        },
-        "counts_PORTA": {
-          "vlnv": "xilinx.com:interface:bram:1.0",
-          "abstraction_type": "xilinx.com:interface:bram_rtl:1.0",
-          "mode": "master",
-          "parameters": {
-            "MASTER_TYPE": [ { "value": "BRAM_CTRL", "value_src": "constant", "value_permission": "bd_and_user", "usage": "all" } ],
-            "MEM_SIZE": [ { "value": "40", "value_src": "constant", "value_permission": "bd_and_user", "usage": "all" } ],
-            "MEM_WIDTH": [ { "value": "32", "value_src": "constant", "value_permission": "bd_and_user", "usage": "all" } ],
-            "MEM_ADDRESS_MODE": [ { "value": "BYTE_ADDRESS", "value_src": "constant", "value_permission": "bd_and_user", "usage": "all" } ],
-            "READ_LATENCY": [ { "value": "1", "value_src": "constant", "value_permission": "bd_and_user", "usage": "all" } ],
-            "MEM_ECC": [ { "value": "NONE", "value_permission": "bd_and_user", "resolve_type": "generated", "is_ips_inferred": true, "is_static_object": false } ],
-            "READ_WRITE_MODE": [ { "value": "", "value_permission": "bd_and_user", "resolve_type": "generated", "is_ips_inferred": true, "is_static_object": false } ]
-          },
-          "port_maps": {
-            "ADDR": [ { "physical_name": "counts_Addr_A" } ],
-            "CLK": [ { "physical_name": "counts_Clk_A" } ],
-            "DIN": [ { "physical_name": "counts_Din_A" } ],
-            "DOUT": [ { "physical_name": "counts_Dout_A" } ],
-            "EN": [ { "physical_name": "counts_EN_A" } ],
-            "RST": [ { "physical_name": "counts_Rst_A" } ],
-            "WE": [ { "physical_name": "counts_WEN_A" } ]
+            "DATA": [ { "physical_name": "pulse" } ]
           }
         }
       }
     }
   },
-  "checksum": "6faf56ec"
+  "checksum": "391d40fa"
 }

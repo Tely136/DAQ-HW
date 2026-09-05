@@ -1,3 +1,3 @@
 relativeroot=C:/DAQ-HW/hls/counter/counter
-original_argv=--mode hls --package --config C:\DAQ-HW\hls\counter\counter\hls_config.cfg --work_dir counter 
+original_argv=--mode hls --csim --config C:\DAQ-HW\hls\counter\counter\hls_config.cfg --work_dir counter 
 

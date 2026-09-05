@@ -6,60 +6,76 @@
 
 `timescale 1 ns / 1 ps 
 
-(* CORE_GENERATION_INFO="test_test,hls_ip_2026_1,{HLS_INPUT_TYPE=cxx,HLS_INPUT_FLOAT=0,HLS_INPUT_FIXED=0,HLS_INPUT_PART=xc7z007s-clg400-1,HLS_INPUT_CLOCK=10.000000,HLS_INPUT_ARCH=others,HLS_SYN_CLOCK=2.552000,HLS_SYN_LAT=2,HLS_SYN_TPT=none,HLS_SYN_MEM=0,HLS_SYN_DSP=0,HLS_SYN_FF=3,HLS_SYN_LUT=82,HLS_VERSION=2026_1}" *)
+(* CORE_GENERATION_INFO="test_test,hls_ip_2026_1,{HLS_INPUT_TYPE=cxx,HLS_INPUT_FLOAT=0,HLS_INPUT_FIXED=0,HLS_INPUT_PART=xc7z007s-clg400-1,HLS_INPUT_CLOCK=10.000000,HLS_INPUT_ARCH=others,HLS_SYN_CLOCK=6.692000,HLS_SYN_LAT=-1,HLS_SYN_TPT=none,HLS_SYN_MEM=0,HLS_SYN_DSP=0,HLS_SYN_FF=34,HLS_SYN_LUT=101,HLS_VERSION=2026_1}" *)
 
 (* DowngradeIPIdentifiedWarnings="yes" *)
 module test (
         ap_clk,
         ap_rst,
-        pulse,
-        next_bin,
-        counts_Addr_A,
-        counts_EN_A,
-        counts_WEN_A,
-        counts_Din_A,
-        counts_Dout_A,
-        counts_Clk_A,
-        counts_Rst_A
+        ap_start,
+        ap_done,
+        ap_idle,
+        ap_ready,
+        pulse
 );
 
-parameter    ap_ST_fsm_state1 = 3'd1;
-parameter    ap_ST_fsm_state2 = 3'd2;
-parameter    ap_ST_fsm_state3 = 3'd4;
+parameter    ap_ST_fsm_state1 = 1'd1;
 
 input   ap_clk;
 input   ap_rst;
+input   ap_start;
+output   ap_done;
+output   ap_idle;
+output   ap_ready;
 input  [0:0] pulse;
-input  [0:0] next_bin;
-output  [31:0] counts_Addr_A;
-output   counts_EN_A;
-output  [3:0] counts_WEN_A;
-output  [31:0] counts_Din_A;
-input  [31:0] counts_Dout_A;
-output   counts_Clk_A;
-output   counts_Rst_A;
 
-wire   [0:0] pulse_read_read_fu_42_p2;
-(* fsm_encoding = "none" *) reg   [2:0] ap_CS_fsm;
+reg ap_idle;
+
+(* fsm_encoding = "none" *) reg   [0:0] ap_CS_fsm;
 wire    ap_CS_fsm_state1;
-wire   [3:0] counts_addr_reg_73;
-wire   [31:0] add_ln18_fu_62_p2;
-wire    ap_CS_fsm_state2;
-reg    counts_EN_A_local;
-wire   [31:0] counts_Addr_A_local;
-reg   [31:0] counts_Addr_A_orig;
-reg   [3:0] counts_WEN_A_local;
-wire    ap_CS_fsm_state3;
-reg   [2:0] ap_NS_fsm;
-wire    ap_ST_fsm_state1_blk;
-wire    ap_ST_fsm_state2_blk;
-wire    ap_ST_fsm_state3_blk;
+reg    ap_block_state1_pp0_stage0_iter0;
+wire   [0:0] icmp_ln12_fu_65_p2;
+reg    ap_condition_exit_pp0_iter0_stage0;
+wire    ap_loop_exit_ready;
+reg    ap_ready_int;
+reg   [31:0] N;
+reg   [31:0] ap_phi_mux_empty_phi_fu_41_p4;
+wire   [31:0] add_ln10_fu_52_p2;
+wire   [31:0] ap_phi_reg_pp0_iter0_empty_reg_38;
+wire   [0:0] pulse_read_read_fu_32_p2;
+reg    ap_done_reg;
+wire    ap_continue_int;
+reg    ap_done_int;
+reg   [0:0] ap_NS_fsm;
+reg    ap_ST_fsm_state1_blk;
+wire    ap_start_int;
+wire    ap_ready_sig;
+wire    ap_done_sig;
+wire    ap_loop_init;
 wire    ap_ce_reg;
 
 // power-on initialization
 initial begin
-#0 ap_CS_fsm = 3'd1;
+#0 ap_CS_fsm = 1'd1;
+#0 N = 32'd0;
+#0 ap_done_reg = 1'b0;
 end
+
+test_flow_control_loop_pipe flow_control_loop_pipe_U(
+    .ap_clk(ap_clk),
+    .ap_rst(ap_rst),
+    .ap_start(ap_start),
+    .ap_ready(ap_ready_sig),
+    .ap_done(ap_done_sig),
+    .ap_start_int(ap_start_int),
+    .ap_loop_init(ap_loop_init),
+    .ap_ready_int(ap_ready_int),
+    .ap_loop_exit_ready(ap_condition_exit_pp0_iter0_stage0),
+    .ap_loop_exit_done(ap_done_int),
+    .ap_continue_int(ap_continue_int),
+    .ap_done_int(ap_done_int),
+    .ap_continue(1'b1)
+);
 
 always @ (posedge ap_clk) begin
     if (ap_rst == 1'b1) begin
@@ -69,51 +85,77 @@ always @ (posedge ap_clk) begin
     end
 end
 
-assign ap_ST_fsm_state1_blk = 1'b0;
-
-assign ap_ST_fsm_state2_blk = 1'b0;
-
-assign ap_ST_fsm_state3_blk = 1'b0;
-
-always @ (*) begin
-    if ((1'b1 == ap_CS_fsm_state2)) begin
-        counts_Addr_A_orig = counts_addr_reg_73;
-    end else if ((1'b1 == ap_CS_fsm_state1)) begin
-        counts_Addr_A_orig = 64'd0;
+always @ (posedge ap_clk) begin
+    if (ap_rst == 1'b1) begin
+        ap_done_reg <= 1'b0;
     end else begin
-        counts_Addr_A_orig = 'bx;
+        if ((ap_continue_int == 1'b1)) begin
+            ap_done_reg <= 1'b0;
+        end else if (((ap_loop_exit_ready == 1'b1) & (1'b0 == ap_block_state1_pp0_stage0_iter0) & (1'b1 == ap_CS_fsm_state1))) begin
+            ap_done_reg <= 1'b1;
+        end
+    end
+end
+
+always @ (posedge ap_clk) begin
+    if (((pulse_read_read_fu_32_p2 == 1'd1) & (1'b0 == ap_block_state1_pp0_stage0_iter0) & (1'b1 == ap_CS_fsm_state1))) begin
+        N <= add_ln10_fu_52_p2;
     end
 end
 
 always @ (*) begin
-    if (((1'b1 == ap_CS_fsm_state3) | (1'b1 == ap_CS_fsm_state2) | (1'b1 == ap_CS_fsm_state1))) begin
-        counts_EN_A_local = 1'b1;
+    if ((1'b1 == ap_block_state1_pp0_stage0_iter0)) begin
+        ap_ST_fsm_state1_blk = 1'b1;
     end else begin
-        counts_EN_A_local = 1'b0;
+        ap_ST_fsm_state1_blk = 1'b0;
     end
 end
 
 always @ (*) begin
-    if ((1'b1 == ap_CS_fsm_state2)) begin
-        counts_WEN_A_local = 4'd15;
+    if (((icmp_ln12_fu_65_p2 == 1'd0) & (1'b0 == ap_block_state1_pp0_stage0_iter0) & (1'b1 == ap_CS_fsm_state1))) begin
+        ap_condition_exit_pp0_iter0_stage0 = 1'b1;
     end else begin
-        counts_WEN_A_local = 4'd0;
+        ap_condition_exit_pp0_iter0_stage0 = 1'b0;
+    end
+end
+
+always @ (*) begin
+    if (((ap_loop_exit_ready == 1'b1) & (1'b0 == ap_block_state1_pp0_stage0_iter0) & (1'b1 == ap_CS_fsm_state1))) begin
+        ap_done_int = 1'b1;
+    end else begin
+        ap_done_int = ap_done_reg;
+    end
+end
+
+always @ (*) begin
+    if (((ap_start_int == 1'b0) & (1'b1 == ap_CS_fsm_state1))) begin
+        ap_idle = 1'b1;
+    end else begin
+        ap_idle = 1'b0;
+    end
+end
+
+always @ (*) begin
+    if ((pulse_read_read_fu_32_p2 == 1'd0)) begin
+        ap_phi_mux_empty_phi_fu_41_p4 = N;
+    end else if ((pulse_read_read_fu_32_p2 == 1'd1)) begin
+        ap_phi_mux_empty_phi_fu_41_p4 = add_ln10_fu_52_p2;
+    end else begin
+        ap_phi_mux_empty_phi_fu_41_p4 = ap_phi_reg_pp0_iter0_empty_reg_38;
+    end
+end
+
+always @ (*) begin
+    if (((1'b0 == ap_block_state1_pp0_stage0_iter0) & (1'b1 == ap_CS_fsm_state1))) begin
+        ap_ready_int = 1'b1;
+    end else begin
+        ap_ready_int = 1'b0;
     end
 end
 
 always @ (*) begin
     case (ap_CS_fsm)
         ap_ST_fsm_state1 : begin
-            if (((1'b1 == ap_CS_fsm_state1) & (pulse_read_read_fu_42_p2 == 1'd0))) begin
-                ap_NS_fsm = ap_ST_fsm_state3;
-            end else begin
-                ap_NS_fsm = ap_ST_fsm_state2;
-            end
-        end
-        ap_ST_fsm_state2 : begin
-            ap_NS_fsm = ap_ST_fsm_state3;
-        end
-        ap_ST_fsm_state3 : begin
             ap_NS_fsm = ap_ST_fsm_state1;
         end
         default : begin
@@ -122,30 +164,24 @@ always @ (*) begin
     endcase
 end
 
-assign add_ln18_fu_62_p2 = (counts_Dout_A + 32'd1);
+assign add_ln10_fu_52_p2 = (N + 32'd1);
 
 assign ap_CS_fsm_state1 = ap_CS_fsm[32'd0];
 
-assign ap_CS_fsm_state2 = ap_CS_fsm[32'd1];
+always @ (*) begin
+    ap_block_state1_pp0_stage0_iter0 = (ap_start_int == 1'b0);
+end
 
-assign ap_CS_fsm_state3 = ap_CS_fsm[32'd2];
+assign ap_done = ap_done_sig;
 
-assign counts_Addr_A = counts_Addr_A_local;
+assign ap_loop_exit_ready = ap_condition_exit_pp0_iter0_stage0;
 
-assign counts_Addr_A_local = counts_Addr_A_orig << 32'd2;
+assign ap_phi_reg_pp0_iter0_empty_reg_38 = 'bx;
 
-assign counts_Clk_A = ap_clk;
+assign ap_ready = ap_ready_sig;
 
-assign counts_Din_A = add_ln18_fu_62_p2;
+assign icmp_ln12_fu_65_p2 = (($signed(ap_phi_mux_empty_phi_fu_41_p4) < $signed(32'd10)) ? 1'b1 : 1'b0);
 
-assign counts_EN_A = counts_EN_A_local;
-
-assign counts_Rst_A = ap_rst;
-
-assign counts_WEN_A = counts_WEN_A_local;
-
-assign counts_addr_reg_73 = 64'd0;
-
-assign pulse_read_read_fu_42_p2 = pulse;
+assign pulse_read_read_fu_32_p2 = pulse;
 
 endmodule //test

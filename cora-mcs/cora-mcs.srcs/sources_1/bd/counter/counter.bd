@@ -1,7 +1,7 @@
 {
   "design": {
     "design_info": {
-      "boundary_crc": "0xFAD172DEE4DE5CEC",
+      "boundary_crc": "0xE12F7AD3710922EF",
       "device": "xc7z007sclg400-1",
       "gen_directory": "../../../../cora-mcs.gen/sources_1/bd/counter",
       "name": "counter",
@@ -20,9 +20,9 @@
       "axi_bram_ctrl_0": "",
       "axi_gpio_0": "",
       "xpm_cdc_gen_0": "",
-      "pos_edge_detect_0": "",
       "ila_0": "",
-      "clk_wiz_0": ""
+      "clk_wiz_0": "",
+      "bus_pos_edge_det_0": ""
     },
     "interface_ports": {
       "DDR_0": {
@@ -224,7 +224,7 @@
           }
         }
       },
-      "rgb_leds": {
+      "led0": {
         "mode": "Master",
         "vlnv_bus_definition": "xilinx.com:interface:gpio:1.0",
         "vlnv": "xilinx.com:interface:gpio_rtl:1.0",
@@ -236,20 +236,23 @@
         },
         "port_maps": {
           "TRI_O": {
-            "physical_name": "rgb_leds_tri_o",
+            "physical_name": "led0_tri_o",
             "direction": "O",
-            "left": "5",
+            "left": "2",
             "right": "0"
           }
         }
       }
     },
     "ports": {
-      "bin_trig": {
-        "direction": "I"
-      },
       "ph_pulse": {
-        "direction": "I"
+        "direction": "I",
+        "parameters": {
+          "PortWidth": {
+            "value": "2",
+            "value_src": "ip_prop"
+          }
+        }
       },
       "ard_clk": {
         "type": "clk",
@@ -299,12 +302,21 @@
             "value": "0.0"
           }
         }
+      },
+      "start_trig": {
+        "direction": "I"
+      },
+      "led1_g": {
+        "direction": "O"
+      },
+      "led1_r": {
+        "direction": "O"
       }
     },
     "components": {
       "test_0": {
         "vlnv": "xilinx.com:hls:test:1.0",
-        "ip_revision": "2114767059",
+        "ip_revision": "2114769879",
         "xci_name": "counter_test_0_1",
         "xci_path": "ip\\counter_test_0_1\\counter_test_0_1.xci",
         "inst_hier_path": "test_0",
@@ -1607,7 +1619,7 @@
         "has_run_ip_tcl": "true",
         "parameters": {
           "SINGLE_PORT_BRAM": {
-            "value": "1"
+            "value": "0"
           }
         },
         "interface_ports": {
@@ -1639,11 +1651,14 @@
         "inst_hier_path": "axi_gpio_0",
         "has_run_ip_tcl": "true",
         "parameters": {
+          "C_GPIO2_WIDTH": {
+            "value": "3"
+          },
           "C_INTERRUPT_PRESENT": {
             "value": "1"
           },
           "GPIO2_BOARD_INTERFACE": {
-            "value": "rgb_leds"
+            "value": "Custom"
           },
           "GPIO_BOARD_INTERFACE": {
             "value": "btns_2bits"
@@ -1669,59 +1684,9 @@
           },
           "INIT_SYNC_FF": {
             "value": "false"
-          }
-        }
-      },
-      "pos_edge_detect_0": {
-        "vlnv": "xilinx.com:module_ref:pos_edge_detect:1.0",
-        "ip_revision": "1",
-        "xci_name": "counter_pos_edge_detect_0_0",
-        "xci_path": "ip\\counter_pos_edge_detect_0_0\\counter_pos_edge_detect_0_0.xci",
-        "inst_hier_path": "pos_edge_detect_0",
-        "has_run_ip_tcl": "true",
-        "reference_info": {
-          "ref_type": "hdl",
-          "ref_name": "pos_edge_detect",
-          "boundary_crc": "0x0"
-        },
-        "ports": {
-          "a": {
-            "direction": "I"
           },
-          "clk": {
-            "type": "clk",
-            "direction": "I",
-            "parameters": {
-              "FREQ_HZ": {
-                "value": "50000000",
-                "value_src": "ip_prop"
-              },
-              "PHASE": {
-                "value": "0.0",
-                "value_src": "ip_prop"
-              },
-              "CLK_DOMAIN": {
-                "value": "/clk_wiz_0_clk_out1",
-                "value_src": "ip_prop"
-              }
-            }
-          },
-          "b": {
-            "direction": "O",
-            "parameters": {
-              "FREQ_HZ": {
-                "value": "1000000",
-                "value_src": "user_prop"
-              },
-              "PHASE": {
-                "value": "0.0",
-                "value_src": "default_prop"
-              },
-              "CLK_DOMAIN": {
-                "value": "counter_clk_200MHz",
-                "value_src": "default_prop"
-              }
-            }
+          "WIDTH": {
+            "value": "1"
           }
         }
       },
@@ -1733,11 +1698,14 @@
         "inst_hier_path": "ila_0",
         "has_run_ip_tcl": "true",
         "parameters": {
+          "C_DATA_DEPTH": {
+            "value": "1024"
+          },
           "C_MONITOR_TYPE": {
             "value": "Native"
           },
           "C_NUM_OF_PROBES": {
-            "value": "2"
+            "value": "5"
           }
         }
       },
@@ -1777,13 +1745,61 @@
             "value": "true"
           }
         }
+      },
+      "bus_pos_edge_det_0": {
+        "vlnv": "xilinx.com:module_ref:bus_pos_edge_det:1.0",
+        "ip_revision": "1",
+        "xci_name": "counter_bus_pos_edge_det_0_0",
+        "xci_path": "ip\\counter_bus_pos_edge_det_0_0\\counter_bus_pos_edge_det_0_0.xci",
+        "inst_hier_path": "bus_pos_edge_det_0",
+        "has_run_ip_tcl": "true",
+        "parameters": {
+          "WIDTH": {
+            "value": "1"
+          }
+        },
+        "reference_info": {
+          "ref_type": "hdl",
+          "ref_name": "bus_pos_edge_det",
+          "boundary_crc": "0x0"
+        },
+        "ports": {
+          "clk": {
+            "type": "clk",
+            "direction": "I",
+            "parameters": {
+              "FREQ_HZ": {
+                "value": "50000000",
+                "value_src": "ip_prop"
+              },
+              "PHASE": {
+                "value": "0.0",
+                "value_src": "ip_prop"
+              },
+              "CLK_DOMAIN": {
+                "value": "/clk_wiz_0_clk_out1",
+                "value_src": "ip_prop"
+              }
+            }
+          },
+          "bus_in": {
+            "direction": "I",
+            "left": "0",
+            "right": "0"
+          },
+          "edge_out": {
+            "direction": "O",
+            "left": "0",
+            "right": "0"
+          }
+        }
       }
     },
     "interface_nets": {
-      "axi_bram_ctrl_0_BRAM_PORTA": {
+      "axi_bram_ctrl_0_BRAM_PORTB": {
         "interface_ports": [
           "test_0_bram/BRAM_PORTB",
-          "axi_bram_ctrl_0/BRAM_PORTA"
+          "axi_bram_ctrl_0/BRAM_PORTB"
         ]
       },
       "axi_gpio_0_GPIO": {
@@ -1794,7 +1810,7 @@
       },
       "axi_gpio_0_GPIO2": {
         "interface_ports": [
-          "rgb_leds",
+          "led0",
           "axi_gpio_0/GPIO2"
         ]
       },
@@ -1831,7 +1847,7 @@
       "test_0_counts_PORTA": {
         "interface_ports": [
           "test_0_bram/BRAM_PORTA",
-          "test_0/counts_PORTA"
+          "axi_bram_ctrl_0/BRAM_PORTA"
         ]
       }
     },
@@ -1840,12 +1856,6 @@
         "ports": [
           "axi_gpio_0/ip2intc_irpt",
           "processing_system7_0/IRQ_F2P"
-        ]
-      },
-      "ck_io1_1": {
-        "ports": [
-          "bin_trig",
-          "test_0/next_bin"
         ]
       },
       "clk_200MHz_1": {
@@ -1858,21 +1868,21 @@
         "ports": [
           "clk_wiz_0/clk_out1",
           "ila_0/clk",
-          "pos_edge_detect_0/clk",
-          "test_0/ap_clk",
           "xpm_cdc_gen_0/dest_clk",
           "processing_system7_0/M_AXI_GP0_ACLK",
           "axi_smc/aclk",
           "rst_ps7_0_50M/slowest_sync_clk",
           "axi_bram_ctrl_0/s_axi_aclk",
-          "axi_gpio_0/s_axi_aclk"
+          "axi_gpio_0/s_axi_aclk",
+          "bus_pos_edge_det_0/clk",
+          "test_0/ap_clk"
         ]
       },
       "ilconstant_0_dout": {
         "ports": [
           "ilconstant_0/dout",
-          "test_0/ap_rst",
-          "clk_wiz_0/reset"
+          "clk_wiz_0/reset",
+          "test_0/ap_rst"
         ]
       },
       "ph_pulse_1": {
@@ -1883,9 +1893,9 @@
       },
       "pos_edge_detect_0_b": {
         "ports": [
-          "pos_edge_detect_0/b",
-          "test_0/pulse",
-          "ila_0/probe1"
+          "bus_pos_edge_det_0/edge_out",
+          "ila_0/probe0",
+          "test_0/pulse"
         ]
       },
       "processing_system7_0_FCLK_RESET0_N": {
@@ -1902,17 +1912,38 @@
           "axi_gpio_0/s_axi_aresetn"
         ]
       },
+      "start_trig_1": {
+        "ports": [
+          "start_trig",
+          "ila_0/probe3",
+          "test_0/ap_start"
+        ]
+      },
       "sys_clock_1": {
         "ports": [
           "sys_clock",
           "clk_wiz_0/clk_in1"
         ]
       },
+      "test_0_ap_done": {
+        "ports": [
+          "test_0/ap_done",
+          "led1_g",
+          "ila_0/probe4"
+        ]
+      },
+      "test_0_ap_ready": {
+        "ports": [
+          "test_0/ap_ready",
+          "led1_r",
+          "ila_0/probe2",
+          "ila_0/probe1"
+        ]
+      },
       "xpm_cdc_gen_0_dest_out": {
         "ports": [
           "xpm_cdc_gen_0/dest_out",
-          "pos_edge_detect_0/a",
-          "ila_0/probe0"
+          "bus_pos_edge_det_0/bus_in"
         ]
       }
     },

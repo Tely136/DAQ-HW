@@ -15,16 +15,27 @@
  * limitations under the License.
  */
 
-// #include "ap_axi_sdata.h"
-#include "hls_stream.h"
-#include "ap_int.h"
-#include <iostream>
+#include "counter.h"
 
-#define NUM_BINS 10
-#define CYCLE_PER_BIN 20;
+using namespace std;
 
-typedef int packet;
-typedef hls::stream<ap_uint<8>> bitstream;
+int main() {
+
+    bitstream A;
+    ap_uint<16> B[NUM_BINS];
+
+    for (int i=0; i<13; i++) {
+        A.write(1);
+
+    }
+    example(A, B);
+  
 
 
-void example(bitstream& A, ap_uint<16> counts[NUM_BINS]);
+    for (int i=0; i<NUM_BINS; i++) {
+        cout << B[i] << "\r\n";
+    }
+
+
+    return 0;
+}
