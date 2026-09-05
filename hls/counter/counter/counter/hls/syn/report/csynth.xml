@@ -6,7 +6,7 @@
         <unit>ns</unit>
         <ProductFamily>zynq</ProductFamily>
         <Part>xc7z007s-clg400-1</Part>
-        <TopModelName>test</TopModelName>
+        <TopModelName>example</TopModelName>
         <TargetClockPeriod>10.00</TargetClockPeriod>
         <ClockUncertainty>2.70</ClockUncertainty>
     </UserAssignments>
@@ -14,51 +14,51 @@
         <PipelineType>loop auto-rewind stp (delay=0 cycle(s))</PipelineType>
         <SummaryOfTimingAnalysis>
             <unit>ns</unit>
-            <EstimatedClockPeriod>6.692</EstimatedClockPeriod>
+            <EstimatedClockPeriod>4.907</EstimatedClockPeriod>
         </SummaryOfTimingAnalysis>
         <SummaryOfOverallLatency>
             <unit>clock cycles</unit>
-            <Best-caseLatency>undef</Best-caseLatency>
-            <Average-caseLatency>undef</Average-caseLatency>
-            <Worst-caseLatency>undef</Worst-caseLatency>
-            <Best-caseRealTimeLatency>undef</Best-caseRealTimeLatency>
-            <Average-caseRealTimeLatency>undef</Average-caseRealTimeLatency>
-            <Worst-caseRealTimeLatency>undef</Worst-caseRealTimeLatency>
-            <Interval-min>0</Interval-min>
-            <Interval-max>0</Interval-max>
+            <Best-caseLatency>1002</Best-caseLatency>
+            <Average-caseLatency>1002</Average-caseLatency>
+            <Worst-caseLatency>1002</Worst-caseLatency>
+            <Best-caseRealTimeLatency>10.020 us</Best-caseRealTimeLatency>
+            <Average-caseRealTimeLatency>10.020 us</Average-caseRealTimeLatency>
+            <Worst-caseRealTimeLatency>10.020 us</Worst-caseRealTimeLatency>
+            <Interval-min>1000</Interval-min>
+            <Interval-max>1000</Interval-max>
             <PerformancePragma>-</PerformancePragma>
         </SummaryOfOverallLatency>
         <SummaryOfLoopLatency>
-            <VITIS_LOOP_8_1>
+            <Loop1>
                 <Slack>7.30</Slack>
-                <TripCount>undef</TripCount>
+                <TripCount>1000</TripCount>
                 <isPerfectNested>0</isPerfectNested>
-                <Latency>undef</Latency>
-                <AbsoluteTimeLatency>undef</AbsoluteTimeLatency>
+                <Latency>1000</Latency>
+                <AbsoluteTimeLatency>10000</AbsoluteTimeLatency>
                 <PipelineII>1</PipelineII>
-                <PipelineDepth>1</PipelineDepth>
+                <PipelineDepth>2</PipelineDepth>
                 <PerformancePragma>-</PerformancePragma>
                 <InstanceList/>
-            </VITIS_LOOP_8_1>
+            </Loop1>
         </SummaryOfLoopLatency>
         <SummaryOfViolations>
             <IssueType>-</IssueType>
             <ViolationType>-</ViolationType>
-            <SourceLocation>counter.cpp:5</SourceLocation>
+            <SourceLocation>counter.cpp:8</SourceLocation>
             <SummaryOfLoopViolations>
-                <VITIS_LOOP_8_1>
-                    <Name>VITIS_LOOP_8_1</Name>
+                <Loop1>
+                    <Name>Loop 1</Name>
                     <IssueType>-</IssueType>
                     <ViolationType>-</ViolationType>
-                    <SourceLocation>counter.cpp:10</SourceLocation>
-                </VITIS_LOOP_8_1>
+                    <SourceLocation>counter.cpp:13</SourceLocation>
+                </Loop1>
             </SummaryOfLoopViolations>
         </SummaryOfViolations>
     </PerformanceEstimates>
     <AreaEstimates>
         <Resources>
-            <FF>34</FF>
-            <LUT>101</LUT>
+            <FF>65</FF>
+            <LUT>238</LUT>
             <BRAM_18K>0</BRAM_18K>
             <DSP>0</DSP>
             <URAM>0</URAM>
@@ -74,7 +74,7 @@
     <InterfaceSummary>
         <RtlPorts>
             <name>ap_clk</name>
-            <Object>test</Object>
+            <Object>example</Object>
             <Type>return value</Type>
             <Scope/>
             <IOProtocol>ap_ctrl_hs</IOProtocol>
@@ -85,7 +85,7 @@
         </RtlPorts>
         <RtlPorts>
             <name>ap_rst</name>
-            <Object>test</Object>
+            <Object>example</Object>
             <Type>return value</Type>
             <Scope/>
             <IOProtocol>ap_ctrl_hs</IOProtocol>
@@ -96,7 +96,7 @@
         </RtlPorts>
         <RtlPorts>
             <name>ap_start</name>
-            <Object>test</Object>
+            <Object>example</Object>
             <Type>return value</Type>
             <Scope/>
             <IOProtocol>ap_ctrl_hs</IOProtocol>
@@ -107,7 +107,7 @@
         </RtlPorts>
         <RtlPorts>
             <name>ap_done</name>
-            <Object>test</Object>
+            <Object>example</Object>
             <Type>return value</Type>
             <Scope/>
             <IOProtocol>ap_ctrl_hs</IOProtocol>
@@ -118,7 +118,7 @@
         </RtlPorts>
         <RtlPorts>
             <name>ap_idle</name>
-            <Object>test</Object>
+            <Object>example</Object>
             <Type>return value</Type>
             <Scope/>
             <IOProtocol>ap_ctrl_hs</IOProtocol>
@@ -129,7 +129,7 @@
         </RtlPorts>
         <RtlPorts>
             <name>ap_ready</name>
-            <Object>test</Object>
+            <Object>example</Object>
             <Type>return value</Type>
             <Scope/>
             <IOProtocol>ap_ctrl_hs</IOProtocol>
@@ -139,84 +139,156 @@
             <Attribute>control</Attribute>
         </RtlPorts>
         <RtlPorts>
-            <name>pulse</name>
-            <Object>pulse</Object>
-            <Type>scalar</Type>
+            <name>A_dout</name>
+            <Object>A</Object>
+            <Type>pointer</Type>
             <Scope/>
-            <IOProtocol>ap_none</IOProtocol>
+            <IOProtocol>ap_fifo</IOProtocol>
             <IOConfig/>
             <Dir>in</Dir>
             <Bits>1</Bits>
+            <Attribute>control</Attribute>
+            <CType>int</CType>
+        </RtlPorts>
+        <RtlPorts>
+            <name>A_empty_n</name>
+            <Object>A</Object>
+            <Type>pointer</Type>
+            <Scope/>
+            <IOProtocol>ap_fifo</IOProtocol>
+            <IOConfig/>
+            <Dir>in</Dir>
+            <Bits>1</Bits>
+            <Attribute>control</Attribute>
+            <CType>int</CType>
+        </RtlPorts>
+        <RtlPorts>
+            <name>A_read</name>
+            <Object>A</Object>
+            <Type>pointer</Type>
+            <Scope/>
+            <IOProtocol>ap_fifo</IOProtocol>
+            <IOConfig/>
+            <Dir>out</Dir>
+            <Bits>1</Bits>
+            <Attribute>control</Attribute>
+            <CType>int</CType>
+        </RtlPorts>
+        <RtlPorts>
+            <name>counts_address0</name>
+            <Object>counts</Object>
+            <Type>array</Type>
+            <Scope/>
+            <IOProtocol>ap_memory</IOProtocol>
+            <IOConfig/>
+            <Dir>out</Dir>
+            <Bits>4</Bits>
+            <Attribute>address</Attribute>
+            <CType>int</CType>
+        </RtlPorts>
+        <RtlPorts>
+            <name>counts_ce0</name>
+            <Object>counts</Object>
+            <Type>array</Type>
+            <Scope/>
+            <IOProtocol>ap_memory</IOProtocol>
+            <IOConfig/>
+            <Dir>out</Dir>
+            <Bits>1</Bits>
+            <Attribute>control</Attribute>
+            <CType>int</CType>
+        </RtlPorts>
+        <RtlPorts>
+            <name>counts_we0</name>
+            <Object>counts</Object>
+            <Type>array</Type>
+            <Scope/>
+            <IOProtocol>ap_memory</IOProtocol>
+            <IOConfig/>
+            <Dir>out</Dir>
+            <Bits>1</Bits>
+            <Attribute>control</Attribute>
+            <CType>int</CType>
+        </RtlPorts>
+        <RtlPorts>
+            <name>counts_d0</name>
+            <Object>counts</Object>
+            <Type>array</Type>
+            <Scope/>
+            <IOProtocol>ap_memory</IOProtocol>
+            <IOConfig/>
+            <Dir>out</Dir>
+            <Bits>16</Bits>
             <Attribute>data</Attribute>
             <CType>int</CType>
         </RtlPorts>
     </InterfaceSummary>
     <RTLDesignHierarchy>
         <TopModule MAX_DEPTH="2">
-            <ModuleName>test</ModuleName>
-            <BindInstances>add_ln10_fu_52_p2 icmp_ln12_fu_65_p2</BindInstances>
+            <ModuleName>example</ModuleName>
+            <BindInstances>select_ln8_fu_159_p3 i_3_fu_167_p3 empty_6_fu_180_p3 add_ln15_fu_187_p2 add_ln18_fu_193_p2 select_ln18_fu_199_p3 icmp_ln13_fu_207_p2 add_ln8_1_fu_130_p2 add_ln8_fu_218_p2 icmp_ln8_fu_136_p2</BindInstances>
         </TopModule>
     </RTLDesignHierarchy>
     <ModuleInformation>
         <Module>
-            <Name>test</Name>
+            <Name>example</Name>
             <Loops>
-                <VITIS_LOOP_8_1/>
+                <Loop1/>
             </Loops>
             <PerformanceEstimates>
                 <SummaryOfTimingAnalysis>
                     <TargetClockPeriod>10.00</TargetClockPeriod>
                     <ClockUncertainty>2.70</ClockUncertainty>
-                    <EstimatedClockPeriod>6.692</EstimatedClockPeriod>
+                    <EstimatedClockPeriod>4.907</EstimatedClockPeriod>
                 </SummaryOfTimingAnalysis>
                 <SummaryOfOverallLatency>
-                    <Best-caseLatency>undef</Best-caseLatency>
-                    <Average-caseLatency>undef</Average-caseLatency>
-                    <Worst-caseLatency>undef</Worst-caseLatency>
-                    <Best-caseRealTimeLatency>undef</Best-caseRealTimeLatency>
-                    <Average-caseRealTimeLatency>undef</Average-caseRealTimeLatency>
-                    <Worst-caseRealTimeLatency>undef</Worst-caseRealTimeLatency>
-                    <PipelineInitiationInterval>0</PipelineInitiationInterval>
+                    <Best-caseLatency>1002</Best-caseLatency>
+                    <Average-caseLatency>1002</Average-caseLatency>
+                    <Worst-caseLatency>1002</Worst-caseLatency>
+                    <Best-caseRealTimeLatency>10.020 us</Best-caseRealTimeLatency>
+                    <Average-caseRealTimeLatency>10.020 us</Average-caseRealTimeLatency>
+                    <Worst-caseRealTimeLatency>10.020 us</Worst-caseRealTimeLatency>
+                    <PipelineInitiationInterval>1000</PipelineInitiationInterval>
                     <PipelineType>loop auto-rewind stp (delay=0 cycle(s))</PipelineType>
                     <PerformancePragma>-</PerformancePragma>
                 </SummaryOfOverallLatency>
                 <SummaryOfLoopLatency>
-                    <VITIS_LOOP_8_1>
-                        <Name>VITIS_LOOP_8_1</Name>
+                    <Loop1>
+                        <Name>Loop 1</Name>
                         <Slack>7.30</Slack>
-                        <TripCount>undef</TripCount>
+                        <TripCount>1000</TripCount>
                         <isPerfectNested>0</isPerfectNested>
-                        <Latency>undef</Latency>
-                        <AbsoluteTimeLatency>undef</AbsoluteTimeLatency>
+                        <Latency>1000</Latency>
+                        <AbsoluteTimeLatency>10.000 us</AbsoluteTimeLatency>
                         <PipelineII>1</PipelineII>
-                        <PipelineDepth>1</PipelineDepth>
+                        <PipelineDepth>2</PipelineDepth>
                         <PipelineType>yes</PipelineType>
                         <PerformancePragma>-</PerformancePragma>
                         <InstanceList/>
-                    </VITIS_LOOP_8_1>
+                    </Loop1>
                 </SummaryOfLoopLatency>
                 <SummaryOfViolations>
                     <IssueType>-</IssueType>
                     <ViolationType>-</ViolationType>
-                    <SourceLocation>counter.cpp:5</SourceLocation>
+                    <SourceLocation>counter.cpp:8</SourceLocation>
                     <SummaryOfLoopViolations>
-                        <VITIS_LOOP_8_1>
-                            <Name>VITIS_LOOP_8_1</Name>
+                        <Loop1>
+                            <Name>Loop 1</Name>
                             <IssueType>-</IssueType>
                             <ViolationType>-</ViolationType>
-                            <SourceLocation>counter.cpp:10</SourceLocation>
-                        </VITIS_LOOP_8_1>
+                            <SourceLocation>counter.cpp:13</SourceLocation>
+                        </Loop1>
                     </SummaryOfLoopViolations>
                 </SummaryOfViolations>
             </PerformanceEstimates>
             <AreaEstimates>
                 <Resources>
-                    <FF>34</FF>
+                    <FF>65</FF>
                     <AVAIL_FF>28800</AVAIL_FF>
                     <UTIL_FF>~0</UTIL_FF>
-                    <LUT>101</LUT>
+                    <LUT>238</LUT>
                     <AVAIL_LUT>14400</AVAIL_LUT>
-                    <UTIL_LUT>~0</UTIL_LUT>
+                    <UTIL_LUT>1</UTIL_LUT>
                     <BRAM_18K>0</BRAM_18K>
                     <AVAIL_BRAM>100</AVAIL_BRAM>
                     <UTIL_BRAM>0</UTIL_BRAM>
@@ -229,8 +301,16 @@
                 </Resources>
             </AreaEstimates>
             <BindNodes>
-                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" CE_REG="" DISPNAME="bind_op add" DSP="0" ID="" IMPL="fabric" LATENCY="0" LOOP="VITIS_LOOP_8_1" OPTYPE="add" PRAGMA="" RTLNAME="add_ln10_fu_52_p2" SOURCE="counter.cpp:10" STORAGESUBTYPE="" URAM="0" VARIABLE="add_ln10" VISIBLE="true"/>
-                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" CE_REG="" DISPNAME="bind_op setlt" DSP="0" ID="" IMPL="auto" LATENCY="0" LOOP="VITIS_LOOP_8_1" OPTYPE="setlt" PRAGMA="" RTLNAME="icmp_ln12_fu_65_p2" SOURCE="counter.cpp:12" STORAGESUBTYPE="" URAM="0" VARIABLE="icmp_ln12" VISIBLE="false"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" CE_REG="" DISPNAME="bind_op select" DSP="0" ID="" IMPL="auto_sel" LATENCY="0" LOOP="Loop 1" OPTYPE="select" PRAGMA="" RTLNAME="select_ln8_fu_159_p3" SOURCE="counter.cpp:8" STORAGESUBTYPE="" URAM="0" VARIABLE="select_ln8" VISIBLE="false"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" CE_REG="" DISPNAME="bind_op select" DSP="0" ID="" IMPL="auto_sel" LATENCY="0" LOOP="Loop 1" OPTYPE="select" PRAGMA="" RTLNAME="i_3_fu_167_p3" SOURCE="counter.cpp:8" STORAGESUBTYPE="" URAM="0" VARIABLE="i_3" VISIBLE="false"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" CE_REG="" DISPNAME="bind_op select" DSP="0" ID="" IMPL="auto_sel" LATENCY="0" LOOP="Loop 1" OPTYPE="select" PRAGMA="" RTLNAME="empty_6_fu_180_p3" SOURCE="counter.cpp:14" STORAGESUBTYPE="" URAM="0" VARIABLE="empty_6" VISIBLE="false"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" CE_REG="" DISPNAME="bind_op add" DSP="0" ID="" IMPL="fabric" LATENCY="0" LOOP="Loop 1" OPTYPE="add" PRAGMA="" RTLNAME="add_ln15_fu_187_p2" SOURCE="counter.cpp:15" STORAGESUBTYPE="" URAM="0" VARIABLE="add_ln15" VISIBLE="true"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" CE_REG="" DISPNAME="bind_op add" DSP="0" ID="" IMPL="fabric" LATENCY="0" LOOP="Loop 1" OPTYPE="add" PRAGMA="" RTLNAME="add_ln18_fu_193_p2" SOURCE="counter.cpp:18" STORAGESUBTYPE="" URAM="0" VARIABLE="add_ln18" VISIBLE="true"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" CE_REG="" DISPNAME="bind_op select" DSP="0" ID="" IMPL="auto_sel" LATENCY="0" LOOP="Loop 1" OPTYPE="select" PRAGMA="" RTLNAME="select_ln18_fu_199_p3" SOURCE="counter.cpp:18" STORAGESUBTYPE="" URAM="0" VARIABLE="select_ln18" VISIBLE="false"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" CE_REG="" DISPNAME="bind_op seteq" DSP="0" ID="" IMPL="auto" LATENCY="0" LOOP="Loop 1" OPTYPE="seteq" PRAGMA="" RTLNAME="icmp_ln13_fu_207_p2" SOURCE="counter.cpp:13" STORAGESUBTYPE="" URAM="0" VARIABLE="icmp_ln13" VISIBLE="false"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" CE_REG="" DISPNAME="bind_op add" DSP="0" ID="" IMPL="fabric" LATENCY="0" LOOP="Loop 1" OPTYPE="add" PRAGMA="" RTLNAME="add_ln8_1_fu_130_p2" SOURCE="counter.cpp:8" STORAGESUBTYPE="" URAM="0" VARIABLE="add_ln8_1" VISIBLE="true"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" CE_REG="" DISPNAME="bind_op add" DSP="0" ID="" IMPL="fabric" LATENCY="0" LOOP="Loop 1" OPTYPE="add" PRAGMA="" RTLNAME="add_ln8_fu_218_p2" SOURCE="counter.cpp:8" STORAGESUBTYPE="" URAM="0" VARIABLE="add_ln8" VISIBLE="true"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" CE_REG="" DISPNAME="bind_op seteq" DSP="0" ID="" IMPL="auto" LATENCY="0" LOOP="Loop 1" OPTYPE="seteq" PRAGMA="" RTLNAME="icmp_ln8_fu_136_p2" SOURCE="counter.cpp:8" STORAGESUBTYPE="" URAM="0" VARIABLE="icmp_ln8" VISIBLE="false"/>
             </BindNodes>
         </Module>
     </ModuleInformation>
@@ -240,9 +320,17 @@
         <config_rtl auto_prefix="1"/>
     </UserConfigCommands>
     <Args>
-        <Arg ArgName="pulse" index="0" direction="in" srcType="ap_uint&lt;1&gt;" srcSize="8">
+        <Arg ArgName="A" index="0" direction="in" srcType="stream&lt;ap_uint&lt;1&gt;, 0&gt;&amp;" srcSize="8">
             <hwRefs>
-                <hwRef type="port" interface="pulse" name="pulse" usage="data" direction="in"/>
+                <hwRef type="interface" interface="A" name="" usage="data" direction="in"/>
+            </hwRefs>
+        </Arg>
+        <Arg ArgName="counts" index="1" direction="out" srcType="ap_uint&lt;16&gt;*" srcSize="16">
+            <hwRefs>
+                <hwRef type="port" interface="counts_address0" name="counts_address0" usage="address" direction="out"/>
+                <hwRef type="port" interface="counts_ce0" name="counts_ce0" usage="control" direction="out"/>
+                <hwRef type="port" interface="counts_we0" name="counts_we0" usage="control" direction="out"/>
+                <hwRef type="port" interface="counts_d0" name="counts_d0" usage="data" direction="out"/>
             </hwRefs>
         </Arg>
     </Args>
@@ -283,24 +371,57 @@
                 <port>ap_start</port>
             </ports>
         </Interface>
-        <Interface InterfaceName="pulse" type="data" busTypeName="data" protocol="ap_none" mode="slave" dataWidth="1">
+        <Interface InterfaceName="A" type="ap_fifo" busTypeName="acc_fifo_read" mode="master" direction="in" dataWidth="1" portPrefix="A_">
             <portMaps>
-                <portMap portMapName="pulse">DATA</portMap>
+                <portMap portMapName="A_dout">RD_DATA</portMap>
+                <portMap portMapName="A_empty_n">EMPTY_N</portMap>
+                <portMap portMapName="A_read">RD_EN</portMap>
             </portMaps>
             <ports>
-                <port>pulse</port>
+                <port>A_dout</port>
+                <port>A_empty_n</port>
+                <port>A_read</port>
             </ports>
             <constraints>
-                <constraint constraint_type="pragma interface" mode="ap_none" register_option="0" argName="pulse"/>
+                <constraint constraint_type="pragma interface" mode="ap_fifo" register_option="0" argName="A"/>
+            </constraints>
+        </Interface>
+        <Interface InterfaceName="counts_address0" type="data" busTypeName="data" protocol="ap_memory" mode="master" dataWidth="4">
+            <portMaps>
+                <portMap portMapName="counts_address0">DATA</portMap>
+            </portMaps>
+            <ports>
+                <port>counts_address0</port>
+            </ports>
+            <constraints>
+                <constraint constraint_type="pragma interface" mode="ap_memory" register_option="0" argName="counts"/>
+            </constraints>
+        </Interface>
+        <Interface InterfaceName="counts_d0" type="data" busTypeName="data" protocol="ap_memory" mode="master" dataWidth="16">
+            <portMaps>
+                <portMap portMapName="counts_d0">DATA</portMap>
+            </portMaps>
+            <ports>
+                <port>counts_d0</port>
+            </ports>
+            <constraints>
+                <constraint constraint_type="pragma interface" mode="ap_memory" register_option="0" argName="counts"/>
             </constraints>
         </Interface>
     </Interfaces>
     <ReportHWInterface>
         <section name="HW Interfaces" level="0">
-            <item name="Other Ports">
+            <item name="AP_FIFO">
                 <table>
-                    <keys size="4">Port, Mode, Direction, Bitwidth</keys>
-                    <column name="pulse">ap_none, in, 1</column>
+                    <keys size="3">Interface, Direction, Data Width</keys>
+                    <column name="A">in, 1</column>
+                </table>
+            </item>
+            <item name="AP_MEMORY">
+                <table>
+                    <keys size="3">Port, Direction, Bitwidth</keys>
+                    <column name="counts_address0">out, 4</column>
+                    <column name="counts_d0">out, 16</column>
                 </table>
             </item>
             <item name="TOP LEVEL CONTROL">
@@ -318,23 +439,28 @@
             <item name="Top Function Arguments">
                 <table>
                     <keys size="3">Argument, Direction, Datatype</keys>
-                    <column name="pulse">in, ap_uint&lt;1&gt;</column>
+                    <column name="A">in, stream&lt;ap_uint&lt;1&gt; 0&gt;&amp;</column>
+                    <column name="counts">out, ap_uint&lt;16&gt;*</column>
                 </table>
             </item>
             <item name="SW-to-HW Mapping">
                 <table>
-                    <keys size="3">Argument, HW Interface, HW Type</keys>
-                    <column name="pulse">pulse, port</column>
+                    <keys size="4">Argument, HW Interface, HW Type, HW Usage</keys>
+                    <column name="A">A, interface, </column>
+                    <column name="counts">counts_address0, port, offset</column>
+                    <column name="counts">counts_ce0, port, </column>
+                    <column name="counts">counts_we0, port, </column>
+                    <column name="counts">counts_d0, port, </column>
                 </table>
             </item>
         </section>
     </ReportSWInterface>
     <ResolutionUrl key="ZZZ">docs.amd.com/access/sources/dita/topic?Doc_Version=2026.1%20English&amp;url=ug1448-hls-guidance&amp;resourceid=ZZZ.html</ResolutionUrl>
-    <ReportBurst>
-        <section name="M_AXI Burst Information" level="0" HEADER_NOTE="Note: All burst requests might be further partitioned into multiple requests during RTL generation based on max_read_burst_length or max_write_burst_length settings."/>
-    </ReportBurst>
-    <PragmaReport/>
+    <PragmaReport>
+        <Pragma type="loop_tripcount" status="implemented" location="counter.cpp:8" parentFunction="example" variable="" isDirective="0" options="max=10 min=10 avg=10"/>
+        <Pragma type="loop_flatten" status="implemented" location="counter.cpp:13" parentFunction="example" variable="" isDirective="0" options=" "/>
+    </PragmaReport>
     <AutoPragmaReport>
-        <AutoPragma type="pipeline" parentFunction="test" options="" pragmaLocId="counter.cpp:8:0" pragmaLocOpt="test/VITIS_LOOP_8_1" srcTcl="config_compile -pipeline_loops 64" srcIni="syn.compile.pipeline_loops=64" srcPragmaType="" srcPragmaLoc="syn.compile.pipeline_loops=64" srcPragmaSource="config" srcPragmaSourceDesc="syn.compile.pipeline_loops=64" srcIsDirective="0" srcIsSlxDirective="0" srcIsCsimDirective="0" directiveIni="syn.directive.pipeline=test/VITIS_LOOP_8_1 " loopName="VITIS_LOOP_8_1" loopLoc="counter.cpp:8:21"/>
+        <AutoPragma type="pipeline" parentFunction="example" options="" pragmaLocId="counter.cpp:13:0" pragmaLocOpt="example/anonymous" srcTcl="config_compile -pipeline_loops 64" srcIni="syn.compile.pipeline_loops=64" srcPragmaType="" srcPragmaLoc="syn.compile.pipeline_loops=64" srcPragmaSource="config" srcPragmaSourceDesc="syn.compile.pipeline_loops=64" srcIsDirective="0" srcIsSlxDirective="0" srcIsCsimDirective="0" directiveIni="syn.directive.pipeline=example/anonymous " loopName="anonymous" loopLoc="counter.cpp:13:9"/>
     </AutoPragmaReport>
 </profile>

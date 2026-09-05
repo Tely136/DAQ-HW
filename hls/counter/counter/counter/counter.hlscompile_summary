@@ -9,10 +9,10 @@
 <ENTRY>
 {
  "type": "ET_CmdStep",
- "dateTimestamp": "09/03/26 15:39:10",
- "timestampMillis": "1788464350648",
+ "dateTimestamp": "09/05/26 12:07:45",
+ "timestampMillis": "1788624465805",
  "buildStep": {
-  "cmdId": "e7ffcc00-159c-477c-a098-60576ffd5296",
+  "cmdId": "eb3651de-d573-4e54-9a49-2096c9e8caed",
   "name": "v++",
   "logFile": "C:/DAQ-HW\\hls\\counter\\counter\\counter\\logs\\counter.steps.log",
   "commandLine": "C:/AMDDesignTools/2026.1/Vitis/bin/unwrapped/win64.o/v++.exe  -c --mode hls --config C:\\DAQ-HW\\hls\\counter\\counter\\hls_config.cfg --work_dir counter ",
@@ -28,7 +28,7 @@
   "iniFiles": [
    {
     "path": "C:/DAQ-HW\\hls\\counter\\counter\\hls_config.cfg",
-    "content": "part=xc7z007sclg400-1\n\n[hls]\npackage.output.format=ip_catalog\npackage.output.syn=false\nsyn.file=counter.cpp\nsyn.file=counter.h\nsyn.top=test"
+    "content": "part=xc7z007sclg400-1\n\n[hls]\npackage.output.format=ip_catalog\npackage.output.syn=false\nsyn.top=example\nsyn.file=counter.cpp\nsyn.file=counter.h\nsyn.file=counter_test.cpp\ntb.file=./counter_test.cpp\ntb.file=./photon_stream.dat\ntb.file=./golden.dat"
    }
   ],
   "cwd": "C:\\DAQ-HW\\hls\\counter\\counter"
@@ -38,10 +38,10 @@
 <ENTRY>
 {
  "type": "ET_Status",
- "dateTimestamp": "09/03/26 15:39:10",
- "timestampMillis": "1788464350650",
+ "dateTimestamp": "09/05/26 12:07:45",
+ "timestampMillis": "1788624465805",
  "status": {
-  "cmdId": "e7ffcc00-159c-477c-a098-60576ffd5296",
+  "cmdId": "eb3651de-d573-4e54-9a49-2096c9e8caed",
   "state": "CS_RUNNING"
  }
 }
@@ -49,8 +49,8 @@
 <ENTRY>
 {
  "type": "ET_FlowMetaData",
- "dateTimestamp": "09/03/26 15:39:17",
- "timestampMillis": "1788464357579",
+ "dateTimestamp": "09/05/26 12:07:54",
+ "timestampMillis": "1788624474150",
  "buildSummary": {
   "hardwarePlatform": "",
   "hardwareDsa": "",
@@ -63,14 +63,15 @@
    {
     "base": {
      "type": "KERNEL",
-     "name": "test",
+     "name": "example",
      "file": "",
      "reports": [],
      "uuid": ""
     },
     "sources": [
      "C:/DAQ-HW\\hls\\counter\\counter\\counter.cpp",
-     "C:/DAQ-HW\\hls\\counter\\counter\\counter.h"
+     "C:/DAQ-HW\\hls\\counter\\counter\\counter.h",
+     "C:/DAQ-HW\\hls\\counter\\counter\\counter_test.cpp"
     ],
     "psSources": [],
     "cuNames": [],
@@ -86,10 +87,10 @@
 <ENTRY>
 {
  "type": "ET_SubCmdStep",
- "dateTimestamp": "09/03/26 15:39:17",
- "timestampMillis": "1788464357580",
+ "dateTimestamp": "09/05/26 12:07:54",
+ "timestampMillis": "1788624474151",
  "buildStep": {
-  "cmdId": "581bd23c-c296-4b99-b497-9689bc4f9fc6",
+  "cmdId": "3e9fb77a-f1c0-4b13-ac6e-6d7aed15cae9",
   "name": "",
   "logFile": "C:/DAQ-HW\\hls\\counter\\counter\\counter\\hls\\hls.log",
   "commandLine": "",
@@ -102,10 +103,10 @@
 <ENTRY>
 {
  "type": "ET_Status",
- "dateTimestamp": "09/03/26 15:39:17",
- "timestampMillis": "1788464357580",
+ "dateTimestamp": "09/05/26 12:07:54",
+ "timestampMillis": "1788624474151",
  "status": {
-  "cmdId": "581bd23c-c296-4b99-b497-9689bc4f9fc6",
+  "cmdId": "3e9fb77a-f1c0-4b13-ac6e-6d7aed15cae9",
   "state": "CS_RUNNING"
  }
 }
@@ -113,8 +114,8 @@
 <ENTRY>
 {
  "type": "ET_Report",
- "dateTimestamp": "09/03/26 15:39:17",
- "timestampMillis": "1788464357580",
+ "dateTimestamp": "09/05/26 12:07:54",
+ "timestampMillis": "1788624474151",
  "report": {
   "path": "C:/DAQ-HW\\hls\\counter\\counter\\counter\\hls\\hls_data.json",
   "name": "",
@@ -127,8 +128,8 @@
 <ENTRY>
 {
  "type": "ET_Report",
- "dateTimestamp": "09/03/26 15:39:17",
- "timestampMillis": "1788464357581",
+ "dateTimestamp": "09/05/26 12:07:54",
+ "timestampMillis": "1788624474152",
  "report": {
   "path": "C:/DAQ-HW\\hls\\counter\\counter\\counter\\hls\\syn\\report\\csynth.rpt",
   "name": "",
@@ -141,8 +142,8 @@
 <ENTRY>
 {
  "type": "ET_Report",
- "dateTimestamp": "09/03/26 15:39:17",
- "timestampMillis": "1788464357581",
+ "dateTimestamp": "09/05/26 12:07:54",
+ "timestampMillis": "1788624474152",
  "report": {
   "path": "C:/DAQ-HW\\hls\\counter\\counter\\counter\\hls\\syn\\report\\csynth.xml",
   "name": "",
@@ -155,8 +156,8 @@
 <ENTRY>
 {
  "type": "ET_Report",
- "dateTimestamp": "09/03/26 15:39:34",
- "timestampMillis": "1788464374737",
+ "dateTimestamp": "09/05/26 12:08:24",
+ "timestampMillis": "1788624504074",
  "report": {
   "path": "C:/DAQ-HW\\hls\\counter\\counter\\counter\\hls",
   "name": "",
@@ -169,8 +170,8 @@
 <ENTRY>
 {
  "type": "ET_Report",
- "dateTimestamp": "09/03/26 15:39:34",
- "timestampMillis": "1788464374738",
+ "dateTimestamp": "09/05/26 12:08:24",
+ "timestampMillis": "1788624504075",
  "report": {
   "path": "C:/DAQ-HW\\hls\\counter\\counter\\counter\\hls",
   "name": "",
@@ -183,8 +184,8 @@
 <ENTRY>
 {
  "type": "ET_Report",
- "dateTimestamp": "09/03/26 15:39:34",
- "timestampMillis": "1788464374738",
+ "dateTimestamp": "09/05/26 12:08:24",
+ "timestampMillis": "1788624504076",
  "report": {
   "path": "C:/DAQ-HW\\hls\\counter\\counter\\counter\\hls",
   "name": "",
@@ -197,10 +198,10 @@
 <ENTRY>
 {
  "type": "ET_Status",
- "dateTimestamp": "09/03/26 15:39:34",
- "timestampMillis": "1788464374739",
+ "dateTimestamp": "09/05/26 12:08:24",
+ "timestampMillis": "1788624504078",
  "status": {
-  "cmdId": "581bd23c-c296-4b99-b497-9689bc4f9fc6",
+  "cmdId": "3e9fb77a-f1c0-4b13-ac6e-6d7aed15cae9",
   "state": "CS_PASSED"
  }
 }
@@ -208,10 +209,10 @@
 <ENTRY>
 {
  "type": "ET_Status",
- "dateTimestamp": "09/03/26 15:39:34",
- "timestampMillis": "1788464374930",
+ "dateTimestamp": "09/05/26 12:08:24",
+ "timestampMillis": "1788624504329",
  "status": {
-  "cmdId": "e7ffcc00-159c-477c-a098-60576ffd5296",
+  "cmdId": "eb3651de-d573-4e54-9a49-2096c9e8caed",
   "state": "CS_PASSED"
  }
 }
@@ -219,8 +220,8 @@
 <ENTRY>
 {
  "type": "ET_Report",
- "dateTimestamp": "09/03/26 15:39:34",
- "timestampMillis": "1788464374948",
+ "dateTimestamp": "09/05/26 12:08:24",
+ "timestampMillis": "1788624504364",
  "report": {
   "path": "C:/DAQ-HW\\hls\\counter\\counter\\counter\\reports\\v++_compile_counter_guidance.html",
   "name": "",
@@ -233,8 +234,8 @@
 <ENTRY>
 {
  "type": "ET_Report",
- "dateTimestamp": "09/03/26 15:39:34",
- "timestampMillis": "1788464374948",
+ "dateTimestamp": "09/05/26 12:08:24",
+ "timestampMillis": "1788624504365",
  "report": {
   "path": "C:/DAQ-HW\\hls\\counter\\counter\\counter\\reports\\.db\\v++_compile_counter_guidance.pb3",
   "name": "",

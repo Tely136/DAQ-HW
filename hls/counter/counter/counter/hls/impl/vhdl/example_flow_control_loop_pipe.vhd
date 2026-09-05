@@ -10,7 +10,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-entity test_flow_control_loop_pipe is
+entity example_flow_control_loop_pipe is
 port (
     ap_clk             : in  std_logic;
     ap_rst             : in  std_logic;
@@ -35,9 +35,9 @@ port (
     ap_loop_exit_ready : in  std_logic;
     ap_loop_exit_done  : in  std_logic
 );
-end entity test_flow_control_loop_pipe;
+end entity example_flow_control_loop_pipe;
 
-architecture behav of test_flow_control_loop_pipe is
+architecture behav of example_flow_control_loop_pipe is
 attribute DowngradeIPIdentifiedWarnings : STRING;
 attribute DowngradeIPIdentifiedWarnings of behav : architecture is "yes";
 begin 

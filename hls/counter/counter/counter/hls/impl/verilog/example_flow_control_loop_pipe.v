@@ -9,7 +9,7 @@
 `timescale 1 ns / 1 ps
 
 (* DowngradeIPIdentifiedWarnings = "yes" *)
-module test_flow_control_loop_pipe(
+module example_flow_control_loop_pipe(
         ap_clk,
         ap_rst,
         ap_start,
