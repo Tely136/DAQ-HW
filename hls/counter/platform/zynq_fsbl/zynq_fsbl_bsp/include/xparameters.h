@@ -1,25 +1,17 @@
 #ifndef XPARAMETERS_H   /* prevent circular inclusions */
 #define XPARAMETERS_H   /* by using protection macros */
 
-#define XPAR_XBRAM_NUM_INSTANCES 1
+#define XPAR_XMCS_NUM_INSTANCES 1
 
-/* Definitions for peripheral AXI_BRAM_CTRL_0 */
-#define XPAR_AXI_BRAM_CTRL_0_COMPATIBLE "xlnx,axi-bram-ctrl-4.1"
-#define XPAR_AXI_BRAM_CTRL_0_BASEADDR 0x40000000
-#define XPAR_AXI_BRAM_CTRL_0_HIGHADDR 0x40001fff
-#define XPAR_AXI_BRAM_CTRL_0_DATA_WIDTH 0x20
-#define XPAR_AXI_BRAM_CTRL_0_ECC 0x0
-#define XPAR_AXI_BRAM_CTRL_0_FAULT_INJECT 0x0
-#define XPAR_AXI_BRAM_CTRL_0_ECC_ONOFF_RESET_VALUE 0x0
+/* Definitions for peripheral MCS_0 */
+#define XPAR_MCS_0_COMPATIBLE "xlnx,MCS-1.0"
+#define XPAR_MCS_0_BASEADDR 0x40000000
+#define XPAR_MCS_0_HIGHADDR 0x4000ffff
 
-/* Canonical definitions for peripheral AXI_BRAM_CTRL_0 */
-#define XPAR_XBRAM_0_BASEADDR 0x40000000
-#define XPAR_XBRAM_0_HIGHADDR 0x40001fff
-#define XPAR_XBRAM_0_COMPATIBLE "xlnx,axi-bram-ctrl-4.1"
-#define XPAR_XBRAM_0_DATA_WIDTH 0x20
-#define XPAR_XBRAM_0_ECC 0x0
-#define XPAR_XBRAM_0_ECC_ONOFF_RESET_VALUE 0x0
-#define XPAR_XBRAM_0_FAULT_INJECT 0x0
+/* Canonical definitions for peripheral MCS_0 */
+#define XPAR_XMCS_0_BASEADDR 0x40000000
+#define XPAR_XMCS_0_HIGHADDR 0x4000ffff
+#define XPAR_XMCS_0_COMPATIBLE "xlnx,MCS-1.0"
 
 #define XPAR_XCORESIGHTPS_DCC_NUM_INSTANCES 1
 
@@ -333,8 +325,6 @@
 #define XPAR_PS7_RAM_0_HIGHADDRESS 0x2ffff
 #define XPAR_PS7_RAM_1_BASEADDRESS 0xffff0000
 #define XPAR_PS7_RAM_1_HIGHADDRESS 0xfffffdff
-#define XPAR_AXI_BRAM_0_BASEADDRESS 0x40000000
-#define XPAR_AXI_BRAM_0_HIGHADDRESS 0x40001fff
 #define XPAR_CPU_CORE_CLOCK_FREQ_HZ 650000000
 
 #define XPAR_CPU_TIMESTAMP_CLK_FREQ 0

@@ -1,0 +1,23 @@
+{
+   "ActiveEmotionalView":"Default View",
+   "Default View_ScaleFactor":"1.0",
+   "Default View_TopLeft":"-288,-202",
+   "ExpandedHierarchyInLayout":"",
+   "guistr":"# # String gsaved with Nlview 7.8.0 2024-04-26 e1825d835c VDI=44 GEI=38 GUI=JA:24.0
+#  -string -flagsOSRD
+preplace port port-id_ard_clk -pg 1 -lvl 0 -x 0 -y 70 -defaultsOSRD
+preplace port port-id_clk -pg 1 -lvl 0 -x 0 -y 90 -defaultsOSRD
+preplace portBus ph_pulse -pg 1 -lvl 0 -x 0 -y 110 -defaultsOSRD
+preplace portBus edge_out -pg 1 -lvl 3 -x 560 -y 80 -defaultsOSRD
+preplace inst xpm_cdc_gen_0 -pg 1 -lvl 1 -x 140 -y 90 -defaultsOSRD
+preplace inst bus_pos_edge_det_0 -pg 1 -lvl 2 -x 400 -y 80 -defaultsOSRD
+preplace netloc xpm_cdc_gen_0_dest_out 1 1 1 N 90
+preplace netloc clk_200MHz_1 1 0 1 NJ 70
+preplace netloc clk_wiz_0_clk_out1 1 0 2 20 10 260
+preplace netloc ph_pulse_1 1 0 1 NJ 110
+preplace netloc pos_edge_detect_0_b 1 2 1 N 80
+levelinfo -pg 1 0 140 400 560
+pagesize -pg 1 -db -bbox -sgen -150 0 710 160
+"
+}
+

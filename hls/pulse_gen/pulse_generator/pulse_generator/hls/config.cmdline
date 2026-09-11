@@ -1,0 +1,3 @@
+relativeroot=C:/DAQ-HW/hls/pulse_gen/pulse_generator
+original_argv=--mode hls --package --config C:\DAQ-HW\hls\pulse_gen\pulse_generator\hls_config.cfg --work_dir pulse_generator 
+

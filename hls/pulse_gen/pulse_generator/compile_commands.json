@@ -1,0 +1,27 @@
+[
+  {
+    "directory": "C:\\DAQ-HW\\hls\\pulse_gen\\pulse_generator",
+    "arguments": [
+      "C:\\AMDDesignTools\\2026.1\\Vitis\\win64\\tools\\clang-16\\bin\\clang++.exe",
+      "--sysroot=C:\\AMDDesignTools\\2026.1\\Vitis\\tps\\mingw\\10.0.0\\win64.o\\nt",
+      "-fhls",
+      "-hls-syn-headers-dir=C:\\AMDDesignTools\\2026.1\\Vitis\\common\\technology\\autopilot",
+      "-fhlstoplevel=pulse_generator",
+      "-c",
+      "C:\\DAQ-HW\\hls\\pulse_gen\\pulse_generator\\pulse_generator.cpp"
+    ],
+    "file": "C:\\DAQ-HW\\hls\\pulse_gen\\pulse_generator\\pulse_generator.cpp"
+  },
+  {
+    "directory": "C:\\DAQ-HW\\hls\\pulse_gen\\pulse_generator",
+    "arguments": [
+      "C:\\AMDDesignTools\\2026.1\\Vitis\\win64\\tools\\clang-16\\bin\\clang++.exe",
+      "--sysroot=C:\\AMDDesignTools\\2026.1\\Vitis\\tps\\mingw\\10.0.0\\win64.o\\nt",
+      "-fhls-tb",
+      "-hls-sim-headers-dir=C:\\AMDDesignTools\\2026.1\\Vitis\\include",
+      "-c",
+      "C:\\DAQ-HW\\hls\\pulse_gen\\pulse_generator\\pulse_generator_test.cpp"
+    ],
+    "file": "C:\\DAQ-HW\\hls\\pulse_gen\\pulse_generator\\pulse_generator_test.cpp"
+  }
+]

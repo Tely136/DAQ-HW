@@ -1,0 +1,157 @@
+<ENTRY>
+{
+ "thisFile": "C:/DAQ-HW\\hls\\pulse_gen\\pulse_generator\\pulse_generator\\pulse_generator.hlsrun_package_summary",
+ "connectId": "",
+ "serverToken": "",
+ "timestamp": "0"
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_CmdStep",
+ "dateTimestamp": "09/09/26 17:18:03",
+ "timestampMillis": "1788988683374",
+ "buildStep": {
+  "cmdId": "ac180dad-c194-40ba-b66f-a72117accb9f",
+  "name": "vitis-run",
+  "logFile": "C:/DAQ-HW\\hls\\pulse_gen\\pulse_generator\\pulse_generator\\logs\\pulse_generator.steps.log",
+  "commandLine": "C:/AMDDesignTools/2026.1/Vitis/bin/unwrapped/win64.o/vitis-run.exe  --mode hls --package --config C:\\DAQ-HW\\hls\\pulse_gen\\pulse_generator\\hls_config.cfg --work_dir pulse_generator ",
+  "args": [
+   "--mode",
+   "hls",
+   "--package",
+   "--config",
+   "C:\\DAQ-HW\\hls\\pulse_gen\\pulse_generator\\hls_config.cfg",
+   "--work_dir",
+   "pulse_generator"
+  ],
+  "iniFiles": [],
+  "cwd": "C:\\DAQ-HW\\hls\\pulse_gen\\pulse_generator"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "09/09/26 17:18:03",
+ "timestampMillis": "1788988683374",
+ "status": {
+  "cmdId": "ac180dad-c194-40ba-b66f-a72117accb9f",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_FlowMetaData",
+ "dateTimestamp": "09/09/26 17:18:10",
+ "timestampMillis": "1788988690520",
+ "buildSummary": {
+  "hardwarePlatform": "",
+  "hardwareDsa": "",
+  "platformDirectory": "",
+  "runtime": "",
+  "systemConfig": "",
+  "flow": "BF_RUN",
+  "target": "TT_HLS_IP",
+  "kernels": [
+   {
+    "base": {
+     "type": "KERNEL",
+     "name": "pulse_generator",
+     "file": "C:/DAQ-HW\\hls\\pulse_gen\\pulse_generator\\pulse_generator\\pulse_generator.zip",
+     "reports": [],
+     "uuid": ""
+    },
+    "sources": [
+     "C:/DAQ-HW\\hls\\pulse_gen\\pulse_generator\\pulse_generator.cpp",
+     "C:/DAQ-HW\\hls\\pulse_gen\\pulse_generator\\pulse_generator.h"
+    ],
+    "psSources": [],
+    "cuNames": [],
+    "type": "HLS",
+    "frequency": 0,
+    "freqUnits": ""
+   }
+  ],
+  "toolVersion": "2026.1"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_SubCmdStep",
+ "dateTimestamp": "09/09/26 17:18:10",
+ "timestampMillis": "1788988690521",
+ "buildStep": {
+  "cmdId": "89823561-71da-47ce-bc4a-9c42e76fbb28",
+  "name": "",
+  "logFile": "C:/DAQ-HW\\hls\\pulse_gen\\pulse_generator\\pulse_generator\\hls\\hls.log",
+  "commandLine": "",
+  "args": [],
+  "iniFiles": [],
+  "cwd": "C:\\DAQ-HW\\hls\\pulse_gen\\pulse_generator"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "09/09/26 17:18:10",
+ "timestampMillis": "1788988690521",
+ "status": {
+  "cmdId": "89823561-71da-47ce-bc4a-9c42e76fbb28",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "09/09/26 17:18:22",
+ "timestampMillis": "1788988702180",
+ "status": {
+  "cmdId": "89823561-71da-47ce-bc4a-9c42e76fbb28",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "09/09/26 17:18:22",
+ "timestampMillis": "1788988702340",
+ "status": {
+  "cmdId": "ac180dad-c194-40ba-b66f-a72117accb9f",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "09/09/26 17:18:22",
+ "timestampMillis": "1788988702340",
+ "report": {
+  "path": "",
+  "name": "",
+  "fileType": "HTML",
+  "reportType": "GLOBAL_RULECHECK_GUIDANCE",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "09/09/26 17:18:22",
+ "timestampMillis": "1788988702341",
+ "report": {
+  "path": "",
+  "name": "",
+  "fileType": "BINARY_PROTOBUF",
+  "reportType": "GLOBAL_RULECHECK_GUIDANCE",
+  "cmdId": ""
+ }
+}
+</ENTRY>

@@ -259,6 +259,15 @@ DEVICE_ID:STRING=7z007s
 //The directory containing a CMake configuration file for INTC.
 INTC_DIR:PATH=INTC_DIR-NOTFOUND
 
+//Value Computed by CMake
+MCS_BINARY_DIR:STATIC=C:/DAQ-HW/hls/counter/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/libsrc/MCS/src
+
+//Value Computed by CMake
+MCS_IS_TOP_LEVEL:STATIC=OFF
+
+//Value Computed by CMake
+MCS_SOURCE_DIR:STATIC=C:/DAQ-HW/hls/counter/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/MCS/src
+
 //Number of slrs
 NUMBER_OF_SLRS:STRING=0x1
 
@@ -346,15 +355,6 @@ XILTIMER_tick_timer:STRING=None
 
 //Yocto based embeddedsw FLOW
 YOCTO:BOOL=OFF
-
-//Value Computed by CMake
-bram_BINARY_DIR:STATIC=C:/DAQ-HW/hls/counter/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/libsrc/bram/src
-
-//Value Computed by CMake
-bram_IS_TOP_LEVEL:STATIC=OFF
-
-//Value Computed by CMake
-bram_SOURCE_DIR:STATIC=C:/DAQ-HW/hls/counter/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/bram/src
 
 //Value Computed by CMake
 bsp_BINARY_DIR:STATIC=C:/DAQ-HW/hls/counter/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp

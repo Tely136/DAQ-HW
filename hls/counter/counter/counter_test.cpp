@@ -5,8 +5,11 @@ using namespace std;
 
 int main() {
     bitstream in;
-    ap_uint<16> out[NUM_BINS];
-    ap_uint<16> gold[NUM_BINS];
+    ap_uint<32> out[MAX_BINS];
+    ap_uint<32> gold[MAX_BINS];
+
+    int bins = NUM_BINS;
+    int cycles = CYCLE_PER_BIN;
 
     std::ifstream photon_stream_file("photon_stream.dat");
     std::ifstream golden_data_file("golden.dat");
@@ -28,7 +31,7 @@ int main() {
         tmp_cnt++;
     }
     
-    example(in, out);
+    MCS(in, out, bins, cycles);
 
     for (int i=0; i<NUM_BINS; i++) {
         if (gold[i] != out[i]) {

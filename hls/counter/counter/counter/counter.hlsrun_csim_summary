@@ -9,10 +9,10 @@
 <ENTRY>
 {
  "type": "ET_CmdStep",
- "dateTimestamp": "09/05/26 12:07:09",
- "timestampMillis": "1788624429315",
+ "dateTimestamp": "09/10/26 14:24:16",
+ "timestampMillis": "1789064656496",
  "buildStep": {
-  "cmdId": "1adb8fe2-67bc-48b9-b1fb-e91252bd3183",
+  "cmdId": "a1a77ca5-743e-4d99-ac1d-066bb340c085",
   "name": "vitis-run",
   "logFile": "C:/DAQ-HW\\hls\\counter\\counter\\counter\\logs\\counter.steps.log",
   "commandLine": "C:/AMDDesignTools/2026.1/Vitis/bin/unwrapped/win64.o/vitis-run.exe  --mode hls --csim --config C:\\DAQ-HW\\hls\\counter\\counter\\hls_config.cfg --work_dir counter ",
@@ -33,10 +33,10 @@
 <ENTRY>
 {
  "type": "ET_Status",
- "dateTimestamp": "09/05/26 12:07:09",
- "timestampMillis": "1788624429316",
+ "dateTimestamp": "09/10/26 14:24:16",
+ "timestampMillis": "1789064656496",
  "status": {
-  "cmdId": "1adb8fe2-67bc-48b9-b1fb-e91252bd3183",
+  "cmdId": "a1a77ca5-743e-4d99-ac1d-066bb340c085",
   "state": "CS_RUNNING"
  }
 }
@@ -44,8 +44,8 @@
 <ENTRY>
 {
  "type": "ET_FlowMetaData",
- "dateTimestamp": "09/05/26 12:07:27",
- "timestampMillis": "1788624447319",
+ "dateTimestamp": "09/10/26 14:24:24",
+ "timestampMillis": "1789064664469",
  "buildSummary": {
   "hardwarePlatform": "",
   "hardwareDsa": "",
@@ -58,15 +58,14 @@
    {
     "base": {
      "type": "KERNEL",
-     "name": "example",
+     "name": "MCS",
      "file": "",
      "reports": [],
      "uuid": ""
     },
     "sources": [
      "C:/DAQ-HW\\hls\\counter\\counter\\counter.cpp",
-     "C:/DAQ-HW\\hls\\counter\\counter\\counter.h",
-     "C:/DAQ-HW\\hls\\counter\\counter\\counter_test.cpp"
+     "C:/DAQ-HW\\hls\\counter\\counter\\counter.h"
     ],
     "psSources": [],
     "cuNames": [],
@@ -82,10 +81,10 @@
 <ENTRY>
 {
  "type": "ET_SubCmdStep",
- "dateTimestamp": "09/05/26 12:07:27",
- "timestampMillis": "1788624447323",
+ "dateTimestamp": "09/10/26 14:24:24",
+ "timestampMillis": "1789064664470",
  "buildStep": {
-  "cmdId": "a1df1cbb-51a0-4a6e-a072-d7c70d6122db",
+  "cmdId": "84782d7f-11b7-4343-9e20-53f632c2afac",
   "name": "",
   "logFile": "C:/DAQ-HW\\hls\\counter\\counter\\counter\\hls\\hls.log",
   "commandLine": "",
@@ -98,10 +97,10 @@
 <ENTRY>
 {
  "type": "ET_Status",
- "dateTimestamp": "09/05/26 12:07:27",
- "timestampMillis": "1788624447325",
+ "dateTimestamp": "09/10/26 14:24:24",
+ "timestampMillis": "1789064664470",
  "status": {
-  "cmdId": "a1df1cbb-51a0-4a6e-a072-d7c70d6122db",
+  "cmdId": "84782d7f-11b7-4343-9e20-53f632c2afac",
   "state": "CS_RUNNING"
  }
 }
@@ -109,10 +108,10 @@
 <ENTRY>
 {
  "type": "ET_Status",
- "dateTimestamp": "09/05/26 12:07:30",
- "timestampMillis": "1788624450740",
+ "dateTimestamp": "09/10/26 14:24:26",
+ "timestampMillis": "1789064666356",
  "status": {
-  "cmdId": "a1df1cbb-51a0-4a6e-a072-d7c70d6122db",
+  "cmdId": "84782d7f-11b7-4343-9e20-53f632c2afac",
   "state": "CS_PASSED"
  }
 }
@@ -120,10 +119,10 @@
 <ENTRY>
 {
  "type": "ET_Status",
- "dateTimestamp": "09/05/26 12:07:31",
- "timestampMillis": "1788624451205",
+ "dateTimestamp": "09/10/26 14:24:26",
+ "timestampMillis": "1789064666500",
  "status": {
-  "cmdId": "1adb8fe2-67bc-48b9-b1fb-e91252bd3183",
+  "cmdId": "a1a77ca5-743e-4d99-ac1d-066bb340c085",
   "state": "CS_PASSED"
  }
 }
@@ -131,8 +130,8 @@
 <ENTRY>
 {
  "type": "ET_Report",
- "dateTimestamp": "09/05/26 12:07:31",
- "timestampMillis": "1788624451206",
+ "dateTimestamp": "09/10/26 14:24:26",
+ "timestampMillis": "1789064666501",
  "report": {
   "path": "",
   "name": "",
@@ -145,8 +144,8 @@
 <ENTRY>
 {
  "type": "ET_Report",
- "dateTimestamp": "09/05/26 12:07:31",
- "timestampMillis": "1788624451207",
+ "dateTimestamp": "09/10/26 14:24:26",
+ "timestampMillis": "1789064666501",
  "report": {
   "path": "",
   "name": "",
