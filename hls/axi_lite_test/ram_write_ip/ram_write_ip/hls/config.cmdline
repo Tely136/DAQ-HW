@@ -1,0 +1,3 @@
+relativeroot=C:/DAQ-HW/hls/axi_lite_test/ram_write_ip
+original_argv=--mode hls --csim --config C:\DAQ-HW\hls\axi_lite_test\ram_write_ip\hls_config.cfg --work_dir ram_write_ip 
+

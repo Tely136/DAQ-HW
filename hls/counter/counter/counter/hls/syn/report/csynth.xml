@@ -7,14 +7,14 @@
         <ProductFamily>zynq</ProductFamily>
         <Part>xc7z007s-clg400-1</Part>
         <TopModelName>MCS</TopModelName>
-        <TargetClockPeriod>1.00</TargetClockPeriod>
-        <ClockUncertainty>0.27</ClockUncertainty>
+        <TargetClockPeriod>10.00</TargetClockPeriod>
+        <ClockUncertainty>2.70</ClockUncertainty>
     </UserAssignments>
     <PerformanceEstimates>
         <PipelineType>no</PipelineType>
         <SummaryOfTimingAnalysis>
             <unit>ns</unit>
-            <EstimatedClockPeriod>2.236</EstimatedClockPeriod>
+            <EstimatedClockPeriod>7.300</EstimatedClockPeriod>
         </SummaryOfTimingAnalysis>
         <SummaryOfOverallLatency>
             <unit>clock cycles</unit>
@@ -30,7 +30,7 @@
         </SummaryOfOverallLatency>
         <SummaryOfLoopLatency>
             <VITIS_LOOP_9_1>
-                <Slack>0.73</Slack>
+                <Slack>7.30</Slack>
                 <TripCount>undef</TripCount>
                 <isPerfectNested>0</isPerfectNested>
                 <Latency>undef</Latency>
@@ -41,7 +41,7 @@
             </VITIS_LOOP_9_1>
         </SummaryOfLoopLatency>
         <SummaryOfViolations>
-            <IssueType>Timing Violation</IssueType>
+            <IssueType>-</IssueType>
             <ViolationType>-</ViolationType>
             <SourceLocation>counter.cpp:6</SourceLocation>
             <SummaryOfLoopViolations>
@@ -57,8 +57,8 @@
     <AreaEstimates>
         <Resources>
             <BRAM_18K>0</BRAM_18K>
-            <FF>1994</FF>
-            <LUT>1279</LUT>
+            <FF>983</FF>
+            <LUT>1251</LUT>
             <DSP>0</DSP>
             <URAM>0</URAM>
         </Resources>
@@ -934,10 +934,10 @@
                     <ModuleName>MCS_Pipeline_VITIS_LOOP_14_2</ModuleName>
                     <IsCompInst>true</IsCompInst>
                     <ID>123</ID>
-                    <BindInstances>icmp_32s_32s_1_2_1_U1 add_31ns_31ns_31_2_1_U2 empty_17_fu_93_p3 add_32ns_32ns_32_2_1_U3</BindInstances>
+                    <BindInstances>icmp_ln14_fu_78_p2 add_ln14_fu_84_p2 empty_17_fu_98_p3 add_ln16_fu_105_p2</BindInstances>
                 </Instance>
             </InstancesList>
-            <BindInstances>icmp_32s_32s_1_2_1_U10 empty_fu_166_p3 icmp_32s_32s_1_2_1_U11 add_31ns_31ns_31_2_1_U12 control_s_axi_U gmem_m_axi_U</BindInstances>
+            <BindInstances>icmp_ln9_fu_131_p2 empty_fu_161_p3 icmp_ln9_1_fu_185_p2 add_ln9_fu_190_p2 control_s_axi_U gmem_m_axi_U</BindInstances>
         </TopModule>
     </RTLDesignHierarchy>
     <ModuleInformation>
@@ -948,9 +948,9 @@
             </Loops>
             <PerformanceEstimates>
                 <SummaryOfTimingAnalysis>
-                    <TargetClockPeriod>1.00</TargetClockPeriod>
-                    <ClockUncertainty>0.27</ClockUncertainty>
-                    <EstimatedClockPeriod>2.236</EstimatedClockPeriod>
+                    <TargetClockPeriod>10.00</TargetClockPeriod>
+                    <ClockUncertainty>2.70</ClockUncertainty>
+                    <EstimatedClockPeriod>5.728</EstimatedClockPeriod>
                 </SummaryOfTimingAnalysis>
                 <SummaryOfOverallLatency>
                     <Best-caseLatency>undef</Best-caseLatency>
@@ -966,20 +966,20 @@
                 <SummaryOfLoopLatency>
                     <VITIS_LOOP_14_2>
                         <Name>VITIS_LOOP_14_2</Name>
-                        <Slack>0.73</Slack>
+                        <Slack>7.30</Slack>
                         <TripCount>undef</TripCount>
                         <isPerfectNested>0</isPerfectNested>
                         <Latency>undef</Latency>
                         <AbsoluteTimeLatency>undef</AbsoluteTimeLatency>
-                        <PipelineII>3</PipelineII>
-                        <PipelineDepth>8</PipelineDepth>
+                        <PipelineII>1</PipelineII>
+                        <PipelineDepth>3</PipelineDepth>
                         <PipelineType>yes</PipelineType>
                         <PerformancePragma>-</PerformancePragma>
                         <InstanceList/>
                     </VITIS_LOOP_14_2>
                 </SummaryOfLoopLatency>
                 <SummaryOfViolations>
-                    <IssueType>Timing Violation</IssueType>
+                    <IssueType>-</IssueType>
                     <ViolationType>-</ViolationType>
                     <SourceLocation>counter.cpp:14</SourceLocation>
                     <SummaryOfLoopViolations>
@@ -994,10 +994,10 @@
             </PerformanceEstimates>
             <AreaEstimates>
                 <Resources>
-                    <FF>577</FF>
+                    <FF>71</FF>
                     <AVAIL_FF>28800</AVAIL_FF>
-                    <UTIL_FF>2</UTIL_FF>
-                    <LUT>207</LUT>
+                    <UTIL_FF>~0</UTIL_FF>
+                    <LUT>176</LUT>
                     <AVAIL_LUT>14400</AVAIL_LUT>
                     <UTIL_LUT>1</UTIL_LUT>
                     <BRAM_18K>0</BRAM_18K>
@@ -1012,10 +1012,10 @@
                 </Resources>
             </AreaEstimates>
             <BindNodes>
-                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" CE_REG="" DISPNAME="bind_op setlt" DSP="0" ID="" IMPL="auto" LATENCY="1" LOOP="VITIS_LOOP_14_2" OPTYPE="setlt" PRAGMA="" RTLNAME="icmp_32s_32s_1_2_1_U1" SOURCE="counter.cpp:14" STORAGESUBTYPE="" URAM="0" VARIABLE="icmp_ln14" VISIBLE="false"/>
-                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" CE_REG="" DISPNAME="bind_op add" DSP="0" ID="" IMPL="fabric" LATENCY="1" LOOP="VITIS_LOOP_14_2" OPTYPE="add" PRAGMA="" RTLNAME="add_31ns_31ns_31_2_1_U2" SOURCE="counter.cpp:14" STORAGESUBTYPE="" URAM="0" VARIABLE="add_ln14" VISIBLE="true"/>
-                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" CE_REG="" DISPNAME="bind_op select" DSP="0" ID="" IMPL="auto_sel" LATENCY="0" LOOP="VITIS_LOOP_14_2" OPTYPE="select" PRAGMA="" RTLNAME="empty_17_fu_93_p3" SOURCE="counter.cpp:15" STORAGESUBTYPE="" URAM="0" VARIABLE="empty_17" VISIBLE="false"/>
-                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" CE_REG="" DISPNAME="bind_op add" DSP="0" ID="" IMPL="fabric" LATENCY="1" LOOP="VITIS_LOOP_14_2" OPTYPE="add" PRAGMA="" RTLNAME="add_32ns_32ns_32_2_1_U3" SOURCE="counter.cpp:16" STORAGESUBTYPE="" URAM="0" VARIABLE="add_ln16" VISIBLE="true"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" CE_REG="" DISPNAME="bind_op setlt" DSP="0" ID="" IMPL="auto" LATENCY="0" LOOP="VITIS_LOOP_14_2" OPTYPE="setlt" PRAGMA="" RTLNAME="icmp_ln14_fu_78_p2" SOURCE="counter.cpp:14" STORAGESUBTYPE="" URAM="0" VARIABLE="icmp_ln14" VISIBLE="false"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" CE_REG="" DISPNAME="bind_op add" DSP="0" ID="" IMPL="fabric" LATENCY="0" LOOP="VITIS_LOOP_14_2" OPTYPE="add" PRAGMA="" RTLNAME="add_ln14_fu_84_p2" SOURCE="counter.cpp:14" STORAGESUBTYPE="" URAM="0" VARIABLE="add_ln14" VISIBLE="true"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" CE_REG="" DISPNAME="bind_op select" DSP="0" ID="" IMPL="auto_sel" LATENCY="0" LOOP="VITIS_LOOP_14_2" OPTYPE="select" PRAGMA="" RTLNAME="empty_17_fu_98_p3" SOURCE="counter.cpp:15" STORAGESUBTYPE="" URAM="0" VARIABLE="empty_17" VISIBLE="false"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" CE_REG="" DISPNAME="bind_op add" DSP="0" ID="" IMPL="fabric" LATENCY="0" LOOP="VITIS_LOOP_14_2" OPTYPE="add" PRAGMA="" RTLNAME="add_ln16_fu_105_p2" SOURCE="counter.cpp:16" STORAGESUBTYPE="" URAM="0" VARIABLE="add_ln16" VISIBLE="true"/>
             </BindNodes>
         </Module>
         <Module>
@@ -1025,9 +1025,9 @@
             </Loops>
             <PerformanceEstimates>
                 <SummaryOfTimingAnalysis>
-                    <TargetClockPeriod>1.00</TargetClockPeriod>
-                    <ClockUncertainty>0.27</ClockUncertainty>
-                    <EstimatedClockPeriod>2.236</EstimatedClockPeriod>
+                    <TargetClockPeriod>10.00</TargetClockPeriod>
+                    <ClockUncertainty>2.70</ClockUncertainty>
+                    <EstimatedClockPeriod>7.300</EstimatedClockPeriod>
                 </SummaryOfTimingAnalysis>
                 <SummaryOfOverallLatency>
                     <Best-caseLatency>undef</Best-caseLatency>
@@ -1043,7 +1043,7 @@
                 <SummaryOfLoopLatency>
                     <VITIS_LOOP_9_1>
                         <Name>VITIS_LOOP_9_1</Name>
-                        <Slack>0.73</Slack>
+                        <Slack>7.30</Slack>
                         <TripCount>undef</TripCount>
                         <isPerfectNested>0</isPerfectNested>
                         <Latency>undef</Latency>
@@ -1058,7 +1058,7 @@
                     </VITIS_LOOP_9_1>
                 </SummaryOfLoopLatency>
                 <SummaryOfViolations>
-                    <IssueType>Timing Violation</IssueType>
+                    <IssueType>-</IssueType>
                     <ViolationType>-</ViolationType>
                     <SourceLocation>counter.cpp:6</SourceLocation>
                     <SummaryOfLoopViolations>
@@ -1076,10 +1076,10 @@
                     <BRAM_18K>0</BRAM_18K>
                     <AVAIL_BRAM>100</AVAIL_BRAM>
                     <UTIL_BRAM>0</UTIL_BRAM>
-                    <FF>1994</FF>
+                    <FF>983</FF>
                     <AVAIL_FF>28800</AVAIL_FF>
-                    <UTIL_FF>6</UTIL_FF>
-                    <LUT>1279</LUT>
+                    <UTIL_FF>3</UTIL_FF>
+                    <LUT>1251</LUT>
                     <AVAIL_LUT>14400</AVAIL_LUT>
                     <UTIL_LUT>8</UTIL_LUT>
                     <DSP>0</DSP>
@@ -1091,10 +1091,10 @@
                 </Resources>
             </AreaEstimates>
             <BindNodes>
-                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" CE_REG="" DISPNAME="bind_op setgt" DSP="0" ID="" IMPL="auto" LATENCY="1" LOOP="" OPTYPE="setgt" PRAGMA="" RTLNAME="icmp_32s_32s_1_2_1_U10" SOURCE="counter.cpp:9" STORAGESUBTYPE="" URAM="0" VARIABLE="icmp_ln9" VISIBLE="false"/>
-                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" CE_REG="" DISPNAME="bind_op select" DSP="0" ID="" IMPL="auto_sel" LATENCY="0" LOOP="" OPTYPE="select" PRAGMA="" RTLNAME="empty_fu_166_p3" SOURCE="counter.cpp:9" STORAGESUBTYPE="" URAM="0" VARIABLE="empty" VISIBLE="false"/>
-                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" CE_REG="" DISPNAME="bind_op setlt" DSP="0" ID="" IMPL="auto" LATENCY="1" LOOP="VITIS_LOOP_9_1" OPTYPE="setlt" PRAGMA="" RTLNAME="icmp_32s_32s_1_2_1_U11" SOURCE="counter.cpp:9" STORAGESUBTYPE="" URAM="0" VARIABLE="icmp_ln9_1" VISIBLE="false"/>
-                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" CE_REG="" DISPNAME="bind_op add" DSP="0" ID="" IMPL="fabric" LATENCY="1" LOOP="VITIS_LOOP_9_1" OPTYPE="add" PRAGMA="" RTLNAME="add_31ns_31ns_31_2_1_U12" SOURCE="counter.cpp:9" STORAGESUBTYPE="" URAM="0" VARIABLE="add_ln9" VISIBLE="true"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" CE_REG="" DISPNAME="bind_op setgt" DSP="0" ID="" IMPL="auto" LATENCY="0" LOOP="" OPTYPE="setgt" PRAGMA="" RTLNAME="icmp_ln9_fu_131_p2" SOURCE="counter.cpp:9" STORAGESUBTYPE="" URAM="0" VARIABLE="icmp_ln9" VISIBLE="false"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" CE_REG="" DISPNAME="bind_op select" DSP="0" ID="" IMPL="auto_sel" LATENCY="0" LOOP="" OPTYPE="select" PRAGMA="" RTLNAME="empty_fu_161_p3" SOURCE="counter.cpp:9" STORAGESUBTYPE="" URAM="0" VARIABLE="empty" VISIBLE="false"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" CE_REG="" DISPNAME="bind_op setlt" DSP="0" ID="" IMPL="auto" LATENCY="0" LOOP="VITIS_LOOP_9_1" OPTYPE="setlt" PRAGMA="" RTLNAME="icmp_ln9_1_fu_185_p2" SOURCE="counter.cpp:9" STORAGESUBTYPE="" URAM="0" VARIABLE="icmp_ln9_1" VISIBLE="false"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" CE_REG="" DISPNAME="bind_op add" DSP="0" ID="" IMPL="fabric" LATENCY="0" LOOP="VITIS_LOOP_9_1" OPTYPE="add" PRAGMA="" RTLNAME="add_ln9_fu_190_p2" SOURCE="counter.cpp:9" STORAGESUBTYPE="" URAM="0" VARIABLE="add_ln9" VISIBLE="true"/>
                 <BindNode BINDTYPE="adapter" BRAM="0" BUNDLEDNAME="control" CE_REG="" DISPNAME="bind_adapter " DSP="0" ID="" IMPL="" LATENCY="" LOOP="" OPTYPE="" PRAGMA="" RTLNAME="control_s_axi_U" SOURCE="" STORAGESIZE="" STORAGESUBTYPE="s_axilite" STORAGEUSAGE="interface" URAM="0" VARIABLE=""/>
                 <BindNode BINDTYPE="adapter" BRAM="0" BUNDLEDNAME="gmem" CE_REG="" DISPNAME="bind_adapter " DSP="0" ID="" IMPL="" LATENCY="" LOOP="" OPTYPE="" PRAGMA="" RTLNAME="gmem_m_axi_U" SOURCE="" STORAGESIZE="" STORAGESUBTYPE="m_axi" STORAGEUSAGE="interface" URAM="0" VARIABLE=""/>
             </BindNodes>

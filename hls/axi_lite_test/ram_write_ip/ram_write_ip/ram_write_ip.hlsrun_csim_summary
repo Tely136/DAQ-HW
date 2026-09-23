@@ -1,0 +1,156 @@
+<ENTRY>
+{
+ "thisFile": "C:/DAQ-HW\\hls\\axi_lite_test\\ram_write_ip\\ram_write_ip\\ram_write_ip.hlsrun_csim_summary",
+ "connectId": "",
+ "serverToken": "",
+ "timestamp": "0"
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_CmdStep",
+ "dateTimestamp": "09/23/26 16:19:23",
+ "timestampMillis": "1790194763873",
+ "buildStep": {
+  "cmdId": "cdede36f-c68b-401a-ad76-99db5c103747",
+  "name": "vitis-run",
+  "logFile": "C:/DAQ-HW\\hls\\axi_lite_test\\ram_write_ip\\ram_write_ip\\logs\\ram_write_ip.steps.log",
+  "commandLine": "C:/AMDDesignTools/2026.1/Vitis/bin/unwrapped/win64.o/vitis-run.exe  --mode hls --csim --config C:\\DAQ-HW\\hls\\axi_lite_test\\ram_write_ip\\hls_config.cfg --work_dir ram_write_ip ",
+  "args": [
+   "--mode",
+   "hls",
+   "--csim",
+   "--config",
+   "C:\\DAQ-HW\\hls\\axi_lite_test\\ram_write_ip\\hls_config.cfg",
+   "--work_dir",
+   "ram_write_ip"
+  ],
+  "iniFiles": [],
+  "cwd": "C:\\DAQ-HW\\hls\\axi_lite_test\\ram_write_ip"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "09/23/26 16:19:23",
+ "timestampMillis": "1790194763874",
+ "status": {
+  "cmdId": "cdede36f-c68b-401a-ad76-99db5c103747",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_FlowMetaData",
+ "dateTimestamp": "09/23/26 16:19:35",
+ "timestampMillis": "1790194775001",
+ "buildSummary": {
+  "hardwarePlatform": "",
+  "hardwareDsa": "",
+  "platformDirectory": "",
+  "runtime": "",
+  "systemConfig": "",
+  "flow": "BF_RUN",
+  "target": "TT_HLS_C_SIM",
+  "kernels": [
+   {
+    "base": {
+     "type": "KERNEL",
+     "name": "example",
+     "file": "",
+     "reports": [],
+     "uuid": ""
+    },
+    "sources": [
+     "C:/DAQ-HW\\hls\\axi_lite_test\\ram_write_ip\\ram_write_ip.cpp"
+    ],
+    "psSources": [],
+    "cuNames": [],
+    "type": "HLS",
+    "frequency": 0,
+    "freqUnits": ""
+   }
+  ],
+  "toolVersion": "2026.1"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_SubCmdStep",
+ "dateTimestamp": "09/23/26 16:19:35",
+ "timestampMillis": "1790194775002",
+ "buildStep": {
+  "cmdId": "25e4499d-7ffb-49c8-a8c9-6b39d36569c4",
+  "name": "",
+  "logFile": "C:/DAQ-HW\\hls\\axi_lite_test\\ram_write_ip\\ram_write_ip\\hls\\hls.log",
+  "commandLine": "",
+  "args": [],
+  "iniFiles": [],
+  "cwd": "C:\\DAQ-HW\\hls\\axi_lite_test\\ram_write_ip"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "09/23/26 16:19:35",
+ "timestampMillis": "1790194775002",
+ "status": {
+  "cmdId": "25e4499d-7ffb-49c8-a8c9-6b39d36569c4",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "09/23/26 16:19:36",
+ "timestampMillis": "1790194776017",
+ "status": {
+  "cmdId": "25e4499d-7ffb-49c8-a8c9-6b39d36569c4",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "09/23/26 16:19:36",
+ "timestampMillis": "1790194776156",
+ "status": {
+  "cmdId": "cdede36f-c68b-401a-ad76-99db5c103747",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "09/23/26 16:19:36",
+ "timestampMillis": "1790194776157",
+ "report": {
+  "path": "",
+  "name": "",
+  "fileType": "HTML",
+  "reportType": "GLOBAL_RULECHECK_GUIDANCE",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "09/23/26 16:19:36",
+ "timestampMillis": "1790194776157",
+ "report": {
+  "path": "",
+  "name": "",
+  "fileType": "BINARY_PROTOBUF",
+  "reportType": "GLOBAL_RULECHECK_GUIDANCE",
+  "cmdId": ""
+ }
+}
+</ENTRY>

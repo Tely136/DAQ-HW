@@ -9,10 +9,10 @@
 <ENTRY>
 {
  "type": "ET_CmdStep",
- "dateTimestamp": "09/10/26 14:24:36",
- "timestampMillis": "1789064676049",
+ "dateTimestamp": "09/14/26 14:19:33",
+ "timestampMillis": "1789409973636",
  "buildStep": {
-  "cmdId": "ab3fa12b-69b3-4402-97eb-093066aa2563",
+  "cmdId": "40007c83-78e7-4a32-b779-9ae9568afa77",
   "name": "v++",
   "logFile": "C:/DAQ-HW\\hls\\counter\\counter\\counter\\logs\\counter.steps.log",
   "commandLine": "C:/AMDDesignTools/2026.1/Vitis/bin/unwrapped/win64.o/v++.exe  -c --mode hls --config C:\\DAQ-HW\\hls\\counter\\counter\\hls_config.cfg --work_dir counter ",
@@ -28,7 +28,7 @@
   "iniFiles": [
    {
     "path": "C:/DAQ-HW\\hls\\counter\\counter\\hls_config.cfg",
-    "content": "part=xc7z007sclg400-1\n\n[hls]\npackage.output.format=ip_catalog\npackage.output.syn=false\nsyn.top=MCS\nsyn.file=counter.cpp\nsyn.file=counter.h\ntb.file=./counter_test.cpp\ntb.file=./photon_stream.dat\ntb.file=./golden.dat\nclock=1GHz"
+    "content": "part=xc7z007sclg400-1\n\n[hls]\npackage.output.format=ip_catalog\npackage.output.syn=false\nsyn.top=MCS\nsyn.file=counter.cpp\nsyn.file=counter.h\ntb.file=./counter_test.cpp\ntb.file=./photon_stream.dat\ntb.file=./golden.dat\nclock=10ns"
    }
   ],
   "cwd": "C:\\DAQ-HW\\hls\\counter\\counter"
@@ -38,10 +38,10 @@
 <ENTRY>
 {
  "type": "ET_Status",
- "dateTimestamp": "09/10/26 14:24:36",
- "timestampMillis": "1789064676049",
+ "dateTimestamp": "09/14/26 14:19:33",
+ "timestampMillis": "1789409973636",
  "status": {
-  "cmdId": "ab3fa12b-69b3-4402-97eb-093066aa2563",
+  "cmdId": "40007c83-78e7-4a32-b779-9ae9568afa77",
   "state": "CS_RUNNING"
  }
 }
@@ -49,8 +49,8 @@
 <ENTRY>
 {
  "type": "ET_FlowMetaData",
- "dateTimestamp": "09/10/26 14:24:43",
- "timestampMillis": "1789064683763",
+ "dateTimestamp": "09/14/26 14:19:41",
+ "timestampMillis": "1789409981718",
  "buildSummary": {
   "hardwarePlatform": "",
   "hardwareDsa": "",
@@ -86,10 +86,10 @@
 <ENTRY>
 {
  "type": "ET_SubCmdStep",
- "dateTimestamp": "09/10/26 14:24:43",
- "timestampMillis": "1789064683764",
+ "dateTimestamp": "09/14/26 14:19:41",
+ "timestampMillis": "1789409981719",
  "buildStep": {
-  "cmdId": "f2291b1a-48f7-449f-ab84-a502fe9c5a35",
+  "cmdId": "81620715-0195-4f04-8394-c206d8ad5cde",
   "name": "",
   "logFile": "C:/DAQ-HW\\hls\\counter\\counter\\counter\\hls\\hls.log",
   "commandLine": "",
@@ -102,10 +102,10 @@
 <ENTRY>
 {
  "type": "ET_Status",
- "dateTimestamp": "09/10/26 14:24:43",
- "timestampMillis": "1789064683764",
+ "dateTimestamp": "09/14/26 14:19:41",
+ "timestampMillis": "1789409981719",
  "status": {
-  "cmdId": "f2291b1a-48f7-449f-ab84-a502fe9c5a35",
+  "cmdId": "81620715-0195-4f04-8394-c206d8ad5cde",
   "state": "CS_RUNNING"
  }
 }
@@ -113,8 +113,8 @@
 <ENTRY>
 {
  "type": "ET_Report",
- "dateTimestamp": "09/10/26 14:24:43",
- "timestampMillis": "1789064683764",
+ "dateTimestamp": "09/14/26 14:19:41",
+ "timestampMillis": "1789409981720",
  "report": {
   "path": "C:/DAQ-HW\\hls\\counter\\counter\\counter\\hls\\hls_data.json",
   "name": "",
@@ -127,8 +127,8 @@
 <ENTRY>
 {
  "type": "ET_Report",
- "dateTimestamp": "09/10/26 14:24:43",
- "timestampMillis": "1789064683765",
+ "dateTimestamp": "09/14/26 14:19:41",
+ "timestampMillis": "1789409981720",
  "report": {
   "path": "C:/DAQ-HW\\hls\\counter\\counter\\counter\\hls\\syn\\report\\csynth.rpt",
   "name": "",
@@ -141,8 +141,8 @@
 <ENTRY>
 {
  "type": "ET_Report",
- "dateTimestamp": "09/10/26 14:24:43",
- "timestampMillis": "1789064683765",
+ "dateTimestamp": "09/14/26 14:19:41",
+ "timestampMillis": "1789409981721",
  "report": {
   "path": "C:/DAQ-HW\\hls\\counter\\counter\\counter\\hls\\syn\\report\\csynth.xml",
   "name": "",
@@ -155,8 +155,8 @@
 <ENTRY>
 {
  "type": "ET_Report",
- "dateTimestamp": "09/10/26 14:25:03",
- "timestampMillis": "1789064703236",
+ "dateTimestamp": "09/14/26 14:20:00",
+ "timestampMillis": "1789410000002",
  "report": {
   "path": "C:/DAQ-HW\\hls\\counter\\counter\\counter\\hls",
   "name": "",
@@ -169,8 +169,8 @@
 <ENTRY>
 {
  "type": "ET_Report",
- "dateTimestamp": "09/10/26 14:25:03",
- "timestampMillis": "1789064703237",
+ "dateTimestamp": "09/14/26 14:20:00",
+ "timestampMillis": "1789410000003",
  "report": {
   "path": "C:/DAQ-HW\\hls\\counter\\counter\\counter\\hls",
   "name": "",
@@ -183,8 +183,8 @@
 <ENTRY>
 {
  "type": "ET_Report",
- "dateTimestamp": "09/10/26 14:25:03",
- "timestampMillis": "1789064703237",
+ "dateTimestamp": "09/14/26 14:20:00",
+ "timestampMillis": "1789410000003",
  "report": {
   "path": "C:/DAQ-HW\\hls\\counter\\counter\\counter\\hls",
   "name": "",
@@ -197,10 +197,10 @@
 <ENTRY>
 {
  "type": "ET_Status",
- "dateTimestamp": "09/10/26 14:25:03",
- "timestampMillis": "1789064703238",
+ "dateTimestamp": "09/14/26 14:20:00",
+ "timestampMillis": "1789410000004",
  "status": {
-  "cmdId": "f2291b1a-48f7-449f-ab84-a502fe9c5a35",
+  "cmdId": "81620715-0195-4f04-8394-c206d8ad5cde",
   "state": "CS_PASSED"
  }
 }
@@ -208,10 +208,10 @@
 <ENTRY>
 {
  "type": "ET_Status",
- "dateTimestamp": "09/10/26 14:25:03",
- "timestampMillis": "1789064703459",
+ "dateTimestamp": "09/14/26 14:20:00",
+ "timestampMillis": "1789410000160",
  "status": {
-  "cmdId": "ab3fa12b-69b3-4402-97eb-093066aa2563",
+  "cmdId": "40007c83-78e7-4a32-b779-9ae9568afa77",
   "state": "CS_PASSED"
  }
 }
@@ -219,8 +219,8 @@
 <ENTRY>
 {
  "type": "ET_Report",
- "dateTimestamp": "09/10/26 14:25:03",
- "timestampMillis": "1789064703478",
+ "dateTimestamp": "09/14/26 14:20:00",
+ "timestampMillis": "1789410000179",
  "report": {
   "path": "C:/DAQ-HW\\hls\\counter\\counter\\counter\\reports\\v++_compile_counter_guidance.html",
   "name": "",
@@ -233,8 +233,8 @@
 <ENTRY>
 {
  "type": "ET_Report",
- "dateTimestamp": "09/10/26 14:25:03",
- "timestampMillis": "1789064703479",
+ "dateTimestamp": "09/14/26 14:20:00",
+ "timestampMillis": "1789410000180",
  "report": {
   "path": "C:/DAQ-HW\\hls\\counter\\counter\\counter\\reports\\.db\\v++_compile_counter_guidance.pb3",
   "name": "",

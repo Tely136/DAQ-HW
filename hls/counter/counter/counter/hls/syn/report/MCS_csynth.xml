@@ -9,15 +9,15 @@
 <ProductFamily>zynq</ProductFamily>
 <Part>xc7z007s-clg400-1</Part>
 <TopModelName>MCS</TopModelName>
-<TargetClockPeriod>1.00</TargetClockPeriod>
-<ClockUncertainty>0.27</ClockUncertainty>
+<TargetClockPeriod>10.00</TargetClockPeriod>
+<ClockUncertainty>2.70</ClockUncertainty>
 </UserAssignments>
 
 <PerformanceEstimates>
 <PipelineType>no</PipelineType>
 <SummaryOfTimingAnalysis>
 <unit>ns</unit>
-<EstimatedClockPeriod>2.236</EstimatedClockPeriod>
+<EstimatedClockPeriod>7.300</EstimatedClockPeriod>
 </SummaryOfTimingAnalysis>
 <SummaryOfOverallLatency>
 <unit>clock cycles</unit>
@@ -33,7 +33,7 @@
 </SummaryOfOverallLatency>
 <SummaryOfLoopLatency>
 <VITIS_LOOP_9_1>
-<Slack>0.73</Slack>
+<Slack>7.30</Slack>
 <TripCount>undef</TripCount>
 <isPerfectNested>0</isPerfectNested>
 <Latency>undef</Latency>
@@ -45,7 +45,7 @@
 </VITIS_LOOP_9_1>
 </SummaryOfLoopLatency>
 <SummaryOfViolations>
-<IssueType>Timing Violation</IssueType>
+<IssueType>-</IssueType>
 <ViolationType>-</ViolationType>
 <SourceLocation>counter.cpp:6</SourceLocation>
 <SummaryOfLoopViolations>
@@ -62,8 +62,8 @@
 <AreaEstimates>
 <Resources>
 <BRAM_18K>0</BRAM_18K>
-<FF>1994</FF>
-<LUT>1279</LUT>
+<FF>983</FF>
+<LUT>1251</LUT>
 <DSP>0</DSP>
 <URAM>0</URAM>
 </Resources>

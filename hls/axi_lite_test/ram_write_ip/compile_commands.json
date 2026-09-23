@@ -1,0 +1,27 @@
+[
+  {
+    "directory": "C:\\DAQ-HW\\hls\\axi_lite_test\\ram_write_ip",
+    "arguments": [
+      "C:\\AMDDesignTools\\2026.1\\Vitis\\win64\\tools\\clang-16\\bin\\clang++.exe",
+      "--sysroot=C:\\AMDDesignTools\\2026.1\\Vitis\\tps\\mingw\\10.0.0\\win64.o\\nt",
+      "-fhls",
+      "-hls-syn-headers-dir=C:\\AMDDesignTools\\2026.1\\Vitis\\common\\technology\\autopilot",
+      "-fhlstoplevel=example",
+      "-c",
+      "C:\\DAQ-HW\\hls\\axi_lite_test\\ram_write_ip\\ram_write_ip.cpp"
+    ],
+    "file": "C:\\DAQ-HW\\hls\\axi_lite_test\\ram_write_ip\\ram_write_ip.cpp"
+  },
+  {
+    "directory": "C:\\DAQ-HW\\hls\\axi_lite_test\\ram_write_ip",
+    "arguments": [
+      "C:\\AMDDesignTools\\2026.1\\Vitis\\win64\\tools\\clang-16\\bin\\clang++.exe",
+      "--sysroot=C:\\AMDDesignTools\\2026.1\\Vitis\\tps\\mingw\\10.0.0\\win64.o\\nt",
+      "-fhls-tb",
+      "-hls-sim-headers-dir=C:\\AMDDesignTools\\2026.1\\Vitis\\include",
+      "-c",
+      "C:\\DAQ-HW\\hls\\axi_lite_test\\ram_write_ip\\ram_write_test.cpp"
+    ],
+    "file": "C:\\DAQ-HW\\hls\\axi_lite_test\\ram_write_ip\\ram_write_test.cpp"
+  }
+]

@@ -7,8 +7,23 @@
 			"path": "../Users/tely1/.Xilinx/Vitis/2026.1/vitis_hls_examples"
 		},
 		{
-			"path": "../../.Xilinx/Vitis/2026.1/vitis_hls_examples"
+			"path": "hls/counter"
 		}
 	],
-	"settings": {}
+	"settings": {
+		"C_Cpp.default.compilerPath": "C:/AMDDesignTools/2026.1/Vitis/tps/mingw/10.0.0/win64.o/nt/bin/g++.exe",
+		"C_Cpp.default.intelliSenseMode": "windows-gcc-x64",
+		"C_Cpp.default.includePath": [
+			"${workspaceFolder}/**",
+			"C:/AMDDesignTools/2026.1/Vitis/include"
+		],
+		"C_Cpp.default.defines": [],
+		"C_Cpp.default.cStandard": "c11",
+		"C_Cpp.default.cppStandard": "c++14",
+		"C_Cpp.default.compileCommands": [],
+		"C_Cpp.intelliSenseEngine": "default",
+		"files.associations": {
+			"*.h": "cpp"
+		}
+	}
 }

@@ -1,0 +1,87 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "HLS: Create component",
+            "type": "process",
+            "command": "powershell.exe",
+            "args": [
+                "-NoProfile", "-ExecutionPolicy", "Bypass", "-File",
+                "${workspaceFolder}/scripts/new-hls-component.ps1",
+                "-Name", "${input:newHlsName}",
+                "-Part", "${input:newHlsPart}",
+                "-ClockNs", "${input:newHlsClock}"
+            ],
+            "options": { "cwd": "${workspaceFolder}" },
+            "presentation": { "reveal": "always", "panel": "dedicated" },
+            "runOptions": { "instanceLimit": 1 },
+            "problemMatcher": []
+        },
+        {
+            "label": "HLS: run selected stage",
+            "type": "process",
+            "command": "powershell.exe",
+            "args": [
+                "-NoProfile", "-ExecutionPolicy", "Bypass", "-File",
+                "${workspaceFolder}/scripts/hls.ps1",
+                "-Action", "${input:hlsStage}",
+                "-Config", "${input:hlsConfig}",
+                "-OpenReport"
+            ],
+            "options": { "cwd": "${workspaceFolder}" },
+            "group": { "kind": "build", "isDefault": true },
+            "presentation": { "reveal": "always", "panel": "dedicated", "clear": true },
+            "runOptions": { "instanceLimit": 1 },
+            "problemMatcher": {
+                "owner": "hls",
+                "fileLocation": ["autoDetect", "${workspaceFolder}"],
+                "pattern": {
+                    "regexp": "^(.+?):(\\d+):(\\d+):\\s+(?:fatal )?(warning|error):\\s+(.*)$",
+                    "file": 1, "line": 2, "column": 3, "severity": 4, "message": 5
+                }
+            }
+        }
+    ],
+    "inputs": [
+        {
+            "id": "newHlsName",
+            "type": "promptString",
+            "description": "Component / top-function name (letters, digits, underscores; start with a letter)"
+        },
+        {
+            "id": "newHlsPart",
+            "type": "promptString",
+            "description": "FPGA part identifier",
+            "default": "xc7z007sclg400-1"
+        },
+        {
+            "id": "newHlsClock",
+            "type": "promptString",
+            "description": "Clock period in nanoseconds",
+            "default": "10"
+        },
+        {
+            "id": "hlsStage",
+            "type": "pickString",
+            "description": "HLS operation (cosim/package synthesize first)",
+            "options": [
+                { "label": "C simulation", "value": "csim" },
+                { "label": "Synthesis", "value": "synth" },
+                { "label": "C/RTL co-simulation", "value": "cosim" },
+                { "label": "Package Vivado IP", "value": "package" },
+                { "label": "All: C simulation, synthesis, co-simulation, package", "value": "all" }
+            ],
+            "default": "csim"
+        },
+        {
+            "id": "hlsConfig",
+            "type": "pickString",
+            "description": "HLS component",
+            "options": [
+                { "label": "Counter / MCS (Cora Z7)", "value": "hls/counter/counter/hls_config.cfg" },
+                { "label": "AXI Lite blinker (Cora Z7)", "value": "hls/axi_lite_test/led_blinker/hls_config.cfg" },
+                { "label": "Pulse generator (Artix-7)", "value": "hls/pulse_gen/pulse_generator/hls_config.cfg" }
+            ]
+        }
+    ]
+}

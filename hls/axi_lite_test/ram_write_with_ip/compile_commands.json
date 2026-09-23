@@ -1,0 +1,8 @@
+[
+{
+  "directory": "C:/DAQ-HW/hls/axi_lite_test/ram_write_with_ip/build",
+  "command": "C:\\AMDDesignTools\\2026.1\\Vitis\\gnu\\aarch32\\nt\\gcc-arm-none-eabi\\bin\\arm-none-eabi-gcc.exe -IC:/DAQ-HW/hls/axi_lite_test/ram_write_with_ip/src -IC:/DAQ-HW/hls/axi_lite_test/ram_write_with_ip/src/. -isystem C:/DAQ-HW/hls/axi_lite_test/platform/export/platform/sw/standalone_ps7_cortexa9_0/include -isystem C:/AMDDesignTools/2026.1/gnu/aarch32/nt/gcc-arm-none-eabi/x86_64-oesdk-mingw32/usr/lib/arm-xilinx-eabi/gcc/arm-xilinx-eabi/13.4.0/include -isystem C:/AMDDesignTools/2026.1/gnu/aarch32/nt/gcc-arm-none-eabi/x86_64-oesdk-mingw32/usr/lib/arm-xilinx-eabi/gcc/arm-xilinx-eabi/13.4.0/include-fixed -isystem C:/AMDDesignTools/2026.1/Vitis/gnu/aarch32/nt/gcc-arm-none-eabi/aarch32-xilinx-eabi/usr/include  -DSDT -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard  -MMD -MP -specs=C:/DAQ-HW/hls/axi_lite_test/platform/export/platform/sw/standalone_ps7_cortexa9_0/Xilinx.spec -IC:/DAQ-HW/hls/axi_lite_test/platform/export/platform/sw/standalone_ps7_cortexa9_0/include -Wall -Wextra      -O0  -g3     -U__clang__ -o CMakeFiles\\ram_write_with_ip.elf.dir\\ram_write_ip.c.obj -c C:\\DAQ-HW\\hls\\axi_lite_test\\ram_write_with_ip\\src\\ram_write_ip.c",
+  "file": "C:\\DAQ-HW\\hls\\axi_lite_test\\ram_write_with_ip\\src\\ram_write_ip.c",
+  "output": "CMakeFiles\\ram_write_with_ip.elf.dir\\ram_write_ip.c.obj"
+}
+]

@@ -6,7 +6,7 @@
 
 `timescale 1 ns / 1 ps 
 
-(* CORE_GENERATION_INFO="MCS_MCS,hls_ip_2026_1,{HLS_INPUT_TYPE=cxx,HLS_INPUT_FLOAT=0,HLS_INPUT_FIXED=0,HLS_INPUT_PART=xc7z007s-clg400-1,HLS_INPUT_CLOCK=1.000000,HLS_INPUT_ARCH=others,HLS_SYN_CLOCK=2.236500,HLS_SYN_LAT=-1,HLS_SYN_TPT=none,HLS_SYN_MEM=0,HLS_SYN_DSP=0,HLS_SYN_FF=1994,HLS_SYN_LUT=1279,HLS_VERSION=2026_1}" *)
+(* CORE_GENERATION_INFO="MCS_MCS,hls_ip_2026_1,{HLS_INPUT_TYPE=cxx,HLS_INPUT_FLOAT=0,HLS_INPUT_FIXED=0,HLS_INPUT_PART=xc7z007s-clg400-1,HLS_INPUT_CLOCK=10.000000,HLS_INPUT_ARCH=others,HLS_SYN_CLOCK=7.300000,HLS_SYN_LAT=-1,HLS_SYN_TPT=none,HLS_SYN_MEM=0,HLS_SYN_DSP=0,HLS_SYN_FF=983,HLS_SYN_LUT=1251,HLS_VERSION=2026_1}" *)
 
 (* DowngradeIPIdentifiedWarnings="yes" *)
 module MCS (
@@ -85,19 +85,16 @@ module MCS (
         s_axi_control_BRESP
 );
 
-parameter    ap_ST_fsm_state1 = 13'd1;
-parameter    ap_ST_fsm_state2 = 13'd2;
-parameter    ap_ST_fsm_state3 = 13'd4;
-parameter    ap_ST_fsm_state4 = 13'd8;
-parameter    ap_ST_fsm_state5 = 13'd16;
-parameter    ap_ST_fsm_state6 = 13'd32;
-parameter    ap_ST_fsm_state7 = 13'd64;
-parameter    ap_ST_fsm_state8 = 13'd128;
-parameter    ap_ST_fsm_state9 = 13'd256;
-parameter    ap_ST_fsm_state10 = 13'd512;
-parameter    ap_ST_fsm_state11 = 13'd1024;
-parameter    ap_ST_fsm_state12 = 13'd2048;
-parameter    ap_ST_fsm_state13 = 13'd4096;
+parameter    ap_ST_fsm_state1 = 10'd1;
+parameter    ap_ST_fsm_state2 = 10'd2;
+parameter    ap_ST_fsm_state3 = 10'd4;
+parameter    ap_ST_fsm_state4 = 10'd8;
+parameter    ap_ST_fsm_state5 = 10'd16;
+parameter    ap_ST_fsm_state6 = 10'd32;
+parameter    ap_ST_fsm_state7 = 10'd64;
+parameter    ap_ST_fsm_state8 = 10'd128;
+parameter    ap_ST_fsm_state9 = 10'd256;
+parameter    ap_ST_fsm_state10 = 10'd512;
 parameter    C_S_AXI_CONTROL_DATA_WIDTH = 32;
 parameter    C_S_AXI_CONTROL_ADDR_WIDTH = 5;
 parameter    C_S_AXI_DATA_WIDTH = 32;
@@ -198,30 +195,20 @@ reg ap_idle;
 reg ap_ready;
 
  reg    ap_rst_n_inv;
-(* fsm_encoding = "none" *) reg   [12:0] ap_CS_fsm;
+(* fsm_encoding = "none" *) reg   [9:0] ap_CS_fsm;
 wire    ap_CS_fsm_state1;
 wire   [63:0] counts;
 reg    gmem_blk_n_AW;
-wire    ap_CS_fsm_state4;
-reg    gmem_blk_n_W;
-wire    ap_CS_fsm_state8;
-reg    gmem_blk_n_B;
-wire    ap_CS_fsm_state13;
-reg   [31:0] num_bins_read_reg_209;
-wire   [30:0] trunc_ln9_1_fu_137_p1;
-reg   [30:0] trunc_ln9_1_reg_221;
-wire   [0:0] grp_fu_131_p2;
-reg   [0:0] icmp_ln9_reg_226;
 wire    ap_CS_fsm_state2;
-reg   [63:0] gmem_addr_reg_231;
-wire    ap_CS_fsm_state3;
-wire   [30:0] empty_fu_166_p3;
-reg   [30:0] empty_reg_238;
-reg   [31:0] cycle_per_bin_read_reg_243;
+reg    gmem_blk_n_W;
 wire    ap_CS_fsm_state5;
-wire   [30:0] grp_fu_188_p2;
-reg   [30:0] add_ln9_reg_259;
-wire    ap_CS_fsm_state6;
+reg    gmem_blk_n_B;
+wire    ap_CS_fsm_state10;
+reg   [31:0] num_bins_read_reg_212;
+reg   [63:0] gmem_addr_reg_223;
+wire   [30:0] empty_fu_161_p3;
+reg   [30:0] empty_reg_230;
+reg   [31:0] cycle_per_bin_read_reg_235;
 wire    grp_MCS_Pipeline_VITIS_LOOP_14_2_fu_123_ap_start;
 wire    grp_MCS_Pipeline_VITIS_LOOP_14_2_fu_123_ap_done;
 wire    grp_MCS_Pipeline_VITIS_LOOP_14_2_fu_123_ap_idle;
@@ -241,32 +228,33 @@ wire   [8:0] gmem_0_RFIFONUM;
 wire    gmem_0_BVALID;
 reg    gmem_0_BREADY;
 reg    grp_MCS_Pipeline_VITIS_LOOP_14_2_fu_123_ap_start_reg;
-wire   [0:0] grp_fu_183_p2;
-wire    ap_CS_fsm_state7;
-wire  signed [63:0] sext_ln9_fu_156_p1;
+wire    ap_CS_fsm_state3;
+wire   [0:0] icmp_ln9_1_fu_185_p2;
+wire    ap_CS_fsm_state4;
+wire  signed [63:0] sext_ln9_fu_151_p1;
 reg   [30:0] i_fu_78;
-wire   [61:0] trunc_ln9_fu_146_p4;
-wire   [31:0] grp_fu_183_p0;
-reg   [12:0] ap_NS_fsm;
+wire   [30:0] add_ln9_fu_190_p2;
+wire   [61:0] trunc_ln9_fu_141_p4;
+wire   [0:0] icmp_ln9_fu_131_p2;
+wire   [30:0] trunc_ln9_1_fu_137_p1;
+wire   [31:0] zext_ln9_1_fu_181_p1;
+reg   [9:0] ap_NS_fsm;
 reg    ap_ST_fsm_state1_blk;
-wire    ap_ST_fsm_state2_blk;
+reg    ap_ST_fsm_state2_blk;
 wire    ap_ST_fsm_state3_blk;
 reg    ap_ST_fsm_state4_blk;
-wire    ap_ST_fsm_state5_blk;
+reg    ap_ST_fsm_state5_blk;
 wire    ap_ST_fsm_state6_blk;
-reg    ap_ST_fsm_state7_blk;
-reg    ap_ST_fsm_state8_blk;
+wire    ap_ST_fsm_state7_blk;
+wire    ap_ST_fsm_state8_blk;
 wire    ap_ST_fsm_state9_blk;
-wire    ap_ST_fsm_state10_blk;
-wire    ap_ST_fsm_state11_blk;
-wire    ap_ST_fsm_state12_blk;
-reg    ap_ST_fsm_state13_blk;
+reg    ap_ST_fsm_state10_blk;
 wire   [63:0] gmem_0_AWLEN0;
 wire    ap_ce_reg;
 
 // power-on initialization
 initial begin
-#0 ap_CS_fsm = 13'd1;
+#0 ap_CS_fsm = 10'd1;
 #0 grp_MCS_Pipeline_VITIS_LOOP_14_2_fu_123_ap_start_reg = 1'b0;
 #0 i_fu_78 = 31'd0;
 end
@@ -278,10 +266,10 @@ MCS_MCS_Pipeline_VITIS_LOOP_14_2 grp_MCS_Pipeline_VITIS_LOOP_14_2_fu_123(
     .ap_done(grp_MCS_Pipeline_VITIS_LOOP_14_2_fu_123_ap_done),
     .ap_idle(grp_MCS_Pipeline_VITIS_LOOP_14_2_fu_123_ap_idle),
     .ap_ready(grp_MCS_Pipeline_VITIS_LOOP_14_2_fu_123_ap_ready),
-    .cycle_per_bin(cycle_per_bin_read_reg_243),
     .A_dout(A_dout),
     .A_empty_n(A_empty_n),
     .A_read(grp_MCS_Pipeline_VITIS_LOOP_14_2_fu_123_A_read),
+    .cycle_per_bin(cycle_per_bin_read_reg_235),
     .p_out(grp_MCS_Pipeline_VITIS_LOOP_14_2_fu_123_p_out),
     .p_out_ap_vld(grp_MCS_Pipeline_VITIS_LOOP_14_2_fu_123_p_out_ap_vld)
 );
@@ -395,7 +383,7 @@ gmem_m_axi_U(
     .I_CH0_RFIFONUM(gmem_0_RFIFONUM),
     .I_CH0_AWVALID(gmem_0_AWVALID),
     .I_CH0_AWREADY(gmem_0_AWREADY),
-    .I_CH0_AWADDR(gmem_addr_reg_231),
+    .I_CH0_AWADDR(gmem_addr_reg_223),
     .I_CH0_AWLEN(gmem_0_AWLEN),
     .I_CH0_WVALID(gmem_0_WVALID),
     .I_CH0_WREADY(gmem_0_WREADY),
@@ -403,53 +391,6 @@ gmem_m_axi_U(
     .I_CH0_WSTRB(4'd15),
     .I_CH0_BVALID(gmem_0_BVALID),
     .I_CH0_BREADY(gmem_0_BREADY)
-);
-
-MCS_icmp_32s_32s_1_2_1 #(
-    .ID( 1 ),
-    .NUM_STAGE( 2 ),
-    .din0_WIDTH( 32 ),
-    .din1_WIDTH( 32 ),
-    .OP_CODE( 6 ),
-    .dout_WIDTH( 1 ))
-icmp_32s_32s_1_2_1_U10(
-    .clk(ap_clk),
-    .reset(ap_rst_n_inv),
-    .din0(num_bins),
-    .din1(32'd0),
-    .ce(1'b1),
-    .dout(grp_fu_131_p2)
-);
-
-MCS_icmp_32s_32s_1_2_1 #(
-    .ID( 1 ),
-    .NUM_STAGE( 2 ),
-    .din0_WIDTH( 32 ),
-    .din1_WIDTH( 32 ),
-    .OP_CODE( 8 ),
-    .dout_WIDTH( 1 ))
-icmp_32s_32s_1_2_1_U11(
-    .clk(ap_clk),
-    .reset(ap_rst_n_inv),
-    .din0(grp_fu_183_p0),
-    .din1(num_bins_read_reg_209),
-    .ce(1'b1),
-    .dout(grp_fu_183_p2)
-);
-
-MCS_add_31ns_31ns_31_2_1 #(
-    .ID( 1 ),
-    .NUM_STAGE( 2 ),
-    .din0_WIDTH( 31 ),
-    .din1_WIDTH( 31 ),
-    .dout_WIDTH( 31 ))
-add_31ns_31ns_31_2_1_U12(
-    .clk(ap_clk),
-    .reset(ap_rst_n_inv),
-    .din0(i_fu_78),
-    .din1(31'd1),
-    .ce(1'b1),
-    .dout(grp_fu_188_p2)
 );
 
 always @ (posedge ap_clk) begin
@@ -464,7 +405,7 @@ always @ (posedge ap_clk) begin
     if (ap_rst_n_inv == 1'b1) begin
         grp_MCS_Pipeline_VITIS_LOOP_14_2_fu_123_ap_start_reg <= 1'b0;
     end else begin
-        if (((grp_fu_183_p2 == 1'd1) & (1'b1 == ap_CS_fsm_state6))) begin
+        if (((icmp_ln9_1_fu_185_p2 == 1'd1) & (1'b1 == ap_CS_fsm_state3))) begin
             grp_MCS_Pipeline_VITIS_LOOP_14_2_fu_123_ap_start_reg <= 1'b1;
         end else if ((grp_MCS_Pipeline_VITIS_LOOP_14_2_fu_123_ap_ready == 1'b1)) begin
             grp_MCS_Pipeline_VITIS_LOOP_14_2_fu_123_ap_start_reg <= 1'b0;
@@ -473,56 +414,32 @@ always @ (posedge ap_clk) begin
 end
 
 always @ (posedge ap_clk) begin
-    if (((ap_start == 1'b1) & (1'b1 == ap_CS_fsm_state1))) begin
+    if (((1'b1 == ap_CS_fsm_state1) & (ap_start == 1'b1))) begin
         i_fu_78 <= 31'd0;
-    end else if (((1'b1 == ap_CS_fsm_state7) & (grp_MCS_Pipeline_VITIS_LOOP_14_2_fu_123_ap_done == 1'b1))) begin
-        i_fu_78 <= add_ln9_reg_259;
-    end
-end
-
-always @ (posedge ap_clk) begin
-    if ((1'b1 == ap_CS_fsm_state6)) begin
-        add_ln9_reg_259 <= grp_fu_188_p2;
-    end
-end
-
-always @ (posedge ap_clk) begin
-    if ((1'b1 == ap_CS_fsm_state4)) begin
-        cycle_per_bin_read_reg_243 <= cycle_per_bin;
-    end
-end
-
-always @ (posedge ap_clk) begin
-    if ((1'b1 == ap_CS_fsm_state3)) begin
-        empty_reg_238 <= empty_fu_166_p3;
-        gmem_addr_reg_231 <= sext_ln9_fu_156_p1;
+    end else if (((icmp_ln9_1_fu_185_p2 == 1'd1) & (1'b1 == ap_CS_fsm_state3))) begin
+        i_fu_78 <= add_ln9_fu_190_p2;
     end
 end
 
 always @ (posedge ap_clk) begin
     if ((1'b1 == ap_CS_fsm_state2)) begin
-        icmp_ln9_reg_226 <= grp_fu_131_p2;
+        cycle_per_bin_read_reg_235 <= cycle_per_bin;
     end
 end
 
 always @ (posedge ap_clk) begin
     if ((1'b1 == ap_CS_fsm_state1)) begin
-        num_bins_read_reg_209 <= num_bins;
-        trunc_ln9_1_reg_221 <= trunc_ln9_1_fu_137_p1;
+        empty_reg_230 <= empty_fu_161_p3;
+        gmem_addr_reg_223 <= sext_ln9_fu_151_p1;
+        num_bins_read_reg_212 <= num_bins;
     end
 end
 
-assign ap_ST_fsm_state10_blk = 1'b0;
-
-assign ap_ST_fsm_state11_blk = 1'b0;
-
-assign ap_ST_fsm_state12_blk = 1'b0;
-
 always @ (*) begin
     if ((gmem_0_BVALID == 1'b0)) begin
-        ap_ST_fsm_state13_blk = 1'b1;
+        ap_ST_fsm_state10_blk = 1'b1;
     end else begin
-        ap_ST_fsm_state13_blk = 1'b0;
+        ap_ST_fsm_state10_blk = 1'b0;
     end
 end
 
@@ -534,42 +451,42 @@ always @ (*) begin
     end
 end
 
-assign ap_ST_fsm_state2_blk = 1'b0;
+always @ (*) begin
+    if ((gmem_0_AWREADY == 1'b0)) begin
+        ap_ST_fsm_state2_blk = 1'b1;
+    end else begin
+        ap_ST_fsm_state2_blk = 1'b0;
+    end
+end
 
 assign ap_ST_fsm_state3_blk = 1'b0;
 
 always @ (*) begin
-    if ((gmem_0_AWREADY == 1'b0)) begin
+    if ((grp_MCS_Pipeline_VITIS_LOOP_14_2_fu_123_ap_done == 1'b0)) begin
         ap_ST_fsm_state4_blk = 1'b1;
     end else begin
         ap_ST_fsm_state4_blk = 1'b0;
     end
 end
 
-assign ap_ST_fsm_state5_blk = 1'b0;
+always @ (*) begin
+    if ((gmem_0_WREADY == 1'b0)) begin
+        ap_ST_fsm_state5_blk = 1'b1;
+    end else begin
+        ap_ST_fsm_state5_blk = 1'b0;
+    end
+end
 
 assign ap_ST_fsm_state6_blk = 1'b0;
 
-always @ (*) begin
-    if ((grp_MCS_Pipeline_VITIS_LOOP_14_2_fu_123_ap_done == 1'b0)) begin
-        ap_ST_fsm_state7_blk = 1'b1;
-    end else begin
-        ap_ST_fsm_state7_blk = 1'b0;
-    end
-end
+assign ap_ST_fsm_state7_blk = 1'b0;
 
-always @ (*) begin
-    if ((gmem_0_WREADY == 1'b0)) begin
-        ap_ST_fsm_state8_blk = 1'b1;
-    end else begin
-        ap_ST_fsm_state8_blk = 1'b0;
-    end
-end
+assign ap_ST_fsm_state8_blk = 1'b0;
 
 assign ap_ST_fsm_state9_blk = 1'b0;
 
 always @ (*) begin
-    if (((gmem_0_BVALID == 1'b1) & (1'b1 == ap_CS_fsm_state13))) begin
+    if (((gmem_0_BVALID == 1'b1) & (1'b1 == ap_CS_fsm_state10))) begin
         ap_done = 1'b1;
     end else begin
         ap_done = 1'b0;
@@ -577,7 +494,7 @@ always @ (*) begin
 end
 
 always @ (*) begin
-    if (((ap_start == 1'b0) & (1'b1 == ap_CS_fsm_state1))) begin
+    if (((1'b1 == ap_CS_fsm_state1) & (ap_start == 1'b0))) begin
         ap_idle = 1'b1;
     end else begin
         ap_idle = 1'b0;
@@ -585,7 +502,7 @@ always @ (*) begin
 end
 
 always @ (*) begin
-    if (((gmem_0_BVALID == 1'b1) & (1'b1 == ap_CS_fsm_state13))) begin
+    if (((gmem_0_BVALID == 1'b1) & (1'b1 == ap_CS_fsm_state10))) begin
         ap_ready = 1'b1;
     end else begin
         ap_ready = 1'b0;
@@ -593,7 +510,7 @@ always @ (*) begin
 end
 
 always @ (*) begin
-    if (((gmem_0_AWREADY == 1'b1) & (1'b1 == ap_CS_fsm_state4))) begin
+    if (((1'b1 == ap_CS_fsm_state2) & (gmem_0_AWREADY == 1'b1))) begin
         gmem_0_AWVALID = 1'b1;
     end else begin
         gmem_0_AWVALID = 1'b0;
@@ -601,7 +518,7 @@ always @ (*) begin
 end
 
 always @ (*) begin
-    if (((gmem_0_BVALID == 1'b1) & (1'b1 == ap_CS_fsm_state13))) begin
+    if (((gmem_0_BVALID == 1'b1) & (1'b1 == ap_CS_fsm_state10))) begin
         gmem_0_BREADY = 1'b1;
     end else begin
         gmem_0_BREADY = 1'b0;
@@ -609,7 +526,7 @@ always @ (*) begin
 end
 
 always @ (*) begin
-    if (((gmem_0_WREADY == 1'b1) & (1'b1 == ap_CS_fsm_state8))) begin
+    if (((gmem_0_WREADY == 1'b1) & (1'b1 == ap_CS_fsm_state5))) begin
         gmem_0_WVALID = 1'b1;
     end else begin
         gmem_0_WVALID = 1'b0;
@@ -617,7 +534,7 @@ always @ (*) begin
 end
 
 always @ (*) begin
-    if ((1'b1 == ap_CS_fsm_state4)) begin
+    if ((1'b1 == ap_CS_fsm_state2)) begin
         gmem_blk_n_AW = m_axi_gmem_AWREADY;
     end else begin
         gmem_blk_n_AW = 1'b1;
@@ -625,7 +542,7 @@ always @ (*) begin
 end
 
 always @ (*) begin
-    if ((1'b1 == ap_CS_fsm_state13)) begin
+    if ((1'b1 == ap_CS_fsm_state10)) begin
         gmem_blk_n_B = m_axi_gmem_BVALID;
     end else begin
         gmem_blk_n_B = 1'b1;
@@ -633,7 +550,7 @@ always @ (*) begin
 end
 
 always @ (*) begin
-    if ((1'b1 == ap_CS_fsm_state8)) begin
+    if ((1'b1 == ap_CS_fsm_state5)) begin
         gmem_blk_n_W = m_axi_gmem_WREADY;
     end else begin
         gmem_blk_n_W = 1'b1;
@@ -643,66 +560,57 @@ end
 always @ (*) begin
     case (ap_CS_fsm)
         ap_ST_fsm_state1 : begin
-            if (((ap_start == 1'b1) & (1'b1 == ap_CS_fsm_state1))) begin
+            if (((1'b1 == ap_CS_fsm_state1) & (ap_start == 1'b1))) begin
                 ap_NS_fsm = ap_ST_fsm_state2;
             end else begin
                 ap_NS_fsm = ap_ST_fsm_state1;
             end
         end
         ap_ST_fsm_state2 : begin
-            ap_NS_fsm = ap_ST_fsm_state3;
+            if (((1'b1 == ap_CS_fsm_state2) & (gmem_0_AWREADY == 1'b1))) begin
+                ap_NS_fsm = ap_ST_fsm_state3;
+            end else begin
+                ap_NS_fsm = ap_ST_fsm_state2;
+            end
         end
         ap_ST_fsm_state3 : begin
-            ap_NS_fsm = ap_ST_fsm_state4;
+            if (((icmp_ln9_1_fu_185_p2 == 1'd0) & (1'b1 == ap_CS_fsm_state3))) begin
+                ap_NS_fsm = ap_ST_fsm_state6;
+            end else begin
+                ap_NS_fsm = ap_ST_fsm_state4;
+            end
         end
         ap_ST_fsm_state4 : begin
-            if (((gmem_0_AWREADY == 1'b1) & (1'b1 == ap_CS_fsm_state4))) begin
+            if (((1'b1 == ap_CS_fsm_state4) & (grp_MCS_Pipeline_VITIS_LOOP_14_2_fu_123_ap_done == 1'b1))) begin
                 ap_NS_fsm = ap_ST_fsm_state5;
             end else begin
                 ap_NS_fsm = ap_ST_fsm_state4;
             end
         end
         ap_ST_fsm_state5 : begin
-            ap_NS_fsm = ap_ST_fsm_state6;
+            if (((gmem_0_WREADY == 1'b1) & (1'b1 == ap_CS_fsm_state5))) begin
+                ap_NS_fsm = ap_ST_fsm_state3;
+            end else begin
+                ap_NS_fsm = ap_ST_fsm_state5;
+            end
         end
         ap_ST_fsm_state6 : begin
-            if (((grp_fu_183_p2 == 1'd0) & (1'b1 == ap_CS_fsm_state6))) begin
-                ap_NS_fsm = ap_ST_fsm_state9;
-            end else begin
-                ap_NS_fsm = ap_ST_fsm_state7;
-            end
+            ap_NS_fsm = ap_ST_fsm_state7;
         end
         ap_ST_fsm_state7 : begin
-            if (((1'b1 == ap_CS_fsm_state7) & (grp_MCS_Pipeline_VITIS_LOOP_14_2_fu_123_ap_done == 1'b1))) begin
-                ap_NS_fsm = ap_ST_fsm_state8;
-            end else begin
-                ap_NS_fsm = ap_ST_fsm_state7;
-            end
+            ap_NS_fsm = ap_ST_fsm_state8;
         end
         ap_ST_fsm_state8 : begin
-            if (((gmem_0_WREADY == 1'b1) & (1'b1 == ap_CS_fsm_state8))) begin
-                ap_NS_fsm = ap_ST_fsm_state5;
-            end else begin
-                ap_NS_fsm = ap_ST_fsm_state8;
-            end
+            ap_NS_fsm = ap_ST_fsm_state9;
         end
         ap_ST_fsm_state9 : begin
             ap_NS_fsm = ap_ST_fsm_state10;
         end
         ap_ST_fsm_state10 : begin
-            ap_NS_fsm = ap_ST_fsm_state11;
-        end
-        ap_ST_fsm_state11 : begin
-            ap_NS_fsm = ap_ST_fsm_state12;
-        end
-        ap_ST_fsm_state12 : begin
-            ap_NS_fsm = ap_ST_fsm_state13;
-        end
-        ap_ST_fsm_state13 : begin
-            if (((gmem_0_BVALID == 1'b1) & (1'b1 == ap_CS_fsm_state13))) begin
+            if (((gmem_0_BVALID == 1'b1) & (1'b1 == ap_CS_fsm_state10))) begin
                 ap_NS_fsm = ap_ST_fsm_state1;
             end else begin
-                ap_NS_fsm = ap_ST_fsm_state13;
+                ap_NS_fsm = ap_ST_fsm_state10;
             end
         end
         default : begin
@@ -713,9 +621,11 @@ end
 
 assign A_read = grp_MCS_Pipeline_VITIS_LOOP_14_2_fu_123_A_read;
 
+assign add_ln9_fu_190_p2 = (i_fu_78 + 31'd1);
+
 assign ap_CS_fsm_state1 = ap_CS_fsm[32'd0];
 
-assign ap_CS_fsm_state13 = ap_CS_fsm[32'd12];
+assign ap_CS_fsm_state10 = ap_CS_fsm[32'd9];
 
 assign ap_CS_fsm_state2 = ap_CS_fsm[32'd1];
 
@@ -725,30 +635,28 @@ assign ap_CS_fsm_state4 = ap_CS_fsm[32'd3];
 
 assign ap_CS_fsm_state5 = ap_CS_fsm[32'd4];
 
-assign ap_CS_fsm_state6 = ap_CS_fsm[32'd5];
-
-assign ap_CS_fsm_state7 = ap_CS_fsm[32'd6];
-
-assign ap_CS_fsm_state8 = ap_CS_fsm[32'd7];
-
 always @ (*) begin
     ap_rst_n_inv = ~ap_rst_n;
 end
 
-assign empty_fu_166_p3 = ((icmp_ln9_reg_226[0:0] == 1'b1) ? trunc_ln9_1_reg_221 : 31'd0);
+assign empty_fu_161_p3 = ((icmp_ln9_fu_131_p2[0:0] == 1'b1) ? trunc_ln9_1_fu_137_p1 : 31'd0);
 
 assign gmem_0_AWLEN = gmem_0_AWLEN0;
 
-assign gmem_0_AWLEN0 = empty_reg_238;
+assign gmem_0_AWLEN0 = empty_reg_230;
 
 assign grp_MCS_Pipeline_VITIS_LOOP_14_2_fu_123_ap_start = grp_MCS_Pipeline_VITIS_LOOP_14_2_fu_123_ap_start_reg;
 
-assign grp_fu_183_p0 = i_fu_78;
+assign icmp_ln9_1_fu_185_p2 = (($signed(zext_ln9_1_fu_181_p1) < $signed(num_bins_read_reg_212)) ? 1'b1 : 1'b0);
 
-assign sext_ln9_fu_156_p1 = $signed(trunc_ln9_fu_146_p4);
+assign icmp_ln9_fu_131_p2 = (($signed(num_bins) > $signed(32'd0)) ? 1'b1 : 1'b0);
+
+assign sext_ln9_fu_151_p1 = $signed(trunc_ln9_fu_141_p4);
 
 assign trunc_ln9_1_fu_137_p1 = num_bins[30:0];
 
-assign trunc_ln9_fu_146_p4 = {{counts[63:2]}};
+assign trunc_ln9_fu_141_p4 = {{counts[63:2]}};
+
+assign zext_ln9_1_fu_181_p1 = i_fu_78;
 
 endmodule //MCS
