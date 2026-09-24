@@ -1,0 +1,3 @@
+relativeroot=C:/DAQ-HW/hls/axi_lite_test/stream_reader
+original_argv=--mode hls --package --config C:\DAQ-HW\hls\axi_lite_test\stream_reader\hls_config.cfg --work_dir stream_reader 
+

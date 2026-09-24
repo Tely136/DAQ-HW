@@ -1,0 +1,157 @@
+<ENTRY>
+{
+ "thisFile": "C:/DAQ-HW\\hls\\axi_lite_test\\generator\\generator\\generator.hlsrun_package_summary",
+ "connectId": "",
+ "serverToken": "",
+ "timestamp": "0"
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_CmdStep",
+ "dateTimestamp": "09/24/26 11:16:02",
+ "timestampMillis": "1790262962176",
+ "buildStep": {
+  "cmdId": "0c83b3c2-a444-4b23-9eb1-ed01455391e0",
+  "name": "vitis-run",
+  "logFile": "C:/DAQ-HW\\hls\\axi_lite_test\\generator\\generator\\logs\\generator.steps.log",
+  "commandLine": "C:/AMDDesignTools/2026.1/Vitis/bin/unwrapped/win64.o/vitis-run.exe  --mode hls --package --config C:\\DAQ-HW\\hls\\axi_lite_test\\generator\\hls_config.cfg --work_dir generator ",
+  "args": [
+   "--mode",
+   "hls",
+   "--package",
+   "--config",
+   "C:\\DAQ-HW\\hls\\axi_lite_test\\generator\\hls_config.cfg",
+   "--work_dir",
+   "generator"
+  ],
+  "iniFiles": [],
+  "cwd": "C:\\DAQ-HW\\hls\\axi_lite_test\\generator"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "09/24/26 11:16:02",
+ "timestampMillis": "1790262962177",
+ "status": {
+  "cmdId": "0c83b3c2-a444-4b23-9eb1-ed01455391e0",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_FlowMetaData",
+ "dateTimestamp": "09/24/26 11:16:11",
+ "timestampMillis": "1790262971225",
+ "buildSummary": {
+  "hardwarePlatform": "",
+  "hardwareDsa": "",
+  "platformDirectory": "",
+  "runtime": "",
+  "systemConfig": "",
+  "flow": "BF_RUN",
+  "target": "TT_HLS_IP",
+  "kernels": [
+   {
+    "base": {
+     "type": "KERNEL",
+     "name": "generator",
+     "file": "C:/DAQ-HW\\hls\\axi_lite_test\\generator\\generator\\generator.zip",
+     "reports": [],
+     "uuid": ""
+    },
+    "sources": [
+     "C:/DAQ-HW\\hls\\axi_lite_test\\generator\\generator.cpp",
+     "C:/DAQ-HW\\hls\\axi_lite_test\\generator\\generator.h"
+    ],
+    "psSources": [],
+    "cuNames": [],
+    "type": "HLS",
+    "frequency": 0,
+    "freqUnits": ""
+   }
+  ],
+  "toolVersion": "2026.1"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_SubCmdStep",
+ "dateTimestamp": "09/24/26 11:16:11",
+ "timestampMillis": "1790262971226",
+ "buildStep": {
+  "cmdId": "d7fbad4c-ba17-4334-9c81-4c4e4032f03d",
+  "name": "",
+  "logFile": "C:/DAQ-HW\\hls\\axi_lite_test\\generator\\generator\\hls\\hls.log",
+  "commandLine": "",
+  "args": [],
+  "iniFiles": [],
+  "cwd": "C:\\DAQ-HW\\hls\\axi_lite_test\\generator"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "09/24/26 11:16:11",
+ "timestampMillis": "1790262971227",
+ "status": {
+  "cmdId": "d7fbad4c-ba17-4334-9c81-4c4e4032f03d",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "09/24/26 11:16:27",
+ "timestampMillis": "1790262987689",
+ "status": {
+  "cmdId": "d7fbad4c-ba17-4334-9c81-4c4e4032f03d",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "09/24/26 11:16:27",
+ "timestampMillis": "1790262987960",
+ "status": {
+  "cmdId": "0c83b3c2-a444-4b23-9eb1-ed01455391e0",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "09/24/26 11:16:27",
+ "timestampMillis": "1790262987961",
+ "report": {
+  "path": "",
+  "name": "",
+  "fileType": "HTML",
+  "reportType": "GLOBAL_RULECHECK_GUIDANCE",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "09/24/26 11:16:27",
+ "timestampMillis": "1790262987962",
+ "report": {
+  "path": "",
+  "name": "",
+  "fileType": "BINARY_PROTOBUF",
+  "reportType": "GLOBAL_RULECHECK_GUIDANCE",
+  "cmdId": ""
+ }
+}
+</ENTRY>

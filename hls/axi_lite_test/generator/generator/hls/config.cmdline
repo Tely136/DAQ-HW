@@ -1,0 +1,3 @@
+relativeroot=C:/DAQ-HW/hls/axi_lite_test/generator
+original_argv=--mode hls --cosim --config C:\DAQ-HW\hls\axi_lite_test\generator\hls_config.cfg --work_dir generator 
+

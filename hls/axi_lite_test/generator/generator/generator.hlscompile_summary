@@ -1,0 +1,246 @@
+<ENTRY>
+{
+ "thisFile": "C:/DAQ-HW\\hls\\axi_lite_test\\generator\\generator\\generator.hlscompile_summary",
+ "connectId": "",
+ "serverToken": "",
+ "timestamp": "0"
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_CmdStep",
+ "dateTimestamp": "09/24/26 11:13:09",
+ "timestampMillis": "1790262789801",
+ "buildStep": {
+  "cmdId": "864ae77b-e671-41d7-b744-9221446e76ec",
+  "name": "v++",
+  "logFile": "C:/DAQ-HW\\hls\\axi_lite_test\\generator\\generator\\logs\\generator.steps.log",
+  "commandLine": "C:/AMDDesignTools/2026.1/Vitis/bin/unwrapped/win64.o/v++.exe  -c --mode hls --config C:\\DAQ-HW\\hls\\axi_lite_test\\generator\\hls_config.cfg --work_dir generator ",
+  "args": [
+   "-c",
+   "--mode",
+   "hls",
+   "--config",
+   "C:\\DAQ-HW\\hls\\axi_lite_test\\generator\\hls_config.cfg",
+   "--work_dir",
+   "generator"
+  ],
+  "iniFiles": [
+   {
+    "path": "C:/DAQ-HW\\hls\\axi_lite_test\\generator\\hls_config.cfg",
+    "content": "part=xc7z007sclg400-1\n\n[hls]\npackage.output.format=ip_catalog\npackage.output.syn=false\ntb.file=generator_test.cpp\nsyn.top=generator\nsyn.file=generator.cpp\nsyn.file=generator.h"
+   }
+  ],
+  "cwd": "C:\\DAQ-HW\\hls\\axi_lite_test\\generator"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "09/24/26 11:13:09",
+ "timestampMillis": "1790262789803",
+ "status": {
+  "cmdId": "864ae77b-e671-41d7-b744-9221446e76ec",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_FlowMetaData",
+ "dateTimestamp": "09/24/26 11:13:19",
+ "timestampMillis": "1790262799146",
+ "buildSummary": {
+  "hardwarePlatform": "",
+  "hardwareDsa": "",
+  "platformDirectory": "",
+  "runtime": "",
+  "systemConfig": "",
+  "flow": "BF_COMPILE",
+  "target": "TT_HW",
+  "kernels": [
+   {
+    "base": {
+     "type": "KERNEL",
+     "name": "generator",
+     "file": "",
+     "reports": [],
+     "uuid": ""
+    },
+    "sources": [
+     "C:/DAQ-HW\\hls\\axi_lite_test\\generator\\generator.cpp",
+     "C:/DAQ-HW\\hls\\axi_lite_test\\generator\\generator.h"
+    ],
+    "psSources": [],
+    "cuNames": [],
+    "type": "HLS",
+    "frequency": 0,
+    "freqUnits": ""
+   }
+  ],
+  "toolVersion": "2026.1"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_SubCmdStep",
+ "dateTimestamp": "09/24/26 11:13:19",
+ "timestampMillis": "1790262799147",
+ "buildStep": {
+  "cmdId": "34ab6394-9743-46ea-8acf-b5e3e896c761",
+  "name": "",
+  "logFile": "C:/DAQ-HW\\hls\\axi_lite_test\\generator\\generator\\hls\\hls.log",
+  "commandLine": "",
+  "args": [],
+  "iniFiles": [],
+  "cwd": "C:\\DAQ-HW\\hls\\axi_lite_test\\generator"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "09/24/26 11:13:19",
+ "timestampMillis": "1790262799148",
+ "status": {
+  "cmdId": "34ab6394-9743-46ea-8acf-b5e3e896c761",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "09/24/26 11:13:19",
+ "timestampMillis": "1790262799148",
+ "report": {
+  "path": "C:/DAQ-HW\\hls\\axi_lite_test\\generator\\generator\\hls\\hls_data.json",
+  "name": "",
+  "fileType": "JSON",
+  "reportType": "HLS_SYNTHESIS",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "09/24/26 11:13:19",
+ "timestampMillis": "1790262799148",
+ "report": {
+  "path": "C:/DAQ-HW\\hls\\axi_lite_test\\generator\\generator\\hls\\syn\\report\\csynth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "HLS_SYNTHESIS",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "09/24/26 11:13:19",
+ "timestampMillis": "1790262799148",
+ "report": {
+  "path": "C:/DAQ-HW\\hls\\axi_lite_test\\generator\\generator\\hls\\syn\\report\\csynth.xml",
+  "name": "",
+  "fileType": "XML",
+  "reportType": "HLS_SYNTHESIS",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "09/24/26 11:13:33",
+ "timestampMillis": "1790262813196",
+ "report": {
+  "path": "C:/DAQ-HW\\hls\\axi_lite_test\\generator\\generator\\hls",
+  "name": "",
+  "fileType": "DIR",
+  "reportType": "HLS_DATAFLOW",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "09/24/26 11:13:33",
+ "timestampMillis": "1790262813198",
+ "report": {
+  "path": "C:/DAQ-HW\\hls\\axi_lite_test\\generator\\generator\\hls",
+  "name": "",
+  "fileType": "DIR",
+  "reportType": "HLS_FUNCTION_CALL_GRAPH",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "09/24/26 11:13:33",
+ "timestampMillis": "1790262813199",
+ "report": {
+  "path": "C:/DAQ-HW\\hls\\axi_lite_test\\generator\\generator\\hls",
+  "name": "",
+  "fileType": "DIR",
+  "reportType": "HLS_SCHEDULE",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "09/24/26 11:13:33",
+ "timestampMillis": "1790262813200",
+ "status": {
+  "cmdId": "34ab6394-9743-46ea-8acf-b5e3e896c761",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "09/24/26 11:13:33",
+ "timestampMillis": "1790262813445",
+ "status": {
+  "cmdId": "864ae77b-e671-41d7-b744-9221446e76ec",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "09/24/26 11:13:33",
+ "timestampMillis": "1790262813470",
+ "report": {
+  "path": "C:/DAQ-HW\\hls\\axi_lite_test\\generator\\generator\\reports\\v++_compile_generator_guidance.html",
+  "name": "",
+  "fileType": "HTML",
+  "reportType": "GLOBAL_RULECHECK_GUIDANCE",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "09/24/26 11:13:33",
+ "timestampMillis": "1790262813470",
+ "report": {
+  "path": "C:/DAQ-HW\\hls\\axi_lite_test\\generator\\generator\\reports\\.db\\v++_compile_generator_guidance.pb3",
+  "name": "",
+  "fileType": "BINARY_PROTOBUF",
+  "reportType": "GLOBAL_RULECHECK_GUIDANCE",
+  "cmdId": ""
+ }
+}
+</ENTRY>
