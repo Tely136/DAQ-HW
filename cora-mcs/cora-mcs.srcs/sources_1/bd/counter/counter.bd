@@ -1956,7 +1956,7 @@
         "components": {
           "stream_generator_0": {
             "vlnv": "xilinx.com:hls:stream_generator:1.0",
-            "ip_revision": "2114802867",
+            "ip_revision": "2114803170",
             "xci_name": "counter_stream_generator_0_0",
             "xci_path": "ip\\counter_stream_generator_0_0\\counter_stream_generator_0_0.xci",
             "inst_hier_path": "MCS/stream_generator_0",
@@ -1990,7 +1990,7 @@
           },
           "stream_reader_0": {
             "vlnv": "xilinx.com:hls:stream_reader:1.0",
-            "ip_revision": "2114802842",
+            "ip_revision": "2114802996",
             "xci_name": "counter_stream_reader_0_0",
             "xci_path": "ip\\counter_stream_reader_0_0\\counter_stream_reader_0_0.xci",
             "inst_hier_path": "MCS/stream_reader_0",

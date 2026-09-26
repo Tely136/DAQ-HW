@@ -6,7 +6,7 @@
 
 `timescale 1 ns / 1 ps 
 
-(* CORE_GENERATION_INFO="stream_reader_stream_reader,hls_ip_2026_1,{HLS_INPUT_TYPE=cxx,HLS_INPUT_FLOAT=0,HLS_INPUT_FIXED=0,HLS_INPUT_PART=xc7z007s-clg400-1,HLS_INPUT_CLOCK=10.000000,HLS_INPUT_ARCH=others,HLS_SYN_CLOCK=7.300000,HLS_SYN_LAT=-1,HLS_SYN_TPT=none,HLS_SYN_MEM=0,HLS_SYN_DSP=0,HLS_SYN_FF=1530,HLS_SYN_LUT=1859,HLS_VERSION=2026_1}" *)
+(* CORE_GENERATION_INFO="stream_reader_stream_reader,hls_ip_2026_1,{HLS_INPUT_TYPE=cxx,HLS_INPUT_FLOAT=0,HLS_INPUT_FIXED=0,HLS_INPUT_PART=xc7z007s-clg400-1,HLS_INPUT_CLOCK=10.000000,HLS_INPUT_ARCH=others,HLS_SYN_CLOCK=7.300000,HLS_SYN_LAT=-1,HLS_SYN_TPT=none,HLS_SYN_MEM=0,HLS_SYN_DSP=0,HLS_SYN_FF=1090,HLS_SYN_LUT=1385,HLS_VERSION=2026_1}" *)
 
 (* DowngradeIPIdentifiedWarnings="yes" *)
 module stream_reader (
@@ -80,11 +80,16 @@ module stream_reader (
         interrupt
 );
 
-parameter    ap_ST_fsm_state1 = 5'd1;
-parameter    ap_ST_fsm_state2 = 5'd2;
-parameter    ap_ST_fsm_state3 = 5'd4;
-parameter    ap_ST_fsm_state4 = 5'd8;
-parameter    ap_ST_fsm_state5 = 5'd16;
+parameter    ap_ST_fsm_state1 = 10'd1;
+parameter    ap_ST_fsm_state2 = 10'd2;
+parameter    ap_ST_fsm_state3 = 10'd4;
+parameter    ap_ST_fsm_state4 = 10'd8;
+parameter    ap_ST_fsm_state5 = 10'd16;
+parameter    ap_ST_fsm_state6 = 10'd32;
+parameter    ap_ST_fsm_state7 = 10'd64;
+parameter    ap_ST_fsm_state8 = 10'd128;
+parameter    ap_ST_fsm_state9 = 10'd256;
+parameter    ap_ST_fsm_state10 = 10'd512;
 parameter    C_S_AXI_CONTROL_DATA_WIDTH = 32;
 parameter    C_S_AXI_CONTROL_ADDR_WIDTH = 6;
 parameter    C_S_AXI_DATA_WIDTH = 32;
@@ -153,7 +158,7 @@ output   m_axi_gmem_BREADY;
 input  [1:0] m_axi_gmem_BRESP;
 input  [C_M_AXI_GMEM_ID_WIDTH - 1:0] m_axi_gmem_BID;
 input  [C_M_AXI_GMEM_BUSER_WIDTH - 1:0] m_axi_gmem_BUSER;
-input  [31:0] data_in_TDATA;
+input  [7:0] data_in_TDATA;
 input   data_in_TVALID;
 output   data_in_TREADY;
 input   s_axi_control_AWVALID;
@@ -179,160 +184,93 @@ output   interrupt;
 wire    ap_start;
 reg    ap_done;
 reg    ap_idle;
-(* fsm_encoding = "none" *) reg   [4:0] ap_CS_fsm;
+(* fsm_encoding = "none" *) reg   [9:0] ap_CS_fsm;
 wire    ap_CS_fsm_state1;
 reg    ap_ready;
 wire   [63:0] data_out;
 wire   [31:0] n_outer;
 wire   [31:0] n_inner;
-reg   [31:0] n_inner_read_reg_142;
-reg   [63:0] data_out_read_reg_147;
-wire   [30:0] empty_fu_112_p3;
-reg   [30:0] empty_reg_152;
-wire   [30:0] smax1_fu_126_p3;
-reg   [30:0] smax1_reg_158;
+reg    gmem_blk_n_AW;
 wire    ap_CS_fsm_state2;
-wire   [61:0] grp_fu_94_p2;
-reg   [61:0] mul_ln3_reg_173;
+reg    gmem_blk_n_W;
+wire    ap_CS_fsm_state5;
+reg    gmem_blk_n_B;
+wire    ap_CS_fsm_state10;
+reg   [31:0] n_inner_read_reg_223;
+reg   [31:0] n_outer_read_reg_228;
+reg   [63:0] gmem_addr_reg_239;
+wire   [30:0] empty_fu_169_p3;
+reg   [30:0] empty_reg_246;
+wire   [30:0] add_ln16_fu_198_p2;
+reg   [30:0] add_ln16_reg_254;
 wire    ap_CS_fsm_state3;
-wire    grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82_ap_start;
-wire    grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82_ap_done;
-wire    grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82_ap_idle;
-wire    grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82_ap_ready;
-wire    grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82_m_axi_gmem_0_AWVALID;
-wire   [63:0] grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82_m_axi_gmem_0_AWADDR;
-wire   [0:0] grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82_m_axi_gmem_0_AWID;
-wire   [31:0] grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82_m_axi_gmem_0_AWLEN;
-wire   [2:0] grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82_m_axi_gmem_0_AWSIZE;
-wire   [1:0] grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82_m_axi_gmem_0_AWBURST;
-wire   [1:0] grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82_m_axi_gmem_0_AWLOCK;
-wire   [3:0] grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82_m_axi_gmem_0_AWCACHE;
-wire   [2:0] grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82_m_axi_gmem_0_AWPROT;
-wire   [3:0] grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82_m_axi_gmem_0_AWQOS;
-wire   [3:0] grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82_m_axi_gmem_0_AWREGION;
-wire   [0:0] grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82_m_axi_gmem_0_AWUSER;
-wire    grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82_m_axi_gmem_0_WVALID;
-wire   [31:0] grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82_m_axi_gmem_0_WDATA;
-wire   [3:0] grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82_m_axi_gmem_0_WSTRB;
-wire    grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82_m_axi_gmem_0_WLAST;
-wire   [0:0] grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82_m_axi_gmem_0_WID;
-wire   [0:0] grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82_m_axi_gmem_0_WUSER;
-wire    grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82_m_axi_gmem_0_ARVALID;
-wire   [63:0] grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82_m_axi_gmem_0_ARADDR;
-wire   [0:0] grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82_m_axi_gmem_0_ARID;
-wire   [31:0] grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82_m_axi_gmem_0_ARLEN;
-wire   [2:0] grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82_m_axi_gmem_0_ARSIZE;
-wire   [1:0] grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82_m_axi_gmem_0_ARBURST;
-wire   [1:0] grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82_m_axi_gmem_0_ARLOCK;
-wire   [3:0] grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82_m_axi_gmem_0_ARCACHE;
-wire   [2:0] grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82_m_axi_gmem_0_ARPROT;
-wire   [3:0] grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82_m_axi_gmem_0_ARQOS;
-wire   [3:0] grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82_m_axi_gmem_0_ARREGION;
-wire   [0:0] grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82_m_axi_gmem_0_ARUSER;
-wire    grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82_m_axi_gmem_0_RREADY;
-wire    grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82_m_axi_gmem_0_BREADY;
-wire    grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82_data_in_TREADY;
+wire    grp_stream_reader_Pipeline_VITIS_LOOP_19_2_fu_131_ap_start;
+wire    grp_stream_reader_Pipeline_VITIS_LOOP_19_2_fu_131_ap_done;
+wire    grp_stream_reader_Pipeline_VITIS_LOOP_19_2_fu_131_ap_idle;
+wire    grp_stream_reader_Pipeline_VITIS_LOOP_19_2_fu_131_ap_ready;
+wire    grp_stream_reader_Pipeline_VITIS_LOOP_19_2_fu_131_data_in_TREADY;
+wire   [30:0] grp_stream_reader_Pipeline_VITIS_LOOP_19_2_fu_131_count_out;
+wire    grp_stream_reader_Pipeline_VITIS_LOOP_19_2_fu_131_count_out_ap_vld;
 reg    gmem_0_AWVALID;
 wire    gmem_0_AWREADY;
+wire   [31:0] gmem_0_AWLEN;
 reg    gmem_0_WVALID;
 wire    gmem_0_WREADY;
+wire   [31:0] gmem_0_WDATA;
 wire    gmem_0_ARREADY;
 wire    gmem_0_RVALID;
 wire   [31:0] gmem_0_RDATA;
 wire   [8:0] gmem_0_RFIFONUM;
 wire    gmem_0_BVALID;
 reg    gmem_0_BREADY;
-reg    grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82_ap_start_reg;
-reg   [4:0] ap_NS_fsm;
-wire    ap_NS_fsm_state4;
+reg    grp_stream_reader_Pipeline_VITIS_LOOP_19_2_fu_131_ap_start_reg;
+wire   [0:0] icmp_ln16_1_fu_193_p2;
 wire    ap_CS_fsm_state4;
-wire    ap_CS_fsm_state5;
-wire   [30:0] grp_fu_94_p0;
-wire   [30:0] grp_fu_94_p1;
-wire   [0:0] icmp_ln15_fu_106_p2;
-wire   [30:0] trunc_ln3_1_fu_102_p1;
-wire   [0:0] empty_21_fu_120_p2;
-wire   [30:0] trunc_ln3_fu_98_p1;
+wire  signed [63:0] sext_ln16_fu_159_p1;
+reg   [30:0] i_fu_86;
+wire   [61:0] trunc_ln_fu_149_p4;
+wire   [0:0] icmp_ln16_fu_139_p2;
+wire   [30:0] trunc_ln16_fu_145_p1;
+wire   [31:0] zext_ln16_1_fu_189_p1;
+reg   [9:0] ap_NS_fsm;
 reg    ap_ST_fsm_state1_blk;
-wire    ap_ST_fsm_state2_blk;
+reg    ap_ST_fsm_state2_blk;
 wire    ap_ST_fsm_state3_blk;
-wire    ap_ST_fsm_state4_blk;
+reg    ap_ST_fsm_state4_blk;
 reg    ap_ST_fsm_state5_blk;
+wire    ap_ST_fsm_state6_blk;
+wire    ap_ST_fsm_state7_blk;
+wire    ap_ST_fsm_state8_blk;
+wire    ap_ST_fsm_state9_blk;
+reg    ap_ST_fsm_state10_blk;
 wire    regslice_both_data_in_U_apdone_blk;
-wire   [31:0] data_in_TDATA_int_regslice;
+wire   [7:0] data_in_TDATA_int_regslice;
 wire    data_in_TVALID_int_regslice;
 reg    data_in_TREADY_int_regslice;
 wire    regslice_both_data_in_U_ack_in;
-wire   [61:0] grp_fu_94_p00;
-wire   [61:0] grp_fu_94_p10;
+wire   [63:0] gmem_0_AWLEN0;
 wire    ap_ce_reg;
 
 // power-on initialization
 initial begin
-#0 ap_CS_fsm = 5'd1;
-#0 grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82_ap_start_reg = 1'b0;
+#0 ap_CS_fsm = 10'd1;
+#0 grp_stream_reader_Pipeline_VITIS_LOOP_19_2_fu_131_ap_start_reg = 1'b0;
+#0 i_fu_86 = 31'd0;
 end
 
-stream_reader_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2 grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82(
+stream_reader_stream_reader_Pipeline_VITIS_LOOP_19_2 grp_stream_reader_Pipeline_VITIS_LOOP_19_2_fu_131(
     .ap_clk(ap_clk),
     .ap_rst(ap_rst_n_inv),
-    .ap_start(grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82_ap_start),
-    .ap_done(grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82_ap_done),
-    .ap_idle(grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82_ap_idle),
-    .ap_ready(grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82_ap_ready),
-    .m_axi_gmem_0_AWVALID(grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82_m_axi_gmem_0_AWVALID),
-    .m_axi_gmem_0_AWREADY(gmem_0_AWREADY),
-    .m_axi_gmem_0_AWADDR(grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82_m_axi_gmem_0_AWADDR),
-    .m_axi_gmem_0_AWID(grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82_m_axi_gmem_0_AWID),
-    .m_axi_gmem_0_AWLEN(grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82_m_axi_gmem_0_AWLEN),
-    .m_axi_gmem_0_AWSIZE(grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82_m_axi_gmem_0_AWSIZE),
-    .m_axi_gmem_0_AWBURST(grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82_m_axi_gmem_0_AWBURST),
-    .m_axi_gmem_0_AWLOCK(grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82_m_axi_gmem_0_AWLOCK),
-    .m_axi_gmem_0_AWCACHE(grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82_m_axi_gmem_0_AWCACHE),
-    .m_axi_gmem_0_AWPROT(grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82_m_axi_gmem_0_AWPROT),
-    .m_axi_gmem_0_AWQOS(grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82_m_axi_gmem_0_AWQOS),
-    .m_axi_gmem_0_AWREGION(grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82_m_axi_gmem_0_AWREGION),
-    .m_axi_gmem_0_AWUSER(grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82_m_axi_gmem_0_AWUSER),
-    .m_axi_gmem_0_WVALID(grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82_m_axi_gmem_0_WVALID),
-    .m_axi_gmem_0_WREADY(gmem_0_WREADY),
-    .m_axi_gmem_0_WDATA(grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82_m_axi_gmem_0_WDATA),
-    .m_axi_gmem_0_WSTRB(grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82_m_axi_gmem_0_WSTRB),
-    .m_axi_gmem_0_WLAST(grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82_m_axi_gmem_0_WLAST),
-    .m_axi_gmem_0_WID(grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82_m_axi_gmem_0_WID),
-    .m_axi_gmem_0_WUSER(grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82_m_axi_gmem_0_WUSER),
-    .m_axi_gmem_0_ARVALID(grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82_m_axi_gmem_0_ARVALID),
-    .m_axi_gmem_0_ARREADY(1'b0),
-    .m_axi_gmem_0_ARADDR(grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82_m_axi_gmem_0_ARADDR),
-    .m_axi_gmem_0_ARID(grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82_m_axi_gmem_0_ARID),
-    .m_axi_gmem_0_ARLEN(grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82_m_axi_gmem_0_ARLEN),
-    .m_axi_gmem_0_ARSIZE(grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82_m_axi_gmem_0_ARSIZE),
-    .m_axi_gmem_0_ARBURST(grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82_m_axi_gmem_0_ARBURST),
-    .m_axi_gmem_0_ARLOCK(grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82_m_axi_gmem_0_ARLOCK),
-    .m_axi_gmem_0_ARCACHE(grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82_m_axi_gmem_0_ARCACHE),
-    .m_axi_gmem_0_ARPROT(grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82_m_axi_gmem_0_ARPROT),
-    .m_axi_gmem_0_ARQOS(grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82_m_axi_gmem_0_ARQOS),
-    .m_axi_gmem_0_ARREGION(grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82_m_axi_gmem_0_ARREGION),
-    .m_axi_gmem_0_ARUSER(grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82_m_axi_gmem_0_ARUSER),
-    .m_axi_gmem_0_RVALID(1'b0),
-    .m_axi_gmem_0_RREADY(grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82_m_axi_gmem_0_RREADY),
-    .m_axi_gmem_0_RDATA(32'd0),
-    .m_axi_gmem_0_RLAST(1'b0),
-    .m_axi_gmem_0_RID(1'd0),
-    .m_axi_gmem_0_RFIFONUM(9'd0),
-    .m_axi_gmem_0_RUSER(1'd0),
-    .m_axi_gmem_0_RRESP(2'd0),
-    .m_axi_gmem_0_BVALID(gmem_0_BVALID),
-    .m_axi_gmem_0_BREADY(grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82_m_axi_gmem_0_BREADY),
-    .m_axi_gmem_0_BRESP(2'd0),
-    .m_axi_gmem_0_BID(1'd0),
-    .m_axi_gmem_0_BUSER(1'd0),
+    .ap_start(grp_stream_reader_Pipeline_VITIS_LOOP_19_2_fu_131_ap_start),
+    .ap_done(grp_stream_reader_Pipeline_VITIS_LOOP_19_2_fu_131_ap_done),
+    .ap_idle(grp_stream_reader_Pipeline_VITIS_LOOP_19_2_fu_131_ap_idle),
+    .ap_ready(grp_stream_reader_Pipeline_VITIS_LOOP_19_2_fu_131_ap_ready),
     .data_in_TVALID(data_in_TVALID_int_regslice),
-    .n_inner(n_inner_read_reg_142),
-    .mul_ln3(mul_ln3_reg_173),
+    .n_inner(n_inner_read_reg_223),
     .data_in_TDATA(data_in_TDATA_int_regslice),
-    .data_in_TREADY(grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82_data_in_TREADY),
-    .zext_ln14(empty_reg_152),
-    .data_out(data_out_read_reg_147)
+    .data_in_TREADY(grp_stream_reader_Pipeline_VITIS_LOOP_19_2_fu_131_data_in_TREADY),
+    .count_out(grp_stream_reader_Pipeline_VITIS_LOOP_19_2_fu_131_count_out),
+    .count_out_ap_vld(grp_stream_reader_Pipeline_VITIS_LOOP_19_2_fu_131_count_out_ap_vld)
 );
 
 stream_reader_control_s_axi #(
@@ -451,33 +389,18 @@ gmem_m_axi_U(
     .I_CH0_RFIFONUM(gmem_0_RFIFONUM),
     .I_CH0_AWVALID(gmem_0_AWVALID),
     .I_CH0_AWREADY(gmem_0_AWREADY),
-    .I_CH0_AWADDR(grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82_m_axi_gmem_0_AWADDR),
-    .I_CH0_AWLEN(grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82_m_axi_gmem_0_AWLEN),
+    .I_CH0_AWADDR(gmem_addr_reg_239),
+    .I_CH0_AWLEN(gmem_0_AWLEN),
     .I_CH0_WVALID(gmem_0_WVALID),
     .I_CH0_WREADY(gmem_0_WREADY),
-    .I_CH0_WDATA(grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82_m_axi_gmem_0_WDATA),
-    .I_CH0_WSTRB(grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82_m_axi_gmem_0_WSTRB),
+    .I_CH0_WDATA(gmem_0_WDATA),
+    .I_CH0_WSTRB(4'd15),
     .I_CH0_BVALID(gmem_0_BVALID),
     .I_CH0_BREADY(gmem_0_BREADY)
 );
 
-stream_reader_mul_31ns_31ns_62_2_1 #(
-    .ID( 1 ),
-    .NUM_STAGE( 2 ),
-    .din0_WIDTH( 31 ),
-    .din1_WIDTH( 31 ),
-    .dout_WIDTH( 62 ))
-mul_31ns_31ns_62_2_1_U7(
-    .clk(ap_clk),
-    .reset(ap_rst_n_inv),
-    .din0(grp_fu_94_p0),
-    .din1(grp_fu_94_p1),
-    .ce(1'b1),
-    .dout(grp_fu_94_p2)
-);
-
 stream_reader_regslice_both #(
-    .DataWidth( 32 ))
+    .DataWidth( 8 ))
 regslice_both_data_in_U(
     .ap_clk(ap_clk),
     .ap_rst(ap_rst_n_inv),
@@ -500,28 +423,44 @@ end
 
 always @ (posedge ap_clk) begin
     if (ap_rst_n_inv == 1'b1) begin
-        grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82_ap_start_reg <= 1'b0;
+        grp_stream_reader_Pipeline_VITIS_LOOP_19_2_fu_131_ap_start_reg <= 1'b0;
     end else begin
-        if (((1'b1 == ap_NS_fsm_state4) & (1'b1 == ap_CS_fsm_state3))) begin
-            grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82_ap_start_reg <= 1'b1;
-        end else if ((grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82_ap_ready == 1'b1)) begin
-            grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82_ap_start_reg <= 1'b0;
+        if (((icmp_ln16_1_fu_193_p2 == 1'd1) & (1'b1 == ap_CS_fsm_state3))) begin
+            grp_stream_reader_Pipeline_VITIS_LOOP_19_2_fu_131_ap_start_reg <= 1'b1;
+        end else if ((grp_stream_reader_Pipeline_VITIS_LOOP_19_2_fu_131_ap_ready == 1'b1)) begin
+            grp_stream_reader_Pipeline_VITIS_LOOP_19_2_fu_131_ap_start_reg <= 1'b0;
         end
     end
 end
 
 always @ (posedge ap_clk) begin
-    if ((1'b1 == ap_CS_fsm_state1)) begin
-        data_out_read_reg_147 <= data_out;
-        empty_reg_152 <= empty_fu_112_p3;
-        n_inner_read_reg_142 <= n_inner;
-        smax1_reg_158 <= smax1_fu_126_p3;
+    if (((1'b1 == ap_CS_fsm_state1) & (ap_start == 1'b1))) begin
+        i_fu_86 <= 31'd0;
+    end else if (((gmem_0_WREADY == 1'b1) & (1'b1 == ap_CS_fsm_state5))) begin
+        i_fu_86 <= add_ln16_reg_254;
     end
 end
 
 always @ (posedge ap_clk) begin
     if ((1'b1 == ap_CS_fsm_state3)) begin
-        mul_ln3_reg_173 <= grp_fu_94_p2;
+        add_ln16_reg_254 <= add_ln16_fu_198_p2;
+    end
+end
+
+always @ (posedge ap_clk) begin
+    if ((1'b1 == ap_CS_fsm_state1)) begin
+        empty_reg_246 <= empty_fu_169_p3;
+        gmem_addr_reg_239 <= sext_ln16_fu_159_p1;
+        n_inner_read_reg_223 <= n_inner;
+        n_outer_read_reg_228 <= n_outer;
+    end
+end
+
+always @ (*) begin
+    if ((gmem_0_BVALID == 1'b0)) begin
+        ap_ST_fsm_state10_blk = 1'b1;
+    end else begin
+        ap_ST_fsm_state10_blk = 1'b0;
     end
 end
 
@@ -533,22 +472,42 @@ always @ (*) begin
     end
 end
 
-assign ap_ST_fsm_state2_blk = 1'b0;
+always @ (*) begin
+    if ((gmem_0_AWREADY == 1'b0)) begin
+        ap_ST_fsm_state2_blk = 1'b1;
+    end else begin
+        ap_ST_fsm_state2_blk = 1'b0;
+    end
+end
 
 assign ap_ST_fsm_state3_blk = 1'b0;
 
-assign ap_ST_fsm_state4_blk = 1'b0;
+always @ (*) begin
+    if ((grp_stream_reader_Pipeline_VITIS_LOOP_19_2_fu_131_ap_done == 1'b0)) begin
+        ap_ST_fsm_state4_blk = 1'b1;
+    end else begin
+        ap_ST_fsm_state4_blk = 1'b0;
+    end
+end
 
 always @ (*) begin
-    if ((grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82_ap_done == 1'b0)) begin
+    if ((gmem_0_WREADY == 1'b0)) begin
         ap_ST_fsm_state5_blk = 1'b1;
     end else begin
         ap_ST_fsm_state5_blk = 1'b0;
     end
 end
 
+assign ap_ST_fsm_state6_blk = 1'b0;
+
+assign ap_ST_fsm_state7_blk = 1'b0;
+
+assign ap_ST_fsm_state8_blk = 1'b0;
+
+assign ap_ST_fsm_state9_blk = 1'b0;
+
 always @ (*) begin
-    if (((1'b1 == ap_CS_fsm_state5) & (grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82_ap_done == 1'b1))) begin
+    if (((gmem_0_BVALID == 1'b1) & (1'b1 == ap_CS_fsm_state10))) begin
         ap_done = 1'b1;
     end else begin
         ap_done = 1'b0;
@@ -564,7 +523,7 @@ always @ (*) begin
 end
 
 always @ (*) begin
-    if (((1'b1 == ap_CS_fsm_state5) & (grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82_ap_done == 1'b1))) begin
+    if (((gmem_0_BVALID == 1'b1) & (1'b1 == ap_CS_fsm_state10))) begin
         ap_ready = 1'b1;
     end else begin
         ap_ready = 1'b0;
@@ -572,34 +531,58 @@ always @ (*) begin
 end
 
 always @ (*) begin
-    if ((1'b1 == ap_CS_fsm_state5)) begin
-        data_in_TREADY_int_regslice = grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82_data_in_TREADY;
+    if ((1'b1 == ap_CS_fsm_state4)) begin
+        data_in_TREADY_int_regslice = grp_stream_reader_Pipeline_VITIS_LOOP_19_2_fu_131_data_in_TREADY;
     end else begin
         data_in_TREADY_int_regslice = 1'b0;
     end
 end
 
 always @ (*) begin
-    if (((1'b1 == ap_CS_fsm_state5) | (1'b1 == ap_CS_fsm_state4))) begin
-        gmem_0_AWVALID = grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82_m_axi_gmem_0_AWVALID;
+    if (((1'b1 == ap_CS_fsm_state2) & (gmem_0_AWREADY == 1'b1))) begin
+        gmem_0_AWVALID = 1'b1;
     end else begin
         gmem_0_AWVALID = 1'b0;
     end
 end
 
 always @ (*) begin
-    if (((1'b1 == ap_CS_fsm_state5) | (1'b1 == ap_CS_fsm_state4))) begin
-        gmem_0_BREADY = grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82_m_axi_gmem_0_BREADY;
+    if (((gmem_0_BVALID == 1'b1) & (1'b1 == ap_CS_fsm_state10))) begin
+        gmem_0_BREADY = 1'b1;
     end else begin
         gmem_0_BREADY = 1'b0;
     end
 end
 
 always @ (*) begin
-    if (((1'b1 == ap_CS_fsm_state5) | (1'b1 == ap_CS_fsm_state4))) begin
-        gmem_0_WVALID = grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82_m_axi_gmem_0_WVALID;
+    if (((gmem_0_WREADY == 1'b1) & (1'b1 == ap_CS_fsm_state5))) begin
+        gmem_0_WVALID = 1'b1;
     end else begin
         gmem_0_WVALID = 1'b0;
+    end
+end
+
+always @ (*) begin
+    if ((1'b1 == ap_CS_fsm_state2)) begin
+        gmem_blk_n_AW = m_axi_gmem_AWREADY;
+    end else begin
+        gmem_blk_n_AW = 1'b1;
+    end
+end
+
+always @ (*) begin
+    if ((1'b1 == ap_CS_fsm_state10)) begin
+        gmem_blk_n_B = m_axi_gmem_BVALID;
+    end else begin
+        gmem_blk_n_B = 1'b1;
+    end
+end
+
+always @ (*) begin
+    if ((1'b1 == ap_CS_fsm_state5)) begin
+        gmem_blk_n_W = m_axi_gmem_WREADY;
+    end else begin
+        gmem_blk_n_W = 1'b1;
     end
 end
 
@@ -613,19 +596,50 @@ always @ (*) begin
             end
         end
         ap_ST_fsm_state2 : begin
-            ap_NS_fsm = ap_ST_fsm_state3;
+            if (((1'b1 == ap_CS_fsm_state2) & (gmem_0_AWREADY == 1'b1))) begin
+                ap_NS_fsm = ap_ST_fsm_state3;
+            end else begin
+                ap_NS_fsm = ap_ST_fsm_state2;
+            end
         end
         ap_ST_fsm_state3 : begin
-            ap_NS_fsm = ap_ST_fsm_state4;
+            if (((icmp_ln16_1_fu_193_p2 == 1'd0) & (1'b1 == ap_CS_fsm_state3))) begin
+                ap_NS_fsm = ap_ST_fsm_state6;
+            end else begin
+                ap_NS_fsm = ap_ST_fsm_state4;
+            end
         end
         ap_ST_fsm_state4 : begin
-            ap_NS_fsm = ap_ST_fsm_state5;
+            if (((1'b1 == ap_CS_fsm_state4) & (grp_stream_reader_Pipeline_VITIS_LOOP_19_2_fu_131_ap_done == 1'b1))) begin
+                ap_NS_fsm = ap_ST_fsm_state5;
+            end else begin
+                ap_NS_fsm = ap_ST_fsm_state4;
+            end
         end
         ap_ST_fsm_state5 : begin
-            if (((1'b1 == ap_CS_fsm_state5) & (grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82_ap_done == 1'b1))) begin
-                ap_NS_fsm = ap_ST_fsm_state1;
+            if (((gmem_0_WREADY == 1'b1) & (1'b1 == ap_CS_fsm_state5))) begin
+                ap_NS_fsm = ap_ST_fsm_state3;
             end else begin
                 ap_NS_fsm = ap_ST_fsm_state5;
+            end
+        end
+        ap_ST_fsm_state6 : begin
+            ap_NS_fsm = ap_ST_fsm_state7;
+        end
+        ap_ST_fsm_state7 : begin
+            ap_NS_fsm = ap_ST_fsm_state8;
+        end
+        ap_ST_fsm_state8 : begin
+            ap_NS_fsm = ap_ST_fsm_state9;
+        end
+        ap_ST_fsm_state9 : begin
+            ap_NS_fsm = ap_ST_fsm_state10;
+        end
+        ap_ST_fsm_state10 : begin
+            if (((gmem_0_BVALID == 1'b1) & (1'b1 == ap_CS_fsm_state10))) begin
+                ap_NS_fsm = ap_ST_fsm_state1;
+            end else begin
+                ap_NS_fsm = ap_ST_fsm_state10;
             end
         end
         default : begin
@@ -634,7 +648,11 @@ always @ (*) begin
     endcase
 end
 
+assign add_ln16_fu_198_p2 = (i_fu_86 + 31'd1);
+
 assign ap_CS_fsm_state1 = ap_CS_fsm[32'd0];
+
+assign ap_CS_fsm_state10 = ap_CS_fsm[32'd9];
 
 assign ap_CS_fsm_state2 = ap_CS_fsm[32'd1];
 
@@ -644,35 +662,33 @@ assign ap_CS_fsm_state4 = ap_CS_fsm[32'd3];
 
 assign ap_CS_fsm_state5 = ap_CS_fsm[32'd4];
 
-assign ap_NS_fsm_state4 = ap_NS_fsm[32'd3];
-
 always @ (*) begin
     ap_rst_n_inv = ~ap_rst_n;
 end
 
 assign data_in_TREADY = regslice_both_data_in_U_ack_in;
 
-assign empty_21_fu_120_p2 = (($signed(n_outer) > $signed(32'd0)) ? 1'b1 : 1'b0);
+assign empty_fu_169_p3 = ((icmp_ln16_fu_139_p2[0:0] == 1'b1) ? trunc_ln16_fu_145_p1 : 31'd0);
 
-assign empty_fu_112_p3 = ((icmp_ln15_fu_106_p2[0:0] == 1'b1) ? trunc_ln3_1_fu_102_p1 : 31'd0);
+assign gmem_0_AWLEN = gmem_0_AWLEN0;
 
-assign grp_fu_94_p0 = grp_fu_94_p00;
+assign gmem_0_AWLEN0 = empty_reg_246;
 
-assign grp_fu_94_p00 = smax1_reg_158;
+assign gmem_0_WDATA = grp_stream_reader_Pipeline_VITIS_LOOP_19_2_fu_131_count_out;
 
-assign grp_fu_94_p1 = grp_fu_94_p10;
+assign grp_stream_reader_Pipeline_VITIS_LOOP_19_2_fu_131_ap_start = grp_stream_reader_Pipeline_VITIS_LOOP_19_2_fu_131_ap_start_reg;
 
-assign grp_fu_94_p10 = empty_reg_152;
+assign icmp_ln16_1_fu_193_p2 = (($signed(zext_ln16_1_fu_189_p1) < $signed(n_outer_read_reg_228)) ? 1'b1 : 1'b0);
 
-assign grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82_ap_start = grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82_ap_start_reg;
+assign icmp_ln16_fu_139_p2 = (($signed(n_outer) > $signed(32'd0)) ? 1'b1 : 1'b0);
 
-assign icmp_ln15_fu_106_p2 = (($signed(n_inner) > $signed(32'd0)) ? 1'b1 : 1'b0);
+assign sext_ln16_fu_159_p1 = $signed(trunc_ln_fu_149_p4);
 
-assign smax1_fu_126_p3 = ((empty_21_fu_120_p2[0:0] == 1'b1) ? trunc_ln3_fu_98_p1 : 31'd0);
+assign trunc_ln16_fu_145_p1 = n_outer[30:0];
 
-assign trunc_ln3_1_fu_102_p1 = n_inner[30:0];
+assign trunc_ln_fu_149_p4 = {{data_out[63:2]}};
 
-assign trunc_ln3_fu_98_p1 = n_outer[30:0];
+assign zext_ln16_1_fu_189_p1 = i_fu_86;
 
 
 reg find_kernel_block = 0;

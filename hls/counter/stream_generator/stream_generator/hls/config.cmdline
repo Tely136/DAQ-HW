@@ -1,3 +1,0 @@
-relativeroot=C:/DAQ-HW/hls/counter/stream_generator
-original_argv=--mode hls --package --config C:\DAQ-HW\hls\counter\stream_generator\hls_config.cfg --work_dir stream_generator 
-

@@ -22,11 +22,23 @@ int main() {
 
     xil_printf("Started Run\r\n");
 
-    for (int i=0; i<N_TOTAL; i++) {
-        XBram_WriteReg(DATA_GEN_ADDR, i*4, i*12);
+    int data[N_TOTAL];
+    
+    int id = 0;
+    for (int i=0; i<N_BINS; i++) {
+        for (int j=0; j<N_CLK; j++) {
+            data[id] = (j%(i+1)==0);
+
+            id++;
+        }
     }
 
-    
+    for (int i=0; i<N_TOTAL; i++) {
+        XBram_WriteReg(DATA_GEN_ADDR, i*4, data[i]);
+    }
+
+    ReadData(DATA_GEN_ADDR, N_TOTAL);
+
     Status = Init(GEN_ADDR, READ_ADDR);
     if (Status != XST_SUCCESS) {
         return XST_FAILURE;
@@ -35,25 +47,26 @@ int main() {
     XStream_generator_Set_n_total(&GenInst,  N_TOTAL);
     XStream_generator_Set_data(&GenInst,     DATA_GEN_ADDR);
     
-    XStream_reader_Set_n_outer(&ReaderInst,  N_OUTER);
-    XStream_reader_Set_n_inner(&ReaderInst,  N_INNER);
+    XStream_reader_Set_n_outer(&ReaderInst,  N_BINS);
+    XStream_reader_Set_n_inner(&ReaderInst,  N_CLK);
     XStream_reader_Set_data_out(&ReaderInst, DATA_READ_ADDR);
 
     XStream_generator_Start(&GenInst);
     XStream_reader_Start(&ReaderInst);
 
-    while (!XStream_generator_IsDone(&GenInst) && !XStream_reader_IsDone(&ReaderInst)) {}
+    while (!XStream_generator_IsDone(&GenInst)) {} 
+    while (!XStream_reader_IsDone(&ReaderInst)) {}
     // xil_printf("IP Finished\r\n");
 
     // printf("Generator   Done: %d\tIdle: %d\tReady: %d\r\n",XStream_generator_IsDone(&GenInst),XStream_generator_IsReady(&GenInst),XStream_generator_IsIdle(&GenInst));
     // printf("Reader      Done: %d\tIdle: %d\tReady: %d\r\n",XStream_reader_IsDone(&ReaderInst),XStream_reader_IsReady(&ReaderInst),XStream_reader_IsIdle(&ReaderInst));
 
-
-    ReadData(DATA_READ_ADDR, 10);
-    Status = CheckData(DATA_GEN_ADDR, DATA_READ_ADDR);
-    if (Status != XST_SUCCESS) {
-        return XST_FAILURE;
-    }
+    xil_printf("\r\n");
+    ReadData(DATA_READ_ADDR, N_BINS);
+    // Status = CheckData(DATA_GEN_ADDR, DATA_READ_ADDR);
+    // if (Status != XST_SUCCESS) {
+    //     return XST_FAILURE;
+    // }
     
     xil_printf("Run Finished\r\n\r\n");
     return XST_SUCCESS;
@@ -87,7 +100,7 @@ void ReadData(UINTPTR BaseAddress, int n) {
 }
 
 int CheckData(UINTPTR WriteAddress, UINTPTR ReadAddress) {    
-    for (int i=0; i<N_OUTER; i++) {
+    for (int i=0; i<N_BINS; i++) {
             
         if (XBram_ReadReg(WriteAddress, i*4) != XBram_ReadReg(ReadAddress, i*4)) {
             printf("Comparison failed\r\n\r\n");

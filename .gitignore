@@ -105,3 +105,61 @@ Desktop.ini
 
 # VS Code - keep project settings if desired
 # .vscode/
+
+# ============================================================
+# Unified Vitis workspace/build output
+# Keep component configs, application sources, BSP configuration,
+# exported IP and XSA handoffs. See GIT-WORKFLOW.md.
+# ============================================================
+
+# Extension patterns missing from the generated Vitis .gitignore files.
+*.o
+*.obj
+*.d
+*.elf
+*.a
+*.pdi
+compile_commands.json
+.ninja_deps
+.ninja_log
+CMakeFiles/
+CMakeCache.txt
+
+# Workspace state (retain launch settings and initialization scripts).
+**/_ide/.wsdata/
+**/_ide/workspace_journal*.py
+**/_ide/version.ini
+**/_ide/.peers.ini
+**/_ide/.vitisPlatformRepo.json
+**/_ide/hwspec.checksum
+.rigel_lopper/
+
+# Generated BSP libraries; retain bsp.yaml and other domain configuration.
+/hls/**/bsp/libsrc/
+/hls/**/bsp/include/
+/hls/**/bsp/lib/
+/hls/**/bsp/hw_artifacts/
+/hls/**/zynq_fsbl_bsp/libsrc/
+/hls/**/zynq_fsbl_bsp/include/
+/hls/**/zynq_fsbl_bsp/lib/
+/hls/**/zynq_fsbl_bsp/hw_artifacts/
+/hls/**/hw/sdt/
+
+# IDE HLS work directories are named after the component, not solution1.
+# Keep hls/impl/ip: Vivado's IP repository currently depends on it.
+/hls/axi_lite_test/generator/generator/*
+!/hls/axi_lite_test/generator/generator/hls/
+/hls/axi_lite_test/ram_write_ip/ram_write_ip/*
+!/hls/axi_lite_test/ram_write_ip/ram_write_ip/hls/
+/hls/axi_lite_test/stream_reader/stream_reader/*
+!/hls/axi_lite_test/stream_reader/stream_reader/hls/
+/hls/counter/counter/counter/*
+!/hls/counter/counter/counter/hls/
+/hls/counter/stream_generator/stream_generator/*
+!/hls/counter/stream_generator/stream_generator/hls/
+/hls/counter/stream_reader/stream_reader/*
+!/hls/counter/stream_reader/stream_reader/hls/
+/hls/**/hls/*
+!/hls/**/hls/impl/
+/hls/**/hls/impl/*
+!/hls/**/hls/impl/ip/

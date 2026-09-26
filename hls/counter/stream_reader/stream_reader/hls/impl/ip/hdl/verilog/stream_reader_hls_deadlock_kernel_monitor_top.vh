@@ -10,12 +10,12 @@ wire [1:0] inst_idle_sigs;
 wire [0:0] inst_block_sigs;
 wire kernel_block;
 
-assign axis_block_sigs[0] = ~grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82.data_in_TDATA_blk_n;
+assign axis_block_sigs[0] = ~grp_stream_reader_Pipeline_VITIS_LOOP_19_2_fu_131.data_in_TDATA_blk_n;
 
 assign inst_block_sigs[0] = 1'b0;
 
 assign inst_idle_sigs[0] = 1'b0;
-assign inst_idle_sigs[1] = grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82.ap_idle;
+assign inst_idle_sigs[1] = grp_stream_reader_Pipeline_VITIS_LOOP_19_2_fu_131.ap_idle;
 
 stream_reader_hls_deadlock_idx0_monitor stream_reader_hls_deadlock_idx0_monitor_U (
     .clock(kernel_monitor_clock),

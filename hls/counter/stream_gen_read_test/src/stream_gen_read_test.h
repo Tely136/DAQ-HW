@@ -17,6 +17,6 @@
 #define DATA_GEN_ADDR   XPAR_XBRAM_0_BASEADDR
 #define DATA_READ_ADDR   0x40003000
 
-#define N_OUTER 5
-#define N_INNER 10
-#define N_TOTAL 5*10
+#define N_BINS 5
+#define N_CLK 10
+#define N_TOTAL N_BINS*N_CLK

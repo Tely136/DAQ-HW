@@ -9,15 +9,21 @@ void stream_reader(stream_in& data_in, dout_t* data_out, int n_outer, int n_inne
     
     int i,j;
     din_t tmp;
+    int count;
 
     int id = 0;
+    
     for (i=0; i<n_outer; i++) {
+        count = 0;
+        
         for (j=0; j<n_inner; j++) {
-            tmp = data_in.read();
+            count += data_in.read();
             
-            data_out[id] = tmp;
+            // data_out[id] = tmp;
 
-            id++;
+            // id++;
         }
+
+        data_out[i] = count;
     }
 }
