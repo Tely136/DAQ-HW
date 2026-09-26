@@ -1,0 +1,246 @@
+<ENTRY>
+{
+ "thisFile": "C:/DAQ-HW\\hls\\counter\\stream_generator\\stream_generator\\stream_generator.hlscompile_summary",
+ "connectId": "",
+ "serverToken": "",
+ "timestamp": "0"
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_CmdStep",
+ "dateTimestamp": "09/26/26 13:25:56",
+ "timestampMillis": "1790443556232",
+ "buildStep": {
+  "cmdId": "ef0b440e-2b39-4bbd-9cee-583976a57f05",
+  "name": "v++",
+  "logFile": "C:/DAQ-HW\\hls\\counter\\stream_generator\\stream_generator\\logs\\stream_generator.steps.log",
+  "commandLine": "C:/AMDDesignTools/2026.1/Vitis/bin/unwrapped/win64.o/v++.exe  -c --mode hls --config C:\\DAQ-HW\\hls\\counter\\stream_generator\\hls_config.cfg --work_dir stream_generator ",
+  "args": [
+   "-c",
+   "--mode",
+   "hls",
+   "--config",
+   "C:\\DAQ-HW\\hls\\counter\\stream_generator\\hls_config.cfg",
+   "--work_dir",
+   "stream_generator"
+  ],
+  "iniFiles": [
+   {
+    "path": "C:/DAQ-HW\\hls\\counter\\stream_generator\\hls_config.cfg",
+    "content": "part=xc7z007sclg400-1\n\n[hls]\npackage.output.format=ip_catalog\npackage.output.syn=false\nsyn.file=stream_generator.cpp\nsyn.file=stream_generator.h\ntb.file=stream_generator_test.cpp\nsyn.top=stream_generator"
+   }
+  ],
+  "cwd": "C:\\DAQ-HW\\hls\\counter\\stream_generator"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "09/26/26 13:25:56",
+ "timestampMillis": "1790443556232",
+ "status": {
+  "cmdId": "ef0b440e-2b39-4bbd-9cee-583976a57f05",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_FlowMetaData",
+ "dateTimestamp": "09/26/26 13:26:03",
+ "timestampMillis": "1790443563897",
+ "buildSummary": {
+  "hardwarePlatform": "",
+  "hardwareDsa": "",
+  "platformDirectory": "",
+  "runtime": "",
+  "systemConfig": "",
+  "flow": "BF_COMPILE",
+  "target": "TT_HW",
+  "kernels": [
+   {
+    "base": {
+     "type": "KERNEL",
+     "name": "stream_generator",
+     "file": "",
+     "reports": [],
+     "uuid": ""
+    },
+    "sources": [
+     "C:/DAQ-HW\\hls\\counter\\stream_generator\\stream_generator.cpp",
+     "C:/DAQ-HW\\hls\\counter\\stream_generator\\stream_generator.h"
+    ],
+    "psSources": [],
+    "cuNames": [],
+    "type": "HLS",
+    "frequency": 0,
+    "freqUnits": ""
+   }
+  ],
+  "toolVersion": "2026.1"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_SubCmdStep",
+ "dateTimestamp": "09/26/26 13:26:03",
+ "timestampMillis": "1790443563898",
+ "buildStep": {
+  "cmdId": "27a526a0-d93c-4dcc-abf3-cf2ae64984b4",
+  "name": "",
+  "logFile": "C:/DAQ-HW\\hls\\counter\\stream_generator\\stream_generator\\hls\\hls.log",
+  "commandLine": "",
+  "args": [],
+  "iniFiles": [],
+  "cwd": "C:\\DAQ-HW\\hls\\counter\\stream_generator"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "09/26/26 13:26:03",
+ "timestampMillis": "1790443563898",
+ "status": {
+  "cmdId": "27a526a0-d93c-4dcc-abf3-cf2ae64984b4",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "09/26/26 13:26:03",
+ "timestampMillis": "1790443563899",
+ "report": {
+  "path": "C:/DAQ-HW\\hls\\counter\\stream_generator\\stream_generator\\hls\\hls_data.json",
+  "name": "",
+  "fileType": "JSON",
+  "reportType": "HLS_SYNTHESIS",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "09/26/26 13:26:03",
+ "timestampMillis": "1790443563899",
+ "report": {
+  "path": "C:/DAQ-HW\\hls\\counter\\stream_generator\\stream_generator\\hls\\syn\\report\\csynth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "HLS_SYNTHESIS",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "09/26/26 13:26:03",
+ "timestampMillis": "1790443563899",
+ "report": {
+  "path": "C:/DAQ-HW\\hls\\counter\\stream_generator\\stream_generator\\hls\\syn\\report\\csynth.xml",
+  "name": "",
+  "fileType": "XML",
+  "reportType": "HLS_SYNTHESIS",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "09/26/26 13:26:16",
+ "timestampMillis": "1790443576276",
+ "report": {
+  "path": "C:/DAQ-HW\\hls\\counter\\stream_generator\\stream_generator\\hls",
+  "name": "",
+  "fileType": "DIR",
+  "reportType": "HLS_DATAFLOW",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "09/26/26 13:26:16",
+ "timestampMillis": "1790443576277",
+ "report": {
+  "path": "C:/DAQ-HW\\hls\\counter\\stream_generator\\stream_generator\\hls",
+  "name": "",
+  "fileType": "DIR",
+  "reportType": "HLS_FUNCTION_CALL_GRAPH",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "09/26/26 13:26:16",
+ "timestampMillis": "1790443576277",
+ "report": {
+  "path": "C:/DAQ-HW\\hls\\counter\\stream_generator\\stream_generator\\hls",
+  "name": "",
+  "fileType": "DIR",
+  "reportType": "HLS_SCHEDULE",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "09/26/26 13:26:16",
+ "timestampMillis": "1790443576278",
+ "status": {
+  "cmdId": "27a526a0-d93c-4dcc-abf3-cf2ae64984b4",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "09/26/26 13:26:16",
+ "timestampMillis": "1790443576429",
+ "status": {
+  "cmdId": "ef0b440e-2b39-4bbd-9cee-583976a57f05",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "09/26/26 13:26:16",
+ "timestampMillis": "1790443576448",
+ "report": {
+  "path": "C:/DAQ-HW\\hls\\counter\\stream_generator\\stream_generator\\reports\\v++_compile_stream_generator_guidance.html",
+  "name": "",
+  "fileType": "HTML",
+  "reportType": "GLOBAL_RULECHECK_GUIDANCE",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "09/26/26 13:26:16",
+ "timestampMillis": "1790443576448",
+ "report": {
+  "path": "C:/DAQ-HW\\hls\\counter\\stream_generator\\stream_generator\\reports\\.db\\v++_compile_stream_generator_guidance.pb3",
+  "name": "",
+  "fileType": "BINARY_PROTOBUF",
+  "reportType": "GLOBAL_RULECHECK_GUIDANCE",
+  "cmdId": ""
+ }
+}
+</ENTRY>

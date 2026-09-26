@@ -152,10 +152,18 @@ include_folder: include
 lib_folder: lib
 libsrc_folder: libsrc
 drv_info:
-  MCS_0:
-    driver: MCS
-    ip_name: MCS
-    path: C:\DAQ-HW\hls\counter\platform\zynq_fsbl\zynq_fsbl_bsp\hw_artifacts\drivers\MCS_v1_0
+  BRAM_axi_bram_ctrl_0:
+    driver: bram
+    ip_name: axi_bram_ctrl
+    path: C:\AMDDesignTools\2026.1\Vitis\data\embeddedsw\XilinxProcessorIPLib\drivers\bram_v4_14
+  MCS_stream_generator_0:
+    driver: stream_generator
+    ip_name: stream_generator
+    path: C:\DAQ-HW\hls\counter\platform\zynq_fsbl\zynq_fsbl_bsp\hw_artifacts\drivers\stream_generator_v1_0
+  MCS_stream_reader_0:
+    driver: stream_reader
+    ip_name: stream_reader
+    path: C:\DAQ-HW\hls\counter\platform\zynq_fsbl\zynq_fsbl_bsp\hw_artifacts\drivers\stream_reader_v1_0
   axi_gpio_0:
     driver: gpio
     ip_name: axi_gpio

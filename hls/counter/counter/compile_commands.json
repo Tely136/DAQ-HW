@@ -6,7 +6,7 @@
       "--sysroot=C:\\AMDDesignTools\\2026.1\\Vitis\\tps\\mingw\\10.0.0\\win64.o\\nt",
       "-fhls",
       "-hls-syn-headers-dir=C:\\AMDDesignTools\\2026.1\\Vitis\\common\\technology\\autopilot",
-      "-fhlstoplevel=MCS",
+      "-fhlstoplevel=counter",
       "-c",
       "C:\\DAQ-HW\\hls\\counter\\counter\\counter.cpp"
     ],

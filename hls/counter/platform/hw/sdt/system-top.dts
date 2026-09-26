@@ -9,6 +9,16 @@
 	slrcount = <1>;
 	family = "Zynq";
 	speed_grade = "1";
+	BRAM_axi_bram_ctrl_0_memory: memory@40002000 {
+		ranges = <0 0x40002000 0x2000>;
+		compatible = "xlnx,axi-bram-ctrl-4.1";
+		#address-cells = <1>;
+		xlnx,ip-name = "axi_bram_ctrl";
+		device_type = "memory";
+		#size-cells = <1>;
+		memory_type = "memory";
+		reg = <0x40002000 0x2000>;
+	};
 	ps7_ddr_0_memory: memory@00100000 {
 		compatible = "xlnx,ps7-ddr-1.00.a";
 		xlnx,ip-name = "ps7_ddr";
@@ -41,11 +51,14 @@
 	cpus_a9: cpus-a9@0 {
 		compatible = "cpus,cluster";
 		address-map = <0xf0000000 &amba 0xf0000000 0x10000000>, 
+			      <0x40002000 &BRAM_axi_bram_ctrl_0_memory 0x40002000 0x2000>, 
+			      <0x40002000 &BRAM_axi_bram_ctrl_0 0x40002000 0x2000>, 
 			      <0x00100000 &ps7_ddr_0_memory 0x00100000 0x1FF00000>, 
 			      <0x0 &ps7_ram_0_memory 0x0 0x30000>, 
 			      <0xffff0000 &ps7_ram_1_memory 0xffff0000 0xfe00>, 
-			      <0x40000000 &MCS_0 0x40000000 0x10000>, 
-			      <0x40010000 &axi_gpio_0 0x40010000 0x10000>, 
+			      <0x40010000 &MCS_stream_generator_0 0x40010000 0x10000>, 
+			      <0x40020000 &axi_gpio_0 0x40020000 0x10000>, 
+			      <0x40030000 &MCS_stream_reader_0 0x40030000 0x10000>, 
 			      <0xf8008000 &ps7_afi_0 0xf8008000 0x1000>, 
 			      <0xf8009000 &ps7_afi_1 0xf8009000 0x1000>, 
 			      <0xf800a000 &ps7_afi_2 0xf800a000 0x1000>, 

@@ -1,24 +1,23 @@
-static int tmp_count;
-static int N;
-
 #include "counter.h"
 
-void MCS(bitstream& A, ap_uint<32> counts[MAX_BINS], int num_bins, int cycle_per_bin) {
-#pragma HLS INTERFACE mode=m_axi port=counts
+void counter(stream_in& data_in, dout_t* data_out, int n_outer, int n_inner) {
+#pragma HLS INTERFACE mode=s_axilite port=n_inner
+#pragma HLS INTERFACE mode=s_axilite port=n_outer
+#pragma HLS INTERFACE mode=m_axi port=data_out
+#pragma HLS INTERFACE mode=axis port=data_in
+#pragma HLS INTERFACE mode=s_axilite port=return
     
-    for (int i=0; i<num_bins; i++) {
-        N=0;
-        tmp_count=0;
-        
-        int l = cycle_per_bin;
-        while (N<l) {
-            if(A.read()) {
-                tmp_count = tmp_count + 1;
-            }
+    int i,j;
+    din_t tmp;
 
-            N++;
+    int id = 0;
+    for (i=0; i<n_outer; i++) {
+        for (j=0; j<n_inner; j++) {
+            tmp = data_in.read();
+            
+            data_out[id] = tmp;
+
+            id++;
         }
-
-        counts[i] = tmp_count;
     }
 }

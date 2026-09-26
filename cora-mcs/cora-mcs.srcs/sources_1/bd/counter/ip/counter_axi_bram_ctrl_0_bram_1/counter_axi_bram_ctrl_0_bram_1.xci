@@ -2,7 +2,7 @@
   "schema": "xilinx.com:schema:json_instance:1.0",
   "ip_inst": {
     "xci_name": "counter_axi_bram_ctrl_0_bram_1",
-    "cell_name": "axi_bram_ctrl_0_bram",
+    "cell_name": "BRAM/axi_bram_ctrl_0_bram",
     "component_reference": "xilinx.com:ip:blk_mem_gen:8.4",
     "ip_revision": "13",
     "gen_directory": "../../../../../../cora-mcs.gen/sources_1/bd/counter/ip/counter_axi_bram_ctrl_0_bram_1",
@@ -293,5 +293,5 @@
       }
     }
   },
-  "checksum": "a87df0cb"
+  "checksum": "0d48420e"
 }

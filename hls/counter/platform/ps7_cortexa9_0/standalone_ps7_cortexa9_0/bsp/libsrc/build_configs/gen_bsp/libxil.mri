@@ -2,6 +2,8 @@ create libxil.a
 addlib C:/DAQ-HW/hls/counter/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/libsrc/xadcps/src/libxadcps.a
 addlib C:/DAQ-HW/hls/counter/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/libsrc/usbps/src/libusbps.a
 addlib C:/DAQ-HW/hls/counter/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/libsrc/uartps/src/libuartps.a
+addlib C:/DAQ-HW/hls/counter/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/libsrc/stream_reader/src/libstream_reader.a
+addlib C:/DAQ-HW/hls/counter/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/libsrc/stream_generator/src/libstream_generator.a
 addlib C:/DAQ-HW/hls/counter/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/libsrc/sdps/src/libsdps.a
 addlib C:/DAQ-HW/hls/counter/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/libsrc/scuwdt/src/libscuwdt.a
 addlib C:/DAQ-HW/hls/counter/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/libsrc/scutimer/src/libscutimer.a
@@ -12,6 +14,6 @@ addlib C:/DAQ-HW/hls/counter/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/b
 addlib C:/DAQ-HW/hls/counter/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/libsrc/dmaps/src/libdmaps.a
 addlib C:/DAQ-HW/hls/counter/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/libsrc/devcfg/src/libdevcfg.a
 addlib C:/DAQ-HW/hls/counter/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/libsrc/coresightps_dcc/src/libcoresightps_dcc.a
-addlib C:/DAQ-HW/hls/counter/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/libsrc/MCS/src/libMCS.a
+addlib C:/DAQ-HW/hls/counter/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/libsrc/bram/src/libbram.a
 save
 end

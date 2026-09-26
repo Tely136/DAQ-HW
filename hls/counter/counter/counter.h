@@ -1,15 +1,17 @@
 #include "hls_stream.h"
-#include "ap_int.h"
-#include <iostream>
+// #include "ap_int.h"
 
-#define MAX_BINS 10000
+#include <stdio.h>
 
-#define NUM_BINS 100
-#define CYCLE_PER_BIN 50
-// #define TOTAL_CYCLES NUM_BINS*CYCLE_PER_BIN
+#define N_OUTER 5
+#define N_INNER 10
 
-typedef int packet;
-typedef hls::stream<ap_uint<1>> bitstream;
+#define N_TOTAL N_OUTER*N_INNER
+
+typedef int din_t;
+typedef hls::stream<din_t> stream_in;
+
+typedef int dout_t;
 
 
-void MCS(bitstream& A, ap_uint<32> counts[MAX_BINS], int num_bins, int cycle_per_bin);
+void counter(stream_in& data_in, dout_t* data_out, int n_outer, int n_inner);

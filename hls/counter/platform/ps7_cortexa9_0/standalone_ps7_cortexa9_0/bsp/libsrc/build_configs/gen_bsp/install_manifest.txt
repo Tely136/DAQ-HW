@@ -6,6 +6,8 @@ C:/DAQ-HW/hls/counter/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/incl
 C:/DAQ-HW/hls/counter/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/include/xadcps.h
 C:/DAQ-HW/hls/counter/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/include/xadcps_hw.h
 C:/DAQ-HW/hls/counter/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/include/xbasic_types.h
+C:/DAQ-HW/hls/counter/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/include/xbram.h
+C:/DAQ-HW/hls/counter/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/include/xbram_hw.h
 C:/DAQ-HW/hls/counter/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/include/xcommon_drv_config.h
 C:/DAQ-HW/hls/counter/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/include/xcoresightpsdcc.h
 C:/DAQ-HW/hls/counter/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/include/xcortexa9.h
@@ -53,8 +55,6 @@ C:/DAQ-HW/hls/counter/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/incl
 C:/DAQ-HW/hls/counter/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/include/xinterrupt_wrap.h
 C:/DAQ-HW/hls/counter/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/include/xl2cc.h
 C:/DAQ-HW/hls/counter/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/include/xl2cc_counter.h
-C:/DAQ-HW/hls/counter/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/include/xmcs.h
-C:/DAQ-HW/hls/counter/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/include/xmcs_hw.h
 C:/DAQ-HW/hls/counter/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/include/xmem_config.h
 C:/DAQ-HW/hls/counter/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/include/xparameters_ps.h
 C:/DAQ-HW/hls/counter/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/include/xplatform_info.h
@@ -73,6 +73,10 @@ C:/DAQ-HW/hls/counter/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/incl
 C:/DAQ-HW/hls/counter/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/include/xsdps_core.h
 C:/DAQ-HW/hls/counter/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/include/xsdps_hw.h
 C:/DAQ-HW/hls/counter/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/include/xstatus.h
+C:/DAQ-HW/hls/counter/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/include/xstream_generator.h
+C:/DAQ-HW/hls/counter/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/include/xstream_generator_hw.h
+C:/DAQ-HW/hls/counter/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/include/xstream_reader.h
+C:/DAQ-HW/hls/counter/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/include/xstream_reader_hw.h
 C:/DAQ-HW/hls/counter/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/include/xtimer_config.h
 C:/DAQ-HW/hls/counter/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/include/xuartps.h
 C:/DAQ-HW/hls/counter/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/include/xuartps_hw.h
@@ -86,6 +90,8 @@ C:/DAQ-HW/hls/counter/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/incl
 C:/DAQ-HW/hls/counter/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/include/xadcps.h
 C:/DAQ-HW/hls/counter/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/include/xadcps_hw.h
 C:/DAQ-HW/hls/counter/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/include/xbasic_types.h
+C:/DAQ-HW/hls/counter/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/include/xbram.h
+C:/DAQ-HW/hls/counter/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/include/xbram_hw.h
 C:/DAQ-HW/hls/counter/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/include/xcommon_drv_config.h
 C:/DAQ-HW/hls/counter/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/include/xcoresightpsdcc.h
 C:/DAQ-HW/hls/counter/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/include/xcortexa9.h
@@ -133,8 +139,6 @@ C:/DAQ-HW/hls/counter/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/incl
 C:/DAQ-HW/hls/counter/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/include/xinterrupt_wrap.h
 C:/DAQ-HW/hls/counter/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/include/xl2cc.h
 C:/DAQ-HW/hls/counter/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/include/xl2cc_counter.h
-C:/DAQ-HW/hls/counter/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/include/xmcs.h
-C:/DAQ-HW/hls/counter/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/include/xmcs_hw.h
 C:/DAQ-HW/hls/counter/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/include/xmem_config.h
 C:/DAQ-HW/hls/counter/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/include/xparameters_ps.h
 C:/DAQ-HW/hls/counter/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/include/xplatform_info.h
@@ -153,6 +157,10 @@ C:/DAQ-HW/hls/counter/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/incl
 C:/DAQ-HW/hls/counter/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/include/xsdps_core.h
 C:/DAQ-HW/hls/counter/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/include/xsdps_hw.h
 C:/DAQ-HW/hls/counter/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/include/xstatus.h
+C:/DAQ-HW/hls/counter/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/include/xstream_generator.h
+C:/DAQ-HW/hls/counter/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/include/xstream_generator_hw.h
+C:/DAQ-HW/hls/counter/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/include/xstream_reader.h
+C:/DAQ-HW/hls/counter/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/include/xstream_reader_hw.h
 C:/DAQ-HW/hls/counter/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/include/xtimer_config.h
 C:/DAQ-HW/hls/counter/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/include/xuartps.h
 C:/DAQ-HW/hls/counter/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/include/xuartps_hw.h
@@ -167,6 +175,8 @@ C:/DAQ-HW/hls/counter/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/incl
 C:/DAQ-HW/hls/counter/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/include/xadcps.h
 C:/DAQ-HW/hls/counter/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/include/xadcps_hw.h
 C:/DAQ-HW/hls/counter/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/include/xbasic_types.h
+C:/DAQ-HW/hls/counter/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/include/xbram.h
+C:/DAQ-HW/hls/counter/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/include/xbram_hw.h
 C:/DAQ-HW/hls/counter/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/include/xcommon_drv_config.h
 C:/DAQ-HW/hls/counter/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/include/xcoresightpsdcc.h
 C:/DAQ-HW/hls/counter/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/include/xcortexa9.h
@@ -214,8 +224,6 @@ C:/DAQ-HW/hls/counter/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/incl
 C:/DAQ-HW/hls/counter/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/include/xinterrupt_wrap.h
 C:/DAQ-HW/hls/counter/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/include/xl2cc.h
 C:/DAQ-HW/hls/counter/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/include/xl2cc_counter.h
-C:/DAQ-HW/hls/counter/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/include/xmcs.h
-C:/DAQ-HW/hls/counter/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/include/xmcs_hw.h
 C:/DAQ-HW/hls/counter/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/include/xmem_config.h
 C:/DAQ-HW/hls/counter/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/include/xparameters_ps.h
 C:/DAQ-HW/hls/counter/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/include/xplatform_info.h
@@ -234,6 +242,10 @@ C:/DAQ-HW/hls/counter/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/incl
 C:/DAQ-HW/hls/counter/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/include/xsdps_core.h
 C:/DAQ-HW/hls/counter/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/include/xsdps_hw.h
 C:/DAQ-HW/hls/counter/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/include/xstatus.h
+C:/DAQ-HW/hls/counter/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/include/xstream_generator.h
+C:/DAQ-HW/hls/counter/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/include/xstream_generator_hw.h
+C:/DAQ-HW/hls/counter/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/include/xstream_reader.h
+C:/DAQ-HW/hls/counter/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/include/xstream_reader_hw.h
 C:/DAQ-HW/hls/counter/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/include/xtimer_config.h
 C:/DAQ-HW/hls/counter/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/include/xuartps.h
 C:/DAQ-HW/hls/counter/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/include/xuartps_hw.h

@@ -1,0 +1,193 @@
+<profile>
+<RunData>
+  <RUN_TYPE>impl</RUN_TYPE>
+  <VIVADO_VERSION>v.2026.1</VIVADO_VERSION>
+  <ROOT_MODULE_CELL>bd_0_i/hls_inst</ROOT_MODULE_CELL>
+</RunData>
+<TimingReport>
+  <TargetClockPeriod>10.000</TargetClockPeriod>
+  <AchievedClockPeriod>7.090</AchievedClockPeriod>
+  <CLOCK_NAME>ap_clk</CLOCK_NAME>
+  <CP_FINAL>7.090</CP_FINAL>
+  <CP_ROUTE>7.090</CP_ROUTE>
+  <CP_SYNTH>5.690</CP_SYNTH>
+  <CP_TARGET>10.000</CP_TARGET>
+  <SLACK_FINAL>2.910</SLACK_FINAL>
+  <SLACK_ROUTE>2.910</SLACK_ROUTE>
+  <SLACK_SYNTH>4.310</SLACK_SYNTH>
+  <TIMING_MET>TRUE</TIMING_MET>
+  <TNS_FINAL>0.000</TNS_FINAL>
+  <TNS_ROUTE>0.000</TNS_ROUTE>
+  <TNS_SYNTH>0.000</TNS_SYNTH>
+  <WNS_FINAL>2.910</WNS_FINAL>
+  <WNS_ROUTE>2.910</WNS_ROUTE>
+  <WNS_SYNTH>4.310</WNS_SYNTH>
+</TimingReport>
+<AreaReport>
+  <Resources>
+    <BRAM>0</BRAM>
+    <CLB>0</CLB>
+    <DSP>4</DSP>
+    <FF>1923</FF>
+    <LATCH>0</LATCH>
+    <LUT>1248</LUT>
+    <SLICE>545</SLICE>
+    <SRL>119</SRL>
+    <URAM>0</URAM>
+  </Resources>
+  <AvailableResources>
+    <BRAM>100</BRAM>
+    <CLB>0</CLB>
+    <DSP>66</DSP>
+    <FF>28800</FF>
+    <LUT>14400</LUT>
+    <SLICE>4400</SLICE>
+    <URAM>0</URAM>
+  </AvailableResources>
+</AreaReport>
+<RtlModules>
+  <RtlModule CELL="inst" DEPTH="0" FILE_NAME="bd_0_hls_inst_0.v" ORIG_REF_NAME="stream_reader" TOP_CELL="bd_0_i/hls_inst/inst">
+    <SubModules count="5">control_s_axi_U gmem_m_axi_U grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82 mul_31ns_31ns_62_2_1_U7 regslice_both_data_in_U</SubModules>
+    <Resources DSP="4" FF="1923" LUT="1248" LUTRAM="6" LogicLUT="1123" SRL="119"/>
+    <LocalResources FF="194"/>
+  </RtlModule>
+  <RtlModule CELL="inst/control_s_axi_U" DEPTH="1" FILE_NAME="stream_reader.v" ORIG_REF_NAME="stream_reader_control_s_axi">
+    <Resources FF="181" LUT="220" LogicLUT="220"/>
+  </RtlModule>
+  <RtlModule CELL="inst/gmem_m_axi_U" DEPTH="1" FILE_NAME="stream_reader.v" ORIG_REF_NAME="stream_reader_gmem_m_axi">
+    <Resources FF="1144" LUT="701" LUTRAM="6" LogicLUT="578" SRL="117"/>
+  </RtlModule>
+  <RtlModule CELL="inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82" DEPTH="1" FILE_NAME="stream_reader.v" ORIG_REF_NAME="stream_reader_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2">
+    <SubModules count="1">flow_control_loop_pipe_sequential_init_U</SubModules>
+    <Resources FF="301" LUT="247" LogicLUT="245" SRL="2"/>
+    <LocalResources FF="299" LUT="241" LogicLUT="239" SRL="2"/>
+  </RtlModule>
+  <RtlModule CELL="inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/flow_control_loop_pipe_sequential_init_U" DEPTH="2" FILE_NAME="stream_reader_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2.v" ORIG_REF_NAME="stream_reader_flow_control_loop_pipe_sequential_init">
+  </RtlModule>
+  <RtlModule CELL="inst/mul_31ns_31ns_62_2_1_U7" DEPTH="1" FILE_NAME="stream_reader.v" ORIG_REF_NAME="stream_reader_mul_31ns_31ns_62_2_1">
+  </RtlModule>
+  <RtlModule CELL="inst/regslice_both_data_in_U" DEPTH="1" FILE_NAME="stream_reader.v" ORIG_REF_NAME="stream_reader_regslice_both">
+    <Resources FF="69" LUT="37" LogicLUT="37"/>
+  </RtlModule>
+</RtlModules>
+<TimingPaths>
+  <TPATH DATAPATH_DELAY="7.115" DATAPATH_LOGIC_DELAY="3.955" DATAPATH_NET_DELAY="3.160" ENDPOINT_PIN="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/sext_ln15_1_mid2_v_reg_390_reg[60]/D" LOGIC_LEVELS="18" MAX_FANOUT="64" SLACK="2.910" STARTPOINT_PIN="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/icmp_ln15_reg_367_reg[0]/C">
+    <CELL NAME="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/icmp_ln15_reg_367_reg[0]" PRIMITIVE_TYPE="FLOP_LATCH.flop.FDRE" FILE_NAME="stream_reader_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2.v" LINE_NUMBER="418"/>
+    <CELL NAME="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/id_2_fu_262_p2_carry_i_4" PRIMITIVE_TYPE="LUT.others.LUT4" FILE_NAME="stream_reader_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2.v" LINE_NUMBER="641"/>
+    <CELL NAME="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/id_2_fu_262_p2_carry" PRIMITIVE_TYPE="CARRY.others.CARRY4" FILE_NAME="stream_reader_control_s_axi.v" LINE_NUMBER="140"/>
+    <CELL NAME="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/id_2_fu_262_p2_carry__0" PRIMITIVE_TYPE="CARRY.others.CARRY4" FILE_NAME="stream_reader_control_s_axi.v" LINE_NUMBER="140"/>
+    <CELL NAME="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/id_2_fu_262_p2_carry__1" PRIMITIVE_TYPE="CARRY.others.CARRY4" FILE_NAME="stream_reader_control_s_axi.v" LINE_NUMBER="140"/>
+    <CELL NAME="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/id_2_fu_262_p2_carry__2" PRIMITIVE_TYPE="CARRY.others.CARRY4" FILE_NAME="stream_reader_control_s_axi.v" LINE_NUMBER="140"/>
+    <CELL NAME="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/id_2_fu_262_p2_carry__3" PRIMITIVE_TYPE="CARRY.others.CARRY4" FILE_NAME="stream_reader_control_s_axi.v" LINE_NUMBER="140"/>
+    <CELL NAME="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/id_2_fu_262_p2_carry__4" PRIMITIVE_TYPE="CARRY.others.CARRY4" FILE_NAME="stream_reader_control_s_axi.v" LINE_NUMBER="140"/>
+    <CELL NAME="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/id_2_fu_262_p2_carry__5" PRIMITIVE_TYPE="CARRY.others.CARRY4" FILE_NAME="stream_reader_control_s_axi.v" LINE_NUMBER="140"/>
+    <CELL NAME="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/add_ln10_fu_280_p2_carry__6_i_4" PRIMITIVE_TYPE="LUT.others.LUT2" FILE_NAME="stream_reader_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2.v" LINE_NUMBER="579"/>
+    <CELL NAME="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/add_ln10_fu_280_p2_carry__6" PRIMITIVE_TYPE="CARRY.others.CARRY4" FILE_NAME="stream_reader_control_s_axi.v" LINE_NUMBER="140"/>
+    <CELL NAME="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/add_ln10_fu_280_p2_carry__7" PRIMITIVE_TYPE="CARRY.others.CARRY4" FILE_NAME="stream_reader_control_s_axi.v" LINE_NUMBER="140"/>
+    <CELL NAME="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/add_ln10_fu_280_p2_carry__8" PRIMITIVE_TYPE="CARRY.others.CARRY4" FILE_NAME="stream_reader_control_s_axi.v" LINE_NUMBER="140"/>
+    <CELL NAME="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/add_ln10_fu_280_p2_carry__9" PRIMITIVE_TYPE="CARRY.others.CARRY4" FILE_NAME="stream_reader_control_s_axi.v" LINE_NUMBER="140"/>
+    <CELL NAME="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/add_ln10_fu_280_p2_carry__10" PRIMITIVE_TYPE="CARRY.others.CARRY4" FILE_NAME="stream_reader_control_s_axi.v" LINE_NUMBER="140"/>
+    <CELL NAME="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/add_ln10_fu_280_p2_carry__11" PRIMITIVE_TYPE="CARRY.others.CARRY4" FILE_NAME="stream_reader_control_s_axi.v" LINE_NUMBER="140"/>
+    <CELL NAME="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/add_ln10_fu_280_p2_carry__12" PRIMITIVE_TYPE="CARRY.others.CARRY4" FILE_NAME="stream_reader_control_s_axi.v" LINE_NUMBER="140"/>
+    <CELL NAME="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/add_ln10_fu_280_p2_carry__13" PRIMITIVE_TYPE="CARRY.others.CARRY4" FILE_NAME="stream_reader_control_s_axi.v" LINE_NUMBER="140"/>
+    <CELL NAME="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/add_ln10_fu_280_p2_carry__14" PRIMITIVE_TYPE="CARRY.others.CARRY4" FILE_NAME="stream_reader_control_s_axi.v" LINE_NUMBER="140"/>
+    <CELL NAME="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/sext_ln15_1_mid2_v_reg_390_reg[60]" PRIMITIVE_TYPE="FLOP_LATCH.flop.FDRE" FILE_NAME="stream_reader_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2.v" LINE_NUMBER="445"/>
+  </TPATH>
+  <TPATH DATAPATH_DELAY="7.031" DATAPATH_LOGIC_DELAY="3.871" DATAPATH_NET_DELAY="3.160" ENDPOINT_PIN="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/sext_ln15_1_mid2_v_reg_390_reg[61]/D" LOGIC_LEVELS="18" MAX_FANOUT="64" SLACK="2.994" STARTPOINT_PIN="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/icmp_ln15_reg_367_reg[0]/C">
+    <CELL NAME="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/icmp_ln15_reg_367_reg[0]" PRIMITIVE_TYPE="FLOP_LATCH.flop.FDRE" FILE_NAME="stream_reader_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2.v" LINE_NUMBER="418"/>
+    <CELL NAME="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/id_2_fu_262_p2_carry_i_4" PRIMITIVE_TYPE="LUT.others.LUT4" FILE_NAME="stream_reader_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2.v" LINE_NUMBER="641"/>
+    <CELL NAME="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/id_2_fu_262_p2_carry" PRIMITIVE_TYPE="CARRY.others.CARRY4" FILE_NAME="stream_reader_control_s_axi.v" LINE_NUMBER="140"/>
+    <CELL NAME="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/id_2_fu_262_p2_carry__0" PRIMITIVE_TYPE="CARRY.others.CARRY4" FILE_NAME="stream_reader_control_s_axi.v" LINE_NUMBER="140"/>
+    <CELL NAME="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/id_2_fu_262_p2_carry__1" PRIMITIVE_TYPE="CARRY.others.CARRY4" FILE_NAME="stream_reader_control_s_axi.v" LINE_NUMBER="140"/>
+    <CELL NAME="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/id_2_fu_262_p2_carry__2" PRIMITIVE_TYPE="CARRY.others.CARRY4" FILE_NAME="stream_reader_control_s_axi.v" LINE_NUMBER="140"/>
+    <CELL NAME="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/id_2_fu_262_p2_carry__3" PRIMITIVE_TYPE="CARRY.others.CARRY4" FILE_NAME="stream_reader_control_s_axi.v" LINE_NUMBER="140"/>
+    <CELL NAME="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/id_2_fu_262_p2_carry__4" PRIMITIVE_TYPE="CARRY.others.CARRY4" FILE_NAME="stream_reader_control_s_axi.v" LINE_NUMBER="140"/>
+    <CELL NAME="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/id_2_fu_262_p2_carry__5" PRIMITIVE_TYPE="CARRY.others.CARRY4" FILE_NAME="stream_reader_control_s_axi.v" LINE_NUMBER="140"/>
+    <CELL NAME="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/add_ln10_fu_280_p2_carry__6_i_4" PRIMITIVE_TYPE="LUT.others.LUT2" FILE_NAME="stream_reader_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2.v" LINE_NUMBER="579"/>
+    <CELL NAME="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/add_ln10_fu_280_p2_carry__6" PRIMITIVE_TYPE="CARRY.others.CARRY4" FILE_NAME="stream_reader_control_s_axi.v" LINE_NUMBER="140"/>
+    <CELL NAME="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/add_ln10_fu_280_p2_carry__7" PRIMITIVE_TYPE="CARRY.others.CARRY4" FILE_NAME="stream_reader_control_s_axi.v" LINE_NUMBER="140"/>
+    <CELL NAME="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/add_ln10_fu_280_p2_carry__8" PRIMITIVE_TYPE="CARRY.others.CARRY4" FILE_NAME="stream_reader_control_s_axi.v" LINE_NUMBER="140"/>
+    <CELL NAME="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/add_ln10_fu_280_p2_carry__9" PRIMITIVE_TYPE="CARRY.others.CARRY4" FILE_NAME="stream_reader_control_s_axi.v" LINE_NUMBER="140"/>
+    <CELL NAME="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/add_ln10_fu_280_p2_carry__10" PRIMITIVE_TYPE="CARRY.others.CARRY4" FILE_NAME="stream_reader_control_s_axi.v" LINE_NUMBER="140"/>
+    <CELL NAME="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/add_ln10_fu_280_p2_carry__11" PRIMITIVE_TYPE="CARRY.others.CARRY4" FILE_NAME="stream_reader_control_s_axi.v" LINE_NUMBER="140"/>
+    <CELL NAME="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/add_ln10_fu_280_p2_carry__12" PRIMITIVE_TYPE="CARRY.others.CARRY4" FILE_NAME="stream_reader_control_s_axi.v" LINE_NUMBER="140"/>
+    <CELL NAME="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/add_ln10_fu_280_p2_carry__13" PRIMITIVE_TYPE="CARRY.others.CARRY4" FILE_NAME="stream_reader_control_s_axi.v" LINE_NUMBER="140"/>
+    <CELL NAME="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/add_ln10_fu_280_p2_carry__14" PRIMITIVE_TYPE="CARRY.others.CARRY4" FILE_NAME="stream_reader_control_s_axi.v" LINE_NUMBER="140"/>
+    <CELL NAME="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/sext_ln15_1_mid2_v_reg_390_reg[61]" PRIMITIVE_TYPE="FLOP_LATCH.flop.FDRE" FILE_NAME="stream_reader_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2.v" LINE_NUMBER="445"/>
+  </TPATH>
+  <TPATH DATAPATH_DELAY="7.011" DATAPATH_LOGIC_DELAY="3.851" DATAPATH_NET_DELAY="3.160" ENDPOINT_PIN="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/sext_ln15_1_mid2_v_reg_390_reg[59]/D" LOGIC_LEVELS="18" MAX_FANOUT="64" SLACK="3.014" STARTPOINT_PIN="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/icmp_ln15_reg_367_reg[0]/C">
+    <CELL NAME="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/icmp_ln15_reg_367_reg[0]" PRIMITIVE_TYPE="FLOP_LATCH.flop.FDRE" FILE_NAME="stream_reader_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2.v" LINE_NUMBER="418"/>
+    <CELL NAME="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/id_2_fu_262_p2_carry_i_4" PRIMITIVE_TYPE="LUT.others.LUT4" FILE_NAME="stream_reader_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2.v" LINE_NUMBER="641"/>
+    <CELL NAME="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/id_2_fu_262_p2_carry" PRIMITIVE_TYPE="CARRY.others.CARRY4" FILE_NAME="stream_reader_control_s_axi.v" LINE_NUMBER="140"/>
+    <CELL NAME="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/id_2_fu_262_p2_carry__0" PRIMITIVE_TYPE="CARRY.others.CARRY4" FILE_NAME="stream_reader_control_s_axi.v" LINE_NUMBER="140"/>
+    <CELL NAME="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/id_2_fu_262_p2_carry__1" PRIMITIVE_TYPE="CARRY.others.CARRY4" FILE_NAME="stream_reader_control_s_axi.v" LINE_NUMBER="140"/>
+    <CELL NAME="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/id_2_fu_262_p2_carry__2" PRIMITIVE_TYPE="CARRY.others.CARRY4" FILE_NAME="stream_reader_control_s_axi.v" LINE_NUMBER="140"/>
+    <CELL NAME="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/id_2_fu_262_p2_carry__3" PRIMITIVE_TYPE="CARRY.others.CARRY4" FILE_NAME="stream_reader_control_s_axi.v" LINE_NUMBER="140"/>
+    <CELL NAME="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/id_2_fu_262_p2_carry__4" PRIMITIVE_TYPE="CARRY.others.CARRY4" FILE_NAME="stream_reader_control_s_axi.v" LINE_NUMBER="140"/>
+    <CELL NAME="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/id_2_fu_262_p2_carry__5" PRIMITIVE_TYPE="CARRY.others.CARRY4" FILE_NAME="stream_reader_control_s_axi.v" LINE_NUMBER="140"/>
+    <CELL NAME="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/add_ln10_fu_280_p2_carry__6_i_4" PRIMITIVE_TYPE="LUT.others.LUT2" FILE_NAME="stream_reader_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2.v" LINE_NUMBER="579"/>
+    <CELL NAME="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/add_ln10_fu_280_p2_carry__6" PRIMITIVE_TYPE="CARRY.others.CARRY4" FILE_NAME="stream_reader_control_s_axi.v" LINE_NUMBER="140"/>
+    <CELL NAME="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/add_ln10_fu_280_p2_carry__7" PRIMITIVE_TYPE="CARRY.others.CARRY4" FILE_NAME="stream_reader_control_s_axi.v" LINE_NUMBER="140"/>
+    <CELL NAME="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/add_ln10_fu_280_p2_carry__8" PRIMITIVE_TYPE="CARRY.others.CARRY4" FILE_NAME="stream_reader_control_s_axi.v" LINE_NUMBER="140"/>
+    <CELL NAME="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/add_ln10_fu_280_p2_carry__9" PRIMITIVE_TYPE="CARRY.others.CARRY4" FILE_NAME="stream_reader_control_s_axi.v" LINE_NUMBER="140"/>
+    <CELL NAME="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/add_ln10_fu_280_p2_carry__10" PRIMITIVE_TYPE="CARRY.others.CARRY4" FILE_NAME="stream_reader_control_s_axi.v" LINE_NUMBER="140"/>
+    <CELL NAME="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/add_ln10_fu_280_p2_carry__11" PRIMITIVE_TYPE="CARRY.others.CARRY4" FILE_NAME="stream_reader_control_s_axi.v" LINE_NUMBER="140"/>
+    <CELL NAME="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/add_ln10_fu_280_p2_carry__12" PRIMITIVE_TYPE="CARRY.others.CARRY4" FILE_NAME="stream_reader_control_s_axi.v" LINE_NUMBER="140"/>
+    <CELL NAME="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/add_ln10_fu_280_p2_carry__13" PRIMITIVE_TYPE="CARRY.others.CARRY4" FILE_NAME="stream_reader_control_s_axi.v" LINE_NUMBER="140"/>
+    <CELL NAME="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/add_ln10_fu_280_p2_carry__14" PRIMITIVE_TYPE="CARRY.others.CARRY4" FILE_NAME="stream_reader_control_s_axi.v" LINE_NUMBER="140"/>
+    <CELL NAME="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/sext_ln15_1_mid2_v_reg_390_reg[59]" PRIMITIVE_TYPE="FLOP_LATCH.flop.FDRE" FILE_NAME="stream_reader_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2.v" LINE_NUMBER="445"/>
+  </TPATH>
+  <TPATH DATAPATH_DELAY="6.998" DATAPATH_LOGIC_DELAY="3.838" DATAPATH_NET_DELAY="3.160" ENDPOINT_PIN="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/sext_ln15_1_mid2_v_reg_390_reg[56]/D" LOGIC_LEVELS="17" MAX_FANOUT="64" SLACK="3.027" STARTPOINT_PIN="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/icmp_ln15_reg_367_reg[0]/C">
+    <CELL NAME="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/icmp_ln15_reg_367_reg[0]" PRIMITIVE_TYPE="FLOP_LATCH.flop.FDRE" FILE_NAME="stream_reader_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2.v" LINE_NUMBER="418"/>
+    <CELL NAME="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/id_2_fu_262_p2_carry_i_4" PRIMITIVE_TYPE="LUT.others.LUT4" FILE_NAME="stream_reader_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2.v" LINE_NUMBER="641"/>
+    <CELL NAME="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/id_2_fu_262_p2_carry" PRIMITIVE_TYPE="CARRY.others.CARRY4" FILE_NAME="stream_reader_control_s_axi.v" LINE_NUMBER="140"/>
+    <CELL NAME="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/id_2_fu_262_p2_carry__0" PRIMITIVE_TYPE="CARRY.others.CARRY4" FILE_NAME="stream_reader_control_s_axi.v" LINE_NUMBER="140"/>
+    <CELL NAME="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/id_2_fu_262_p2_carry__1" PRIMITIVE_TYPE="CARRY.others.CARRY4" FILE_NAME="stream_reader_control_s_axi.v" LINE_NUMBER="140"/>
+    <CELL NAME="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/id_2_fu_262_p2_carry__2" PRIMITIVE_TYPE="CARRY.others.CARRY4" FILE_NAME="stream_reader_control_s_axi.v" LINE_NUMBER="140"/>
+    <CELL NAME="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/id_2_fu_262_p2_carry__3" PRIMITIVE_TYPE="CARRY.others.CARRY4" FILE_NAME="stream_reader_control_s_axi.v" LINE_NUMBER="140"/>
+    <CELL NAME="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/id_2_fu_262_p2_carry__4" PRIMITIVE_TYPE="CARRY.others.CARRY4" FILE_NAME="stream_reader_control_s_axi.v" LINE_NUMBER="140"/>
+    <CELL NAME="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/id_2_fu_262_p2_carry__5" PRIMITIVE_TYPE="CARRY.others.CARRY4" FILE_NAME="stream_reader_control_s_axi.v" LINE_NUMBER="140"/>
+    <CELL NAME="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/add_ln10_fu_280_p2_carry__6_i_4" PRIMITIVE_TYPE="LUT.others.LUT2" FILE_NAME="stream_reader_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2.v" LINE_NUMBER="579"/>
+    <CELL NAME="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/add_ln10_fu_280_p2_carry__6" PRIMITIVE_TYPE="CARRY.others.CARRY4" FILE_NAME="stream_reader_control_s_axi.v" LINE_NUMBER="140"/>
+    <CELL NAME="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/add_ln10_fu_280_p2_carry__7" PRIMITIVE_TYPE="CARRY.others.CARRY4" FILE_NAME="stream_reader_control_s_axi.v" LINE_NUMBER="140"/>
+    <CELL NAME="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/add_ln10_fu_280_p2_carry__8" PRIMITIVE_TYPE="CARRY.others.CARRY4" FILE_NAME="stream_reader_control_s_axi.v" LINE_NUMBER="140"/>
+    <CELL NAME="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/add_ln10_fu_280_p2_carry__9" PRIMITIVE_TYPE="CARRY.others.CARRY4" FILE_NAME="stream_reader_control_s_axi.v" LINE_NUMBER="140"/>
+    <CELL NAME="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/add_ln10_fu_280_p2_carry__10" PRIMITIVE_TYPE="CARRY.others.CARRY4" FILE_NAME="stream_reader_control_s_axi.v" LINE_NUMBER="140"/>
+    <CELL NAME="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/add_ln10_fu_280_p2_carry__11" PRIMITIVE_TYPE="CARRY.others.CARRY4" FILE_NAME="stream_reader_control_s_axi.v" LINE_NUMBER="140"/>
+    <CELL NAME="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/add_ln10_fu_280_p2_carry__12" PRIMITIVE_TYPE="CARRY.others.CARRY4" FILE_NAME="stream_reader_control_s_axi.v" LINE_NUMBER="140"/>
+    <CELL NAME="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/add_ln10_fu_280_p2_carry__13" PRIMITIVE_TYPE="CARRY.others.CARRY4" FILE_NAME="stream_reader_control_s_axi.v" LINE_NUMBER="140"/>
+    <CELL NAME="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/sext_ln15_1_mid2_v_reg_390_reg[56]" PRIMITIVE_TYPE="FLOP_LATCH.flop.FDRE" FILE_NAME="stream_reader_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2.v" LINE_NUMBER="445"/>
+  </TPATH>
+  <TPATH DATAPATH_DELAY="6.990" DATAPATH_LOGIC_DELAY="3.830" DATAPATH_NET_DELAY="3.160" ENDPOINT_PIN="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/sext_ln15_1_mid2_v_reg_390_reg[58]/D" LOGIC_LEVELS="17" MAX_FANOUT="64" SLACK="3.035" STARTPOINT_PIN="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/icmp_ln15_reg_367_reg[0]/C">
+    <CELL NAME="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/icmp_ln15_reg_367_reg[0]" PRIMITIVE_TYPE="FLOP_LATCH.flop.FDRE" FILE_NAME="stream_reader_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2.v" LINE_NUMBER="418"/>
+    <CELL NAME="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/id_2_fu_262_p2_carry_i_4" PRIMITIVE_TYPE="LUT.others.LUT4" FILE_NAME="stream_reader_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2.v" LINE_NUMBER="641"/>
+    <CELL NAME="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/id_2_fu_262_p2_carry" PRIMITIVE_TYPE="CARRY.others.CARRY4" FILE_NAME="stream_reader_control_s_axi.v" LINE_NUMBER="140"/>
+    <CELL NAME="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/id_2_fu_262_p2_carry__0" PRIMITIVE_TYPE="CARRY.others.CARRY4" FILE_NAME="stream_reader_control_s_axi.v" LINE_NUMBER="140"/>
+    <CELL NAME="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/id_2_fu_262_p2_carry__1" PRIMITIVE_TYPE="CARRY.others.CARRY4" FILE_NAME="stream_reader_control_s_axi.v" LINE_NUMBER="140"/>
+    <CELL NAME="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/id_2_fu_262_p2_carry__2" PRIMITIVE_TYPE="CARRY.others.CARRY4" FILE_NAME="stream_reader_control_s_axi.v" LINE_NUMBER="140"/>
+    <CELL NAME="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/id_2_fu_262_p2_carry__3" PRIMITIVE_TYPE="CARRY.others.CARRY4" FILE_NAME="stream_reader_control_s_axi.v" LINE_NUMBER="140"/>
+    <CELL NAME="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/id_2_fu_262_p2_carry__4" PRIMITIVE_TYPE="CARRY.others.CARRY4" FILE_NAME="stream_reader_control_s_axi.v" LINE_NUMBER="140"/>
+    <CELL NAME="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/id_2_fu_262_p2_carry__5" PRIMITIVE_TYPE="CARRY.others.CARRY4" FILE_NAME="stream_reader_control_s_axi.v" LINE_NUMBER="140"/>
+    <CELL NAME="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/add_ln10_fu_280_p2_carry__6_i_4" PRIMITIVE_TYPE="LUT.others.LUT2" FILE_NAME="stream_reader_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2.v" LINE_NUMBER="579"/>
+    <CELL NAME="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/add_ln10_fu_280_p2_carry__6" PRIMITIVE_TYPE="CARRY.others.CARRY4" FILE_NAME="stream_reader_control_s_axi.v" LINE_NUMBER="140"/>
+    <CELL NAME="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/add_ln10_fu_280_p2_carry__7" PRIMITIVE_TYPE="CARRY.others.CARRY4" FILE_NAME="stream_reader_control_s_axi.v" LINE_NUMBER="140"/>
+    <CELL NAME="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/add_ln10_fu_280_p2_carry__8" PRIMITIVE_TYPE="CARRY.others.CARRY4" FILE_NAME="stream_reader_control_s_axi.v" LINE_NUMBER="140"/>
+    <CELL NAME="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/add_ln10_fu_280_p2_carry__9" PRIMITIVE_TYPE="CARRY.others.CARRY4" FILE_NAME="stream_reader_control_s_axi.v" LINE_NUMBER="140"/>
+    <CELL NAME="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/add_ln10_fu_280_p2_carry__10" PRIMITIVE_TYPE="CARRY.others.CARRY4" FILE_NAME="stream_reader_control_s_axi.v" LINE_NUMBER="140"/>
+    <CELL NAME="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/add_ln10_fu_280_p2_carry__11" PRIMITIVE_TYPE="CARRY.others.CARRY4" FILE_NAME="stream_reader_control_s_axi.v" LINE_NUMBER="140"/>
+    <CELL NAME="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/add_ln10_fu_280_p2_carry__12" PRIMITIVE_TYPE="CARRY.others.CARRY4" FILE_NAME="stream_reader_control_s_axi.v" LINE_NUMBER="140"/>
+    <CELL NAME="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/add_ln10_fu_280_p2_carry__13" PRIMITIVE_TYPE="CARRY.others.CARRY4" FILE_NAME="stream_reader_control_s_axi.v" LINE_NUMBER="140"/>
+    <CELL NAME="bd_0_i/hls_inst/inst/grp_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2_fu_82/sext_ln15_1_mid2_v_reg_390_reg[58]" PRIMITIVE_TYPE="FLOP_LATCH.flop.FDRE" FILE_NAME="stream_reader_stream_reader_Pipeline_VITIS_LOOP_14_1_VITIS_LOOP_15_2.v" LINE_NUMBER="445"/>
+  </TPATH>
+</TimingPaths>
+<VivadoReportFiles>
+  <ReportFile TYPE="design_analysis" PATH="verilog/report/stream_reader_design_analysis_routed.rpt"/>
+  <ReportFile TYPE="failfast" PATH="verilog/report/stream_reader_failfast_routed.rpt"/>
+  <ReportFile TYPE="power" PATH="verilog/report/stream_reader_power_routed.rpt"/>
+  <ReportFile TYPE="status" PATH="verilog/report/stream_reader_status_routed.rpt"/>
+  <ReportFile TYPE="timing" PATH="verilog/report/stream_reader_timing_routed.rpt"/>
+  <ReportFile TYPE="timing_paths" PATH="verilog/report/stream_reader_timing_paths_routed.rpt"/>
+  <ReportFile TYPE="utilization" PATH="verilog/report/stream_reader_utilization_routed.rpt"/>
+  <ReportFile TYPE="utilization_hierarchical" PATH="verilog/report/stream_reader_utilization_hierarchical_routed.rpt"/>
+</VivadoReportFiles>
+</profile>

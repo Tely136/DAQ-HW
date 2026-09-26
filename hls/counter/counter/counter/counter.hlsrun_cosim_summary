@@ -1,0 +1,227 @@
+<ENTRY>
+{
+ "thisFile": "C:/DAQ-HW\\hls\\counter\\counter\\counter\\counter.hlsrun_cosim_summary",
+ "connectId": "",
+ "serverToken": "",
+ "timestamp": "0"
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_CmdStep",
+ "dateTimestamp": "09/24/26 14:48:51",
+ "timestampMillis": "1790275731000",
+ "buildStep": {
+  "cmdId": "d2629034-2099-4fb3-aea5-e50a4e101dd2",
+  "name": "vitis-run",
+  "logFile": "C:/DAQ-HW\\hls\\counter\\counter\\counter\\logs\\counter.steps.log",
+  "commandLine": "C:/AMDDesignTools/2026.1/Vitis/bin/unwrapped/win64.o/vitis-run.exe  --mode hls --cosim --config C:\\DAQ-HW\\hls\\counter\\counter\\hls_config.cfg --work_dir counter ",
+  "args": [
+   "--mode",
+   "hls",
+   "--cosim",
+   "--config",
+   "C:\\DAQ-HW\\hls\\counter\\counter\\hls_config.cfg",
+   "--work_dir",
+   "counter"
+  ],
+  "iniFiles": [],
+  "cwd": "C:\\DAQ-HW\\hls\\counter\\counter"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "09/24/26 14:48:51",
+ "timestampMillis": "1790275731001",
+ "status": {
+  "cmdId": "d2629034-2099-4fb3-aea5-e50a4e101dd2",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_FlowMetaData",
+ "dateTimestamp": "09/24/26 14:49:00",
+ "timestampMillis": "1790275740636",
+ "buildSummary": {
+  "hardwarePlatform": "",
+  "hardwareDsa": "",
+  "platformDirectory": "",
+  "runtime": "",
+  "systemConfig": "",
+  "flow": "BF_RUN",
+  "target": "TT_HLS_RTL_COSIM",
+  "kernels": [
+   {
+    "base": {
+     "type": "KERNEL",
+     "name": "counter",
+     "file": "",
+     "reports": [],
+     "uuid": ""
+    },
+    "sources": [
+     "C:/DAQ-HW\\hls\\counter\\counter\\counter.cpp",
+     "C:/DAQ-HW\\hls\\counter\\counter\\counter.h"
+    ],
+    "psSources": [],
+    "cuNames": [],
+    "type": "HLS",
+    "frequency": 0,
+    "freqUnits": ""
+   }
+  ],
+  "toolVersion": "2026.1"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_SubCmdStep",
+ "dateTimestamp": "09/24/26 14:49:00",
+ "timestampMillis": "1790275740637",
+ "buildStep": {
+  "cmdId": "659bc72a-8289-43a3-9fbc-250e8a618048",
+  "name": "",
+  "logFile": "C:/DAQ-HW\\hls\\counter\\counter\\counter\\hls\\hls.log",
+  "commandLine": "",
+  "args": [],
+  "iniFiles": [],
+  "cwd": "C:\\DAQ-HW\\hls\\counter\\counter"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "09/24/26 14:49:00",
+ "timestampMillis": "1790275740637",
+ "status": {
+  "cmdId": "659bc72a-8289-43a3-9fbc-250e8a618048",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "09/24/26 14:49:00",
+ "timestampMillis": "1790275740638",
+ "report": {
+  "path": "C:/DAQ-HW\\hls\\counter\\counter\\counter\\hls\\sim\\report\\counter_cosim.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "HLS_COSIMULATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "09/24/26 14:49:00",
+ "timestampMillis": "1790275740638",
+ "report": {
+  "path": "C:/DAQ-HW\\hls\\counter\\counter\\counter\\hls",
+  "name": "",
+  "fileType": "DIR",
+  "reportType": "HLS_DATAFLOW",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "09/24/26 14:49:00",
+ "timestampMillis": "1790275740638",
+ "report": {
+  "path": "C:/DAQ-HW\\hls\\counter\\counter\\counter\\hls",
+  "name": "",
+  "fileType": "DIR",
+  "reportType": "HLS_FUNCTION_CALL_GRAPH_COSIM",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "09/24/26 14:49:00",
+ "timestampMillis": "1790275740639",
+ "report": {
+  "path": "C:/DAQ-HW\\hls\\counter\\counter\\counter\\hls",
+  "name": "",
+  "fileType": "DIR",
+  "reportType": "HLS_TIMELINE_TRACE",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "09/24/26 14:49:00",
+ "timestampMillis": "1790275740639",
+ "report": {
+  "path": "C:/DAQ-HW\\hls\\counter\\counter\\counter\\hls",
+  "name": "",
+  "fileType": "DIR",
+  "reportType": "HLS_WAVE",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "09/24/26 14:49:08",
+ "timestampMillis": "1790275748743",
+ "status": {
+  "cmdId": "659bc72a-8289-43a3-9fbc-250e8a618048",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "09/24/26 14:49:08",
+ "timestampMillis": "1790275748968",
+ "status": {
+  "cmdId": "d2629034-2099-4fb3-aea5-e50a4e101dd2",
+  "state": "CS_FAILED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "09/24/26 14:49:08",
+ "timestampMillis": "1790275748968",
+ "report": {
+  "path": "",
+  "name": "",
+  "fileType": "HTML",
+  "reportType": "GLOBAL_RULECHECK_GUIDANCE",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "09/24/26 14:49:08",
+ "timestampMillis": "1790275748968",
+ "report": {
+  "path": "",
+  "name": "",
+  "fileType": "BINARY_PROTOBUF",
+  "reportType": "GLOBAL_RULECHECK_GUIDANCE",
+  "cmdId": ""
+ }
+}
+</ENTRY>

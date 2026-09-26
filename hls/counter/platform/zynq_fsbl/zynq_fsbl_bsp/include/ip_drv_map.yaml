@@ -1,6 +1,12 @@
-MCS_0:
-- MCS
-- MCS
+BRAM_axi_bram_ctrl_0:
+- axi_bram_ctrl
+- bram
+MCS_stream_generator_0:
+- stream_generator
+- stream_generator
+MCS_stream_reader_0:
+- stream_reader
+- stream_reader
 axi_gpio_0:
 - axi_gpio
 - gpio
