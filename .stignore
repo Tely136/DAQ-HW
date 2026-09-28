@@ -1,23 +1,43 @@
+// All Syncthing rules are in this file; no includes are required.
+// Copy this file to every device and repeat after rule changes.
+// Syncthing does not synchronize .stignore itself.
+// Keep rules aligned with .gitignore; the formats differ.
+// Git history/index are local. Exchange history using Git if needed.
+.git
+// Sources live here; generated projects/workspaces belong in C:/DAQ-BUILD.
+// These rules also cover accidental in-repo builds. Keep HDL/C/C++, tests,
+// XDC, Tcl, HLS configs, CMake inputs, linker scripts and IP/BD definitions.
+
+// Syncthing device-local markers, versions and temporary transfers.
+// Keep .stignore as versioned configuration.
+.stfolder
+.stversions
+.syncthing.*.tmp
+~syncthing~*.tmp
+// Conflict copies intentionally remain visible for review.
+
 // Local build/workspace directories (reserved names).
-/DAQ-BUILD/
-/workspaces/
-build/
-cmake-build-*/
-Debug/
-Release/
+/DAQ-BUILD
+/workspaces
+build
+cmake-build-*
+Debug
+Release
+/hls/counter/export
+/hls/counter/logs
 
 // Vivado generated project products. Do not ignore *.srcs or *.xpr:
 // they may contain intentional design/project inputs.
-.Xil/
-*.cache/
-*.gen/
-*.runs/
-*.sim/
-*.hw/
-*.ip_user_files/
-ip_user_files/
-xsim.dir/
-webtalk/
+.Xil
+*.cache
+*.gen
+*.runs
+*.sim
+*.hw
+*.ip_user_files
+ip_user_files
+xsim.dir
+webtalk
 *.jou
 *.log
 *.str
@@ -31,14 +51,14 @@ webtalk/
 *.xpr.zip
 
 // Vitis/HLS transient state. Keep vitis-comp.json and hls_config.cfg.
-.autopilot/
-.apc/
-.metadata/
-.rigel_lopper/
-RemoteSystemsTempFiles/
+.autopilot
+.apc
+.metadata
+.rigel_lopper
+RemoteSystemsTempFiles
 .vitisWorkspace.json
-**/_ide/logs/
-**/_ide/.wsdata/
+**/_ide/logs
+**/_ide/.wsdata
 **/_ide/workspace_journal*.py
 **/_ide/.peers.ini
 **/_ide/.vitisPlatformRepo.json
@@ -50,20 +70,20 @@ RemoteSystemsTempFiles/
 *.adb.xml
 
 // Standard HLS work-directory output, scoped beneath the HLS source tree.
-/hls/**/hls/syn/
-/hls/**/hls/sim/
-/hls/**/hls/csim/
-/hls/**/hls/impl/
-/hls/**/solution*/syn/
-/hls/**/solution*/sim/
-/hls/**/solution*/csim/
-/hls/**/solution*/impl/
+/hls/**/hls/syn
+/hls/**/hls/sim
+/hls/**/hls/csim
+/hls/**/hls/impl
+/hls/**/solution*/syn
+/hls/**/solution*/sim
+/hls/**/solution*/csim
+/hls/**/solution*/impl
 
 // Compilers, CMake, Ninja and language-server caches.
-.cache/
-.clangd/
+.cache
+.clangd/**
 compile_commands.json
-CMakeFiles/
+CMakeFiles
 CMakeCache.txt
 CMakeUserPresets.json
 cmake_install.cmake
@@ -76,6 +96,7 @@ rules.ninja
 *.obj
 *.d
 *.elf
+*.pdi
 *.exe
 *.a
 *.so
@@ -84,18 +105,23 @@ rules.ninja
 *.ilk
 
 // Python automation caches and local environments.
-__pycache__/
+__pycache__
 *.py[cod]
-.venv/
-venv/
-.pytest_cache/
-.ruff_cache/
+.venv
+venv
+.pytest_cache
+.ruff_cache
 
 // Editor/OS temporary files. Shared .vscode settings stay tracked.
-.vs/
+.vs
 .DS_Store
 Thumbs.db
 Desktop.ini
 *.swp
 *.swo
 *~
+
+// Intentionally NOT ignored: *.xsa (hardware handoffs), *.bin/*.mem/*.coe
+// (possible test/ROM inputs), *.wcfg (wave setups), *.rpt (saved reports),
+// *.tcl, *.xci, *.bd, *.json, *.yaml, .clangd files, and source Makefiles.
+// Store routine reports/binaries/platforms in the external build directory.

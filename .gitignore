@@ -2,6 +2,14 @@
 # These rules also cover accidental in-repo builds. Keep HDL/C/C++, tests,
 # XDC, Tcl, HLS configs, CMake inputs, linker scripts and IP/BD definitions.
 
+# Syncthing device-local markers, versions and temporary transfers.
+# Keep .stignore as versioned configuration.
+.stfolder/
+.stversions/
+.syncthing.*.tmp
+~syncthing~*.tmp
+# Conflict copies intentionally remain visible for review.
+
 # Local build/workspace directories (reserved names).
 /DAQ-BUILD/
 /workspaces/
@@ -9,6 +17,8 @@ build/
 cmake-build-*/
 Debug/
 Release/
+/hls/counter/export/
+/hls/counter/logs/
 
 # Vivado generated project products. Do not ignore *.srcs or *.xpr:
 # they may contain intentional design/project inputs.
@@ -80,6 +90,7 @@ rules.ninja
 *.obj
 *.d
 *.elf
+*.pdi
 *.exe
 *.a
 *.so
