@@ -1,8 +1,4 @@
-# Sources live here; generated projects/workspaces belong in C:/DAQ-BUILD.
-# These rules also cover accidental in-repo builds. Keep HDL/C/C++, tests,
-# XDC, Tcl, HLS configs, CMake inputs, linker scripts and IP/BD definitions.
-
-# Local build/workspace directories (reserved names).
+// Local build/workspace directories (reserved names).
 /DAQ-BUILD/
 /workspaces/
 build/
@@ -10,8 +6,8 @@ cmake-build-*/
 Debug/
 Release/
 
-# Vivado generated project products. Do not ignore *.srcs or *.xpr:
-# they may contain intentional design/project inputs.
+// Vivado generated project products. Do not ignore *.srcs or *.xpr:
+// they may contain intentional design/project inputs.
 .Xil/
 *.cache/
 *.gen/
@@ -34,7 +30,7 @@ webtalk/
 *.mmi
 *.xpr.zip
 
-# Vitis/HLS transient state. Keep vitis-comp.json and hls_config.cfg.
+// Vitis/HLS transient state. Keep vitis-comp.json and hls_config.cfg.
 .autopilot/
 .apc/
 .metadata/
@@ -53,7 +49,7 @@ RemoteSystemsTempFiles/
 *.adb
 *.adb.xml
 
-# Standard HLS work-directory output, scoped beneath the HLS source tree.
+// Standard HLS work-directory output, scoped beneath the HLS source tree.
 /hls/**/hls/syn/
 /hls/**/hls/sim/
 /hls/**/hls/csim/
@@ -63,7 +59,7 @@ RemoteSystemsTempFiles/
 /hls/**/solution*/csim/
 /hls/**/solution*/impl/
 
-# Compilers, CMake, Ninja and language-server caches.
+// Compilers, CMake, Ninja and language-server caches.
 .cache/
 .clangd/
 compile_commands.json
@@ -87,7 +83,7 @@ rules.ninja
 *.pdb
 *.ilk
 
-# Python automation caches and local environments.
+// Python automation caches and local environments.
 __pycache__/
 *.py[cod]
 .venv/
@@ -95,7 +91,7 @@ venv/
 .pytest_cache/
 .ruff_cache/
 
-# Editor/OS temporary files. Shared .vscode settings stay tracked.
+// Editor/OS temporary files. Shared .vscode settings stay tracked.
 .vs/
 .DS_Store
 Thumbs.db
@@ -103,8 +99,3 @@ Desktop.ini
 *.swp
 *.swo
 *~
-
-# Intentionally NOT ignored: *.xsa (hardware handoffs), *.bin/*.mem/*.coe
-# (possible test/ROM inputs), *.wcfg (wave setups), *.rpt (saved reports),
-# *.tcl, *.xci, *.bd, *.json, *.yaml, .clangd files, and source Makefiles.
-# Store routine reports/binaries/platforms in the external build directory.
