@@ -1,6 +1,6 @@
 #include "stream_reader.h"
 
-static void count_bins(stream_in& data_in, hls::stream<dout_t>& bins, int n_outer, int n_inner) {
+static void count_bins(stream_in& data_in, counts_stream& bins, int n_outer, int n_inner) {
 #pragma HLS INLINE off
     int count=0;
     
@@ -17,7 +17,7 @@ static void count_bins(stream_in& data_in, hls::stream<dout_t>& bins, int n_oute
     }
 }
 
-static void write_bins(hls::stream<dout_t>& bins, dout_t* out, int n_outer) {
+static void write_bins(counts_stream& bins, dout_t* out, int n_outer) {
 #pragma HLS INLINE off
     for (int i=0; i<n_outer; i++) {
 #pragma HLS PIPELINE II=1
@@ -25,17 +25,16 @@ static void write_bins(hls::stream<dout_t>& bins, dout_t* out, int n_outer) {
     }
 }
 
-void stream_reader(stream_in& data_in, dout_t* data_out, int n_outer, int n_inner) {
+void stream_reader(stream_in& data_in, dout_t* data_out, int n_bin, int n_clk) {
 #pragma HLS DATAFLOW
-#pragma HLS INTERFACE mode=s_axilite port=n_inner
-#pragma HLS INTERFACE mode=s_axilite port=n_outer
-#pragma HLS INTERFACE mode=m_axi port=data_out depth=128
+#pragma HLS INTERFACE mode=s_axilite port=n_clk
+#pragma HLS INTERFACE mode=s_axilite port=n_bin
+#pragma HLS INTERFACE mode=m_axi port=data_out depth=n_bin*n_clk
 #pragma HLS INTERFACE mode=axis port=data_in
 #pragma HLS INTERFACE mode=s_axilite port=return
     
-    hls::stream<dout_t> bins("bins");
+    counts_stream bins("bins");
     
-    count_bins(data_in, bins, n_outer, n_inner);
-    write_bins(bins, data_out, n_outer);
-
+    count_bins(data_in, bins, n_bin, n_clk);
+    write_bins(bins, data_out, n_bin);
 }
