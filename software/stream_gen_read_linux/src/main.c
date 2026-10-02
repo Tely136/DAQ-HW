@@ -17,7 +17,10 @@
 #define BRAM_ADDRESS 0x40002000
 #define BRAM_SIZE    0x2000 /* 8 KiB, from the hardware address map. */
 
-#define DATA_READ_ADDR   (BRAM_ADDRESS + N_BINS * sizeof(uint32_t))
+#define DDR_ADDRESS 0x1F000000
+#define DDR_SIZE    0x10000
+
+#define DATA_READ_ADDR   DDR_ADDRESS
 
 #define N_BINS   5
 #define N_CLK   10
@@ -40,10 +43,10 @@ void* map_device(uint64_t address, size_t size) {
     return mapping;
 }
 
-void init_bram(void* bram_mapping) {
+void init_bram(void* bram_mapping, int* data) {
     volatile uint32_t* bram = bram_mapping;
-    for (int i=0; i<N_BINS; i++) {
-        bram[i] = i+1;
+    for (int i=0; i<N_TOTAL; i++) {
+        bram[i] = data[i];
     }
 }
 
@@ -58,11 +61,25 @@ void print_status(u32 status) {
 
 int main() {
 
+    int data[N_TOTAL];
+    int id = 0;
+    for (int i=0; i<N_BINS; i++) {
+        for (int j=0; j<N_CLK; j++) {
+            data[id] = (j % (i + 1) == 0);
+            id++;
+        }
+    }
+
     void* bram_mapping = map_device(BRAM_ADDRESS, BRAM_SIZE);
     if (bram_mapping == NULL) {
         return 1;
     }
-    init_bram(bram_mapping);
+    init_bram(bram_mapping, data);
+
+    void* ddr_mapping = map_device(DDR_ADDRESS, DDR_SIZE);
+    if (ddr_mapping == NULL) {
+        return 1;
+    }
 
     /* Map the generator's AXI-Lite control registers. */
     void* gen_mapping = map_device(GEN_ADDRESS, GEN_SIZE);
@@ -98,10 +115,6 @@ int main() {
         XSTREAM_READER_CONTROL_ADDR_AP_CTRL
     );
 
-    /* Print the status of both components. */
-    // print_status(gen_status);
-    // print_status(reader_status);
-
     /* Set input parameters. This does not start the generator. */
     XStream_generator_Set_n_total(&gen, N_TOTAL);
     XStream_generator_Set_data(&gen,    BRAM_ADDRESS);
@@ -116,16 +129,31 @@ int main() {
     while (!XStream_generator_IsDone(&gen)) {}
     while (!XStream_reader_IsDone(&reader)) {}
 
+
+    volatile uint32_t* bram = bram_mapping;
+    volatile uint32_t* ddr = ddr_mapping;
+
+    int counts_test;
+    id=0;
     for (int i=0; i<N_BINS; i++) {
-        volatile uint32_t* bram = bram_mapping;
-        uint32_t value = bram[i]; // Read from the output location in BRAM
-        printf("BRAM[%d] = %u\n", i, value);
+        counts_test = 0;
+
+        for(int j=0; j<N_CLK; j++) {
+            counts_test += bram[id];
+            id++;
+        }
+
+        if (counts_test != ddr[i]) {
+            printf("Comparison Failed");
+            return 1;
+        }
     }
 
     munmap(bram_mapping, BRAM_SIZE);
     munmap(gen_mapping, GEN_SIZE);
     munmap(reader_mapping, READER_SIZE);
+    munmap(ddr_mapping, DDR_SIZE);
 
-    printf("Run Finished.\n");
+    printf("Run Finished Successfully.\n");
     return 0;
 }
