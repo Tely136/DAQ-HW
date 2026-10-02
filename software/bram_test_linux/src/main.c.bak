@@ -1,0 +1,59 @@
+#include <fcntl.h>
+#include <inttypes.h>
+#include <stdint.h>
+#include <stdio.h>
+#include <sys/mman.h>
+#include <unistd.h>
+
+#define BRAM_ADDRESS 0x40002000
+#define BRAM_SIZE    0x2000 /* 8 KiB, from the hardware address map. */
+#define TEST_WORDS   4
+
+int main(void)
+{
+    /* This test only overwrites and reads four BRAM words. */
+    int fd = open("/dev/mem", O_RDWR | O_SYNC);
+    if (fd < 0) {
+        perror("open /dev/mem (normally requires root)");
+        return 1;
+    }
+
+    /* mmap's physical offset must be page-aligned. */
+    long page_size = sysconf(_SC_PAGESIZE);
+    if (page_size <= 0 || BRAM_ADDRESS % page_size != 0) {
+        fprintf(stderr, "BRAM address is not aligned to the system page size\n");
+        close(fd);
+        return 1;
+    }
+
+    /* Map the physical BRAM into this process's virtual address space. */
+    void *mapping = mmap(NULL, BRAM_SIZE, PROT_READ | PROT_WRITE,
+                         MAP_SHARED, fd, BRAM_ADDRESS);
+    if (mapping == MAP_FAILED) {
+        perror("mmap BRAM");
+        close(fd);
+        return 1;
+    }
+    close(fd);
+    volatile uint32_t *bram = mapping;
+
+    /* A uint32_t pointer advances four bytes per index, like i * 4 in XBram. */
+    for (unsigned int i = 0; i < TEST_WORDS; ++i) {
+        bram[i] = i + 1;
+    }
+
+    int result = 0;
+    for (unsigned int i = 0; i < TEST_WORDS; ++i) {
+        uint32_t expected = i + 1;
+        uint32_t actual = bram[i];
+        printf("word %2u: 0x%08" PRIx32 "  %s\n", i, actual,
+               actual == expected ? "OK" : "MISMATCH");
+        if (actual != expected) {
+            result = 1;
+        }
+    }
+
+    munmap(mapping, BRAM_SIZE);
+    puts(result == 0 ? "BRAM test passed" : "BRAM test failed");
+    return result;
+}

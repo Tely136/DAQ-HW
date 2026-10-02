@@ -1,0 +1,6 @@
+[
+    {
+        "name": "Vitis",
+        "environmentSetupScript": "/home/tely1/yocto/sdk/cora-mcs/environment-setup-cortexa9t2hf-neon-amd-linux-gnueabi"
+    }
+]
