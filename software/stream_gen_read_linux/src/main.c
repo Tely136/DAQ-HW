@@ -5,11 +5,15 @@
 #include <sys/mman.h>
 #include <unistd.h>
 
+#include "xtrigger.h"
 #include "xstream_generator.h"
-#include "xstream_reader.h"
+#include "xstream_reader.h"0
 
-#define GEN_ADDRESS 0x40010000
-#define GEN_SIZE   0x1000 /* 4 KiB, from the hardware address map. */
+#define TRIG_ADDRESS 0x40040000
+#define TRIG_SIZE   0x1000
+
+#define GEN_ADDRESS 0x40010000 /* confirm with files, look for way to get this from the hardware description */
+#define GEN_SIZE   0x1000 /* 4 KiB, from the hardware address map. check the hardware description for the correct size */
 
 #define READER_ADDRESS 0x40030000
 #define READER_SIZE   0x1000
@@ -81,6 +85,12 @@ int main() {
         return 1;
     }
 
+    /* Map the trigger's AXI-Lite control registers. */
+    void* trig_mapping = map_device(TRIG_ADDRESS, TRIG_SIZE);
+    if (trig_mapping == NULL) {
+        return 1;
+    }
+
     /* Map the generator's AXI-Lite control registers. */
     void* gen_mapping = map_device(GEN_ADDRESS, GEN_SIZE);
     if (gen_mapping == NULL) {
@@ -92,6 +102,11 @@ int main() {
     if (reader_mapping == NULL) {
         return 1;
     }
+
+    XTrigger trig = {
+        .Control_BaseAddress = (u64)(uintptr_t) trig_mapping,
+        .IsReady = XIL_COMPONENT_IS_READY
+    };
 
     XStream_generator gen = {
         .Control_BaseAddress = (u64)(uintptr_t) gen_mapping,
@@ -105,17 +120,15 @@ int main() {
 
 
     /* Read the control/status register once, then decode it. */
-    u32 gen_status = XStream_generator_ReadReg(
-        gen.Control_BaseAddress, 
-        XSTREAM_GENERATOR_CONTROL_ADDR_AP_CTRL
+    u32 trig_status = XTrigger_ReadReg(
+        trig.Control_BaseAddress,
+        XTRIGGER_CONTROL_ADDR_AP_CTRL
     );
-
-    u32 reader_status = XStream_reader_ReadReg(
-        reader.Control_BaseAddress,
-        XSTREAM_READER_CONTROL_ADDR_AP_CTRL
-    );
+    // print_status(trig_status);
 
     /* Set input parameters. This does not start the generator. */
+    XTrigger_Set_clk_periods(&trig, 100);
+
     XStream_generator_Set_n_total(&gen, N_TOTAL);
     XStream_generator_Set_data(&gen,    BRAM_ADDRESS);
 
@@ -123,11 +136,9 @@ int main() {
     XStream_reader_Set_n_inner(&reader,  N_CLK);
     XStream_reader_Set_data_out(&reader, DATA_READ_ADDR);
 
-    XStream_generator_Start(&gen);
-    XStream_reader_Start(&reader);
+    XTrigger_Start(&trig);
 
-    while (!XStream_generator_IsDone(&gen)) {}
-    while (!XStream_reader_IsDone(&reader)) {}
+    while (!XTrigger_IsDone(&trig)) {}
 
 
     volatile uint32_t* bram = bram_mapping;
