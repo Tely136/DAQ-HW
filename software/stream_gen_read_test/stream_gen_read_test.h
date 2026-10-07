@@ -11,6 +11,7 @@
 #include <xil_types.h>
 
 
+// #define TRIGG_ADDR  XPAR_XTR
 #define GEN_ADDR    XPAR_XSTREAM_GENERATOR_0_BASEADDR
 #define READ_ADDR   XPAR_XSTREAM_READER_0_BASEADDR
 

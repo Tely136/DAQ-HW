@@ -4,16 +4,19 @@
 #include <xil_printf.h>
 #include <xil_types.h>
 #include <xstatus.h>
+
+#include "xtrigger.h"
 #include <xstream_generator.h>
 #include <xstream_reader.h>
 
 
-int Init(UINTPTR GenAddr, UINTPTR ReaderAddr);
+int Init(UINTPTR TriggAddress, UINTPTR GenAddress, UINTPTR ReadAddress);
 void SetData(UINTPTR BaseAddress, int n, int data[n]);
 void ReadData(UINTPTR BaseAddress, int n);
 int CheckData(UINTPTR GenAddress, UINTPTR ReadAddress);
 int CheckCounts(UINTPTR GenAddress, UINTPTR ReadAddress);
 
+XTrigger            TrigInst;
 XStream_generator   GenInst;
 XStream_reader      ReaderInst;
 
@@ -39,7 +42,7 @@ int main() {
 
     // ReadData(DATA_GEN_ADDR, N_TOTAL);
 
-    Status = Init(GEN_ADDR, READ_ADDR);
+    Status = Init(TRIGG_ADDR, GEN_ADDR, READ_ADDR);
     if (Status != XST_SUCCESS) {
         return XST_FAILURE;
     }
@@ -51,15 +54,11 @@ int main() {
     XStream_reader_Set_n_inner(&ReaderInst,  N_CLK);
     XStream_reader_Set_data_out(&ReaderInst, DATA_READ_ADDR);
 
-    XStream_generator_Start(&GenInst);
-    XStream_reader_Start(&ReaderInst);
+    // XStream_generator_Start(&GenInst);
+    // XStream_reader_Start(&ReaderInst);
 
-    while (!XStream_generator_IsDone(&GenInst)) {} 
-    while (!XStream_reader_IsDone(&ReaderInst)) {}
-    // xil_printf("IP Finished\r\n");
-
-    // printf("Generator   Done: %d\tIdle: %d\tReady: %d\r\n",XStream_generator_IsDone(&GenInst),XStream_generator_IsReady(&GenInst),XStream_generator_IsIdle(&GenInst));
-    // printf("Reader      Done: %d\tIdle: %d\tReady: %d\r\n",XStream_reader_IsDone(&ReaderInst),XStream_reader_IsReady(&ReaderInst),XStream_reader_IsIdle(&ReaderInst));
+    // while (!XStream_generator_IsDone(&GenInst)) {} 
+    // while (!XStream_reader_IsDone(&ReaderInst)) {}
 
     ReadData(DATA_READ_ADDR, N_BINS);
     Status = CheckCounts(DATA_GEN_ADDR, DATA_READ_ADDR);
@@ -72,17 +71,24 @@ int main() {
 }
 
 
-int Init(UINTPTR GenAddr, UINTPTR ReaderAddr) {
+int Init(UINTPTR TriggAddress, UINTPTR GenAddress, UINTPTR ReadAddress) {
     int Status;
 
-    Status = XStream_generator_Initialize(&GenInst, GenAddr);
+    Status = XTrigger_Initialize(&TrigInst, TriggAddress);
+    if (Status != XST_SUCCESS) {
+        xil_printf("Trigger failed to initialize\r\n");
+
+        return XST_FAILURE;
+    }
+
+    Status = XStream_generator_Initialize(&GenInst, GenAddress);
     if (Status != XST_SUCCESS) {
         xil_printf("Stream generator failed to initialize\r\n");
 
         return XST_FAILURE;
     }
 
-    Status = XStream_reader_Initialize(&ReaderInst, ReaderAddr);
+    Status = XStream_reader_Initialize(&ReaderInst, ReadAddress);
     if (Status != XST_SUCCESS) {
         xil_printf("Stream reader failed to initialize\r\n");
 

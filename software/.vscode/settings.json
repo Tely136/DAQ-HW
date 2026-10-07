@@ -1,3 +1,4 @@
 {
-    "cmake.sourceDirectory": "/mnt/c/DAQ-HW/software/gpio_test_linux"
+    "cmake.sourceDirectory": "/mnt/c/DAQ-HW/software/gpio_test_linux",
+    "cmake.ignoreCMakeListsMissing": true
 }

@@ -5,13 +5,13 @@ set -euo pipefail
 # Paths and names to customize.
 VITIS_SETTINGS="/opt/Xilinx/2026.1/Vitis/settings64.sh"
 SDT_DIR="/home/tely1/yocto/hardware/cora-mcs/sdt/"
-XSA_PATH="/mnt/c/DAQ-HW/hardware/counter_wrapper.xsa"
+XSA_PATH="/mnt/c/Users/tely1/PhD/DAQ-HW/hardware/counter_wrapper.xsa"
 MACHINE_NAME="cora-mcs-generated"
 IMAGE_MACHINE_NAME="amd-cortexa9thf-neon-common"
 REMOTE_HOST="amd-edf@192.168.137.20"
 REMOTE_PATH="/tmp/boot.bin"
-# JUMP_HOST="thomas@pi5"
-JUMP_HOST="thomas@192.168.137.101"
+JUMP_HOST="thomas@pi5"
+# JUMP_HOST="thomas@192.168.137.101"
 
 EDF_ROOT="/home/tely1/yocto/edf"
 EDF_BUILD_DIR="$EDF_ROOT/build"
