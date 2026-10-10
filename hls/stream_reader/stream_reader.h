@@ -16,4 +16,4 @@ typedef hls::stream<din_t> stream_in;
 
 typedef int dout_t;
 
-void stream_reader(stream_in& data_in, dout_t* data_out, int avg_shot, int n_bin, int n_cycle);
+void stream_reader(const volatile bool* shot_trigger, stream_in& data_in, dout_t* data_out, int avg_shot, int n_bin, int n_cycle);
