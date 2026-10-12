@@ -1,0 +1,157 @@
+<ENTRY>
+{
+ "thisFile": "C:/Users\\tely1\\PhD\\DAQ-HW\\hls\\ws_test\\stream_generator\\stream_generator\\stream_generator.hlsrun_package_summary",
+ "connectId": "",
+ "serverToken": "",
+ "timestamp": "0"
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_CmdStep",
+ "dateTimestamp": "10/11/26 10:07:12",
+ "timestampMillis": "1791727632380",
+ "buildStep": {
+  "cmdId": "8bb4d41a-4efc-45bc-aa0e-4d6dcbdffb17",
+  "name": "vitis-run",
+  "logFile": "C:/Users\\tely1\\PhD\\DAQ-HW\\hls\\ws_test\\stream_generator\\stream_generator\\logs\\stream_generator.steps.log",
+  "commandLine": "C:/AMDDesignTools/2026.1/Vitis/bin/unwrapped/win64.o/vitis-run.exe  --mode hls --package --config C:\\Users\\tely1\\PhD\\DAQ-HW\\hls\\ws_test\\stream_generator\\hls_config.cfg --work_dir stream_generator ",
+  "args": [
+   "--mode",
+   "hls",
+   "--package",
+   "--config",
+   "C:\\Users\\tely1\\PhD\\DAQ-HW\\hls\\ws_test\\stream_generator\\hls_config.cfg",
+   "--work_dir",
+   "stream_generator"
+  ],
+  "iniFiles": [],
+  "cwd": "C:\\Users\\tely1\\PhD\\DAQ-HW\\hls\\ws_test\\stream_generator"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "10/11/26 10:07:12",
+ "timestampMillis": "1791727632380",
+ "status": {
+  "cmdId": "8bb4d41a-4efc-45bc-aa0e-4d6dcbdffb17",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_FlowMetaData",
+ "dateTimestamp": "10/11/26 10:07:15",
+ "timestampMillis": "1791727635523",
+ "buildSummary": {
+  "hardwarePlatform": "",
+  "hardwareDsa": "",
+  "platformDirectory": "",
+  "runtime": "",
+  "systemConfig": "",
+  "flow": "BF_RUN",
+  "target": "TT_HLS_IP",
+  "kernels": [
+   {
+    "base": {
+     "type": "KERNEL",
+     "name": "stream_generator",
+     "file": "C:/Users\\tely1\\PhD\\DAQ-HW\\hls\\ws_test\\stream_generator\\stream_generator\\stream_generator.zip",
+     "reports": [],
+     "uuid": ""
+    },
+    "sources": [
+     "C:/Users\\tely1\\PhD\\DAQ-HW\\hls\\stream_generator\\stream_generator.cpp",
+     "C:/Users\\tely1\\PhD\\DAQ-HW\\hls\\stream_generator\\stream_generator.h"
+    ],
+    "psSources": [],
+    "cuNames": [],
+    "type": "HLS",
+    "frequency": 0,
+    "freqUnits": ""
+   }
+  ],
+  "toolVersion": "2026.1"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_SubCmdStep",
+ "dateTimestamp": "10/11/26 10:07:15",
+ "timestampMillis": "1791727635524",
+ "buildStep": {
+  "cmdId": "00913251-1664-460e-89c1-cac641b28db8",
+  "name": "",
+  "logFile": "C:/Users\\tely1\\PhD\\DAQ-HW\\hls\\ws_test\\stream_generator\\stream_generator\\hls\\hls.log",
+  "commandLine": "",
+  "args": [],
+  "iniFiles": [],
+  "cwd": "C:\\Users\\tely1\\PhD\\DAQ-HW\\hls\\ws_test\\stream_generator"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "10/11/26 10:07:15",
+ "timestampMillis": "1791727635525",
+ "status": {
+  "cmdId": "00913251-1664-460e-89c1-cac641b28db8",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "10/11/26 10:07:24",
+ "timestampMillis": "1791727644530",
+ "status": {
+  "cmdId": "00913251-1664-460e-89c1-cac641b28db8",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "10/11/26 10:07:24",
+ "timestampMillis": "1791727644609",
+ "status": {
+  "cmdId": "8bb4d41a-4efc-45bc-aa0e-4d6dcbdffb17",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "10/11/26 10:07:24",
+ "timestampMillis": "1791727644609",
+ "report": {
+  "path": "",
+  "name": "",
+  "fileType": "HTML",
+  "reportType": "GLOBAL_RULECHECK_GUIDANCE",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "10/11/26 10:07:24",
+ "timestampMillis": "1791727644609",
+ "report": {
+  "path": "",
+  "name": "",
+  "fileType": "BINARY_PROTOBUF",
+  "reportType": "GLOBAL_RULECHECK_GUIDANCE",
+  "cmdId": ""
+ }
+}
+</ENTRY>

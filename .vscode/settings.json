@@ -1,3 +1,4 @@
 {
-    "cmake.sourceDirectory": "C:/DAQ-HW/software/stream_gen_read_test/src"
+    "cmake.sourceDirectory": "C:/DAQ-HW/software/stream_gen_read_test/src",
+    "cmake.ignoreCMakeListsMissing": true
 }

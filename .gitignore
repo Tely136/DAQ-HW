@@ -34,34 +34,34 @@ webtalk/
 *.mmi
 *.xpr.zip
 
-# Vitis/HLS transient state. Keep vitis-comp.json and hls_config.cfg.
-.autopilot/
-.apc/
-.metadata/
-.rigel_lopper/
-RemoteSystemsTempFiles/
-.vitisWorkspace.json
-**/_ide/logs/
-**/_ide/.wsdata/
-**/_ide/workspace_journal*.py
-**/_ide/.peers.ini
-**/_ide/.vitisPlatformRepo.json
-**/_ide/version.ini
-**/_ide/hwspec.checksum
-*.hlscompile_summary
-*.hlsrun_*_summary
-*.adb
-*.adb.xml
+# # Vitis/HLS transient state. Keep vitis-comp.json and hls_config.cfg.
+# .autopilot/
+# .apc/
+# .metadata/
+# .rigel_lopper/
+# RemoteSystemsTempFiles/
+# .vitisWorkspace.json
+# **/_ide/logs/
+# **/_ide/.wsdata/
+# **/_ide/workspace_journal*.py
+# **/_ide/.peers.ini
+# **/_ide/.vitisPlatformRepo.json
+# **/_ide/version.ini
+# **/_ide/hwspec.checksum
+# *.hlscompile_summary
+# *.hlsrun_*_summary
+# *.adb
+# *.adb.xml
 
-# Standard HLS work-directory output, scoped beneath the HLS source tree.
-/hls/**/hls/syn/
-/hls/**/hls/sim/
-/hls/**/hls/csim/
-/hls/**/hls/impl/
-/hls/**/solution*/syn/
-/hls/**/solution*/sim/
-/hls/**/solution*/csim/
-/hls/**/solution*/impl/
+# # Standard HLS work-directory output, scoped beneath the HLS source tree.
+# /hls/**/hls/syn/
+# /hls/**/hls/sim/
+# /hls/**/hls/csim/
+# /hls/**/hls/impl/
+# /hls/**/solution*/syn/
+# /hls/**/solution*/sim/
+# /hls/**/solution*/csim/
+# /hls/**/solution*/impl/
 
 # Compilers, CMake, Ninja and language-server caches.
 .cache/
