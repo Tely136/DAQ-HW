@@ -4,8 +4,10 @@
 int main() {
     int i,j;
     int tmp;
+    int sample_id;
 
-    stream_in A;
+    trigger_t trigger;
+    stream_in data;
     int count_test[N_BINS][N_SHOT];
     dout_t counts[N_TOTAL];
 
@@ -16,24 +18,32 @@ int main() {
     }
 
     int count;
-    for (int k=0; k<N_SHOT; k++) {
-        for (i=0; i<N_BINS; i++) {
-            
+    ap_uint<1> trigger_tmp;
+    for (sample_id=0; sample_id<N_TOTAL; sample_id++) {
+        trigger.write(0);
+
+        if (sample_id%N_TRIG==0) {
+                  
             count = 0;
             for (j=0; j<N_CLK; j++) {            
                 tmp = (j%(i+1)==0);
                 count += tmp;
                 
-                A.write(tmp);
+                trigger_tmp = j==0 ? 1 : 0;
+                trigger.write(trigger_tmp);
+                data.write(tmp);
+                sample_id++;
             }
             
-            count_test[i][k] = (k==0 | k%AVG_SHOT==0) ? count : count_test[i][k-1] + count;
+            /* Figure out good way to test results */
+            // count_test[i][k] = (k==0 | k%AVG_SHOT==0) ? count : count_test[i][k-1] + count;
         }
     }
 
 
+
     for (int k=0; k<N_SHOT; k++) {
-        stream_reader(A,counts,AVG_SHOT,N_BINS,N_CLK);
+        stream_reader(trigger,data,counts,AVG_SHOT,N_BINS,N_CLK);
 
         // printf("Shot %d\n",k+1);
         for (i=0; i<N_BINS; i++) {
