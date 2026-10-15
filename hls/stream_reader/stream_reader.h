@@ -4,15 +4,17 @@
 
 #include <stdio.h>
 
-#define N_TRIG 100
+#define MAX_BINS 128
 
-#define AVG_SHOT 5
+#define N_TRIG 100  /* number of clock pulses between triggers */
 
-#define N_SHOT 15
-#define N_BINS 5
-#define N_CLK 10
+#define N_SHOT 12 /* total number of shots in simulation */
+#define AVG_SHOT 10 /* number of shots to average */
 
-#define N_TOTAL N_TRIG*AVG_SHOT
+#define N_BINS 5 /* number of bins to acquire */
+#define N_CLK 10 /* number of clock pulses within each bin */
+
+#define N_TOTAL N_SHOT*N_TRIG /* total number of clock pulses in simulation */
 
 typedef hls::ap_none<ap_uint<1>> trigger_t;
 

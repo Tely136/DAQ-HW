@@ -12,6 +12,7 @@ void stream_reader(trigger_t& shot_trigger, stream_in& data_in, dout_t* data_out
     #pragma HLS INTERFACE mode=s_axilite port=return
     
     din_t tmp;
+    dout_t accumulated[MAX_BINS];
     int count;
 
     int id = 0;
@@ -35,8 +36,13 @@ void stream_reader(trigger_t& shot_trigger, stream_in& data_in, dout_t* data_out
             }
 
             // look into how tasks or dataflow could improve this 
-            data_out[bin] = (shot==0) ? count : data_out[bin] + count;
+            accumulated[bin] = (shot==0) ? count : accumulated[bin] + count;
         }
+    }
+
+    for (int bin=0; bin<n_bin; bin++) {
+        #pragma HLS PIPELINE II=1
+        data_out[bin] = accumulated[bin];
     }
 }
 

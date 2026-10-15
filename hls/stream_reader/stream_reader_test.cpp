@@ -2,59 +2,59 @@
 #include <stdio.h>
 
 int main() {
-    int i,j;
-    int tmp;
-    int sample_id;
+    // Match the reader's m_axi depth so this buffer is also suitable for cosim.
+    const int OUTPUT_DEPTH = 128;
+    const int WAIT_READS = 3;
+    static_assert(AVG_SHOT > 0 && N_BINS > 0 && N_CLK > 0,
+                  "Test dimensions must be positive");
+    static_assert(N_BINS <= OUTPUT_DEPTH, "Bins exceed the reader's m_axi depth");
 
     trigger_t trigger;
     stream_in data;
-    int count_test[N_BINS][N_SHOT];
-    dout_t counts[N_TOTAL];
+    dout_t counts[OUTPUT_DEPTH];
+    for (int i = 0; i < OUTPUT_DEPTH; ++i)
+        counts[i] = -1; // The first shot must overwrite previous contents.
 
-    for (i=0; i<N_BINS; i++) {
-        for (j=0; j<N_SHOT; j++) {
-        count_test[i][j] = 0;
+    // One acquisition for now: provide exactly AVG_SHOT shots.
+    // N_SHOT is reserved for a future multiple-acquisition test.
+    for (int shot = 0; shot < AVG_SHOT; ++shot) {
+        // These are values for successive trigger reads, not clock delays.
+        for (int check = 0; check < WAIT_READS; ++check)
+            trigger.write(0);
+        trigger.write(1);
+
+        for (int bin = 0; bin < N_BINS; ++bin) {
+            for (int sample = 0; sample < N_CLK; ++sample)
+                data.write(sample % (bin + 1) == 0);
         }
     }
 
-    int count;
-    ap_uint<1> trigger_tmp;
-    for (sample_id=0; sample_id<N_TOTAL; sample_id++) {
-        trigger.write(0);
+    stream_reader(trigger, data, counts, AVG_SHOT, N_BINS, N_CLK);
 
-        if (sample_id%N_TRIG==0) {
-                  
-            count = 0;
-            for (j=0; j<N_CLK; j++) {            
-                tmp = (j%(i+1)==0);
-                count += tmp;
-                
-                trigger_tmp = j==0 ? 1 : 0;
-                trigger.write(trigger_tmp);
-                data.write(tmp);
-                sample_id++;
-            }
-            
-            /* Figure out good way to test results */
-            // count_test[i][k] = (k==0 | k%AVG_SHOT==0) ? count : count_test[i][k-1] + count;
+    int errors = 0;
+    for (int bin = 0; bin < N_BINS; ++bin) {
+        // Independently count multiples of (bin + 1) in [0, N_CLK).
+        const int per_shot = 1 + (N_CLK - 1) / (bin + 1);
+        const int expected = AVG_SHOT * per_shot;
+        printf("Bin %d: expected %d, got %d\n", bin, expected, counts[bin]);
+        if (counts[bin] != expected)
+            ++errors;
+    }
+
+    // Detect writes outside the requested bins, within the declared buffer.
+    for (int bin = N_BINS; bin < OUTPUT_DEPTH; ++bin) {
+        if (counts[bin] != -1) {
+            printf("Unexpected write to output bin %d\n", bin);
+            ++errors;
         }
     }
 
-
-
-    for (int k=0; k<N_SHOT; k++) {
-        stream_reader(trigger,data,counts,AVG_SHOT,N_BINS,N_CLK);
-
-        // printf("Shot %d\n",k+1);
-        for (i=0; i<N_BINS; i++) {
-            // printf("count test: %d\tcount IP: %d\n", count_test[i][k], counts[i]);
-            
-            if (counts[i] != count_test[i][k]) {
-                printf("failure\r\n");
-                return 1;
-            }
-        }
+    if (data.size() != 0 || trigger.size() != 0) {
+        printf("Unconsumed inputs: %d samples, %d trigger values\n",
+               (int)data.size(), (int)trigger.size());
+        ++errors;
     }
 
-    return 0;
+    printf("%s: single acquisition (%d shots)\n", errors ? "FAIL" : "PASS", AVG_SHOT);
+    return errors ? 1 : 0;
 }

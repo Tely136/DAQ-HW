@@ -1,39 +1,45 @@
 #include "stream_generator.h"
 #include <stdio.h>
 
-int main () {
-    stream_out A;
-    
-    dout_t tmp;
-    int data_in[N_TOTAL];
+int main() {
+    generator_trigger_t trigger;
+    stream_out output;
+    int data_in[128] = {};
+    static_assert(N_TOTAL > 0 && N_TOTAL <= 128, "Test exceeds m_axi depth");
+    int errors = 0;
 
-    int i,j,tmp_in;
+    // Two separate functional invocations; these queued values model reads,
+    // not clock timing. RTL testing must check independently timed pulses.
+    for (int shot = 0; shot < 2; ++shot) {
+        for (int i = 0; i < N_TOTAL; ++i)
+            data_in[i] = ((i + shot) % 3 == 0);
 
-    int id=0;
-    for (i=0; i<N_BINS; i++) {
-        for (j=0; j<N_CLK; j++) {
+        trigger.write(0);
+        trigger.write(0);
+        trigger.write(1); // Release wait_for_trigger.
+        trigger.write(1); // Still high when wait_for_release reads it.
+        trigger.write(0); // Rearm.
 
-            tmp_in = (j%(i+1)==0);
-            data_in[id] = tmp_in;
+        stream_generator(trigger, output, N_TOTAL, data_in);
 
-            printf("in: %d\r\n",tmp_in);
-
-            id++;
+        if ((int)output.size() != N_TOTAL) {
+            printf("FAIL: shot %d has %d samples, expected %d\n",
+                   shot, (int)output.size(), N_TOTAL);
+            return 1;
+        }
+        for (int i = 0; i < N_TOTAL; ++i) {
+            int actual = (int)output.read();
+            if (actual != data_in[i]) {
+                printf("FAIL: shot %d sample %d expected %d, got %d\n",
+                       shot, i, data_in[i], actual);
+                ++errors;
+            }
+        }
+        if (trigger.size() != 0) {
+            printf("FAIL: trigger inputs not fully consumed\n");
+            ++errors;
         }
     }
-
-    stream_generator(A,N_TOTAL,data_in);
-
-    for (i=0; i<N_TOTAL; i++) {
-        tmp = A.read();
-        printf("out: %d\r\n",(int)tmp);
-
-        if(tmp != data_in[i]) {
-            printf("results don't match\r\n");
-
-            // return 1;
-        }
-    }
-
-    return 0;
+    printf("%s: two triggered shots\n", errors ? "FAIL" : "PASS");
+    return errors ? 1 : 0;
 }

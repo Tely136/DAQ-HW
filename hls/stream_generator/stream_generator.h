@@ -1,5 +1,6 @@
 #include "hls_stream.h"
 #include "ap_int.h"
+#include "hls_directio.h"
 
 #define N_BINS 5
 #define N_CLK 10
@@ -8,4 +9,6 @@
 typedef ap_uint<1> dout_t;
 typedef hls::stream<dout_t> stream_out;
 
-void stream_generator(stream_out& out, int n_total, int* data);
+typedef hls::ap_none<ap_uint<1>> generator_trigger_t;
+
+void stream_generator(generator_trigger_t& shot_trigger, stream_out& out, int n_total, int* data);

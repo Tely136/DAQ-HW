@@ -26,14 +26,15 @@
 #define DDR_ADDRESS 0x1F000000
 #define DDR_SIZE    0x10000
 
-// #define DATA_READ_ADDR   DDR_ADDRESS
-#define DATA_READ_ADDR (BRAM_ADDRESS + 4 * N_TOTAL)
+#define DATA_READ_ADDR   DDR_ADDRESS
+// #define DATA_READ_ADDR (BRAM_ADDRESS + 4 * N_TOTAL)
 
 #define CLK_FREQ    50000000 // Hz
-#define SHOT_FREQ   500000
+#define SHOT_FREQ   20
 #define CLK_PERIODS (CLK_FREQ / SHOT_FREQ)
 
-#define AVG_SHOT 10
+#define AVG_SHOT 1200
+
 #define N_BINS   5
 #define N_CLK   10
 #define N_TOTAL   (N_BINS * N_CLK)
