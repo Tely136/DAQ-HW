@@ -17,6 +17,8 @@ set(READ_DRIVER "${IP_DRIVER_ROOT}/stream_reader_v1_0/src")
 
 add_executable(stream_control_linux
     src/main.c
+    src/daq.h
+    src/daq_tcpip.h
     "${TRIG_DRIVER}/xtrigger.c"
     "${GEN_DRIVER}/xstream_generator.c"
     "${READ_DRIVER}/xstream_reader.c"

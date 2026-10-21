@@ -1,7 +1,3 @@
-/*
-** server.c -- a stream socket server demo
-*/
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -45,17 +41,15 @@ void *get_in_addr(struct sockaddr *sa)
     return &(((struct sockaddr_in6*)sa)->sin6_addr);
 }
 
-int tcp_server(uint32_t* counts, int n_bins)
-{
-    // listen on sock_fd, new connection on new_fd
+int tcp_listen(int port) {
     int sockfd, new_fd;
     struct addrinfo hints, *servinfo, *p;
     struct sockaddr_storage their_addr; // connector's address info
-    socklen_t sin_size;
     struct sigaction sa;
+    socklen_t sin_size;
     int yes=1;
-    char s[INET6_ADDRSTRLEN];
     int rv;
+    char s[INET6_ADDRSTRLEN];
 
     memset(&hints, 0, sizeof hints);
     hints.ai_family = AF_INET;
@@ -69,14 +63,12 @@ int tcp_server(uint32_t* counts, int n_bins)
 
     // loop through all the results and bind to the first we can
     for(p = servinfo; p != NULL; p = p->ai_next) {
-        if ((sockfd = socket(p->ai_family, p->ai_socktype,
-                p->ai_protocol)) == -1) {
+        if ((sockfd = socket(p->ai_family, p->ai_socktype, p->ai_protocol)) == -1) {
             perror("server: socket");
             continue;
         }
 
-        if (setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR, &yes,
-                sizeof(int)) == -1) {
+        if (setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR, &yes, sizeof(int)) == -1) {
             perror("setsockopt");
             exit(1);
         }
@@ -112,7 +104,7 @@ int tcp_server(uint32_t* counts, int n_bins)
 
     printf("server: waiting for connections...\n");
 
-    while(1) {  // main accept() loop
+    while(1) {
         sin_size = sizeof their_addr;
         new_fd = accept(sockfd, (struct sockaddr *)&their_addr,
             &sin_size);
@@ -121,12 +113,24 @@ int tcp_server(uint32_t* counts, int n_bins)
             continue;
         }
 
-        inet_ntop(their_addr.ss_family,
-            get_in_addr((struct sockaddr *)&their_addr),
-            s, sizeof s);
+        inet_ntop(their_addr.ss_family, get_in_addr((struct sockaddr *)&their_addr), s, sizeof s);
         printf("server: got connection from %s\n", s);
+        break; // exit the loop after accepting one connection
+    }
 
-        
+
+    return new_fd;
+}
+
+int tcp_server(uint32_t* counts, int n_bins)
+{
+    // listen on sock_fd, new connection on new_fd
+    int new_fd;
+    struct sockaddr_storage their_addr; // connector's address info
+    socklen_t sin_size;
+    int rv;
+
+    new_fd = tcp_listen(atoi(PORT));        
 
         // char buff[1024];
         // rv = read(new_fd, buff, sizeof(buff));
@@ -148,7 +152,7 @@ int tcp_server(uint32_t* counts, int n_bins)
                 break;
             }
             sent += rv;
-        }
+    
 
         fprintf(stdout, "server: sent %d bytes\n", sent);
 
