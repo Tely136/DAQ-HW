@@ -1,12 +1,6 @@
 clc; clearvars;
-%%
-t = tcpclient("localhost",3490); %[output:1d5eb5b5]
 
-%[appendix]{"version":"1.0"}
-%---
-%[metadata:view]
-%   data: {"layout":"inline"}
-%---
-%[output:1d5eb5b5]
-%   data: {"dataType":"text","outputData":{"text":"\ndata =\n\n     []\n\n","truncated":false}}
-%---
+daq = tcpclient("192.168.137.20",8080);
+
+daq.ByteOrder = "little-endian";
+a = read(daq,5,"uint32");

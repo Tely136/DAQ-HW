@@ -11,6 +11,8 @@
 #include "xstream_generator.h"
 #include "xstream_reader.h"
 
+#include "daq_tcpip.h"
+
 #define TRIG_ADDRESS 0x40040000
 #define TRIG_SIZE   0x1000
 
@@ -33,7 +35,7 @@
 #define SHOT_FREQ   20
 #define CLK_PERIODS (CLK_FREQ / SHOT_FREQ)
 
-#define AVG_SHOT 1200
+#define AVG_SHOT 20
 
 #define N_BINS   5
 #define N_CLK   10
@@ -95,10 +97,7 @@ void print_status(u32 status) {
     printf("auto-restart: %u\n", (unsigned)((status >> 7) & 1));
 }
 
-int main() {
-    uint32_t interrupt_count;
-    struct timespec start, started, end, cpu_start, cpu_end;
-
+void initialize_testdata(void* memory_map) {
     int data[N_TOTAL];
     int id = 0;
     for (int i=0; i<N_BINS; i++) {
@@ -107,13 +106,23 @@ int main() {
             id++;
         }
     }
+    init_bram(memory_map, data);
+}
 
+
+int main() {
+    int id;
+    uint32_t interrupt_count;
+    struct timespec start, started, end, cpu_start, cpu_end;
 
     void* bram_mapping = map_device(BRAM_ADDRESS, BRAM_SIZE);
     if (bram_mapping == NULL) {
         return 1;
     }
-    init_bram(bram_mapping, data);
+
+    initialize_testdata(bram_mapping);
+
+
 
 #if DATA_READ_ADDR == DDR_ADDRESS
     void* ddr_mapping = map_device(DDR_ADDRESS, DDR_SIZE);
@@ -126,21 +135,10 @@ int main() {
                               + (DATA_READ_ADDR - BRAM_ADDRESS) / sizeof(uint32_t);
 #endif
 
+    trigger_stuff:
     /* Map the trigger's AXI-Lite control registers. */
     void* trig_mapping = map_device(TRIG_ADDRESS, TRIG_SIZE);
     if (trig_mapping == NULL) {
-        return 1;
-    }
-
-    /* Map the generator's AXI-Lite control registers. */
-    void* gen_mapping = map_device(GEN_ADDRESS, GEN_SIZE);
-    if (gen_mapping == NULL) {
-        return 1;
-    }
-
-    /* Map the reader's AXI-Lite control registers. */
-    void* reader_mapping = map_device(READER_ADDRESS, READER_SIZE);
-    if (reader_mapping == NULL) {
         return 1;
     }
 
@@ -149,16 +147,41 @@ int main() {
         .IsReady = XIL_COMPONENT_IS_READY
     };
 
+    /* Autorestart persists after the previous application exits. */
+    int trigger_was_running = !XTrigger_IsIdle(&trig);
+
+    /* Set input parameters. This does not start an idle generator. */
+    XTrigger_Set_clk_periods(&trig, CLK_PERIODS);
+    XTrigger_EnableAutoRestart(&trig);
+    // XTrigger_DisableAutoRestart(&trig);
+
+
+    generator_stuff:
+    /* Map the generator's AXI-Lite control registers. */
+    void* gen_mapping = map_device(GEN_ADDRESS, GEN_SIZE);
+    if (gen_mapping == NULL) {
+        return 1;
+    }
+
     XStream_generator gen = {
         .Control_BaseAddress = (u64)(uintptr_t) gen_mapping,
         .IsReady = XIL_COMPONENT_IS_READY
     };
 
+    XStream_generator_Set_n_total(&gen, N_TOTAL);
+    XStream_generator_Set_data(&gen,    BRAM_ADDRESS);
+
+    reader_stuff:
+    /* Map the reader's AXI-Lite control registers. */
+    void* reader_mapping = map_device(READER_ADDRESS, READER_SIZE);
+    if (reader_mapping == NULL) {
+        return 1;
+    }
+
     XStream_reader reader = {
         .Control_BaseAddress = (u64)(uintptr_t) reader_mapping,
         .IsReady = XIL_COMPONENT_IS_READY
     };
-
 
     /* Do not reconfigure an acquisition left running by an earlier process. */
     if (!XStream_reader_IsIdle(&reader)) {
@@ -172,9 +195,15 @@ int main() {
      */
     XStream_reader_InterruptGlobalDisable(&reader);
     XStream_reader_InterruptDisable(&reader, 0x3);
-    XStream_reader_InterruptClear(&reader,
-        XStream_reader_InterruptGetStatus(&reader));
+    XStream_reader_InterruptClear(&reader, XStream_reader_InterruptGetStatus(&reader));
     (void)XStream_reader_InterruptGetStatus(&reader); /* Flush the clear. */
+
+    XStream_reader_Set_avg_shot(&reader,  AVG_SHOT);
+    XStream_reader_Set_n_bin(&reader,  N_BINS);
+    XStream_reader_Set_n_cycle(&reader,  N_CLK);
+    XStream_reader_Set_data_out(&reader, DATA_READ_ADDR);
+
+
 
     int irq_fd = open("/dev/uio0", O_RDWR);
     if (irq_fd < 0) {
@@ -183,21 +212,6 @@ int main() {
     }
     int exit_status = 1;
 
-    /* Autorestart persists after the previous application exits. */
-    int trigger_was_running = !XTrigger_IsIdle(&trig);
-
-    /* Set input parameters. This does not start an idle generator. */
-    XTrigger_Set_clk_periods(&trig, CLK_PERIODS);
-    XTrigger_EnableAutoRestart(&trig);
-    // XTrigger_DisableAutoRestart(&trig);
-
-    XStream_generator_Set_n_total(&gen, N_TOTAL);
-    XStream_generator_Set_data(&gen,    BRAM_ADDRESS);
-
-    XStream_reader_Set_avg_shot(&reader,  AVG_SHOT);
-    XStream_reader_Set_n_bin(&reader,  N_BINS);
-    XStream_reader_Set_n_cycle(&reader,  N_CLK);
-    XStream_reader_Set_data_out(&reader, DATA_READ_ADDR);
 
     /* Verify the actual AXI-Lite settings before timing the acquisition. */
     u32 periods = XTrigger_Get_clk_periods(&trig);
@@ -304,6 +318,12 @@ int main() {
             exit_status = 1;
         }
     }
+
+    uint32_t counts_copy[N_BINS];
+    for (int i = 0; i < N_BINS; i++) {
+        counts_copy[i] = counts[i];
+    }
+    tcp_server(counts_copy, N_BINS);
 
 cleanup:
     /* This program performs one acquisition. The next run re-arms UIO. */
