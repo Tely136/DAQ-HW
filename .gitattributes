@@ -1,2 +1,6 @@
 # Bash scripts must use Unix line endings, including Windows checkouts.
 *.sh text eol=lf
+
+# Generated handoff text stays LF across Windows and WSL checkouts.
+hardware/cora-mcs/sdt/** text eol=lf
+hardware/cora-mcs/sdt/*.bit binary

@@ -2,10 +2,16 @@
 
 set -euo pipefail
 
+# Resolve the checkout through the script, not the caller's working directory.
+SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P)"
+REPO_ROOT="$(cd -- "$SCRIPT_DIR/.." && pwd -P)"
+REPO_SDT_DIR="$REPO_ROOT/hardware/cora-mcs/sdt"
+
 # Paths and names to customize.
+VITIS_RELEASE="2026.1"
 VITIS_SETTINGS="/opt/Xilinx/2026.1/Vitis/settings64.sh"
 SDT_DIR="/home/tely1/yocto/hardware/cora-mcs/sdt/"
-XSA_PATH="/mnt/c/Users/tely1/PhD/DAQ-HW/hardware/counter_wrapper.xsa"
+XSA_PATH="$REPO_ROOT/hardware/counter_wrapper.xsa"
 MACHINE_NAME="cora-mcs-generated"
 IMAGE_MACHINE_NAME="amd-cortexa9thf-neon-common"
 REMOTE_HOST="amd-edf@192.168.137.20"
@@ -34,7 +40,7 @@ usage() {
 Usage: amd-edf-tools.sh [phase ...]
 
 Phases:
-  --sdt       Generate the system device tree with SDTGen
+  --sdt       Generate SDT in WSL; update WSL and repo handoffs
   --bootbin   Generate the machine configuration and BOOT.BIN
   --image     Build edf-linux-disk-image
   --wic       Copy BOOT.BIN into WIC partition 1
@@ -86,28 +92,65 @@ if [[ "$RUN_SDT" == true && ! -f "$VITIS_SETTINGS" ]]; then
 	exit 1
 fi
 
-if [[ "$RUN_SDT" == true && ! -d "$SDT_DIR" ]]; then
-	printf 'SDT directory not found: %s\n' "$SDT_DIR" >&2
-	exit 1
-fi
-
-if [[ "$RUN_SDT" == true && ! -f "$SDT_DIR/system-top.dts" ]]; then
-	printf 'system-top.dts not found in SDT directory: %s\n' "$SDT_DIR" >&2
-	exit 1
-fi
-
-# Generate the SDT in a Vitis environment isolated from EDF.
+# Generate into a fresh Linux staging directory. Failed generation never
+# publishes into either the working EDF handoff or the versioned snapshot.
 if [[ "$RUN_SDT" == true ]]; then
 (
-	set +u
-    source "$VITIS_SETTINGS"
-	set -u
-
-    sdtgen <<SDTGEN_COMMANDS
-set_dt_param -dir "$SDT_DIR"
-set_dt_param -xsa "$XSA_PATH"
-generate_sdt
+    [[ -f "$XSA_PATH" ]] || { printf 'XSA not found: %s\n' "$XSA_PATH" >&2; exit 1; }
+    command -v rsync >/dev/null || { echo 'Install rsync in WSL first.' >&2; exit 1; }
+    mkdir -p "$(dirname -- "${SDT_DIR%/}")"
+    STAGE_ROOT="$(mktemp -d "$(dirname -- "${SDT_DIR%/}")/.sdt-stage.XXXXXX")"
+    trap 'rm -rf -- "$STAGE_ROOT"' EXIT
+    export SDT_STAGE_OUTPUT="$STAGE_ROOT/sdt"
+    export SDT_INPUT_XSA="$XSA_PATH"
+    XSA_SHA256="$(sha256sum "$XSA_PATH" | cut -d ' ' -f 1)"
+    (
+        cd "$STAGE_ROOT"
+        set +u
+        source "$VITIS_SETTINGS"
+        set -u
+        # Tcl environment references also handle spaces in the repo path.
+        sdtgen <<'SDTGEN_COMMANDS'
+if {[catch {
+    set_dt_param -dir $::env(SDT_STAGE_OUTPUT)
+    set_dt_param -xsa $::env(SDT_INPUT_XSA)
+    generate_sdt
+} message]} {
+    puts stderr $message
+    exit 1
+}
+exit 0
 SDTGEN_COMMANDS
+    )
+    [[ "$XSA_SHA256" == "$(sha256sum "$XSA_PATH" | cut -d ' ' -f 1)" ]] || {
+        echo 'XSA changed during generation; handoff not published.' >&2; exit 1;
+    }
+    for required in system-top.dts pl.dtsi pcw.dtsi ps7_init.c ps7_init.h counter_wrapper.bit; do
+        [[ -s "$SDT_STAGE_OUTPUT/$required" ]] || {
+            printf 'Generated handoff missing %s; not published.\n' "$required" >&2; exit 1;
+        }
+    done
+    [[ -n "$(find "$SDT_STAGE_OUTPUT/drivers" -name '*_hw.h' -print -quit)" ]] || {
+        echo 'Generated HLS driver headers missing; not published.' >&2; exit 1;
+    }
+    # Record stable provenance; avoid a timestamp-only diff every generation.
+    printf 'vitis_release=%s\nxsa=hardware/counter_wrapper.xsa\nxsa_sha256=%s\n' \
+        "$VITIS_RELEASE" "$XSA_SHA256" > "$SDT_STAGE_OUTPUT/handoff-manifest.txt"
+
+    # Only the designated generated directories may be synchronized/deleted.
+    [[ "$(realpath -m "$REPO_SDT_DIR")" == "$REPO_ROOT/hardware/cora-mcs/sdt" ]] || exit 1
+    [[ "$(realpath -m "$SDT_DIR")" == /home/tely1/yocto/hardware/cora-mcs/sdt ]] || {
+        echo 'Unexpected EDF SDT destination; review the publication guard.' >&2; exit 1;
+    }
+    for destination in "$REPO_SDT_DIR" "${SDT_DIR%/}"; do
+        [[ ! -L "$destination" ]] || { echo 'SDT destination cannot be a symlink.' >&2; exit 1; }
+        mkdir -p "$destination"
+        rsync -rlt --delete --checksum \
+            --exclude='.git/' --exclude='.vscode/' --exclude='.Xil/' \
+            --exclude='*.log' --exclude='*.jou' --exclude='ps7_init.html' \
+            "$SDT_STAGE_OUTPUT/" "$destination/"
+    done
+    printf 'Published SDT and drivers to:\n  %s\n  %s\n' "$SDT_DIR" "$REPO_SDT_DIR"
 )
 fi
 

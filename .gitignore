@@ -108,3 +108,10 @@ Desktop.ini
 # (possible test/ROM inputs), *.wcfg (wave setups), *.rpt (saved reports),
 # *.tcl, *.xci, *.bd, *.json, *.yaml, .clangd files, and source Makefiles.
 # Store routine reports/binaries/platforms in the external build directory.
+
+# Versioned, complete SDT handoff: boot/debug artifacts are intentional here.
+!/hardware/cora-mcs/sdt/*.bit
+!/hardware/cora-mcs/sdt/*.ltx
+!/hardware/cora-mcs/sdt/*.mmi
+/hardware/cora-mcs/sdt/ps7_init.html
+/hardware/cora-mcs/sdt/.vscode/
