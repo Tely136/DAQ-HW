@@ -6,7 +6,7 @@ set(CMAKE_C_STANDARD_REQUIRED ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 set(IP_DRIVER_ROOT
-    "/home/tely1/yocto/hardware/cora-mcs/sdt/drivers"
+    "/mnt/c/Users/tely1/PhD/DAQ-HW/hardware/cora-mcs/sdt/drivers"
     CACHE PATH "Generated HLS driver directory"
 )
 
