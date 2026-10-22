@@ -1,0 +1,3 @@
+vitis_release=2026.1
+xsa=hardware/counter_wrapper.xsa
+xsa_sha256=c3f3fd82642f19022743ccd28fed7702dbe9709a838108d42e845c78da42eb66
