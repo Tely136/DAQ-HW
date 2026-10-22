@@ -1,4 +1,9 @@
+#ifndef DAQ_TCPIP_H
+#define DAQ_TCPIP_H
+
 #include <stdio.h>
+#include <stdint.h>
+#include <limits.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include <errno.h>
@@ -18,6 +23,108 @@
 
 #define BACKLOG 1   // how many pending connections queue will hold
 
+/* Blocking sockets only. These helpers do not convert payload byte order.
+ * On a transfer error, some bytes may already have been consumed/sent;
+ * close the connection rather than retrying the whole message.
+ */
+static inline int send_all(int fd, const void *data, size_t bytes)
+{
+    const unsigned char *buffer = data;
+    size_t sent = 0;
+
+    while (sent < bytes) {
+        size_t remaining = bytes - sent;
+        size_t chunk = remaining > (size_t)SSIZE_MAX
+                     ? (size_t)SSIZE_MAX : remaining;
+        ssize_t n = send(fd, buffer + sent, chunk, MSG_NOSIGNAL);
+        if (n < 0) {
+            if (errno == EINTR)
+                continue;
+            return -1;
+        }
+        if (n == 0) {
+            errno = EIO;
+            return -1;
+        }
+        sent += (size_t)n;
+    }
+    return 0;
+}
+
+/* Returns 1 for a complete payload, 0 for EOF before any payload bytes,
+ * or -1 for an error (including EOF partway through: ECONNRESET).
+ * A zero-byte request succeeds immediately.
+ */
+static inline int recv_exact(int fd, void *data, size_t bytes)
+{
+    unsigned char *buffer = data;
+    size_t received = 0;
+
+    while (received < bytes) {
+        size_t remaining = bytes - received;
+        size_t chunk = remaining > (size_t)SSIZE_MAX
+                     ? (size_t)SSIZE_MAX : remaining;
+        ssize_t n = recv(fd, buffer + received, chunk, 0);
+        if (n < 0) {
+            if (errno == EINTR)
+                continue;
+            return -1;
+        }
+        if (n == 0) {
+            if (received == 0)
+                return 0;
+            errno = ECONNRESET;
+            return -1;
+        }
+        received += (size_t)n;
+    }
+    return 1;
+}
+
+/* Reads an LF-terminated text command, removes LF, and NUL-terminates it.
+ * Capacity includes the final NUL. Empty lines are valid.
+ * Returns 1 for a line, 0 for EOF before any bytes, or -1 with errno set.
+ * Embedded NUL is rejected (EPROTO); oversized lines fail with EMSGSIZE.
+ * Close the connection after errors: an unfinished line may remain unread.
+ * Reading one byte at a time deliberately leaves subsequent lines/binary
+ * payloads in the socket, so this can be mixed safely with recv_exact().
+ */
+static inline int recv_line(int fd, char *line, size_t capacity)
+{
+    size_t used = 0;
+
+    if (line == NULL || capacity == 0) {
+        errno = EINVAL;
+        return -1;
+    }
+    line[0] = '\0';
+
+    for (;;) {
+        unsigned char c;
+        int result = recv_exact(fd, &c, 1);
+        if (result < 0)
+            return -1;
+        if (result == 0) {
+            if (used == 0)
+                return 0;
+            errno = ECONNRESET;
+            return -1;
+        }
+        if (c == '\n')
+            return 1;
+        if (c == '\0') {
+            errno = EPROTO;
+            return -1;
+        }
+        if (used == capacity - 1) {
+            errno = EMSGSIZE;
+            return -1;
+        }
+        line[used++] = (char)c;
+        line[used] = '\0';
+    }
+}
+
 void sigchld_handler(int s)
 {
     (void)s; // quiet unused variable warning
@@ -29,7 +136,6 @@ void sigchld_handler(int s)
 
     errno = saved_errno;
 }
-
 
 // get sockaddr, IPv4 or IPv6:
 void *get_in_addr(struct sockaddr *sa)
@@ -118,48 +224,7 @@ int tcp_listen(int port) {
         break; // exit the loop after accepting one connection
     }
 
-
     return new_fd;
 }
 
-int tcp_server(uint32_t* counts, int n_bins)
-{
-    // listen on sock_fd, new connection on new_fd
-    int new_fd;
-    struct sockaddr_storage their_addr; // connector's address info
-    socklen_t sin_size;
-    int rv;
-
-    new_fd = tcp_listen(atoi(PORT));        
-
-        // char buff[1024];
-        // rv = read(new_fd, buff, sizeof(buff));
-        // if (rv == -1) {
-        //     perror("read");
-        // }
-
-        // char *msg = "OK";
-        // rv = write(new_fd, msg, strlen(msg));
-        // if (rv == -1) {
-        //     perror("write");
-        // }
-
-        int sent = 0;
-        while (sent < n_bins * sizeof(uint32_t)) {
-            rv = write(new_fd, ((char*)counts) + sent, n_bins * sizeof(uint32_t) - sent);
-            if (rv == -1) {
-                perror("write");
-                break;
-            }
-            sent += rv;
-    
-
-        fprintf(stdout, "server: sent %d bytes\n", sent);
-
-        close(new_fd);
-        }
-        // fprintf(stdout, "server: received %d bytes: %s\n", rv, buff);
-    
-
-    return 0;
-}
+#endif /* DAQ_TCPIP_H */

@@ -22,13 +22,13 @@
 #define SHOT_FREQ   20
 #define CLK_PERIODS (CLK_FREQ / SHOT_FREQ)
 
-#define AVG_SHOT 20
+#define N_SHOT 20
 
 #define N_BINS   5
 #define N_CLK   10
 #define N_TOTAL   (N_BINS * N_CLK)
 
-_Static_assert(AVG_SHOT > 0 && N_BINS > 0 && N_CLK > 0, "Acquisition sizes must be positive");
+_Static_assert(N_SHOT > 0 && N_BINS > 0 && N_CLK > 0, "Acquisition sizes must be positive");
 _Static_assert(SHOT_FREQ > 0 && CLK_PERIODS > 0, "Invalid trigger frequency");
 _Static_assert(N_TOTAL * sizeof(uint32_t) <= BRAM_SIZE, "Input exceeds BRAM");
 #if DATA_READ_ADDR == DDR_ADDRESS

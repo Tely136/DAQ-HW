@@ -1,6 +1,5 @@
 #include <stdint.h>
 
-
 #include "params.h"
 
 #include "xtrigger.h"
@@ -8,6 +7,7 @@
 #include "xstream_reader.h"
 
 struct daq_device {
+    int configured;
     volatile uint32_t* counts;
 
     void* bram_mapping;
@@ -15,6 +15,8 @@ struct daq_device {
     void* trig_mapping;
     void* gen_mapping;
     void* reader_mapping;
+
+    int irq_fd;
 
     XTrigger trigger;
     XStream_generator generator;
@@ -24,7 +26,7 @@ struct daq_device {
 struct daq_config {
     uint32_t n_bins;
     uint32_t n_clk;
-    uint32_t avg_shot;
+    uint32_t n_shot;
 };
 
 static double elapsed(struct timespec start, struct timespec end) {
@@ -46,7 +48,6 @@ void print_status(u32 status) {
     printf("ready:        %u\n", (unsigned)((status >> 3) & 1));
     printf("auto-restart: %u\n", (unsigned)((status >> 7) & 1));
 }
-
 
 void* map_device(uint64_t address, size_t size) {
     int fd = open("/dev/mem", O_RDWR | O_SYNC);
@@ -154,8 +155,8 @@ int daq_open(struct daq_device* daq) {
         perror("open /dev/uio0");
         return 1;
     }
+    daq->irq_fd = irq_fd;
 
-    
     return 0;
 }
 
@@ -181,13 +182,21 @@ int daq_close(struct daq_device* daq) {
     return 0;
 }
 
-int daq_configure(struct daq_device* daq, struct daq_config* config) {
+int daq_configure(struct daq_device* daq, struct daq_config* config, char* message) {
+
+    int matched = sscanf(message, "CONFIG %u %u %u", &config->n_shot, &config->n_bins, &config->n_clk);
+    if (matched != 3) {
+        fprintf(stderr, "Invalid CONFIG message: %s\n", message);
+        return 1;
+    }   
+
+
     XTrigger_Set_clk_periods(&daq->trigger, CLK_PERIODS);
 
     XStream_generator_Set_n_total(&daq->generator, config->n_bins * config->n_clk);
     XStream_generator_Set_data(&daq->generator, BRAM_ADDRESS);
 
-    XStream_reader_Set_avg_shot(&daq->reader,  config->avg_shot);
+    XStream_reader_Set_avg_shot(&daq->reader,  config->n_shot);
     XStream_reader_Set_n_bin(&daq->reader,  config->n_bins);
     XStream_reader_Set_n_cycle(&daq->reader,  config->n_clk);
     XStream_reader_Set_data_out(&daq->reader, DATA_READ_ADDR);
@@ -199,7 +208,7 @@ int daq_configure(struct daq_device* daq, struct daq_config* config) {
     printf("Readback: periods=%" PRIu32 ", shots=%" PRIu32", bins=%" PRIu32 ", cycles=%" PRIu32 ", output=0x%08" PRIx64 "\n",
            periods, shots, XStream_reader_Get_n_bin(&daq->reader), XStream_reader_Get_n_cycle(&daq->reader), XStream_reader_Get_data_out(&daq->reader));
 
-    if (periods != CLK_PERIODS || shots != AVG_SHOT ||
+    if (periods != CLK_PERIODS || shots != N_SHOT ||
         XStream_reader_Get_n_bin(&daq->reader) != N_BINS ||
         XStream_reader_Get_n_cycle(&daq->reader) != N_CLK ||
         XStream_reader_Get_data_out(&daq->reader) != DATA_READ_ADDR ||
@@ -209,26 +218,44 @@ int daq_configure(struct daq_device* daq, struct daq_config* config) {
         return 1;
     }
 
-    printf("Assuming a %d Hz trigger clock: nominal acquisition %.6f s\n", CLK_FREQ, (double)AVG_SHOT * CLK_PERIODS / CLK_FREQ);
+    XStream_reader_InterruptEnable(&daq->reader, 0x1);  // ap_done
+    XStream_reader_InterruptGlobalEnable(&daq->reader);
+
+    printf("Assuming a %d Hz trigger clock: nominal acquisition %.6f s\n", CLK_FREQ, (double)N_SHOT * CLK_PERIODS / CLK_FREQ);
+
+    daq->configured = 1;
 
     return 0;
 }
 
+int aquire_test(struct daq_device* daq, struct daq_config* config, uint32_t* counts_out) {
+    printf("Entered aquire_test function\n");
 
-int aquire_test(struct daq_device* daq) {
+    // /* Do not reconfigure an acquisition left running by an earlier process. */
+    // if (!XStream_reader_IsIdle(&daq.reader)) {
+    //     fprintf(stderr, "Reader is still running; wait for it to finish before retrying.\n");
+    //     return 1;
+    // }
+    // XStream_reader_DisableAutoRestart(&daq.reader);
+
+    int n_shot = config->n_shot;
+    int n_bins = config->n_bins;
+    int n_clk = config->n_clk;
 
     XTrigger_EnableAutoRestart(&daq->trigger);
 
     struct timespec start, started, end, cpu_start, cpu_end;
     uint32_t enable = 1;
-    if (write(irq_fd, &enable, sizeof(enable)) != sizeof(enable)) {
+    if (write(daq->irq_fd, &enable, sizeof(enable)) != sizeof(enable)) {
         perror("enable UIO interrupt");
+
         goto cleanup;
     }
 
     if (clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &cpu_start) != 0 ||
         clock_gettime(CLOCK_MONOTONIC, &start) != 0) {
         perror("clock_gettime");
+
         goto cleanup;
     }
 
@@ -236,6 +263,7 @@ int aquire_test(struct daq_device* daq) {
     XStream_reader_Start(&daq->reader);
     if (clock_gettime(CLOCK_MONOTONIC, &started) != 0) {
         perror("clock_gettime");
+
         goto cleanup;
     }
 
@@ -245,7 +273,7 @@ int aquire_test(struct daq_device* daq) {
     uint32_t interrupt_count;
     ssize_t bytes;
     do {
-        bytes = read(irq_fd, &interrupt_count, sizeof(interrupt_count));
+        bytes = read(daq->irq_fd, &interrupt_count, sizeof(interrupt_count));
     } while (bytes < 0 && errno == EINTR);
 
     if (bytes != sizeof(interrupt_count)) {
@@ -255,6 +283,7 @@ int aquire_test(struct daq_device* daq) {
         else {
             fprintf(stderr, "Incomplete UIO interrupt count\n");
         }
+
         goto cleanup;
     }
 
@@ -263,14 +292,16 @@ int aquire_test(struct daq_device* daq) {
     if (clock_gettime(CLOCK_MONOTONIC, &end) != 0 ||
         clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &cpu_end) != 0) {
         perror("clock_gettime");
+
         goto cleanup;
     }
 
     u32 pending = XStream_reader_InterruptGetStatus(&daq->reader);
     XStream_reader_InterruptClear(&daq->reader, pending);
-    XStream_reader_InterruptGlobalDisable(&daq->reader);
+    // XStream_reader_InterruptGlobalDisable(&daq->reader);
     if (!(pending & 0x1)) {
         fprintf(stderr, "UIO notification without reader completion.\n");
+
         goto cleanup;
     }
 
@@ -278,22 +309,22 @@ int aquire_test(struct daq_device* daq) {
     printf("Event completed in %f seconds\n", time_taken);
     printf("Start calls: %.6f s; interrupt wait: %.6f s; process CPU: %.6f s\n",
            elapsed(start, started), elapsed(started, end), elapsed(cpu_start, cpu_end));
-    printf("Effective accepted-shot rate: %.3f shots/s\n", AVG_SHOT / time_taken);
+    printf("Effective accepted-shot rate: %.3f shots/s\n", n_shot / time_taken);
 
     volatile uint32_t* bram = daq->bram_mapping;
 
-    exit_status = 0;
     int counts_test;
+    int exit_status = 0;
     int id=0;
-    for (int i=0; i<N_BINS; i++) {
+    for (int i=0; i<n_bins; i++) {
         counts_test = 0;
 
-        for(int j=0; j<N_CLK; j++) {
+        for(int j=0; j<n_clk; j++) {
             counts_test += bram[id];
             id++;
         }
 
-        counts_test *= AVG_SHOT;
+        counts_test *= n_shot;
         printf("Bin %d: Expected %d, Read %" PRIu32 "\n", i, counts_test, daq->counts[i]);
 
         if ((uint32_t)counts_test != daq->counts[i]) {
@@ -301,10 +332,20 @@ int aquire_test(struct daq_device* daq) {
         }
     }
 
-    uint32_t counts_copy[N_BINS];
-    for (int i = 0; i < N_BINS; i++) {
-        counts_copy[i] = daq->counts[i];
+    for (int i = 0; i < n_bins; i++) {
+        counts_out[i] = daq->counts[i];
     }
 
-    return 0;
+
+cleanup:
+    /* This program performs one acquisition. The next run re-arms UIO. */
+    // XStream_reader_InterruptGlobalDisable(&daq->reader);
+    // XStream_reader_InterruptDisable(&daq->reader, 0x3);
+    XStream_reader_InterruptClear(&daq->reader,
+    XStream_reader_InterruptGetStatus(&daq->reader));
+        
+    // close(daq->irq_fd);
+
+    printf("%s\n", exit_status == 0 ? "Run Finished Successfully." : "Run failed.");
+    return exit_status;
 }

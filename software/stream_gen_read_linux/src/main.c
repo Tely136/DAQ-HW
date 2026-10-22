@@ -6,6 +6,7 @@
 #include <unistd.h>
 #include <time.h>
 #include <errno.h>
+#include <string.h>
 
 #include "xtrigger.h"
 #include "xstream_generator.h"
@@ -17,55 +18,76 @@
 
 
 int main() {
+    int status;
     struct daq_device daq;
     struct daq_config config = {
         .n_bins = N_BINS,
         .n_clk = N_CLK,
-        .avg_shot = AVG_SHOT
+        .n_shot = N_SHOT
     };  
+    char buf[1024];
+
+    daq.configured = 0;
 
     // setup code here
     daq_open(&daq);
 
-
-
-    /* Do not reconfigure an acquisition left running by an earlier process. */
-    if (!XStream_reader_IsIdle(&daq.reader)) {
-        fprintf(stderr, "Reader is still running; wait for it to finish before retrying.\n");
-        return 1;
-    }
-    XStream_reader_DisableAutoRestart(&daq.reader);
-
-
-
-
     // wait for client to connect and return socket file descriptor
     int sockfd = tcp_listen(atoi(PORT));
     if (sockfd < 0) {
-        goto cleanup; // need to look at this
+        return 1; // need to look at this
     }
 
+    status = send(sockfd, "READY\n", 6, 0);
+    if (status == -1) {
+        perror("write");
+        return 1;
+    }
 
-    daq_configure(&daq, &config);
-    
+    while(1) {
+        status = recv_line(sockfd, buf, sizeof(buf));
 
+        if (status == -1) {
+            perror("recv_line");
+            return 1;
+        } else if (status == 0) {
+            fprintf(stderr, "Client disconnected\n");
+            return 1;
+        }
 
-    XStream_reader_InterruptEnable(&daq.reader, 0x1);  // ap_done
-    XStream_reader_InterruptGlobalEnable(&daq.reader);
+        if (strstr(buf, "CONFIG") != NULL) {
+            status = daq_configure(&daq, &config, buf);
+            if (status != 0) {
+                fprintf(stderr, "Failed to configure DAQ\n");
+                return 1;
+            }
 
-    
+            printf("Configure successful\n");
+            continue;
+        }
 
-cleanup:
-    /* This program performs one acquisition. The next run re-arms UIO. */
-    XStream_reader_InterruptGlobalDisable(&daq.reader);
-    XStream_reader_InterruptDisable(&daq.reader, 0x3);
-    XStream_reader_InterruptClear(&daq.reader,
-        XStream_reader_InterruptGetStatus(&daq.reader));
-        
-    close(irq_fd);
+        if (strstr(buf, "START") != NULL) {
+            if (!daq.configured) {
+                printf("DAQ not configured\n");
+                continue;
+            }
+            else {
+                uint32_t counts[config.n_bins];
+                status = aquire_test(&daq, &config, counts);
+                if (status != 0) {
+                    fprintf(stderr, "DAQ acquisition failed with status %d\n", status);
+                    return status;  
+                }
 
-    daq_close(&daq);
+                send_all(sockfd, counts, config.n_bins * sizeof(*counts));
+                continue;
+            }
+        }
 
-    printf("%s\n", exit_status == 0 ? "Run Finished Successfully." : "Run failed.");
-    return exit_status;
+        if (strstr(buf, "END") != NULL) {
+            break;
+        }
+    }
+
+    return 0;
 }
