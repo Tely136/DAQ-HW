@@ -13,7 +13,7 @@ set(IP_DRIVER_ROOT
 # improve this to be more generic, and not hardcoded to the specific driver names
 set(TRIG_DRIVER "${IP_DRIVER_ROOT}/trigger_v1_0/src") 
 set(GEN_DRIVER "${IP_DRIVER_ROOT}/stream_generator_v1_0/src")
-set(READ_DRIVER "${IP_DRIVER_ROOT}/stream_reader_v1_0/src")
+set(MCS_DRIVER "${IP_DRIVER_ROOT}/multi_channel_scaler_v1_0/src")
 
 add_executable(stream_control_linux
     src/main.c
@@ -21,11 +21,11 @@ add_executable(stream_control_linux
     src/daq_tcpip.h
     "${TRIG_DRIVER}/xtrigger.c"
     "${GEN_DRIVER}/xstream_generator.c"
-    "${READ_DRIVER}/xstream_reader.c"
+    "${MCS_DRIVER}/xmulti_channel_scaler.c"
 )
 
 target_include_directories(stream_control_linux PRIVATE
     "${TRIG_DRIVER}"
     "${GEN_DRIVER}"
-    "${READ_DRIVER}"
+    "${MCS_DRIVER}"
 )

@@ -1,4 +1,4 @@
-#include "stream_reader.h"
+#include "mcs.h"
 #include <stdio.h>
 
 int main() {
@@ -29,7 +29,7 @@ int main() {
         }
     }
 
-    stream_reader(trigger, data, counts, AVG_SHOT, N_BINS, N_CLK);
+    multi_channel_scaler(trigger, data, counts, AVG_SHOT, N_BINS, N_CLK);
 
     int errors = 0;
     for (int bin = 0; bin < N_BINS; ++bin) {

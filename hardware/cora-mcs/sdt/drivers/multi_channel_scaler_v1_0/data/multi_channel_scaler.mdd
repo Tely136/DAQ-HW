@@ -5,20 +5,15 @@
 # Copyright 2022-2026 Advanced Micro Devices, Inc. All Rights Reserved.
 # 
 # ==============================================================
-%YAML 1.2
----
-title: stream_reader driver
-type: driver
-properties:
-    compatible:
-        items:
-            - const: xlnx,stream-reader-1.0
-config:
-    - XStream_reader_Config
-required:
-    - compatible
-    - reg
-additionalProperties:
-   - interrupts
-   - interrupt-parent
+OPTION psf_version = 2.1;
+
+BEGIN driver multi_channel_scaler
+
+ OPTION supported_peripherals = (multi_channel_scaler_v1_0 );
+ OPTION driver_state = ACTIVE;
+ OPTION copyfiles = all;
+ OPTION name = multi_channel_scaler;
+ OPTION version = 1.0;
+
+END driver
 

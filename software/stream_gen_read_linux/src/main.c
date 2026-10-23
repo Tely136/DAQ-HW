@@ -10,7 +10,7 @@
 
 #include "xtrigger.h"
 #include "xstream_generator.h"
-#include "xstream_reader.h"
+#include "xmulti_channel_scaler.h"
 
 #include "params.h"
 #include "daq.h"

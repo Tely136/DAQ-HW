@@ -1,8 +1,9 @@
-#include "stream_reader.h"
 #include <stdio.h>
 
+#include "mcs.h"
 
-void stream_reader(trigger_t& shot_trigger, stream_in& data_in, dout_t* data_out, int avg_shot, int n_bin, int n_cycle) {
+
+void multi_channel_scaler(trigger_t& shot_trigger, stream_in& data_in, dout_t* data_out, int avg_shot, int n_bin, int n_cycle) {
     // #pragma HLS INTERFACE mode=ap_none port=shot_trigger
     #pragma HLS INTERFACE mode=s_axilite port=avg_shot
     #pragma HLS INTERFACE mode=s_axilite port=n_bin

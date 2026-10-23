@@ -23,4 +23,4 @@ typedef hls::stream<din_t> stream_in;
 
 typedef int dout_t;
 
-void stream_reader(trigger_t& shot_trigger, stream_in& data_in, dout_t* data_out, int avg_shot, int n_bin, int n_cycle);
+void multi_channel_scaler(trigger_t& shot_trigger, stream_in& data_in, dout_t* data_out, int avg_shot, int n_bin, int n_cycle);

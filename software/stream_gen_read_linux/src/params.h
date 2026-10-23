@@ -6,8 +6,8 @@
 #define GEN_ADDRESS 0x40010000 /* confirm with files, look for way to get this from the hardware description */
 #define GEN_SIZE   0x1000 /* 4 KiB, from the hardware address map. check the hardware description for the correct size */
 
-#define READER_ADDRESS 0x40030000
-#define READER_SIZE   0x1000
+#define MCS_ADDRESS 0x40030000
+#define MCS_SIZE   0x1000
 
 #define BRAM_ADDRESS 0x40002000
 #define BRAM_SIZE    0x2000 /* 8 KiB, from the hardware address map. */

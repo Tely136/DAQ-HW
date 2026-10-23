@@ -4,7 +4,7 @@
 
 #include "xtrigger.h"
 #include "xstream_generator.h"
-#include "xstream_reader.h"
+#include "xmulti_channel_scaler.h"
 
 struct daq_device {
     int configured;
@@ -14,13 +14,13 @@ struct daq_device {
     void* ddr_mapping;
     void* trig_mapping;
     void* gen_mapping;
-    void* reader_mapping;
+    void* mcs_mapping;
 
     int irq_fd;
 
     XTrigger trigger;
     XStream_generator generator;
-    XStream_reader reader;
+    XMulti_channel_scaler mcs;
 };
 
 struct daq_config {
@@ -116,17 +116,17 @@ int daq_open(struct daq_device* daq) {
     };
     daq->generator = generator;
 
-    /* Map the reader's AXI-Lite control registers. */
-    daq->reader_mapping = map_device(READER_ADDRESS, READER_SIZE);
-    if (daq->reader_mapping == NULL) {
+    /* Map the multi-channel scaler's AXI-Lite control registers. */
+    daq->mcs_mapping = map_device(MCS_ADDRESS, MCS_SIZE);
+    if (daq->mcs_mapping == NULL) {
         return 1;
     }
 
-    XStream_reader reader = {
-        .Control_BaseAddress = (u64)(uintptr_t) daq->reader_mapping,
+    XMulti_channel_scaler mcs = {
+        .Control_BaseAddress = (u64)(uintptr_t) daq->mcs_mapping,
         .IsReady = XIL_COMPONENT_IS_READY
     };
-    daq->reader = reader;
+    daq->mcs = mcs;
 
     initialize_testdata(daq->bram_mapping);
 
@@ -145,10 +145,10 @@ int daq_open(struct daq_device* daq) {
     /* ISR is toggle-on-write: clear only bits which are already set.
      * Opening UIO afterwards starts with a fresh notification count.
      */
-    XStream_reader_InterruptGlobalDisable(&daq->reader);
-    XStream_reader_InterruptDisable(&daq->reader, 0x3);
-    XStream_reader_InterruptClear(&daq->reader, XStream_reader_InterruptGetStatus(&daq->reader));
-    (void)XStream_reader_InterruptGetStatus(&daq->reader); /* Flush the clear. */
+    XMulti_channel_scaler_InterruptGlobalDisable(&daq->mcs);
+    XMulti_channel_scaler_InterruptDisable(&daq->mcs, 0x3);
+    XMulti_channel_scaler_InterruptClear(&daq->mcs, XMulti_channel_scaler_InterruptGetStatus(&daq->mcs));
+    (void)XMulti_channel_scaler_InterruptGetStatus(&daq->mcs); /* Flush the clear. */
 
     int irq_fd = open("/dev/uio0", O_RDWR);
     if (irq_fd < 0) {
@@ -170,8 +170,8 @@ int daq_close(struct daq_device* daq) {
     if (daq->gen_mapping) {
         munmap(daq->gen_mapping, GEN_SIZE);
     }
-    if (daq->reader_mapping) {
-        munmap(daq->reader_mapping, READER_SIZE);
+    if (daq->mcs_mapping) {
+        munmap(daq->mcs_mapping, MCS_SIZE);
     }
 #if DATA_READ_ADDR == DDR_ADDRESS
     if (daq->ddr_mapping) {
@@ -196,30 +196,30 @@ int daq_configure(struct daq_device* daq, struct daq_config* config, char* messa
     XStream_generator_Set_n_total(&daq->generator, config->n_bins * config->n_clk);
     XStream_generator_Set_data(&daq->generator, BRAM_ADDRESS);
 
-    XStream_reader_Set_avg_shot(&daq->reader,  config->n_shot);
-    XStream_reader_Set_n_bin(&daq->reader,  config->n_bins);
-    XStream_reader_Set_n_cycle(&daq->reader,  config->n_clk);
-    XStream_reader_Set_data_out(&daq->reader, DATA_READ_ADDR);
+    XMulti_channel_scaler_Set_avg_shot(&daq->mcs,  config->n_shot);
+    XMulti_channel_scaler_Set_n_bin(&daq->mcs,  config->n_bins);
+    XMulti_channel_scaler_Set_n_cycle(&daq->mcs,  config->n_clk);
+    XMulti_channel_scaler_Set_data_out(&daq->mcs, DATA_READ_ADDR);
 
     /* Verify the actual AXI-Lite settings before timing the acquisition. */
     u32 periods = XTrigger_Get_clk_periods(&daq->trigger);
-    u32 shots = XStream_reader_Get_avg_shot(&daq->reader);
+    u32 shots = XMulti_channel_scaler_Get_avg_shot(&daq->mcs);
 
     printf("Readback: periods=%" PRIu32 ", shots=%" PRIu32", bins=%" PRIu32 ", cycles=%" PRIu32 ", output=0x%08" PRIx64 "\n",
-           periods, shots, XStream_reader_Get_n_bin(&daq->reader), XStream_reader_Get_n_cycle(&daq->reader), XStream_reader_Get_data_out(&daq->reader));
+           periods, shots, XMulti_channel_scaler_Get_n_bin(&daq->mcs), XMulti_channel_scaler_Get_n_cycle(&daq->mcs), XMulti_channel_scaler_Get_data_out(&daq->mcs));
 
     if (periods != CLK_PERIODS || shots != N_SHOT ||
-        XStream_reader_Get_n_bin(&daq->reader) != N_BINS ||
-        XStream_reader_Get_n_cycle(&daq->reader) != N_CLK ||
-        XStream_reader_Get_data_out(&daq->reader) != DATA_READ_ADDR ||
+        XMulti_channel_scaler_Get_n_bin(&daq->mcs) != N_BINS ||
+        XMulti_channel_scaler_Get_n_cycle(&daq->mcs) != N_CLK ||
+        XMulti_channel_scaler_Get_data_out(&daq->mcs) != DATA_READ_ADDR ||
         XStream_generator_Get_n_total(&daq->generator) != N_TOTAL ||
         XStream_generator_Get_data(&daq->generator) != BRAM_ADDRESS) {
         fprintf(stderr, "Register readback does not match requested configuration.\n");
         return 1;
     }
 
-    XStream_reader_InterruptEnable(&daq->reader, 0x1);  // ap_done
-    XStream_reader_InterruptGlobalEnable(&daq->reader);
+    XMulti_channel_scaler_InterruptEnable(&daq->mcs, 0x1);  // ap_done
+    XMulti_channel_scaler_InterruptGlobalEnable(&daq->mcs);
 
     printf("Assuming a %d Hz trigger clock: nominal acquisition %.6f s\n", CLK_FREQ, (double)N_SHOT * CLK_PERIODS / CLK_FREQ);
 
@@ -260,7 +260,7 @@ int aquire_test(struct daq_device* daq, struct daq_config* config, uint32_t* cou
     }
 
     XTrigger_Start(&daq->trigger);
-    XStream_reader_Start(&daq->reader);
+    XMulti_channel_scaler_Start(&daq->mcs);
     if (clock_gettime(CLOCK_MONOTONIC, &started) != 0) {
         perror("clock_gettime");
 
@@ -296,11 +296,11 @@ int aquire_test(struct daq_device* daq, struct daq_config* config, uint32_t* cou
         goto cleanup;
     }
 
-    u32 pending = XStream_reader_InterruptGetStatus(&daq->reader);
-    XStream_reader_InterruptClear(&daq->reader, pending);
-    // XStream_reader_InterruptGlobalDisable(&daq->reader);
+    u32 pending = XMulti_channel_scaler_InterruptGetStatus(&daq->mcs);
+    XMulti_channel_scaler_InterruptClear(&daq->mcs, pending);
+    // XMulti_channel_scaler_InterruptGlobalDisable(&daq->mcs);
     if (!(pending & 0x1)) {
-        fprintf(stderr, "UIO notification without reader completion.\n");
+        fprintf(stderr, "UIO notification without MCS completion.\n");
 
         goto cleanup;
     }
@@ -339,10 +339,10 @@ int aquire_test(struct daq_device* daq, struct daq_config* config, uint32_t* cou
 
 cleanup:
     /* This program performs one acquisition. The next run re-arms UIO. */
-    // XStream_reader_InterruptGlobalDisable(&daq->reader);
-    // XStream_reader_InterruptDisable(&daq->reader, 0x3);
-    XStream_reader_InterruptClear(&daq->reader,
-    XStream_reader_InterruptGetStatus(&daq->reader));
+    // XMulti_channel_scaler_InterruptGlobalDisable(&daq->mcs);
+    // XMulti_channel_scaler_InterruptDisable(&daq->mcs, 0x3);
+    XMulti_channel_scaler_InterruptClear(&daq->mcs,
+    XMulti_channel_scaler_InterruptGetStatus(&daq->mcs));
         
     // close(daq->irq_fd);
 
