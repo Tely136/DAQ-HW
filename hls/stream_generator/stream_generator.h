@@ -7,7 +7,7 @@
 #define N_TOTAL N_BINS*N_CLK
 
 typedef ap_uint<1> dout_t;
-typedef hls::stream<dout_t> stream_out;
+typedef hls::ap_none<dout_t> stream_out;
 
 typedef hls::ap_none<ap_uint<1>> generator_trigger_t;
 

@@ -8,7 +8,6 @@ void multi_channel_scaler(trigger_t& shot_trigger, stream_in& data_in, dout_t* d
     #pragma HLS INTERFACE mode=s_axilite port=n_bin
     #pragma HLS INTERFACE mode=s_axilite port=n_cycle
     #pragma HLS INTERFACE mode=m_axi port=data_out depth=128
-    #pragma HLS INTERFACE mode=axis port=data_in
     #pragma HLS INTERFACE mode=s_axilite port=return
     
     din_t tmp;

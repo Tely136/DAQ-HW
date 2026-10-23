@@ -19,7 +19,7 @@
 typedef hls::ap_none<ap_uint<1>> trigger_t;
 
 typedef ap_uint<1> din_t;
-typedef hls::stream<din_t> stream_in;
+typedef hls::ap_none<din_t> stream_in;
 
 typedef int dout_t;
 
