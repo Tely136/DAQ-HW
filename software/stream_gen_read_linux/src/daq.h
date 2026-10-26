@@ -190,10 +190,11 @@ int daq_configure(struct daq_device* daq, struct daq_config* config, char* messa
         return 1;
     }   
 
+    int n_total = config->n_bins * config->n_clk;
 
     XTrigger_Set_clk_periods(&daq->trigger, CLK_PERIODS);
 
-    XStream_generator_Set_n_total(&daq->generator, config->n_bins * config->n_clk);
+    XStream_generator_Set_n_total(&daq->generator, n_total);
     XStream_generator_Set_data(&daq->generator, BRAM_ADDRESS);
 
     XMulti_channel_scaler_Set_avg_shot(&daq->mcs,  config->n_shot);
@@ -208,12 +209,14 @@ int daq_configure(struct daq_device* daq, struct daq_config* config, char* messa
     printf("Readback: periods=%" PRIu32 ", shots=%" PRIu32", bins=%" PRIu32 ", cycles=%" PRIu32 ", output=0x%08" PRIx64 "\n",
            periods, shots, XMulti_channel_scaler_Get_n_bin(&daq->mcs), XMulti_channel_scaler_Get_n_cycle(&daq->mcs), XMulti_channel_scaler_Get_data_out(&daq->mcs));
 
-    if (periods != CLK_PERIODS || shots != N_SHOT ||
-        XMulti_channel_scaler_Get_n_bin(&daq->mcs) != N_BINS ||
-        XMulti_channel_scaler_Get_n_cycle(&daq->mcs) != N_CLK ||
+    if (periods != CLK_PERIODS || shots != config->n_shot ||
+        XMulti_channel_scaler_Get_n_bin(&daq->mcs) != config->n_bins ||
+        XMulti_channel_scaler_Get_n_cycle(&daq->mcs) != config->n_clk ||
         XMulti_channel_scaler_Get_data_out(&daq->mcs) != DATA_READ_ADDR ||
-        XStream_generator_Get_n_total(&daq->generator) != N_TOTAL ||
-        XStream_generator_Get_data(&daq->generator) != BRAM_ADDRESS) {
+
+        XStream_generator_Get_n_total(&daq->generator) != n_total ||
+        XStream_generator_Get_data(&daq->generator) != BRAM_ADDRESS)     
+    {
         fprintf(stderr, "Register readback does not match requested configuration.\n");
         return 1;
     }
@@ -221,7 +224,7 @@ int daq_configure(struct daq_device* daq, struct daq_config* config, char* messa
     XMulti_channel_scaler_InterruptEnable(&daq->mcs, 0x1);  // ap_done
     XMulti_channel_scaler_InterruptGlobalEnable(&daq->mcs);
 
-    printf("Assuming a %d Hz trigger clock: nominal acquisition %.6f s\n", CLK_FREQ, (double)N_SHOT * CLK_PERIODS / CLK_FREQ);
+    printf("Assuming a %d Hz trigger clock: nominal acquisition %.6f s\n", CLK_FREQ, (double)config->n_shot * CLK_PERIODS / CLK_FREQ);
 
     daq->configured = 1;
 
@@ -231,16 +234,19 @@ int daq_configure(struct daq_device* daq, struct daq_config* config, char* messa
 int aquire_test(struct daq_device* daq, struct daq_config* config, uint32_t* counts_out) {
     printf("Entered aquire_test function\n");
 
+    int n_shot = config->n_shot;
+    int n_bins = config->n_bins;
+    int n_clk = config->n_clk;
+
     // /* Do not reconfigure an acquisition left running by an earlier process. */
     // if (!XStream_reader_IsIdle(&daq.reader)) {
     //     fprintf(stderr, "Reader is still running; wait for it to finish before retrying.\n");
     //     return 1;
     // }
     // XStream_reader_DisableAutoRestart(&daq.reader);
+    while (!XMulti_channel_scaler_IsIdle(&daq->mcs)) { }
 
-    int n_shot = config->n_shot;
-    int n_bins = config->n_bins;
-    int n_clk = config->n_clk;
+
 
     XTrigger_EnableAutoRestart(&daq->trigger);
 

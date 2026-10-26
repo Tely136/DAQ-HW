@@ -30,7 +30,9 @@ int main() {
     daq.configured = 0;
 
     // setup code here
+    printf("opening\n");
     daq_open(&daq);
+    printf("opened\n");
 
     // wait for client to connect and return socket file descriptor
     int sockfd = tcp_listen(atoi(PORT));
