@@ -66,70 +66,73 @@ void* map_device(uint64_t address, size_t size) {
     return mapping;
 }
 
-void init_bram(void* bram_mapping, int* data) {
+void init_bram(void* bram_mapping, int* data, int n_total) {
     volatile uint32_t* bram = bram_mapping;
-    for (int i=0; i<N_TOTAL; i++) {
+    for (int i=0; i<n_total; i++) {
         bram[i] = data[i];
     }
 }
 
-void initialize_testdata(void* memory_map) {
-    int data[N_TOTAL];
+void initialize_testdata(void* memory_map, int n_bins, int n_clk) {
+    int data[n_bins * n_clk];
     int id = 0;
-    for (int i=0; i<N_BINS; i++) {
-        for (int j=0; j<N_CLK; j++) {
+    for (int i=0; i<n_bins; i++) {
+        for (int j=0; j<n_clk; j++) {
             data[id] = (j % (i + 1) == 0);
             id++;
         }
     }
-    init_bram(memory_map, data);
+    init_bram(memory_map, data, n_bins * n_clk);
 }
 
 int daq_open(struct daq_device* daq) {
 
+    // map bram
     daq->bram_mapping = map_device(BRAM_ADDRESS, BRAM_SIZE);
     if (daq->bram_mapping == NULL) {
         return 1;
     }
 
-    /* Map the trigger's AXI-Lite control registers. */
+    // map trigger
     daq->trig_mapping = map_device(TRIG_ADDRESS, TRIG_SIZE);
     if (daq->trig_mapping == NULL) {
         return 1;
     }
 
+    // trigger instance
     XTrigger trigger = {
         .Control_BaseAddress = (u64)(uintptr_t) daq->trig_mapping,
         .IsReady = XIL_COMPONENT_IS_READY
     };
     daq->trigger = trigger;
 
-    /* Map the generator's AXI-Lite control registers. */
+    // map generator
     daq->gen_mapping = map_device(GEN_ADDRESS, GEN_SIZE);
     if (daq->gen_mapping == NULL) {
         return 1;
     }
 
+    // generator instance
     XStream_generator generator = {
         .Control_BaseAddress = (u64)(uintptr_t) daq->gen_mapping,
         .IsReady = XIL_COMPONENT_IS_READY
     };
     daq->generator = generator;
 
-    /* Map the multi-channel scaler's AXI-Lite control registers. */
+    // map mcs
     daq->mcs_mapping = map_device(MCS_ADDRESS, MCS_SIZE);
     if (daq->mcs_mapping == NULL) {
         return 1;
     }
 
+    // mcs instance
     XMulti_channel_scaler mcs = {
         .Control_BaseAddress = (u64)(uintptr_t) daq->mcs_mapping,
         .IsReady = XIL_COMPONENT_IS_READY
     };
     daq->mcs = mcs;
 
-    initialize_testdata(daq->bram_mapping);
-
+    // map ddr if needed
 #if DATA_READ_ADDR == DDR_ADDRESS
     void* ddr_mapping = map_device(DDR_ADDRESS, DDR_SIZE);
     if (ddr_mapping == NULL) {
@@ -142,14 +145,14 @@ int daq_open(struct daq_device* daq) {
 #endif
     daq->counts = counts;
 
-    /* ISR is toggle-on-write: clear only bits which are already set.
-     * Opening UIO afterwards starts with a fresh notification count.
-     */
+
+    // disable mcs interrupts and clear any pending ones
     XMulti_channel_scaler_InterruptGlobalDisable(&daq->mcs);
     XMulti_channel_scaler_InterruptDisable(&daq->mcs, 0x3);
     XMulti_channel_scaler_InterruptClear(&daq->mcs, XMulti_channel_scaler_InterruptGetStatus(&daq->mcs));
-    (void)XMulti_channel_scaler_InterruptGetStatus(&daq->mcs); /* Flush the clear. */
+    (void)XMulti_channel_scaler_InterruptGetStatus(&daq->mcs);
 
+    // open UIO device for interrupt handling
     int irq_fd = open("/dev/uio0", O_RDWR);
     if (irq_fd < 0) {
         perror("open /dev/uio0");
@@ -161,6 +164,8 @@ int daq_open(struct daq_device* daq) {
 }
 
 int daq_close(struct daq_device* daq) {
+
+    // unmap memory regions
     if (daq->bram_mapping) {
         munmap(daq->bram_mapping, BRAM_SIZE);
     }
@@ -184,25 +189,36 @@ int daq_close(struct daq_device* daq) {
 
 int daq_configure(struct daq_device* daq, struct daq_config* config, char* message) {
 
+    // parse config message
     int matched = sscanf(message, "CONFIG %u %u %u", &config->n_shot, &config->n_bins, &config->n_clk);
     if (matched != 3) {
         fprintf(stderr, "Invalid CONFIG message: %s\n", message);
         return 1;
     }   
 
-    int n_total = config->n_bins * config->n_clk;
+    int n_shot = config->n_shot;
+    int n_bins = config->n_bins;
+    int n_clk = config->n_clk;
+    int n_total = n_bins * n_clk;
 
+    // set number of clock periods per trigger output
     XTrigger_Set_clk_periods(&daq->trigger, CLK_PERIODS);
 
+    // set total number of clock cycles for generator, and bram address for input data
     XStream_generator_Set_n_total(&daq->generator, n_total);
     XStream_generator_Set_data(&daq->generator, BRAM_ADDRESS);
 
-    XMulti_channel_scaler_Set_avg_shot(&daq->mcs,  config->n_shot);
+    // set number of shots, bins, cycles, and output address for mcs
+    XMulti_channel_scaler_Set_avg_shot(&daq->mcs,  config->n_shot); // change avg_shot to n_shot in vitis later
     XMulti_channel_scaler_Set_n_bin(&daq->mcs,  config->n_bins);
     XMulti_channel_scaler_Set_n_cycle(&daq->mcs,  config->n_clk);
     XMulti_channel_scaler_Set_data_out(&daq->mcs, DATA_READ_ADDR);
 
-    /* Verify the actual AXI-Lite settings before timing the acquisition. */
+    // enable mcs interrupts
+    XMulti_channel_scaler_InterruptEnable(&daq->mcs, 0x1);
+    XMulti_channel_scaler_InterruptGlobalEnable(&daq->mcs);
+
+    // verify configuration by reading back registers
     u32 periods = XTrigger_Get_clk_periods(&daq->trigger);
     u32 shots = XMulti_channel_scaler_Get_avg_shot(&daq->mcs);
 
@@ -221,9 +237,6 @@ int daq_configure(struct daq_device* daq, struct daq_config* config, char* messa
         return 1;
     }
 
-    XMulti_channel_scaler_InterruptEnable(&daq->mcs, 0x1);  // ap_done
-    XMulti_channel_scaler_InterruptGlobalEnable(&daq->mcs);
-
     printf("Assuming a %d Hz trigger clock: nominal acquisition %.6f s\n", CLK_FREQ, (double)config->n_shot * CLK_PERIODS / CLK_FREQ);
 
     daq->configured = 1;
@@ -234,50 +247,50 @@ int daq_configure(struct daq_device* daq, struct daq_config* config, char* messa
 int aquire_test(struct daq_device* daq, struct daq_config* config, uint32_t* counts_out) {
     printf("Entered aquire_test function\n");
 
+    struct timespec start, started, end, cpu_start, cpu_end;
+    uint32_t enable = 1;
+    uint32_t interrupt_count;
+    ssize_t bytes;
+    int exit_status = 0;
+
     int n_shot = config->n_shot;
     int n_bins = config->n_bins;
     int n_clk = config->n_clk;
 
-    // /* Do not reconfigure an acquisition left running by an earlier process. */
-    // if (!XStream_reader_IsIdle(&daq.reader)) {
-    //     fprintf(stderr, "Reader is still running; wait for it to finish before retrying.\n");
-    //     return 1;
-    // }
-    // XStream_reader_DisableAutoRestart(&daq.reader);
+    // initialize test data
+    initialize_testdata(daq->bram_mapping, n_bins, n_clk);
+    
+    // Disable auto-restart for MCS and wait for it to become idle before starting a new acquisition.
+    XMulti_channel_scaler_DisableAutoRestart(&daq->mcs);
     while (!XMulti_channel_scaler_IsIdle(&daq->mcs)) { }
 
-
-
+    // enable auto restart for trigger
     XTrigger_EnableAutoRestart(&daq->trigger);
 
-    struct timespec start, started, end, cpu_start, cpu_end;
-    uint32_t enable = 1;
+    // enable UIO interrupt
     if (write(daq->irq_fd, &enable, sizeof(enable)) != sizeof(enable)) {
         perror("enable UIO interrupt");
 
         goto cleanup;
     }
 
-    if (clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &cpu_start) != 0 ||
-        clock_gettime(CLOCK_MONOTONIC, &start) != 0) {
+    // timestamp before starting the acquisition
+    if (clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &cpu_start) != 0 || clock_gettime(CLOCK_MONOTONIC, &start) != 0) {
         perror("clock_gettime");
 
         goto cleanup;
     }
 
-    XTrigger_Start(&daq->trigger);
+    // start the acquisition
     XMulti_channel_scaler_Start(&daq->mcs);
+    XTrigger_Start(&daq->trigger);
     if (clock_gettime(CLOCK_MONOTONIC, &started) != 0) {
         perror("clock_gettime");
 
         goto cleanup;
     }
 
-    /* Blocking read sleeps until UIO delivers the completion interrupt.
-     * No register polling and no timeout; EINTR means a Linux signal arrived.
-     */
-    uint32_t interrupt_count;
-    ssize_t bytes;
+    // wait for interrupt from UIO
     do {
         bytes = read(daq->irq_fd, &interrupt_count, sizeof(interrupt_count));
     } while (bytes < 0 && errno == EINTR);
@@ -293,8 +306,7 @@ int aquire_test(struct daq_device* daq, struct daq_config* config, uint32_t* cou
         goto cleanup;
     }
 
-
-    /* Timestamp immediately after waking, before reading any IP registers. */
+    // timestamp after acquisition completes
     if (clock_gettime(CLOCK_MONOTONIC, &end) != 0 ||
         clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &cpu_end) != 0) {
         perror("clock_gettime");
@@ -302,6 +314,7 @@ int aquire_test(struct daq_device* daq, struct daq_config* config, uint32_t* cou
         goto cleanup;
     }
 
+    // verify the mcs interrupt status and clear it
     u32 pending = XMulti_channel_scaler_InterruptGetStatus(&daq->mcs);
     XMulti_channel_scaler_InterruptClear(&daq->mcs, pending);
     // XMulti_channel_scaler_InterruptGlobalDisable(&daq->mcs);
@@ -311,16 +324,16 @@ int aquire_test(struct daq_device* daq, struct daq_config* config, uint32_t* cou
         goto cleanup;
     }
 
+    // calculate elapsed time and print results
     double time_taken = elapsed(start, end);
     printf("Event completed in %f seconds\n", time_taken);
-    printf("Start calls: %.6f s; interrupt wait: %.6f s; process CPU: %.6f s\n",
-           elapsed(start, started), elapsed(started, end), elapsed(cpu_start, cpu_end));
+    printf("Start calls: %.6f s; interrupt wait: %.6f s; process CPU: %.6f s\n", elapsed(start, started), elapsed(started, end), elapsed(cpu_start, cpu_end));
     printf("Effective accepted-shot rate: %.3f shots/s\n", n_shot / time_taken);
 
+    // verify counts against expected values
     volatile uint32_t* bram = daq->bram_mapping;
 
     int counts_test;
-    int exit_status = 0;
     int id=0;
     for (int i=0; i<n_bins; i++) {
         counts_test = 0;
@@ -344,14 +357,13 @@ int aquire_test(struct daq_device* daq, struct daq_config* config, uint32_t* cou
 
 
 cleanup:
-    /* This program performs one acquisition. The next run re-arms UIO. */
-    // XMulti_channel_scaler_InterruptGlobalDisable(&daq->mcs);
-    // XMulti_channel_scaler_InterruptDisable(&daq->mcs, 0x3);
+    // disable auto-restart for trigger
+    XTrigger_DisableAutoRestart(&daq->trigger);
+
+    // clear any pending interrupts
     XMulti_channel_scaler_InterruptClear(&daq->mcs,
     XMulti_channel_scaler_InterruptGetStatus(&daq->mcs));
         
-    // close(daq->irq_fd);
-
     printf("%s\n", exit_status == 0 ? "Run Finished Successfully." : "Run failed.");
     return exit_status;
 }
