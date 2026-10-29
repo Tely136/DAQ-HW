@@ -5,7 +5,7 @@ int main() {
     // Match the reader's m_axi depth so this buffer is also suitable for cosim.
     const int OUTPUT_DEPTH = 128;
     const int WAIT_READS = 3;
-    static_assert(AVG_SHOT > 0 && N_BINS > 0 && N_CLK > 0,
+    static_assert(N_SHOT > 0 && N_BINS > 0 && N_CLK > 0,
                   "Test dimensions must be positive");
     static_assert(N_BINS <= OUTPUT_DEPTH, "Bins exceed the reader's m_axi depth");
 
@@ -16,8 +16,8 @@ int main() {
         counts[i] = -1; // The first shot must overwrite previous contents.
 
     // One acquisition for now: provide exactly AVG_SHOT shots.
-    // N_SHOT is reserved for a future multiple-acquisition test.
-    for (int shot = 0; shot < AVG_SHOT; ++shot) {
+    // SIM_SHOT is reserved for a future multiple-acquisition test.
+    for (int shot = 0; shot < N_SHOT; ++shot) {
         // These are values for successive trigger reads, not clock delays.
         for (int check = 0; check < WAIT_READS; ++check)
             trigger.write(0);
@@ -29,13 +29,13 @@ int main() {
         }
     }
 
-    multi_channel_scaler(trigger, data, counts, AVG_SHOT, N_BINS, N_CLK);
+    multi_channel_scaler(trigger, data, counts, N_SHOT, N_BINS, N_CLK);
 
     int errors = 0;
     for (int bin = 0; bin < N_BINS; ++bin) {
         // Independently count multiples of (bin + 1) in [0, N_CLK).
         const int per_shot = 1 + (N_CLK - 1) / (bin + 1);
-        const int expected = AVG_SHOT * per_shot;
+        const int expected = N_SHOT * per_shot;
         printf("Bin %d: expected %d, got %d\n", bin, expected, counts[bin]);
         if (counts[bin] != expected)
             ++errors;
@@ -55,6 +55,6 @@ int main() {
         ++errors;
     }
 
-    printf("%s: single acquisition (%d shots)\n", errors ? "FAIL" : "PASS", AVG_SHOT);
+    printf("%s: single acquisition (%d shots)\n", errors ? "FAIL" : "PASS", N_SHOT);
     return errors ? 1 : 0;
 }

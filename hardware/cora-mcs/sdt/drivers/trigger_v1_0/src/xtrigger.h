@@ -92,23 +92,11 @@ int XTrigger_Initialize(XTrigger *InstancePtr, const char* InstanceName);
 int XTrigger_Release(XTrigger *InstancePtr);
 #endif
 
-void XTrigger_Start(XTrigger *InstancePtr);
-u32 XTrigger_IsDone(XTrigger *InstancePtr);
-u32 XTrigger_IsIdle(XTrigger *InstancePtr);
-u32 XTrigger_IsReady(XTrigger *InstancePtr);
-void XTrigger_EnableAutoRestart(XTrigger *InstancePtr);
-void XTrigger_DisableAutoRestart(XTrigger *InstancePtr);
 
 void XTrigger_Set_clk_periods(XTrigger *InstancePtr, u32 Data);
 u32 XTrigger_Get_clk_periods(XTrigger *InstancePtr);
-
-void XTrigger_InterruptGlobalEnable(XTrigger *InstancePtr);
-void XTrigger_InterruptGlobalDisable(XTrigger *InstancePtr);
-void XTrigger_InterruptEnable(XTrigger *InstancePtr, u32 Mask);
-void XTrigger_InterruptDisable(XTrigger *InstancePtr, u32 Mask);
-void XTrigger_InterruptClear(XTrigger *InstancePtr, u32 Mask);
-u32 XTrigger_InterruptGetEnabled(XTrigger *InstancePtr);
-u32 XTrigger_InterruptGetStatus(XTrigger *InstancePtr);
+void XTrigger_Set_enable(XTrigger *InstancePtr, u32 Data);
+u32 XTrigger_Get_enable(XTrigger *InstancePtr);
 
 #ifdef __cplusplus
 }

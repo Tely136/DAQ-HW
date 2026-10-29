@@ -77,7 +77,7 @@
 			compatible = "xlnx,stream-generator-1.0";
 			xlnx,ii = "undef";
 			xlnx,machine = <64>;
-			xlnx,s-axi-control-addr-width = <6>;
+			xlnx,s-axi-control-addr-width = <5>;
 			xlnx,ip-name = "stream_generator";
 			reg = <0x40010000 0x10000>;
 			clocks = <&clkc 15>;

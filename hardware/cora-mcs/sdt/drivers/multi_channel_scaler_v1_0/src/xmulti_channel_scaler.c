@@ -95,20 +95,20 @@ u64 XMulti_channel_scaler_Get_data_out(XMulti_channel_scaler *InstancePtr) {
     return Data;
 }
 
-void XMulti_channel_scaler_Set_avg_shot(XMulti_channel_scaler *InstancePtr, u32 Data) {
+void XMulti_channel_scaler_Set_n_shot(XMulti_channel_scaler *InstancePtr, u32 Data) {
     Xil_AssertVoid(InstancePtr != NULL);
     Xil_AssertVoid(InstancePtr->IsReady == XIL_COMPONENT_IS_READY);
 
-    XMulti_channel_scaler_WriteReg(InstancePtr->Control_BaseAddress, XMULTI_CHANNEL_SCALER_CONTROL_ADDR_AVG_SHOT_DATA, Data);
+    XMulti_channel_scaler_WriteReg(InstancePtr->Control_BaseAddress, XMULTI_CHANNEL_SCALER_CONTROL_ADDR_N_SHOT_DATA, Data);
 }
 
-u32 XMulti_channel_scaler_Get_avg_shot(XMulti_channel_scaler *InstancePtr) {
+u32 XMulti_channel_scaler_Get_n_shot(XMulti_channel_scaler *InstancePtr) {
     u32 Data;
 
     Xil_AssertNonvoid(InstancePtr != NULL);
     Xil_AssertNonvoid(InstancePtr->IsReady == XIL_COMPONENT_IS_READY);
 
-    Data = XMulti_channel_scaler_ReadReg(InstancePtr->Control_BaseAddress, XMULTI_CHANNEL_SCALER_CONTROL_ADDR_AVG_SHOT_DATA);
+    Data = XMulti_channel_scaler_ReadReg(InstancePtr->Control_BaseAddress, XMULTI_CHANNEL_SCALER_CONTROL_ADDR_N_SHOT_DATA);
     return Data;
 }
 

@@ -29,3 +29,5 @@ target_include_directories(data_acquisition_test PRIVATE
     "${GEN_DRIVER}"
     "${MCS_DRIVER}"
 )
+
+target_link_libraries(data_acquisition_test m)

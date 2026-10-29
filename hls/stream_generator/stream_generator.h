@@ -11,4 +11,4 @@ typedef hls::ap_none<dout_t> stream_out;
 
 typedef hls::ap_none<ap_uint<1>> generator_trigger_t;
 
-void stream_generator(generator_trigger_t& shot_trigger, stream_out& out, int n_total, int* data);
+void stream_generator(generator_trigger_t& shot_trigger, stream_out& out, int n_bin, int n_cycle);

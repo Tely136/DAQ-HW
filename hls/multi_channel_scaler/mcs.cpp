@@ -2,9 +2,9 @@
 #include <stdio.h>
 
 
-void multi_channel_scaler(trigger_t& shot_trigger, stream_in& data_in, dout_t* data_out, int avg_shot, int n_bin, int n_cycle) {
+void multi_channel_scaler(trigger_t& shot_trigger, stream_in& data_in, dout_t* data_out, int n_shot, int n_bin, int n_cycle) {
     // #pragma HLS INTERFACE mode=ap_none port=shot_trigger
-    #pragma HLS INTERFACE mode=s_axilite port=avg_shot
+    #pragma HLS INTERFACE mode=s_axilite port=n_shot
     #pragma HLS INTERFACE mode=s_axilite port=n_bin
     #pragma HLS INTERFACE mode=s_axilite port=n_cycle
     #pragma HLS INTERFACE mode=m_axi port=data_out depth=128
@@ -16,7 +16,7 @@ void multi_channel_scaler(trigger_t& shot_trigger, stream_in& data_in, dout_t* d
 
     int id = 0;
 
-    for (int shot=0; shot<avg_shot; shot++) {
+    for (int shot=0; shot<n_shot; shot++) {
 
         wait_for_shot:
         while(!shot_trigger.read()) {

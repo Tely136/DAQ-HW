@@ -21,39 +21,37 @@ int XStream_generator_CfgInitialize(XStream_generator *InstancePtr, XStream_gene
 }
 #endif
 
-void XStream_generator_Set_n_total(XStream_generator *InstancePtr, u32 Data) {
+void XStream_generator_Set_n_bin(XStream_generator *InstancePtr, u32 Data) {
     Xil_AssertVoid(InstancePtr != NULL);
     Xil_AssertVoid(InstancePtr->IsReady == XIL_COMPONENT_IS_READY);
 
-    XStream_generator_WriteReg(InstancePtr->Control_BaseAddress, XSTREAM_GENERATOR_CONTROL_ADDR_N_TOTAL_DATA, Data);
+    XStream_generator_WriteReg(InstancePtr->Control_BaseAddress, XSTREAM_GENERATOR_CONTROL_ADDR_N_BIN_DATA, Data);
 }
 
-u32 XStream_generator_Get_n_total(XStream_generator *InstancePtr) {
+u32 XStream_generator_Get_n_bin(XStream_generator *InstancePtr) {
     u32 Data;
 
     Xil_AssertNonvoid(InstancePtr != NULL);
     Xil_AssertNonvoid(InstancePtr->IsReady == XIL_COMPONENT_IS_READY);
 
-    Data = XStream_generator_ReadReg(InstancePtr->Control_BaseAddress, XSTREAM_GENERATOR_CONTROL_ADDR_N_TOTAL_DATA);
+    Data = XStream_generator_ReadReg(InstancePtr->Control_BaseAddress, XSTREAM_GENERATOR_CONTROL_ADDR_N_BIN_DATA);
     return Data;
 }
 
-void XStream_generator_Set_data(XStream_generator *InstancePtr, u64 Data) {
+void XStream_generator_Set_n_cycle(XStream_generator *InstancePtr, u32 Data) {
     Xil_AssertVoid(InstancePtr != NULL);
     Xil_AssertVoid(InstancePtr->IsReady == XIL_COMPONENT_IS_READY);
 
-    XStream_generator_WriteReg(InstancePtr->Control_BaseAddress, XSTREAM_GENERATOR_CONTROL_ADDR_DATA_DATA, (u32)(Data));
-    XStream_generator_WriteReg(InstancePtr->Control_BaseAddress, XSTREAM_GENERATOR_CONTROL_ADDR_DATA_DATA + 4, (u32)(Data >> 32));
+    XStream_generator_WriteReg(InstancePtr->Control_BaseAddress, XSTREAM_GENERATOR_CONTROL_ADDR_N_CYCLE_DATA, Data);
 }
 
-u64 XStream_generator_Get_data(XStream_generator *InstancePtr) {
-    u64 Data;
+u32 XStream_generator_Get_n_cycle(XStream_generator *InstancePtr) {
+    u32 Data;
 
     Xil_AssertNonvoid(InstancePtr != NULL);
     Xil_AssertNonvoid(InstancePtr->IsReady == XIL_COMPONENT_IS_READY);
 
-    Data = XStream_generator_ReadReg(InstancePtr->Control_BaseAddress, XSTREAM_GENERATOR_CONTROL_ADDR_DATA_DATA);
-    Data += (u64)XStream_generator_ReadReg(InstancePtr->Control_BaseAddress, XSTREAM_GENERATOR_CONTROL_ADDR_DATA_DATA + 4) << 32;
+    Data = XStream_generator_ReadReg(InstancePtr->Control_BaseAddress, XSTREAM_GENERATOR_CONTROL_ADDR_N_CYCLE_DATA);
     return Data;
 }
 

@@ -93,10 +93,10 @@ int XStream_generator_Release(XStream_generator *InstancePtr);
 #endif
 
 
-void XStream_generator_Set_n_total(XStream_generator *InstancePtr, u32 Data);
-u32 XStream_generator_Get_n_total(XStream_generator *InstancePtr);
-void XStream_generator_Set_data(XStream_generator *InstancePtr, u64 Data);
-u64 XStream_generator_Get_data(XStream_generator *InstancePtr);
+void XStream_generator_Set_n_bin(XStream_generator *InstancePtr, u32 Data);
+u32 XStream_generator_Get_n_bin(XStream_generator *InstancePtr);
+void XStream_generator_Set_n_cycle(XStream_generator *InstancePtr, u32 Data);
+u32 XStream_generator_Get_n_cycle(XStream_generator *InstancePtr);
 
 #ifdef __cplusplus
 }

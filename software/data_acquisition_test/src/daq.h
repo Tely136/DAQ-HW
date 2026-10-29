@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include <math.h>
 
 #include "params.h"
 
@@ -205,11 +206,11 @@ int daq_configure(struct daq_device* daq, struct daq_config* config, char* messa
     XTrigger_Set_clk_periods(&daq->trigger, CLK_PERIODS);
 
     // set total number of clock cycles for generator, and bram address for input data
-    XStream_generator_Set_n_total(&daq->generator, n_total);
-    XStream_generator_Set_data(&daq->generator, BRAM_ADDRESS);
+    XStream_generator_Set_n_bin(&daq->generator, n_bins);
+    XStream_generator_Set_n_cycle(&daq->generator, n_clk);
 
     // set number of shots, bins, cycles, and output address for mcs
-    XMulti_channel_scaler_Set_avg_shot(&daq->mcs,  config->n_shot); // change avg_shot to n_shot in vitis later
+    XMulti_channel_scaler_Set_n_shot(&daq->mcs,  config->n_shot);
     XMulti_channel_scaler_Set_n_bin(&daq->mcs,  config->n_bins);
     XMulti_channel_scaler_Set_n_cycle(&daq->mcs,  config->n_clk);
     XMulti_channel_scaler_Set_data_out(&daq->mcs, DATA_READ_ADDR);
@@ -220,7 +221,7 @@ int daq_configure(struct daq_device* daq, struct daq_config* config, char* messa
 
     // verify configuration by reading back registers
     u32 periods = XTrigger_Get_clk_periods(&daq->trigger);
-    u32 shots = XMulti_channel_scaler_Get_avg_shot(&daq->mcs);
+    u32 shots = XMulti_channel_scaler_Get_n_shot(&daq->mcs);
 
     printf("Readback: periods=%" PRIu32 ", shots=%" PRIu32", bins=%" PRIu32 ", cycles=%" PRIu32 ", output=0x%08" PRIx64 "\n",
            periods, shots, XMulti_channel_scaler_Get_n_bin(&daq->mcs), XMulti_channel_scaler_Get_n_cycle(&daq->mcs), XMulti_channel_scaler_Get_data_out(&daq->mcs));
@@ -230,8 +231,8 @@ int daq_configure(struct daq_device* daq, struct daq_config* config, char* messa
         XMulti_channel_scaler_Get_n_cycle(&daq->mcs) != config->n_clk ||
         XMulti_channel_scaler_Get_data_out(&daq->mcs) != DATA_READ_ADDR ||
 
-        XStream_generator_Get_n_total(&daq->generator) != n_total ||
-        XStream_generator_Get_data(&daq->generator) != BRAM_ADDRESS)     
+        XStream_generator_Get_n_bin(&daq->generator) != n_bins ||
+        XStream_generator_Get_n_cycle(&daq->generator) != n_clk)     
     {
         fprintf(stderr, "Register readback does not match requested configuration.\n");
         return 1;
@@ -258,14 +259,15 @@ int aquire_test(struct daq_device* daq, struct daq_config* config, uint32_t* cou
     int n_clk = config->n_clk;
 
     // initialize test data
-    initialize_testdata(daq->bram_mapping, n_bins, n_clk);
+    // initialize_testdata(daq->bram_mapping, n_bins, n_clk);
     
     // Disable auto-restart for MCS and wait for it to become idle before starting a new acquisition.
     XMulti_channel_scaler_DisableAutoRestart(&daq->mcs);
     while (!XMulti_channel_scaler_IsIdle(&daq->mcs)) { }
 
-    // enable auto restart for trigger
-    XTrigger_EnableAutoRestart(&daq->trigger);
+    // enable auto restart for trigger and mcs
+    // XTrigger_EnableAutoRestart(&daq->trigger);
+    // XMulti_channel_scaler_EnableAutoRestart(&daq->mcs);
 
     // enable UIO interrupt
     if (write(daq->irq_fd, &enable, sizeof(enable)) != sizeof(enable)) {
@@ -282,8 +284,9 @@ int aquire_test(struct daq_device* daq, struct daq_config* config, uint32_t* cou
     }
 
     // start the acquisition
+    // XTrigger_Start(&daq->trigger);
+    XTrigger_Set_enable(&daq->trigger, 1);
     XMulti_channel_scaler_Start(&daq->mcs);
-    XTrigger_Start(&daq->trigger);
     if (clock_gettime(CLOCK_MONOTONIC, &started) != 0) {
         perror("clock_gettime");
 
@@ -338,12 +341,7 @@ int aquire_test(struct daq_device* daq, struct daq_config* config, uint32_t* cou
     for (int i=0; i<n_bins; i++) {
         counts_test = 0;
 
-        for(int j=0; j<n_clk; j++) {
-            counts_test += bram[id];
-            id++;
-        }
-
-        counts_test *= n_shot;
+        counts_test = n_shot * (1 + (n_clk - 1) / (i + 1));
         printf("Bin %d: Expected %d, Read %" PRIu32 "\n", i, counts_test, daq->counts[i]);
 
         if ((uint32_t)counts_test != daq->counts[i]) {
@@ -357,8 +355,10 @@ int aquire_test(struct daq_device* daq, struct daq_config* config, uint32_t* cou
 
 
 cleanup:
-    // disable auto-restart for trigger
-    XTrigger_DisableAutoRestart(&daq->trigger);
+    // disable auto-restart for trigger and mcs
+    // XTrigger_DisableAutoRestart(&daq->trigger);
+    XTrigger_Set_enable(&daq->trigger, 0);
+    XMulti_channel_scaler_DisableAutoRestart(&daq->mcs);
 
     // clear any pending interrupts
     XMulti_channel_scaler_InterruptClear(&daq->mcs,

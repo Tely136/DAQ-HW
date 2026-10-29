@@ -30,8 +30,8 @@ _Static_assert(MAX_SAMPLE * sizeof(uint32_t) <= BRAM_SIZE, "Input exceeds BRAM")
 #if DATA_READ_ADDR == DDR_ADDRESS
 _Static_assert(MAX_BINS * sizeof(uint32_t) <= DDR_SIZE, "Output exceeds DDR buffer");
 #else
-_Static_assert(DATA_READ_ADDR >= BRAM_ADDRESS + N_TOTAL * sizeof(uint32_t),
+_Static_assert(DATA_READ_ADDR >= BRAM_ADDRESS + MAX_SAMPLE * sizeof(uint32_t),
                "Output overlaps generator input");
-_Static_assert(DATA_READ_ADDR + N_BINS * sizeof(uint32_t) <= BRAM_ADDRESS + BRAM_SIZE,
+_Static_assert(DATA_READ_ADDR + MAX_BINS * sizeof(uint32_t) <= BRAM_ADDRESS + BRAM_SIZE,
                "Output exceeds BRAM");
 #endif

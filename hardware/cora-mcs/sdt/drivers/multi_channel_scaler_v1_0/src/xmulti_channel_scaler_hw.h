@@ -30,8 +30,8 @@
 // 0x14 : Data signal of data_out
 //        bit 31~0 - data_out[63:32] (Read/Write)
 // 0x18 : reserved
-// 0x1c : Data signal of avg_shot
-//        bit 31~0 - avg_shot[31:0] (Read/Write)
+// 0x1c : Data signal of n_shot
+//        bit 31~0 - n_shot[31:0] (Read/Write)
 // 0x20 : reserved
 // 0x24 : Data signal of n_bin
 //        bit 31~0 - n_bin[31:0] (Read/Write)
@@ -47,8 +47,8 @@
 #define XMULTI_CHANNEL_SCALER_CONTROL_ADDR_ISR           0x0c
 #define XMULTI_CHANNEL_SCALER_CONTROL_ADDR_DATA_OUT_DATA 0x10
 #define XMULTI_CHANNEL_SCALER_CONTROL_BITS_DATA_OUT_DATA 64
-#define XMULTI_CHANNEL_SCALER_CONTROL_ADDR_AVG_SHOT_DATA 0x1c
-#define XMULTI_CHANNEL_SCALER_CONTROL_BITS_AVG_SHOT_DATA 32
+#define XMULTI_CHANNEL_SCALER_CONTROL_ADDR_N_SHOT_DATA   0x1c
+#define XMULTI_CHANNEL_SCALER_CONTROL_BITS_N_SHOT_DATA   32
 #define XMULTI_CHANNEL_SCALER_CONTROL_ADDR_N_BIN_DATA    0x24
 #define XMULTI_CHANNEL_SCALER_CONTROL_BITS_N_BIN_DATA    32
 #define XMULTI_CHANNEL_SCALER_CONTROL_ADDR_N_CYCLE_DATA  0x2c

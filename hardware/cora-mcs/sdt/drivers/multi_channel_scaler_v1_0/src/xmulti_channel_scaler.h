@@ -101,8 +101,8 @@ void XMulti_channel_scaler_DisableAutoRestart(XMulti_channel_scaler *InstancePtr
 
 void XMulti_channel_scaler_Set_data_out(XMulti_channel_scaler *InstancePtr, u64 Data);
 u64 XMulti_channel_scaler_Get_data_out(XMulti_channel_scaler *InstancePtr);
-void XMulti_channel_scaler_Set_avg_shot(XMulti_channel_scaler *InstancePtr, u32 Data);
-u32 XMulti_channel_scaler_Get_avg_shot(XMulti_channel_scaler *InstancePtr);
+void XMulti_channel_scaler_Set_n_shot(XMulti_channel_scaler *InstancePtr, u32 Data);
+u32 XMulti_channel_scaler_Get_n_shot(XMulti_channel_scaler *InstancePtr);
 void XMulti_channel_scaler_Set_n_bin(XMulti_channel_scaler *InstancePtr, u32 Data);
 u32 XMulti_channel_scaler_Get_n_bin(XMulti_channel_scaler *InstancePtr);
 void XMulti_channel_scaler_Set_n_cycle(XMulti_channel_scaler *InstancePtr, u32 Data);

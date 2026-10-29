@@ -1,8 +1,7 @@
+%% Initialize
 clc; clearvars;
     
-N_SHOT = 50;
-N_BINS = 20;
-N_CLK = 100;
+
 
 % Connect to the DAQ server
 daq = tcpclient("192.168.137.20",8080);
@@ -12,6 +11,11 @@ daq.ByteOrder = "little-endian";
 aq = readline(daq);
 assert(aq == "READY", "DAQ not ready");
 
+%% Configure
+N_SHOT = 1201;
+N_BINS = 10;
+N_CLK = 10;
+
 % Attempt to read data from the DAQ without configuring it first
 % writeline(daq,"START");
 
@@ -19,6 +23,7 @@ assert(aq == "READY", "DAQ not ready");
 config_msg = sprintf("CONFIG %i %i %i", N_SHOT, N_BINS, N_CLK); 
 writeline(daq,config_msg);
 
+%% Start and read data
 writeline(daq,"START");
 a = read(daq, N_BINS, "uint32");
 disp(a);
@@ -31,5 +36,6 @@ disp(a);
 % a = read(daq, 5, "uint32");
 % disp(a);
 
+%% Finish DAQ session
 % Finish the DAQ session
 writeline(daq,"END");
