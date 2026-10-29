@@ -7,14 +7,14 @@
 # ==============================================================
 %YAML 1.2
 ---
-title: stream_generator driver
+title: pulse_source driver
 type: driver
 properties:
     compatible:
         items:
-            - const: xlnx,stream-generator-1.0
+            - const: xlnx,pulse-source-1.0
 config:
-    - XStream_generator_Config
+    - XPulse_source_Config
 required:
     - compatible
     - reg

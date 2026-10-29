@@ -7,12 +7,12 @@
 # ==============================================================
 OPTION psf_version = 2.1;
 
-BEGIN driver stream_generator
+BEGIN driver pulse_source
 
- OPTION supported_peripherals = (stream_generator_v1_0 );
+ OPTION supported_peripherals = (pulse_source_v1_0 );
  OPTION driver_state = ACTIVE;
  OPTION copyfiles = all;
- OPTION name = stream_generator;
+ OPTION name = pulse_source;
  OPTION version = 1.0;
 
 END driver

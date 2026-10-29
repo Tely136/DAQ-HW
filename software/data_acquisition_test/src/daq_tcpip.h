@@ -147,7 +147,7 @@ void *get_in_addr(struct sockaddr *sa)
     return &(((struct sockaddr_in6*)sa)->sin6_addr);
 }
 
-int tcp_listen(int port) {
+int tcp_listen(const char* port) {
     int sockfd, new_fd;
     struct addrinfo hints, *servinfo, *p;
     struct sockaddr_storage their_addr; // connector's address info
@@ -162,9 +162,9 @@ int tcp_listen(int port) {
     hints.ai_socktype = SOCK_STREAM;
     // hints.ai_flags = AI_PASSIVE; // use my IP
 
-    if ((rv = getaddrinfo(IP_ADDRESS, PORT, &hints, &servinfo)) != 0) {
+    if ((rv = getaddrinfo(IP_ADDRESS, port, &hints, &servinfo)) != 0) {
         fprintf(stderr, "getaddrinfo: %s\n", gai_strerror(rv));
-        return 1;
+        return -1;
     }
 
     // loop through all the results and bind to the first we can
@@ -224,6 +224,7 @@ int tcp_listen(int port) {
         break; // exit the loop after accepting one connection
     }
 
+    close(sockfd);
     return new_fd;
 }
 

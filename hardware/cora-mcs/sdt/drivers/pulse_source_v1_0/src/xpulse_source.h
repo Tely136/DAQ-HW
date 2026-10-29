@@ -5,8 +5,8 @@
 // Copyright 2022-2026 Advanced Micro Devices, Inc. All Rights Reserved.
 // 
 // ==============================================================
-#ifndef XSTREAM_GENERATOR_H
-#define XSTREAM_GENERATOR_H
+#ifndef XPULSE_SOURCE_H
+#define XPULSE_SOURCE_H
 
 #ifdef __cplusplus
 extern "C" {
@@ -30,7 +30,7 @@ extern "C" {
 #include <unistd.h>
 #include <stddef.h>
 #endif
-#include "xstream_generator_hw.h"
+#include "xpulse_source_hw.h"
 
 /**************************** Type Definitions ******************************/
 #ifdef __linux__
@@ -46,26 +46,26 @@ typedef struct {
     u16 DeviceId;
 #endif
     u64 Control_BaseAddress;
-} XStream_generator_Config;
+} XPulse_source_Config;
 #endif
 
 typedef struct {
     u64 Control_BaseAddress;
     u32 IsReady;
-} XStream_generator;
+} XPulse_source;
 
 typedef u32 word_type;
 
 /***************** Macros (Inline Functions) Definitions *********************/
 #ifndef __linux__
-#define XStream_generator_WriteReg(BaseAddress, RegOffset, Data) \
+#define XPulse_source_WriteReg(BaseAddress, RegOffset, Data) \
     Xil_Out32((BaseAddress) + (RegOffset), (u32)(Data))
-#define XStream_generator_ReadReg(BaseAddress, RegOffset) \
+#define XPulse_source_ReadReg(BaseAddress, RegOffset) \
     Xil_In32((BaseAddress) + (RegOffset))
 #else
-#define XStream_generator_WriteReg(BaseAddress, RegOffset, Data) \
+#define XPulse_source_WriteReg(BaseAddress, RegOffset, Data) \
     *(volatile u32*)((BaseAddress) + (RegOffset)) = (u32)(Data)
-#define XStream_generator_ReadReg(BaseAddress, RegOffset) \
+#define XPulse_source_ReadReg(BaseAddress, RegOffset) \
     *(volatile u32*)((BaseAddress) + (RegOffset))
 
 #define Xil_AssertVoid(expr)    assert(expr)
@@ -80,23 +80,23 @@ typedef u32 word_type;
 /************************** Function Prototypes *****************************/
 #ifndef __linux__
 #ifdef SDT
-int XStream_generator_Initialize(XStream_generator *InstancePtr, UINTPTR BaseAddress);
-XStream_generator_Config* XStream_generator_LookupConfig(UINTPTR BaseAddress);
+int XPulse_source_Initialize(XPulse_source *InstancePtr, UINTPTR BaseAddress);
+XPulse_source_Config* XPulse_source_LookupConfig(UINTPTR BaseAddress);
 #else
-int XStream_generator_Initialize(XStream_generator *InstancePtr, u16 DeviceId);
-XStream_generator_Config* XStream_generator_LookupConfig(u16 DeviceId);
+int XPulse_source_Initialize(XPulse_source *InstancePtr, u16 DeviceId);
+XPulse_source_Config* XPulse_source_LookupConfig(u16 DeviceId);
 #endif
-int XStream_generator_CfgInitialize(XStream_generator *InstancePtr, XStream_generator_Config *ConfigPtr);
+int XPulse_source_CfgInitialize(XPulse_source *InstancePtr, XPulse_source_Config *ConfigPtr);
 #else
-int XStream_generator_Initialize(XStream_generator *InstancePtr, const char* InstanceName);
-int XStream_generator_Release(XStream_generator *InstancePtr);
+int XPulse_source_Initialize(XPulse_source *InstancePtr, const char* InstanceName);
+int XPulse_source_Release(XPulse_source *InstancePtr);
 #endif
 
 
-void XStream_generator_Set_n_bin(XStream_generator *InstancePtr, u32 Data);
-u32 XStream_generator_Get_n_bin(XStream_generator *InstancePtr);
-void XStream_generator_Set_n_cycle(XStream_generator *InstancePtr, u32 Data);
-u32 XStream_generator_Get_n_cycle(XStream_generator *InstancePtr);
+void XPulse_source_Set_clk_periods(XPulse_source *InstancePtr, u32 Data);
+u32 XPulse_source_Get_clk_periods(XPulse_source *InstancePtr);
+void XPulse_source_Set_enable(XPulse_source *InstancePtr, u32 Data);
+u32 XPulse_source_Get_enable(XPulse_source *InstancePtr);
 
 #ifdef __cplusplus
 }

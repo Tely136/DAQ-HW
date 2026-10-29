@@ -1,37 +1,26 @@
+#ifndef DAQ_PARAMS_H
+#define DAQ_PARAMS_H
+
 #include <stdint.h>
 
-#define TRIG_ADDRESS 0x40020000
-#define TRIG_SIZE   0x10000 /* 64K */
+#define TRIGGER_ADDRESS 0x40020000
+#define TRIGGER_SIZE    0x10000
 
-#define GEN_ADDRESS 0x40010000 /* confirm with files, look for way to get this from the hardware description */
-#define GEN_SIZE   0x10000 /* 64K */
+#define SOURCE_ADDRESS  0x40010000
+#define SOURCE_SIZE     0x10000
 
-#define MCS_ADDRESS 0x40000000
-#define MCS_SIZE   0x10000 /* 64K */
+#define MCS_ADDRESS     0x40000000
+#define MCS_SIZE        0x10000
 
-#define BRAM_ADDRESS 0x42000000
-#define BRAM_SIZE    0x2000 /* 8 KiB, from the hardware address map. */
+// reserved DDR output buffer
+#define COUNTS_ADDRESS  0x1F000000
+#define COUNTS_SIZE     0x10000
 
-#define DDR_ADDRESS 0x1F000000
-#define DDR_SIZE    0x10000
+#define CLOCK_HZ        50000000
 
-#define DATA_READ_ADDR   DDR_ADDRESS
-// #define DATA_READ_ADDR (BRAM_ADDRESS + 4 * N_TOTAL)
+// match the accumulation array in mcs.h
+#define MAX_BINS 128
 
-#define CLK_FREQ    50000000 // Hz
-#define SHOT_FREQ   20
-#define CLK_PERIODS (CLK_FREQ / SHOT_FREQ) // number of clock cycles per trigger
+_Static_assert(MAX_BINS * sizeof(uint32_t) <= COUNTS_SIZE, "Output exceeds buffer");
 
-#define MAX_SAMPLE 1000
-#define MAX_BINS 100
-
-
-_Static_assert(MAX_SAMPLE * sizeof(uint32_t) <= BRAM_SIZE, "Input exceeds BRAM");
-#if DATA_READ_ADDR == DDR_ADDRESS
-_Static_assert(MAX_BINS * sizeof(uint32_t) <= DDR_SIZE, "Output exceeds DDR buffer");
-#else
-_Static_assert(DATA_READ_ADDR >= BRAM_ADDRESS + MAX_SAMPLE * sizeof(uint32_t),
-               "Output overlaps generator input");
-_Static_assert(DATA_READ_ADDR + MAX_BINS * sizeof(uint32_t) <= BRAM_ADDRESS + BRAM_SIZE,
-               "Output exceeds BRAM");
 #endif

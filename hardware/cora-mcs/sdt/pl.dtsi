@@ -73,12 +73,12 @@
 			xlnx,latency = "undef";
 			xlnx,name = "MCS_multi_channel_scaler_0";
 		};
-		MCS_stream_generator_0: stream_generator@40010000 {
-			compatible = "xlnx,stream-generator-1.0";
+		MCS_pulse_source_0: pulse_source@40010000 {
+			compatible = "xlnx,pulse-source-1.0";
 			xlnx,ii = "undef";
 			xlnx,machine = <64>;
 			xlnx,s-axi-control-addr-width = <5>;
-			xlnx,ip-name = "stream_generator";
+			xlnx,ip-name = "pulse_source";
 			reg = <0x40010000 0x10000>;
 			clocks = <&clkc 15>;
 			xlnx,clk-period = <10>;
@@ -88,7 +88,7 @@
 			clock-names = "ap_clk";
 			xlnx,combinational = <0>;
 			xlnx,latency = "undef";
-			xlnx,name = "MCS_stream_generator_0";
+			xlnx,name = "MCS_pulse_source_0";
 		};
 		MCS_trigger_0: trigger@40020000 {
 			compatible = "xlnx,trigger-1.0";

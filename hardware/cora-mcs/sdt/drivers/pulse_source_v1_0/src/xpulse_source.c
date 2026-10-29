@@ -6,11 +6,11 @@
 // 
 // ==============================================================
 /***************************** Include Files *********************************/
-#include "xstream_generator.h"
+#include "xpulse_source.h"
 
 /************************** Function Implementation *************************/
 #ifndef __linux__
-int XStream_generator_CfgInitialize(XStream_generator *InstancePtr, XStream_generator_Config *ConfigPtr) {
+int XPulse_source_CfgInitialize(XPulse_source *InstancePtr, XPulse_source_Config *ConfigPtr) {
     Xil_AssertNonvoid(InstancePtr != NULL);
     Xil_AssertNonvoid(ConfigPtr != NULL);
 
@@ -21,37 +21,37 @@ int XStream_generator_CfgInitialize(XStream_generator *InstancePtr, XStream_gene
 }
 #endif
 
-void XStream_generator_Set_n_bin(XStream_generator *InstancePtr, u32 Data) {
+void XPulse_source_Set_clk_periods(XPulse_source *InstancePtr, u32 Data) {
     Xil_AssertVoid(InstancePtr != NULL);
     Xil_AssertVoid(InstancePtr->IsReady == XIL_COMPONENT_IS_READY);
 
-    XStream_generator_WriteReg(InstancePtr->Control_BaseAddress, XSTREAM_GENERATOR_CONTROL_ADDR_N_BIN_DATA, Data);
+    XPulse_source_WriteReg(InstancePtr->Control_BaseAddress, XPULSE_SOURCE_CONTROL_ADDR_CLK_PERIODS_DATA, Data);
 }
 
-u32 XStream_generator_Get_n_bin(XStream_generator *InstancePtr) {
+u32 XPulse_source_Get_clk_periods(XPulse_source *InstancePtr) {
     u32 Data;
 
     Xil_AssertNonvoid(InstancePtr != NULL);
     Xil_AssertNonvoid(InstancePtr->IsReady == XIL_COMPONENT_IS_READY);
 
-    Data = XStream_generator_ReadReg(InstancePtr->Control_BaseAddress, XSTREAM_GENERATOR_CONTROL_ADDR_N_BIN_DATA);
+    Data = XPulse_source_ReadReg(InstancePtr->Control_BaseAddress, XPULSE_SOURCE_CONTROL_ADDR_CLK_PERIODS_DATA);
     return Data;
 }
 
-void XStream_generator_Set_n_cycle(XStream_generator *InstancePtr, u32 Data) {
+void XPulse_source_Set_enable(XPulse_source *InstancePtr, u32 Data) {
     Xil_AssertVoid(InstancePtr != NULL);
     Xil_AssertVoid(InstancePtr->IsReady == XIL_COMPONENT_IS_READY);
 
-    XStream_generator_WriteReg(InstancePtr->Control_BaseAddress, XSTREAM_GENERATOR_CONTROL_ADDR_N_CYCLE_DATA, Data);
+    XPulse_source_WriteReg(InstancePtr->Control_BaseAddress, XPULSE_SOURCE_CONTROL_ADDR_ENABLE_DATA, Data);
 }
 
-u32 XStream_generator_Get_n_cycle(XStream_generator *InstancePtr) {
+u32 XPulse_source_Get_enable(XPulse_source *InstancePtr) {
     u32 Data;
 
     Xil_AssertNonvoid(InstancePtr != NULL);
     Xil_AssertNonvoid(InstancePtr->IsReady == XIL_COMPONENT_IS_READY);
 
-    Data = XStream_generator_ReadReg(InstancePtr->Control_BaseAddress, XSTREAM_GENERATOR_CONTROL_ADDR_N_CYCLE_DATA);
+    Data = XPulse_source_ReadReg(InstancePtr->Control_BaseAddress, XPULSE_SOURCE_CONTROL_ADDR_ENABLE_DATA);
     return Data;
 }
 

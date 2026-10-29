@@ -57,7 +57,7 @@
 			      <0x0 &ps7_ram_0_memory 0x0 0x30000>, 
 			      <0xffff0000 &ps7_ram_1_memory 0xffff0000 0xfe00>, 
 			      <0x40000000 &MCS_multi_channel_scaler_0 0x40000000 0x10000>, 
-			      <0x40010000 &MCS_stream_generator_0 0x40010000 0x10000>, 
+			      <0x40010000 &MCS_pulse_source_0 0x40010000 0x10000>, 
 			      <0x40020000 &MCS_trigger_0 0x40020000 0x10000>, 
 			      <0x41200000 &axi_gpio_0 0x41200000 0x10000>, 
 			      <0xf8008000 &ps7_afi_0 0xf8008000 0x1000>, 
