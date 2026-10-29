@@ -12,7 +12,7 @@ aq = readline(daq);
 assert(aq == "READY", "DAQ not ready");
 
 %% Configure
-N_SHOT = 1201;
+N_SHOT = 20;
 N_BINS = 10;
 N_CLK = 10;
 

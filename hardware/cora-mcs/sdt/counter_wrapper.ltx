@@ -57,11 +57,11 @@
                                 "portIndex": 1,
                                 "nets": [
                                     {
-                                        "name": "counter_i/MCS/stream_generator_0_out_r1",
+                                        "name": "counter_i/MCS/out_r_0",
                                         "isBus": true,
                                         "subnets": [
                                             {
-                                                "name": "counter_i/MCS/stream_generator_0_out_r1[0]"
+                                                "name": "counter_i/MCS/out_r_0[0]"
                                             }
                                         ]
                                     }
@@ -76,6 +76,27 @@
                                 "leftIndex": 0,
                                 "rightIndex": 0,
                                 "portIndex": 2,
+                                "nets": [
+                                    {
+                                        "name": "counter_i/MCS/data_in_0",
+                                        "isBus": true,
+                                        "subnets": [
+                                            {
+                                                "name": "counter_i/MCS/data_in_0[0]"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "probe3",
+                                "id": 3,
+                                "type": "DATA_TRIGGER",
+                                "direction": "IN",
+                                "isVector": false,
+                                "leftIndex": 0,
+                                "rightIndex": 0,
+                                "portIndex": 3,
                                 "nets": [
                                     {
                                         "name": "counter_i/MCS/interrupt",
